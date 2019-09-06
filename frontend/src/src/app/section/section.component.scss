@@ -1,0 +1,41 @@
+.title_box {
+  position: relative;
+  margin: 0 0 60px;
+  padding: 30px 0 40px;
+  background: #2B4859;
+  color: #fff;
+  background-position: 50% 0;
+  background-color: #2b4a68;
+  background-repeat: repeat;
+}
+.container {
+  width: 1140px;
+}
+.title_box .breadcrumbs {
+  position: relative;
+  color: #fff;
+  margin: 0 0 25px -10px;
+  font-size: 12px;
+}
+.title_box .breadcrumbs > span {
+  color: #FFFFFF;
+  text-transform: uppercase;
+  margin: 0 10px;
+}
+.title_box .breadcrumbs a {
+  transition: all 0.2s ease-out;
+  color: #fff;
+}
+.title_box h1 {
+  color: inherit;
+  margin-left: -4px;
+}
+h1, .h1 {
+  font-family: "Roboto Slab";
+  line-height: 72px;
+  font-weight: 300;
+  font-size: 60px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.24s ease-in-out;
+}

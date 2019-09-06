@@ -1,0 +1,70 @@
+<div class="top_nav affix-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div class="logo">
+          <a routerLink="">
+            <img src="../../assets/img/bimc2019logo_small.png" alt="14th Bialystok International Medical Congress">
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <ul class="top_nav_menu" routerLinkActive="active">
+          <li>
+            <a routerLink="home">Home</a>
+          </li>
+          <li *ngIf="authority === 'admin'" class="nav-item">
+            <a class="nav-link" routerLink="users">Users</a>
+          </li>
+          <li *ngIf="!authority" class="nav-item">
+            <a class="nav-link" routerLink="login">Login</a>
+          </li>
+          <li *ngIf="authority">
+            <a class="nav-link" routerLink="abstracts">Abstracts</a>
+          </li>
+          <li *ngIf="authority">
+            <a class="nav-link" routerLink="user/{{tokenStorage.getUserId()}}">Info</a>
+          </li>
+          <li *ngIf="authority">
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="top_info_boxes">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="top_info_box">
+          <div class="icon">
+            <i class="stm-icon-roundels"></i>
+          </div>
+          <div class="text">
+            <strong>Where?</strong>
+            <span>ul. Szpitalna 37, 15-295 Białystok</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="top_info_box">
+          <div class="icon">
+            <i class="stm-icon-clock"></i>
+          </div>
+          <div class="text">
+            <strong>When?</strong>
+            <span>May, 17th - 18th, 2019</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

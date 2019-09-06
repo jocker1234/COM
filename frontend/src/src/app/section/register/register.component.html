@@ -1,0 +1,170 @@
+<div *ngIf="isSignedUp; else signupForm">
+  Your registration is successful. Please login!
+</div>
+
+<ng-template #signupForm>
+  <h3>Registration</h3><hr>
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="form-group row">
+      <label for="authorities" class="col-sm-3 col-form-label">Participant category</label>
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="authorities" [(ngModel)]="form.authorities">
+          <option value="">Select</option>
+          <option value="active">Activate Participant</option>
+          <option value="pasive">Pasive Participant</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="email" class="col-sm-3 col-form-label">E-mail / Login**</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required/>
+        <div *ngIf="f.submitted && email.invalid">
+          <div *ngIf="email.errors.required">Email is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="password" class="col-sm-3 col-form-label">Password</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="email" [(ngModel)]="form.password" #password="ngModel" required/>
+        <div *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">Password is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-3 col-form-label">First name</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="firstName" [(ngModel)]="form.firstName" #firstName="ngModel"
+               required/>
+        <div *ngIf="f.submitted && firstName.invalid">
+          <div *ngIf="firstName.errors.required">First name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="lastName" class="col-sm-3 col-form-label">Last name</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName" #lastName="ngModel"
+               required/>
+        <div *ngIf="f.submitted && lastName.invalid">
+          <div *ngIf="lastName.errors.required">Last name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="gender" [(ngModel)]="form.gender">
+          <option selected>Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="dateOfBirth" class="col-sm-3 col-form-label">Date of birth</label>
+      <div class="col-sm-7">
+        <input class="form-control" type="date" name="dateOfBirth" [(ngModel)]="form.dateOfBirth"
+               #dateOfBirth="ngModel">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="country" class="col-sm-3 col-form-label">Country</label>
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="country" [(ngModel)]="form.country">
+          <option value="">Select country...</option>
+          <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="title" class="col-sm-3 col-form-label">Title</label>
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="title" [(ngModel)]="form.title">
+          <option selected>Select</option>
+          <option value="Student">Student</option>
+          <option value="PhD_Student">PhD Student</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="university" class="col-sm-3 col-form-label">University</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="university" [(ngModel)]="form.university" #university="ngModel"
+               required/>
+        <div *ngIf="f.submitted && university.invalid">
+          <div *ngIf="university.errors.required">University is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="faculty" class="col-sm-3 col-form-label">Faculty</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="faculty" [(ngModel)]="form.faculty" #faculty="ngModel" required/>
+        <div *ngIf="f.submitted && faculty.invalid">
+          <div *ngIf="faculty.errors.required">Faculty is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="yearOfStudy" class="col-sm-3 col-form-label">Year of study</label>
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="yearOfStudy" [(ngModel)]="form.yearOfStudy">>
+          <option selected>Select</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="phoneNumber" class="col-sm-3 col-form-label">Phone number</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="form.phoneNumber"
+               #phoneNumber="ngModel"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="needVisa" class="col-sm-3 col-form-label">Do you need visa?</label>
+      <div class="col-sm-7">
+        <input type="radio" value="true" name="visa" [(ngModel)]="form.needVisa" required #visa="ngModel">Yes
+        <input type="radio" value="false" name="visa" [(ngModel)]="form.needVisa" required #visa="ngModel">No
+        <div *ngIf="f.submitted && visa.invalid">
+          <div *ngIf="visa.errors.required">University is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="form.needVisa=='true'">
+      <label for="passportNumber" class="col-sm-3 col-form-label">ID/Passport</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="passportNumber" [(ngModel)]="form.passportNumber"
+               #passportNumber="ngModel"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-1 col-form-label text-right"><input type="checkbox"/></div>
+      <div class="col-md-10">
+        In accordance with art. 24 par. 1 of the Act of 29 August 1997. on Personal Data Protection (i.e. from 2015. Item. 2135, as amended. D) we inform that:<br/>
+        1)	the administrator of your data is the Rector of Medical University of Bialystok, seated in ul. Kilińskiego 1, 15-089 Bialystok,<br/>
+        2)	the data is collected in order to register for the conference and will not be shared with other entities,<br/>
+        3)	you have the right to access your personal data and correct it,<br/>
+        4)	data submission is voluntary.<br/>
+        In accordance with art. 23 par. 1 pt. 1 of the Act of 29 August 1997. on Personal Data Protection (i.e., from 2015. Item. 2135, as amended. D), I hereby agree to the processing of my personal data in order to register for the conference.<br/>
+      </div>
+    </div>
+    <div class="form-group ng-hide">
+      <button class="btn btn-primary">Register</button>
+      <div class="col-sm-6">
+        <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+          Signup failed!<br/>{{errorMessage}}
+        </div>
+      </div>
+    </div>
+  </form>
+  <hr>
+</ng-template>

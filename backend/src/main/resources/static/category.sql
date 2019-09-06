@@ -1,0 +1,15 @@
+INSERT INTO category(name) VALUES('Surgery and Orthopedics');
+INSERT INTO category(name) VALUES('Internal Diseases');
+INSERT INTO category(name) VALUES('Pharmacy');
+INSERT INTO category(name) VALUES('Genetics and Molecular Biology');
+INSERT INTO category(name) VALUES('Gynecology and Obstetrics');
+INSERT INTO category(name) VALUES('Immunology');
+INSERT INTO category(name) VALUES('Interdisciplinary Session');
+INSERT INTO category(name) VALUES('Cardiology');
+INSERT INTO category(name) VALUES('Basic Sciences');
+INSERT INTO category(name) VALUES('Dentistry');
+INSERT INTO category(name) VALUES('Neurology and Neurosurgery');
+INSERT INTO category(name) VALUES('Pediatrics and Neurosurgery');
+INSERT INTO category(name) VALUES('Pediatrics and Neonatology');
+INSERT INTO category(name) VALUES('Public Health');
+INSERT INTO category(name) VALUES('Phd Session');

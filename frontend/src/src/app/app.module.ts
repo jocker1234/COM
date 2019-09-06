@@ -1,16 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {LoginComponent} from "./section/login/login.component";
+import {RegisterComponent} from "./section/register/register.component";
+import {PasswordResetComponent} from "./section/login/password-reset/password-reset.component";
+import {HeaderComponent} from "./header/header.component";
+import {FooterComponent} from "./footer/footer.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {SectionComponent} from "./section/section.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    HeaderComponent,
+    AppComponent,
+    SectionComponent,
+    LoginComponent,
+    RegisterComponent,
+    PasswordResetComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
