@@ -10,10 +10,6 @@ import {environment} from "../../../environments/environment";
 
 const apiUrl = environment.apiUrl;
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -27,22 +23,22 @@ export class AuthService {
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(`${this.loginUrl}`, credentials, httpOptions)
+    return this.http.post<JwtResponse>(`${this.loginUrl}`, credentials)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
   signUp(info: SignUpInfo): Observable<string> {
-    return this.http.post<string>(`${this.signupUrl}`, info, httpOptions)
+    return this.http.post<string>(`${this.signupUrl}`, info)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
   remaindPassword(email: string){
-    return this.http.post(`${this.remaindPasswordUrl}`, email, httpOptions)
+    return this.http.post(`${this.remaindPasswordUrl}`, email)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
   countryList(){
-    return this.http.get(`${this.countryListUrl}`, httpOptions)
+    return this.http.get(`${this.countryListUrl}`)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 

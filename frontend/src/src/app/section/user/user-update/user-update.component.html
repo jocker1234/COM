@@ -1,0 +1,161 @@
+<h2>Update Data</h2><br/>
+<form name="form" (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="email" class="col-sm-2 col-form-label">E-mail / Login**</label>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required/>
+      <div *ngIf="f.submitted && email.invalid">
+        <div *ngIf="email.errors.required">Email is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="password" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required/>
+      <div *ngIf="f.submitted && password.invalid">
+        <div *ngIf="password.errors.required">Password is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="firstName" class="col-sm-2 col-form-label">First name</label>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel"
+             required/>
+      <div *ngIf="f.submitted && firstName.invalid">
+        <div *ngIf="firstName.errors.required">First name is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="lastName" class="col-sm-2 col-form-label">Last name</label>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="lastName" [(ngModel)]="user.lastName" #lastName="ngModel"
+             required/>
+      <div *ngIf="f.submitted && lastName.invalid">
+        <div *ngIf="lastName.errors.required">Last name is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+    <div class="col-sm-7">
+      <select class="col-sm-7 form-control" name="gender" [(ngModel)]="user.gender">
+        <option selected>Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="dateOfBirth" class="col-sm-2 col-form-label">Date of birth</label>
+    <div class="col-sm-7">
+      <input class="form-control" type="date" name="dateOfBirth" [(ngModel)]="user.dateOfBirth"
+             #dateOfBirth="ngModel">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="country" class="col-sm-2 col-form-label">Country</label>
+    <div class="col-sm-7">
+      <select class="col-sm-7 form-control" name="country" [(ngModel)]="user.country">
+        <option value="">Select country...</option>
+        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="title" class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-7">
+      <select class="col-sm-7 form-control" name="title" [(ngModel)]="user.title">
+        <option selected>Select</option>
+        <option value="Student">Student</option>
+        <option value="PhD_Student">PhD Student</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="university" class="col-sm-2 col-form-label">University</label>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="university" [(ngModel)]="user.university" #university="ngModel"
+             required/>
+      <div *ngIf="f.submitted && university.invalid">
+        <div *ngIf="university.errors.required">University is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="faculty" class="col-sm-2 col-form-label">Faculty</label>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="faculty" [(ngModel)]="user.faculty" #faculty="ngModel" required/>
+      <div *ngIf="f.submitted && faculty.invalid">
+        <div *ngIf="faculty.errors.required">Faculty is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="yearOfStudy" class="col-sm-2 col-form-label">Year of study</label>
+    <div class="col-sm-7">
+      <select class="col-sm-7 form-control" name="yearOfStudy" [(ngModel)]="user.yearOfStudy">>
+        <option selected>Select</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="phoneNumber" class="col-sm-2 col-form-label">Phone number</label>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="user.phoneNumber"
+             #phoneNumber="ngModel"/>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-1"></div>
+    <label for="needVisa" class="col-sm-2 col-form-label">Do you needVisa?</label>
+    <div class="col-sm-7">
+      <input type="radio" [value]="true" name="visa1" [(ngModel)]="user.needVisa" required #visa="ngModel">Yes
+      <input type="radio" [value]="false" name="visa2" [(ngModel)]="user.needVisa" required #visa="ngModel">No
+      <div *ngIf="f.submitted && visa.invalid">
+        <div *ngIf="visa.errors.required">University is required</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row" *ngIf="user.needVisa">
+    <div class="col-sm-1"></div>
+    <label for="passportNumber" class="col-sm-2 col-form-label">ID/Passport</label>
+    <div class="col-sm-7">
+      <input type="text" class="form-control" name="passportNumber" [(ngModel)]="user.passportNumber"
+             #passportNumber="ngModel"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group ng-hide" style="margin-right: 5px">
+      <button class="btn btn-primary" routerLink="/user/{{user.id}}">Cancel</button>
+    </div>
+    <div class="form-group ng-hide">
+      <button class="btn btn-primary">Save</button>
+      <div class="col-sm-6">
+        <div *ngIf="f.submitted" class="alert alert-warning">
+          Signup failed!<br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

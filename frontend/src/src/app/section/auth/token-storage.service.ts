@@ -15,6 +15,7 @@ export class TokenStorageService {
 
   signOut() {
     window.sessionStorage.clear();
+    window.location.replace('')
   }
 
   public saveToken(accessToken: string) {
@@ -48,7 +49,6 @@ export class TokenStorageService {
         this.roles.push(authority.authority);
       });
     }
-
     return this.roles;
   }
 

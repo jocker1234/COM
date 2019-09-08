@@ -18,11 +18,9 @@ export class PasswordResetComponent implements OnInit {
   }
 
   remind() {
-    console.log(this.email);
     this.authService.remaindPassword(this.email).subscribe(response => {
-      console.log(response);
       this.router.navigate(['/login']);
-    }, error => console.log(error));
+    });
 
   }
 }

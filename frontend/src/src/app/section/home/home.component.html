@@ -1,0 +1,13 @@
+<div *ngIf="info.token; else loggedOut">
+  <h5 class="text-primary">Your Information</h5>
+  <p>
+    <strong>Email:</strong>{{info.email}}<br/>
+    <strong>Roles:</strong>{{info.authorities}}<br/>
+    <strong>Token:</strong>{{info.token}}<br/>
+    <strong>Id:</strong>{{info.id}}<br/>
+  </p>
+  <button class="btn btn-secondary" (click)="logout()">Logout</button>
+</div>
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

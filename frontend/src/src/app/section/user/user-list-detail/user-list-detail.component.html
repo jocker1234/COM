@@ -1,0 +1,83 @@
+<div *ngIf="user">
+  <table class="table">
+    <tr><h4 class="col">Account data</h4></tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Registration date</td>
+      <td class="col-sm-7">{{user.registrationDate | date:'dd/MM/yyyy HH:mm'}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Participant category</td>
+      <span *ngFor="let authority of user.authoritiesSet" class="col-sm-7"><td>{{authority.roleName}}</td></span>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Email</td>
+      <td class="col-sm-7">{{user.email}}</td>
+    </tr>
+    <tr><h4 class="col">Personal data</h4></tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">First name</td>
+      <td class="col-sm-7">{{user.firstName}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Last name</td>
+      <td class="col-sm-7">{{user.lastName}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Gender</td>
+      <td class="col-sm-7">{{user.gender}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Date of birth</td>
+      <td class="col-sm-7">{{user.dateOfBirth | date:'dd/MM/yyyy HH:mm'}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Country</td>
+      <td class="col-sm-7">{{user.country}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Title</td>
+      <td class="col-sm-7">{{user.title}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">University</td>
+      <td class="col-sm-7">{{user.university}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Faculty</td>
+      <td class="col-sm-7">{{user.faculty}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Year of study</td>
+      <td class="col-sm-7">{{user.yearOfStudy}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Phone number</td>
+      <td class="col-sm-7">{{user.phoneNumber}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Do you need a visa?</td>
+      <td class="col-sm-7">{{user.needVisa ? 'yes' : 'no'}}</td>
+    </tr>
+    <tr class="row" *ngIf="user.needVisa">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Visa number</td>
+      <td class="col-sm-7">{{user.passportNumber}}</td>
+    </tr>
+  </table>
+  <button class="btn btn-primary" style="margin-right: 5px" routerLink="/user/{{user.id}}/edit">Edit Data</button>
+  <button class="btn btn-primary" (click)="delete()">Remove Account</button>
+</div>

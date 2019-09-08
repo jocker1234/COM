@@ -1,0 +1,23 @@
+<h2>List users</h2>
+<table class="table">
+  <thead>
+  <tr class="row">
+    <td class="col">ID</td>
+    <td class="col">Email</td>
+    <td class="col">First name</td>
+    <td class="col">Last name</td>
+    <td class="col">Country</td>
+    <td class="col">University</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="row" *ngFor="let user of users" routerLink="/user/{{user.id}}" >
+    <td class="col">{{user.id}}</td>
+    <td class="col">{{user.email}}</td>
+    <td class="col">{{user.firstName}}</td>
+    <td class="col">{{user.lastName}}</td>
+    <td class="col">{{user.country}}</td>
+    <td class="col">{{user.university}}</td>
+  </tr>
+  </tbody>
+</table>
