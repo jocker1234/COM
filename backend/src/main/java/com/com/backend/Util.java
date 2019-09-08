@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Util {
 
-    public final static String replace(String message, Object[] params) {
+    public static String replace(String message, Object[] params) {
         if (params != null && message != null) {
             for (int i = 0; i < params.length; i++) {
                 message = message.replaceAll("\\{" + i + "\\}", ((params.length > i && params[i] != null) ? Matcher.quoteReplacement(params[i].toString()) : "null"));
@@ -16,11 +16,11 @@ public class Util {
         return message;
     }
 
-    public final static String joinWithComma(List<String> strings) {
-        return strings.stream().collect(Collectors.joining(","));
+    public static String joinWithComma(List<String> strings) {
+        return String.join(",", strings);
     }
 
-    public final static List<String> splitWithComma(String s){
+    public static List<String> splitWithComma(String s){
         return Arrays.stream(s.split(",")).collect(Collectors.toList());
 
     }

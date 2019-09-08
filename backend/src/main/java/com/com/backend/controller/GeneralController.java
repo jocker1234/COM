@@ -15,12 +15,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class GeneralController {
 
-    private UsersService usersService;
-
-    public GeneralController(UsersService usersService) {
-        this.usersService = usersService;
-    }
-
     @GetMapping("/countryList")
     public ResponseEntity<List<String>> listCountry(){
         List<String> countryList = Validation.getListCountries();
