@@ -16,12 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,7 +64,6 @@ public class SignUpInController {
     }
 
     @PostMapping("/signup")
-    @ResponseBody
     public ResponseEntity<?> registrationUser(@Valid @RequestBody UsersDto usersDtoRequest) throws AppException {
         if (userService.existsUserByEmail(usersDtoRequest.getEmail()))
             throw new AppException(Errors.EMAIL_EXIST);
@@ -79,7 +73,6 @@ public class SignUpInController {
     }
 
     @PostMapping("/reset")
-    @ResponseBody
     public ResponseEntity<?> resetPassword(@Valid @RequestBody String email) throws AppException {
         if (email == null)
             throw new AppException(Errors.EMAIL_EXIST);
