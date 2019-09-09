@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./section/user/user.module').then(value => value.UserModule)
   },
+  {
+    path: 'abstracts',
+    loadChildren: () => import('./section/abstracts/abstracts.module').then(value => value.AbstractsModule)
+  }
 ];
 
 @NgModule({
