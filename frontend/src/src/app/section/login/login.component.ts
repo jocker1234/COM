@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.loginInfo = new AuthLoginInfo(
       this.form.email,
       this.form.password);

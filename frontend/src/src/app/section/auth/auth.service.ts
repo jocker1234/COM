@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {Observable, of, throwError} from "rxjs";
-import {SignUpInfo} from "./signup-info";
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
 import {AuthLoginInfo} from "./login-info";
+import {Observable} from "rxjs";
 import {JwtResponse} from "./jwt-response";
 import {catchError} from "rxjs/operators";
 import {HandlingErrorsService} from "../../handling-errors.service";
+import {SignUpInfo} from "./signup-info";
 import {environment} from "../../../environments/environment";
 
 const apiUrl = environment.apiUrl;
