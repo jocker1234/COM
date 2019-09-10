@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Authors</label>
-      <input type="text" class="form-control" name="authors" [(ngModel)]="case.authors[0].name">
+      <input type="text" class="form-control" name="authors" [(ngModel)]="author">
       <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
@@ -35,8 +35,8 @@
       <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Conclusion</label>
-      <input type="text" class="form-control" name="conclusion" [(ngModel)]="case.conclusion">
+      <label class="col col-form-label">Conclusions</label>
+      <input type="text" class="form-control" name="conclusions" [(ngModel)]="case.conclusions">
       <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
   </div>

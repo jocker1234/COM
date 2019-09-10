@@ -5,7 +5,7 @@ import {Category} from "../category";
 export class CaseAbstract extends Abstract{
   background: string;
   caseReport: string;
-  conclusion: string;
+  conclusions: string;
 
   constructor() {
     super();

@@ -1,3 +1,3 @@
 export class Authors {
-  name: string;
+  name: string = '';
 }

@@ -5,7 +5,7 @@ import {Authors} from "../authors";
 export class Abstract {
   id: number;
   title: string;
-  authors: Authors[];
+  authors: any[];
   tutors: string;
   users: User;
   categoryId: number;

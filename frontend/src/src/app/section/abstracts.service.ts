@@ -20,7 +20,6 @@ export class AbstractsService {
   constructor(private http: HttpClient) { }
 
   newCaseAbstract(caseAbstract: CaseAbstract): Observable<CaseAbstract> {
-    console.log(this.http.post<CaseAbstract>(`${this.caseUrl}`, caseAbstract));
     return this.http.post<CaseAbstract>(`${this.caseUrl}`, caseAbstract)
       .pipe(catchError(HandlingErrorsService.handleError));
   }

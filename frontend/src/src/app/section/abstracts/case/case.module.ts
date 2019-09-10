@@ -7,7 +7,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {CaseAbstractCreateComponent} from './case-abstract-create/case-abstract-create.component';
 import {httpInterceptorProvider} from "../../auth/auth-interceptor";
-import {MultiInputModule} from "@ng-libs/multi-input-array";
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import {MultiInputModule} from "@ng-libs/multi-input-array";
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule,
-    MultiInputModule
+    ReactiveFormsModule
   ],
   providers: [httpInterceptorProvider],
 })
