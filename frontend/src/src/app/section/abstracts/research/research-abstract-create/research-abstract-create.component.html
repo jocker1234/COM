@@ -1,49 +1,54 @@
-<form class="needs-validation"  [formGroup]="modelForm" (ngSubmit)="onSubmit()" novalidate>
+<form class="needs-validation" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
   <div class="form-group">
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Title</label>
-      <input type="text" formControlName="title" class="form-control" name="title">
-      <span *ngIf="!(modelForm.controls.title.untouched || modelForm.controls.title.valid)">{{ 'error.required' }}</span>
+      <input type="text" class="form-control" name="title" [(ngModel)]="research.title">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Authors</label>
-      <input type="text" formControlName="authors" class="form-control" name="authors">
-      <span *ngIf="!(modelForm.controls.authors.untouched || modelForm.controls.authors.valid)">{{ validationMessages.authors }}</span>
+      <input type="text" class="form-control" name="authors" [(ngModel)]="author">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Tutor</label>
-      <input type="text" formControlName="tutors" class="form-control" name="tutors">
-      <span *ngIf="!(modelForm.controls.tutors.untouched || modelForm.controls.tutors.valid)">{{ validationMessages.tutors }}</span>
+      <input type="text" class="form-control" name="tutors" [(ngModel)]="research.tutors">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Category</label>
-      <input type="text" class="form-control" name="category">
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="country" [(ngModel)]="research.categoryId">
+          <option value="">Select category...</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+        </select>
+      </div>
     </div>
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Introduction</label>
-      <input type="text" formControlName="introdution" class="form-control" name="introdution">
-      <span *ngIf="!(modelForm.controls.introdution.untouched || modelForm.controls.introdution.valid)">{{ validationMessages.introdution }}</span>
+      <input type="text" class="form-control" name="introdution" [(ngModel)]="research.introdution">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Aim of the study</label>
-      <input type="text" formControlName="aimOfTheStudy" class="form-control" name="aimOfTheStudy">
-      <span *ngIf="!(modelForm.controls.aimOfTheStudy.untouched || modelForm.controls.aimOfTheStudy.valid)">{{ validationMessages.aimOfTheStudy }}</span>
+      <input type="text" class="form-control" name="aimOfTheStudy" [(ngModel)]="research.aimOfTheStudy">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Material and methods</label>
-      <input type="text" formControlName="materialAndMethods" class="form-control" name="materialAndMethods">
-      <span *ngIf="!(modelForm.controls.materialAndMethods.untouched || modelForm.controls.materialAndMethods.valid)">{{ validationMessages.materialAndMethods }}</span>
+      <input type="text" class="form-control" name="materialAndMethods" [(ngModel)]="research.materialAndMethods">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
       <label class="col col-form-label">Result</label>
-      <input type="text" formControlName="results" class="form-control" name="results">
-      <span *ngIf="!(modelForm.controls.results.untouched || modelForm.controls.results.valid)">{{ validationMessages.results }}</span>
+      <input type="text" class="form-control" name="results" [(ngModel)]="research.results">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
     <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Conclusion</label>
-      <input type="text" formControlName="conclusions" class="form-control" name="conclusions">
-      <span *ngIf="!(modelForm.controls.conclusions.untouched || modelForm.controls.conclusions.valid)">{{ validationMessages.conclusions }}</span>
+      <label class="col col-form-label">Conclusions</label>
+      <input type="text" class="form-control" name="conclusions" [(ngModel)]="research.conclusions">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
     </div>
   </div>
-  <button [disabled]="!modelForm.valid" type="submit">Send</button>
+  <button [disabled]="!f.value" type="submit">Send</button>
 </form>

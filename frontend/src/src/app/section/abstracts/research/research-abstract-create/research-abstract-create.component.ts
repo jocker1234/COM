@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ResearchAbstract} from "../../research-abstract";
 import {AbstractsService} from "../../../abstracts.service";
+import {Category} from "../../../category";
+import {CategoryService} from "../../../category.service";
 
 @Component({
   selector: 'app-research-abstract-create',
@@ -10,42 +11,20 @@ import {AbstractsService} from "../../../abstracts.service";
 })
 export class ResearchAbstractCreateComponent implements OnInit {
 
-  modelForm: FormGroup;
+  author: any;
+  categories: Category[];
+  research: ResearchAbstract = new ResearchAbstract();
 
-  research: ResearchAbstract;
-  researchAbstractError: ResearchAbstract;
-
-  private validationMessages = {
-    title: {
-      required: 'firstname is required'
-    },
-    authors: {
-      required: 'lastname is required',
-      minlength: 'lastname must have at least 3 characters'
-    }
-  }
-
-  constructor(private formBuilder: FormBuilder, private abstractService: AbstractsService) { }
+  constructor(private abstractService: AbstractsService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.modelForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      authors: [[]],
-      tutors: ['', Validators.required],
-      category: [[]],
-      introdution: ['', Validators.required],
-      aimOfTheStudy: ['', Validators.required],
-      materialAndMethods: ['', Validators.required],
-      results: ['', Validators.required],
-      conclusions: ['', Validators.required]
-    });
+    this.research.authors = [];
+    this.categoryService.getCategory().subscribe(data => this.categories = data);
   }
 
-  get f() { return this.modelForm.controls; }
-
   onSubmit() {
-    console.log(this.modelForm.value);
-    this.abstractService.newResearchAbstract(this.modelForm.value);
+    this.research.authors.push(this.author);
+    this.abstractService.newResearchAbstract(this.research).subscribe(value => console.log("as " + value ));
   }
 
 }

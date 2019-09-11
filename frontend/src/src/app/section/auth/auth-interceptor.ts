@@ -11,14 +11,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.token.getToken();
-    console.log(req.headers);
     req = req.clone({
       setHeaders: {
         'Content-Type': 'application/json; charset=utf-8',
         'Accept': 'application/json'
       }
     });
-    console.log(req.headers);
     if (token != null) {
       req = req.clone({
         setHeaders: {
@@ -26,7 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
         },
       });
     }
-    console.log(req.headers);
     return next.handle(req);
   }
 
