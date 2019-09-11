@@ -1,0 +1,44 @@
+<form class="needs-validation" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <div class="form-group">
+    <div class="col-md-6 mb-3">
+      <label class="col col-form-label">Title</label>
+      <input type="text" class="form-control" name="title" [(ngModel)]="case.title">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="col col-form-label">Authors</label>
+      <input type="text" class="form-control" name="authors" [(ngModel)]="author">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="col col-form-label">Tutor</label>
+      <input type="text" class="form-control" name="tutors" [(ngModel)]="case.tutors">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="col col-form-label">Category</label>
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="country" [(ngModel)]="case.categoryId">
+          <option value="">Select category...</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="col col-form-label">Background</label>
+      <input type="text" class="form-control" name="background" [(ngModel)]="case.background">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="col col-form-label">Case Report</label>
+      <input type="text" class="form-control" name="caseReport" [(ngModel)]="case.caseReport">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="col col-form-label">Conclusions</label>
+      <input type="text" class="form-control" name="conclusions" [(ngModel)]="case.conclusions">
+      <span *ngIf="!(f.untouched || f.valid)"></span>
+    </div>
+  </div>
+  <button [disabled]="!f.value" type="submit">Send</button>
+</form>
