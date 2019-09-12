@@ -4,6 +4,7 @@ import {Category} from "../../../category";
 import {CategoryService} from "../../../category.service";
 import {AbstractsService} from "../../../abstracts.service";
 import {Authors} from "../../../authors";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-case-abstract-create',
@@ -16,7 +17,7 @@ export class CaseAbstractCreateComponent implements OnInit {
   categories: Category[];
   case: CaseAbstract = new CaseAbstract();
 
-  constructor(private abstractService: AbstractsService, private categoryService: CategoryService) { }
+  constructor(private abstractService: AbstractsService, private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit() {
     this.case.authors = [];
@@ -25,7 +26,9 @@ export class CaseAbstractCreateComponent implements OnInit {
 
   onSubmit() {
     this.case.authors.push(this.author);
-    this.abstractService.newCaseAbstract(this.case).subscribe(value => console.log("as " + value ));
+    this.abstractService.newCaseAbstract(this.case).subscribe(value => {
+      this.router.navigate(['abstracts/case/' + value.id])
+    });
   }
 
 }

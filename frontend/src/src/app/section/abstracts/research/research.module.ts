@@ -6,10 +6,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {ResearchAbstractCreateComponent} from "./research-abstract-create/research-abstract-create.component";
+import {ResearchAbstractItemsDetailsComponent} from "./research-abstract-items-details/research-abstract-items-details.component";
 
 @NgModule({
   declarations: [
-    ResearchAbstractCreateComponent
+    ResearchAbstractCreateComponent,
+    ResearchAbstractItemsDetailsComponent
   ],
   imports: [
     CommonModule,
