@@ -1,6 +1,4 @@
 import {User} from "../user/user";
-import {Category} from "../category";
-import {Authors} from "../authors";
 
 export class Abstract {
   id: number;

@@ -39,10 +39,10 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  /*sendCaseAbstract(id: number) {
-    return this.http.put(`${this.caseUrl}/${id}/send`)
+  sendCaseAbstract(id: number) {
+    return this.http.put(`${this.caseUrl}/${id}/send`, null)
       .pipe(catchError(HandlingErrorsService.handleError));
-  }*/
+  }
 
   newResearchAbstract(caseAbstract: ResearchAbstract): Observable<ResearchAbstract> {
     return this.http.post<ResearchAbstract>(`${this.researchUrl}`, caseAbstract)
@@ -64,10 +64,10 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  /*sendResearchAbstract(id: number) {
-    return this.http.put(`${this.researchUrl}/${id}/send`,)
+  sendResearchAbstract(id: number) {
+    return this.http.put(`${this.researchUrl}/${id}/send`,null)
       .pipe(catchError(HandlingErrorsService.handleError));
-  }*/
+  }
 
 
 
