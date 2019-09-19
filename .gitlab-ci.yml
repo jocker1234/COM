@@ -1,1 +1,14 @@
-image: java:latest
+image: java:8
+
+stages:
+  - build
+
+before_script:
+  - chmod +x mvnw
+
+build:
+  stage: build
+  script: ./backend/mvnw package
+  artifacts:
+    paths:
+      - backend/target/backend-1.0.0.war
