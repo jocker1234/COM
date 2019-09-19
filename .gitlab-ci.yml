@@ -4,7 +4,7 @@ stages:
   - build
 
 before_script:
-  - chmod +x backend/mvn
+  - chmod +x ./backend/mvn
 
 build:
   stage: build
