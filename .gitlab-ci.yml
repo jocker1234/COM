@@ -4,11 +4,11 @@ stages:
   - build
 
 before_script:
-  - chmod +x mvnw
+  - chmod +x mvn
 
 build:
   stage: build
-  script: ./backend/mvnw package
+  script: ./backend/mvn package
   artifacts:
     paths:
       - backend/target/backend-1.0.0.war
