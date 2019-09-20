@@ -22,8 +22,8 @@ jobs:
 
     steps:
       - checkout
-      
-      - run: apt-get update -qq && apt-get install -y postgresql
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client
       
       - run:  
           name: Set up DB
