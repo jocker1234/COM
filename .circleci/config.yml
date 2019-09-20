@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       
-      - run: sudo apt-get install postgresql-client
+      - run: sudo apt-get install postgresql-client --fix-missing
       
       - run:  
           name: Set up DB
