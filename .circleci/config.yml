@@ -7,12 +7,12 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8u212-stretch
+      - image: circleci/maven:4.0.0-jdk08
       - image: circleci/postgres
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_DB: jdbc:postgresql://localhost/postgres
-          POSTGRES_PASSWORD: ""
+          POSTGRES_DB: jdbc:postgresql://localhost:5432/conf
+          POSTGRES_PASSWORD: qwerty
 
     working_directory: ~/repo
 
