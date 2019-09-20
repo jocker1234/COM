@@ -22,6 +22,14 @@ jobs:
 
     steps:
       - checkout
+      
+      - run: apt-get update -qq && apt-get install -y postgresql
+      
+      - run:  
+          name: Set up DB
+          command: |
+            psql -h 127.0.0.1 -U postgres -c "CREATE DATABASE conf;"
+            psql -h 127.0.0.1 -U postgres -c "CREATE USER postgres WITH PASSWORD 'qwerty'; GRANT ALL PRIVILEGES ON DATABASE conf TO postgres;"
 
       # Download and cache dependencies
       - restore_cache:
