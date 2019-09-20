@@ -23,8 +23,6 @@ jobs:
     steps:
       - checkout
       
-      - run: apt-get update -qq && apt-get install -y postgresql
-      
       - run:  
           name: Set up DB
           command: |
