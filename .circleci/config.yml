@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/maven:4.0.0-jdk8
+      - image: circleci/openjdk:8
       - image: circleci/postgres
         environment:
           POSTGRES_USER: postgres
