@@ -11,8 +11,8 @@ jobs:
       - image: circleci/postgres
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_DB: jdbc:postgresql://localhost/conf
-          POSTGRES_PASSWORD: qwerty
+          POSTGRES_DB: jdbc:postgresql://localhost/postgres
+          POSTGRES_PASSWORD: ""
 
     working_directory: ~/repo
 
