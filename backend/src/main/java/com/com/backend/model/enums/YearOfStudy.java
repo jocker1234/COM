@@ -1,4 +1,4 @@
-package com.com.backend.domain.enums;
+package com.com.backend.model.enums;
 
 import java.util.HashMap;
 import java.util.Map;

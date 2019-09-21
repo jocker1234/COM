@@ -1,7 +1,7 @@
 package com.com.backend.mapper;
 
-import com.com.backend.domain.Authorities;
-import com.com.backend.domain.enums.Role;
+import com.com.backend.model.Authorities;
+import com.com.backend.model.enums.Role;
 import com.com.backend.dto.AuthoritiesDto;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;

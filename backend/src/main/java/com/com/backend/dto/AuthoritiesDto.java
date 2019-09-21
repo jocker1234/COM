@@ -1,11 +1,12 @@
 package com.com.backend.dto;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class AuthoritiesDto extends AbstractDto {
 
     @NonNull

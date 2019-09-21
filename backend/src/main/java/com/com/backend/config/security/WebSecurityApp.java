@@ -55,7 +55,8 @@ public class WebSecurityApp extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/v2/api-docs",
+        web.ignoring().antMatchers(
+                "/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources",
                 "/swagger-resources/**",
@@ -68,15 +69,23 @@ public class WebSecurityApp extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(jwtAuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
-        http.cors().and().csrf().disable()
+        http.cors()
+                .and()
+                .csrf()
+                    .disable()
                 .authorizeRequests()
-                .requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("ADMIN")
-                .antMatchers("/api/auth/**", "/actuator/**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers(EndpointRequest.toAnyEndpoint())
+                    .hasRole("ADMIN")
+                .antMatchers("/api/auth/**", "/actuator/**")
+                    .permitAll()
+                .anyRequest()
+                    .authenticated()
                 .and()
-                .exceptionHandling().authenticationEntryPoint(jwtAuthEntryPoint)
+                .exceptionHandling()
+                    .authenticationEntryPoint(jwtAuthEntryPoint)
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
 }

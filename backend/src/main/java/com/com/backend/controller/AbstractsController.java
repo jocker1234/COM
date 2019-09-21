@@ -1,7 +1,7 @@
 package com.com.backend.controller;
 
-import com.com.backend.domain.Abstracts;
-import com.com.backend.domain.enums.Errors;
+import com.com.backend.model.Abstracts;
+import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.dto.AbstractsDto;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
@@ -67,7 +67,7 @@ public abstract class AbstractsController<T extends AbstractsDto, S extends Abst
     public ResponseEntity sendToApproval(@PathVariable Long id) throws AppException {
         int result = getService().forwardForApproval(id);
         if (result == 0)
-            throw new AbstractNotFoundException(Errors.NOT_FOUND);
+            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         return ResponseEntity.ok().build();
     }
 
@@ -76,7 +76,7 @@ public abstract class AbstractsController<T extends AbstractsDto, S extends Abst
     public ResponseEntity approvedAbstract(@PathVariable Long id) throws AppException {
         int result = getService().approved(id);
         if(result == 0)
-            throw new AbstractNotFoundException(Errors.NOT_FOUND);
+            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         return ResponseEntity.ok().build();
     }
 
@@ -85,7 +85,7 @@ public abstract class AbstractsController<T extends AbstractsDto, S extends Abst
     public ResponseEntity rejectedAbstract(@PathVariable Long id) throws AppException {
         int result = getService().rejected(id);
         if(result == 0)
-            throw new AbstractNotFoundException(Errors.NOT_FOUND);
+            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         return ResponseEntity.ok().build();
     }
 

@@ -1,8 +1,7 @@
-package com.com.backend.domain;
+package com.com.backend.model;
 
-import com.com.backend.domain.enums.Role;
-import lombok.Getter;
-import lombok.Setter;
+import com.com.backend.model.enums.Role;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +14,9 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 @Table
 public class Authorities extends AbstractEntity {

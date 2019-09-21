@@ -1,6 +1,6 @@
 package com.com.backend.mapper;
 
-import com.com.backend.domain.Abstracts;
+import com.com.backend.model.Abstracts;
 import com.com.backend.dto.AbstractsDto;
 
 import java.util.List;

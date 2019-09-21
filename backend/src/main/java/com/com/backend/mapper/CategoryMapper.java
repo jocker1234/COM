@@ -1,6 +1,6 @@
 package com.com.backend.mapper;
 
-import com.com.backend.domain.Category;
+import com.com.backend.model.Category;
 import com.com.backend.dto.CategoryDto;
 import org.mapstruct.Mapper;
 

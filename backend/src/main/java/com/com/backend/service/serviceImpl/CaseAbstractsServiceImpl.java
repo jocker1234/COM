@@ -2,10 +2,10 @@ package com.com.backend.service.serviceImpl;
 
 import com.com.backend.dao.CaseAbstractsDao;
 import com.com.backend.dao.CategoryDao;
-import com.com.backend.domain.CaseAbstracts;
-import com.com.backend.domain.enums.Errors;
-import com.com.backend.domain.enums.Fields;
-import com.com.backend.domain.enums.Status;
+import com.com.backend.model.CaseAbstracts;
+import com.com.backend.model.enums.ExceptionType;
+import com.com.backend.model.enums.Fields;
+import com.com.backend.model.enums.Status;
 import com.com.backend.dto.CaseAbstractsDto;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
@@ -48,13 +48,13 @@ public class CaseAbstractsServiceImpl extends AbstractsServiceImpl<CaseAbstracts
 
     public void validFields(CaseAbstractsDto caseAbstracts) throws WrongValueException {
         if (isNull(caseAbstracts.getCaseReport())) {
-            throw new WrongValueException(Errors.WRONG_VALUE, Fields.CASE_REPORT);
+            throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.CASE_REPORT);
         }
         if (isNull(caseAbstracts.getBackground())) {
-            throw new WrongValueException(Errors.WRONG_VALUE, Fields.BACKGROUND);
+            throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.BACKGROUND);
         }
         if (isNull(caseAbstracts.getConclusions())) {
-            throw new WrongValueException(Errors.WRONG_VALUE, Fields.CONCLUSION);
+            throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.CONCLUSION);
         }
     }
 
@@ -65,10 +65,10 @@ public class CaseAbstractsServiceImpl extends AbstractsServiceImpl<CaseAbstracts
         validFields(caseAbstracts);
         Optional<CaseAbstracts> caseAbstract = caseAbstractsDao.findById(id);
         if(!caseAbstract.isPresent()){
-            throw new AbstractNotFoundException(Errors.NOT_FOUND);
+            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         }
         if(!caseAbstract.get().getStatus().equals(Status.DO.getStatus())){
-            throw new AppException(Errors.ABSTRACT_SENT);
+            throw new AppException(ExceptionType.ABSTRACT_SENT);
         }
         caseAbstract.map(thesis -> {
             thesis = setValue(thesis, caseAbstracts);
@@ -90,21 +90,21 @@ public class CaseAbstractsServiceImpl extends AbstractsServiceImpl<CaseAbstracts
     @Override
     public int forwardForApproval(Long id) throws AppException {
         if(!caseAbstractsDao.getStatus(id).equals(Status.DO.getStatus()))
-            throw new AppException(Errors.WRONG_STATUS);
+            throw new AppException(ExceptionType.WRONG_STATUS);
         return caseAbstractsDao.changeStatusCase(Status.FORWARDED.getStatus(), id);
     }
 
     @Override
     public int approved(Long id) throws AppException {
         if(!caseAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
-            throw new AppException(Errors.WRONG_STATUS);
+            throw new AppException(ExceptionType.WRONG_STATUS);
         return caseAbstractsDao.changeStatusCase(Status.APPROVED.getStatus(), id);
     }
 
     @Override
     public int rejected(Long id) throws AppException {
         if(!caseAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
-            throw new AppException(Errors.WRONG_STATUS);
+            throw new AppException(ExceptionType.WRONG_STATUS);
         return caseAbstractsDao.changeStatusCase(Status.REJECTED.getStatus(), id);
     }
 

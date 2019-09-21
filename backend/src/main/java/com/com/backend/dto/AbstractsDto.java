@@ -1,13 +1,15 @@
 package com.com.backend.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.lang.NonNull;
 
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class AbstractsDto extends AbstractDto {
 
     @NonNull

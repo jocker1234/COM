@@ -1,6 +1,6 @@
 package com.com.backend.service;
 
-import com.com.backend.domain.Abstracts;
+import com.com.backend.model.Abstracts;
 import com.com.backend.dto.AbstractsDto;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;

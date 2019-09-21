@@ -1,6 +1,6 @@
 package com.com.backend.dao;
 
-import com.com.backend.domain.Users;
+import com.com.backend.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

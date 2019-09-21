@@ -1,7 +1,7 @@
 package com.com.backend.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,6 +9,9 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class UsersDto extends AbstractDto {
 
     private String email;

@@ -1,10 +1,9 @@
 package com.com.backend.mapper;
 
-import com.com.backend.Util;
-import com.com.backend.domain.ResearchAbstracts;
+import com.com.backend.util.Util;
+import com.com.backend.model.ResearchAbstracts;
 import com.com.backend.dto.ResearchAbstractsDto;
 import com.com.backend.service.CategoryService;
-import com.com.backend.service.ResearchAbstractsService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

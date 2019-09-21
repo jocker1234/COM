@@ -1,7 +1,7 @@
 package com.com.backend.mapper;
 
-import com.com.backend.domain.Users;
-import com.com.backend.domain.enums.YearOfStudy;
+import com.com.backend.model.Users;
+import com.com.backend.model.enums.YearOfStudy;
 import com.com.backend.dto.UsersDto;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;

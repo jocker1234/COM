@@ -1,6 +1,6 @@
 package com.com.backend.dao;
 
-import com.com.backend.domain.Abstracts;
+import com.com.backend.model.Abstracts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

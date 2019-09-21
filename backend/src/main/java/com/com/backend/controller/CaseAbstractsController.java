@@ -1,6 +1,6 @@
 package com.com.backend.controller;
 
-import com.com.backend.domain.CaseAbstracts;
+import com.com.backend.model.CaseAbstracts;
 import com.com.backend.dto.CaseAbstractsDto;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.CaseAbstractsService;

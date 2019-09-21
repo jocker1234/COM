@@ -1,8 +1,8 @@
 package com.com.backend.service.serviceImpl;
 
 import com.com.backend.dao.AuthoritiesDao;
-import com.com.backend.domain.Authorities;
-import com.com.backend.domain.enums.Role;
+import com.com.backend.model.Authorities;
+import com.com.backend.model.enums.Role;
 import com.com.backend.dto.AuthoritiesDto;
 import com.com.backend.mapper.AuthoritiesMapper;
 import com.com.backend.service.AuthoritiesService;

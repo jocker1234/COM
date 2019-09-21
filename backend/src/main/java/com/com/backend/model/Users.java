@@ -1,10 +1,9 @@
-package com.com.backend.domain;
+package com.com.backend.model;
 
-import com.com.backend.domain.enums.Gender;
-import com.com.backend.domain.enums.Title;
-import com.com.backend.domain.enums.YearOfStudy;
-import lombok.Getter;
-import lombok.Setter;
+import com.com.backend.model.enums.Gender;
+import com.com.backend.model.enums.Title;
+import com.com.backend.model.enums.YearOfStudy;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +19,9 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Users extends AbstractEntity {
 

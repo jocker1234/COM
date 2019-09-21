@@ -1,7 +1,7 @@
 package com.com.backend.mapper;
 
-import com.com.backend.Util;
-import com.com.backend.domain.CaseAbstracts;
+import com.com.backend.util.Util;
+import com.com.backend.model.CaseAbstracts;
 import com.com.backend.dto.CaseAbstractsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

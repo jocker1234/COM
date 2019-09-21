@@ -1,6 +1,6 @@
 package com.com.backend.controller;
 
-import com.com.backend.domain.ResearchAbstracts;
+import com.com.backend.model.ResearchAbstracts;
 import com.com.backend.dto.ResearchAbstractsDto;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.ResearchAbstractsService;

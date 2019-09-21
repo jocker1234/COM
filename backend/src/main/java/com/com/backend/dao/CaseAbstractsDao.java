@@ -1,6 +1,6 @@
 package com.com.backend.dao;
 
-import com.com.backend.domain.CaseAbstracts;
+import com.com.backend.model.CaseAbstracts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

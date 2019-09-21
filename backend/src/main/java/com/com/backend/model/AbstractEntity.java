@@ -1,7 +1,6 @@
-package com.com.backend.domain;
+package com.com.backend.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -12,6 +11,9 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @MappedSuperclass
 public abstract class AbstractEntity {
 

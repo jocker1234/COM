@@ -2,8 +2,8 @@ package com.com.backend.controller;
 
 import com.com.backend.config.security.JwtProvider;
 import com.com.backend.config.security.JwtResponse;
-import com.com.backend.domain.Users;
-import com.com.backend.domain.enums.Errors;
+import com.com.backend.model.Users;
+import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.dto.LoginFormRequest;
 import com.com.backend.dto.UsersDto;
 import com.com.backend.exception.AppException;
@@ -66,7 +66,7 @@ public class SignUpInController {
     @PostMapping("/signup")
     public ResponseEntity<?> registrationUser(@Valid @RequestBody UsersDto usersDtoRequest) throws AppException {
         if (userService.existsUserByEmail(usersDtoRequest.getEmail()))
-            throw new AppException(Errors.EMAIL_EXIST);
+            throw new AppException(ExceptionType.EMAIL_EXIST);
         UsersDto user = userService.signUpUser(usersDtoRequest);
 
         return ResponseEntity.ok(user);
@@ -75,7 +75,7 @@ public class SignUpInController {
     @PostMapping("/reset")
     public ResponseEntity<?> resetPassword(@Valid @RequestBody String email) throws AppException {
         if (email == null)
-            throw new AppException(Errors.EMAIL_EXIST);
+            throw new AppException(ExceptionType.EMAIL_EXIST);
 
         Users user = userService.getUserByEmail(email);
         emailService.reamindPassword(user);

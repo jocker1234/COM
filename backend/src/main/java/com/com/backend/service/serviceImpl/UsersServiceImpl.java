@@ -1,9 +1,9 @@
 package com.com.backend.service.serviceImpl;
 
 import com.com.backend.dao.UsersDao;
-import com.com.backend.domain.Authorities;
-import com.com.backend.domain.Users;
-import com.com.backend.domain.enums.*;
+import com.com.backend.model.Authorities;
+import com.com.backend.model.Users;
+import com.com.backend.model.enums.*;
 import com.com.backend.dto.UsersDto;
 import com.com.backend.exception.AppException;
 import com.com.backend.mapper.UserMapper;
@@ -57,32 +57,32 @@ public class UsersServiceImpl implements UsersService {
     private void validateUser(UsersDto userDto) throws AppException {
 
         if (!Validation.emailValidation(userDto.getEmail()))
-            throw new AppException(Errors.EMAIL_FORMAT);
+            throw new AppException(ExceptionType.EMAIL_FORMAT);
 
         if (Gender.valueOf(userDto.getGender()) == null)
-            throw new AppException(Errors.GENDER_NOT_FOUND);
+            throw new AppException(EntityType.GENDER, ExceptionType.NOT_FOUND);
 
         if (!Validation.countryValidation(userDto.getCountry()))
-            throw new AppException(Errors.COUNTRY_NOT_FOUND);
+            throw new AppException(EntityType.COUNTRY, ExceptionType.NOT_FOUND);
 
         if (Title.valueOf(userDto.getTitle()) == null)
-            throw new AppException(Errors.TITLE_NOT_FOUND);
+            throw new AppException(EntityType.TITLE, ExceptionType.NOT_FOUND);
 
         if (YearOfStudy.valueOf(userDto.getYearOfStudy()) == null)
-            throw new AppException(Errors.YEAR_OF_STUDY_NOT_FOUND);
+            throw new AppException(EntityType.YEAR_OF_STUDY, ExceptionType.NOT_FOUND);
 
         if (userDto.getNeedVisa() == null)
-            throw new AppException(Errors.NEED_VISA);
+            throw new AppException(ExceptionType.NEED_VISA);
 
         if (userDto.getNeedVisa() && !Validation.passportNumberValidation(userDto.getPassportNumber()))
-            throw new AppException(Errors.PASSPORT_NUMBER_FORMAT);
+            throw new AppException(ExceptionType.PASSPORT_NUMBER_FORMAT);
     }
 
     private UsersDto validateAuthenticate(UsersDto userDto) throws AppException{
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 
         if (userDto.getAuthorities() == null)
-            throw new AppException(Errors.EMAIL_FORMAT);
+            throw new AppException(ExceptionType.EMAIL_FORMAT);
         if (userDto.getAuthorities() != null && userDto.getAuthorities().length != 0) {
             Set<Authorities> authoritiesDtos = new HashSet<>();
 
@@ -152,7 +152,7 @@ public class UsersServiceImpl implements UsersService {
         System.out.println(users.toString());
         UsersDto user = usersMapper.usersToUsersDto(usersDao.getOne(id));
         if (user == null)
-            throw new AppException(Errors.USER_NOT_FOUND);
+            throw new AppException(EntityType.USER, ExceptionType.NOT_FOUND);
         return user;
     }
 

@@ -1,6 +1,6 @@
 package com.com.backend.service;
 
-import com.com.backend.domain.AbstractEntity;
+import com.com.backend.model.AbstractEntity;
 import com.com.backend.dto.AbstractDto;
 import com.com.backend.exception.AppException;
 

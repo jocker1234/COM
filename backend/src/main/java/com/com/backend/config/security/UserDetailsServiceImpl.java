@@ -1,7 +1,7 @@
 package com.com.backend.config.security;
 
 import com.com.backend.dao.UsersDao;
-import com.com.backend.domain.Users;
+import com.com.backend.model.Users;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

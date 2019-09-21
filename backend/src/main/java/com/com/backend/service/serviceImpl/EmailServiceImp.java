@@ -1,6 +1,6 @@
 package com.com.backend.service.serviceImpl;
 
-import com.com.backend.domain.Users;
+import com.com.backend.model.Users;
 import com.com.backend.dto.Mail;
 import com.com.backend.dto.UsersDto;
 import com.com.backend.service.EmailService;

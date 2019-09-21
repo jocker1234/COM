@@ -1,10 +1,10 @@
 package com.com.backend.service.serviceImpl;
 
-import com.com.backend.Util;
+import com.com.backend.util.Util;
 import com.com.backend.dao.CategoryDao;
-import com.com.backend.domain.Abstracts;
-import com.com.backend.domain.enums.Errors;
-import com.com.backend.domain.enums.Fields;
+import com.com.backend.model.Abstracts;
+import com.com.backend.model.enums.ExceptionType;
+import com.com.backend.model.enums.Fields;
 import com.com.backend.dto.AbstractsDto;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
@@ -46,23 +46,23 @@ public abstract class AbstractsServiceImpl<T extends AbstractsDto, S extends Abs
     public T getOne(Long id) throws AbstractNotFoundException {
         Optional<S> s = getDao().findById(id);
         if(!s.isPresent()){
-            throw new AbstractNotFoundException(Errors.NOT_FOUND);
+            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         }
         return (T) getMapper().dtoToModel(s.get());
     }
 
     protected void validAbstracts(T t) throws WrongValueException {
         if(t.getCategoryId()==null){
-            throw new WrongValueException(Errors.WRONG_VALUE, Fields.CATEGORY);
+            throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.CATEGORY);
         }
         if(t.getAuthors()==null||t.getAuthors().size()==0){
-            throw new WrongValueException(Errors.WRONG_VALUE, Fields.AUTHOR);
+            throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.AUTHOR);
         }
         if(isNull(t.getTitle())){
-            throw new WrongValueException(Errors.WRONG_VALUE, Fields.TITLE);
+            throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.TITLE);
         }
         if(isNull(t.getTutors())){
-            throw new WrongValueException(Errors.WRONG_VALUE, Fields.TUTORS);
+            throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.TUTORS);
         }
     }
 
@@ -104,7 +104,7 @@ public abstract class AbstractsServiceImpl<T extends AbstractsDto, S extends Abs
         try{
             getDao().deleteById(id);
         }catch (EmptyResultDataAccessException e){
-            throw new AbstractNotFoundException(Errors.NOT_FOUND);
+            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         }
     }
 }

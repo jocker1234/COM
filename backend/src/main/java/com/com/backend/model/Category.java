@@ -1,12 +1,14 @@
-package com.com.backend.domain;
+package com.com.backend.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Category extends AbstractEntity {
 
