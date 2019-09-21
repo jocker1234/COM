@@ -21,21 +21,28 @@ public class CategoryController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
-    public ResponseEntity<List<CategoryDto>> getAll(){
+    public ResponseEntity<List<CategoryDto>> getAll() {
         return ResponseEntity.ok(categoryService.getAll());
     }
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
-    public ResponseEntity<List<CategoryDto>> create(@Valid @RequestBody CategoryDto categoryRequest){
+    public ResponseEntity<List<CategoryDto>> create(@Valid @RequestBody CategoryDto categoryRequest) {
         List<CategoryDto> categoryDtos = categoryService.create(categoryRequest);
         return ResponseEntity.ok(categoryDtos);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
-    public ResponseEntity<List<CategoryDto>> delete(@Valid @PathVariable Long id){
+    public ResponseEntity<List<CategoryDto>> delete(@Valid @PathVariable Long id) {
         List<CategoryDto> categoryDtos = categoryService.delete(id);
+        return ResponseEntity.ok(categoryDtos);
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
+    public ResponseEntity<List<CategoryDto>> update(@Valid @PathVariable Long id, @RequestBody CategoryDto categoryDto) {
+        List<CategoryDto> categoryDtos = categoryService.update(id, categoryDto);
         return ResponseEntity.ok(categoryDtos);
     }
 

@@ -9,4 +9,5 @@ public interface CategoryService {
     List<CategoryDto> getAll();
     List<CategoryDto> create(CategoryDto categoryDto);
     List<CategoryDto> delete(Long id);
+    List<CategoryDto> update(Long id, CategoryDto categoryDto);
 }

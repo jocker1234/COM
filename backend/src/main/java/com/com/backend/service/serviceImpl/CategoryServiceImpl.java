@@ -1,7 +1,7 @@
 package com.com.backend.service.serviceImpl;
 
 import com.com.backend.dao.CategoryDao;
-import com.com.backend.domain.Category;
+import com.com.backend.model.Category;
 import com.com.backend.dto.CategoryDto;
 import com.com.backend.mapper.CategoryMapper;
 import com.com.backend.service.CategoryService;
@@ -39,6 +39,13 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDto> delete(Long id) {
         categoryDao.delete(getOne(id));
         return getAll();
+    }
+
+    @Override
+    public List<CategoryDto> update(Long id, CategoryDto categoryDto) {
+        Category category = categoryMapper.entityToData(categoryDto);
+        categoryDao.save(category);
+        return this.getAll();
     }
 
 }
