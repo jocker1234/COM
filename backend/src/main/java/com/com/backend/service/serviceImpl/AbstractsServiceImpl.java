@@ -5,6 +5,7 @@ import com.com.backend.dao.CategoryDao;
 import com.com.backend.model.Abstracts;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
+import com.com.backend.model.enums.Status;
 import com.com.backend.dto.AbstractsDto;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
@@ -63,6 +64,9 @@ public abstract class AbstractsServiceImpl<T extends AbstractsDto, S extends Abs
         }
         if(isNull(t.getTutors())){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.TUTORS);
+        }
+        if(isNull(t.getStatus())){
+            t.setStatus(Status.DO.getStatus());
         }
     }
 
