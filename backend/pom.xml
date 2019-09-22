@@ -6,7 +6,6 @@
 		<groupId>com.com</groupId>
 		<artifactId>conference-organization-managment</artifactId>
 		<version>1.0.0</version>
-		<relativePath></relativePath>
 	</parent>
 	<artifactId>backend</artifactId>
 	<packaging>war</packaging>
