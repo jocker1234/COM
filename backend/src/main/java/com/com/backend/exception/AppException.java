@@ -1,21 +1,8 @@
 package com.com.backend.exception;
 
-import com.com.backend.config.PropertiesConfig;
 import com.com.backend.model.enums.EntityType;
-import com.com.backend.util.Util;
 import com.com.backend.model.enums.ExceptionType;
-import org.hibernate.service.spi.InjectService;
-import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-import java.text.MessageFormat;
-import java.util.Optional;
 
 @Configurable
 public class AppException extends Exception {

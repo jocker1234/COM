@@ -1,6 +1,5 @@
 package com.com.backend.exception;
 
-import com.com.backend.config.PropertiesConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -19,9 +18,6 @@ public class ExceptionControllerAdvice {
 
     @Autowired
     private MessageSource messageSource;
-
-    @Autowired
-    private PropertiesConfig propertiesConfig;
 
     @ExceptionHandler(AppException.class)
     public ResponseEntity<ExceptionResponse> exceptionHandler(HttpServletRequest request, AppException ex) {
@@ -60,7 +56,7 @@ public class ExceptionControllerAdvice {
     }
 
     private String getMessage(AppException ex) {
-        Optional<String> templateContent = Optional.ofNullable(messageSource.getMessage(propertiesConfig.getConfigValue(ex.getMessage()), ex.getParameters(), LocaleContextHolder.getLocale()));
+        Optional<String> templateContent = Optional.ofNullable(messageSource.getMessage(ex.getMessage(), ex.getParameters(), LocaleContextHolder.getLocale()));
         if (templateContent.isPresent() && ex.parameters != null) {
             return MessageFormat.format(templateContent.get(), ex.getParameters());
         }
