@@ -1,5 +1,6 @@
-package com.com.backend.dto;
+package com.com.backend.dto.request;
 
+import com.com.backend.dto.AbstractDto;
 import lombok.*;
 import org.springframework.lang.NonNull;
 
@@ -9,13 +10,12 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
-public class AbstractsDto extends AbstractDto {
+public class AbstractsDtoRequest extends AbstractDto {
 
     @NonNull
     private String title;
     @NonNull
-    private List<String> authors;
+    private String[] authors;
     @NonNull
     private String tutors;
     @NonNull

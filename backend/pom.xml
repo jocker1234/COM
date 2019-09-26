@@ -96,6 +96,11 @@
 			<artifactId>mapstruct-jdk8</artifactId>
 			<version>1.2.0.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>2.1.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

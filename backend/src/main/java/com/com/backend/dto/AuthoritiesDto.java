@@ -6,7 +6,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class AuthoritiesDto extends AbstractDto {
 
     @NonNull

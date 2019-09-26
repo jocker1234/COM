@@ -1,17 +1,20 @@
 package com.com.backend.service.serviceImpl;
 
-import com.com.backend.util.Util;
+import com.com.backend.dto.request.AbstractsDtoRequest;
+import com.com.backend.dto.response.AbstractsDtoResponse;
+import com.com.backend.model.Users;
+import com.com.backend.service.AbstractsService;
+import com.com.backend.service.UsersService;
 import com.com.backend.dao.CategoryDao;
 import com.com.backend.model.Abstracts;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
 import com.com.backend.model.enums.Status;
-import com.com.backend.dto.AbstractsDto;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
 import com.com.backend.exception.WrongValueException;
 import com.com.backend.mapper.AbstractsMapper;
-import com.com.backend.service.AbstractsService;
+import com.com.backend.service.AbstractsAbstractService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -22,41 +25,46 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public abstract class AbstractsServiceImpl<T extends AbstractsDto, S extends Abstracts> implements AbstractsService<T,S> {
+public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequest, TRES extends AbstractsDtoResponse,
+                                                S extends Abstracts> implements AbstractsAbstractService<TREQ, TRES, S> {
 
     public abstract AbstractsMapper getMapper();
     public abstract JpaRepository<S, Long> getDao();
-    protected abstract void validFields(T t) throws WrongValueException;
-    protected abstract S modelToDto(T t);
+    protected abstract void validFields(TREQ t) throws WrongValueException;
+    protected abstract S dtoReqToModel(TREQ t);
 
-    private CategoryDao categoryDao;
+    private UsersService usersService;
+    protected CategoryDao categoryDao;
+    private AbstractsService abstractsService;
 
-    public AbstractsServiceImpl(CategoryDao categoryDao) {
+    public AbstractsAbstractServiceImpl(UsersService usersService, CategoryDao categoryDao, AbstractsService abstractsService) {
+        this.usersService = usersService;
         this.categoryDao = categoryDao;
+        this.abstractsService = abstractsService;
     }
 
     protected boolean isNull(String value){
         return !(value!=null && !value.isEmpty());
     }
 
-    public List<T> getAll() {
+    public List<TRES> getAll() {
         List<S> s = getDao().findAll();
-        return getMapper().dtoListToModelList(s);
+        return getMapper().modelListToDtoListRes(s);
     }
 
-    public T getOne(Long id) throws AbstractNotFoundException {
+    public TRES getOne(Long id) throws AbstractNotFoundException {
         Optional<S> s = getDao().findById(id);
         if(!s.isPresent()){
             throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         }
-        return (T) getMapper().dtoToModel(s.get());
+        return (TRES) getMapper().modelToDtoRes(s.get());
     }
 
-    protected void validAbstracts(T t) throws WrongValueException {
+    protected void validAbstracts(TREQ t) throws WrongValueException {
         if(t.getCategoryId()==null){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.CATEGORY);
         }
-        if(t.getAuthors()==null||t.getAuthors().size()==0){
+        if(t.getAuthors()==null||t.getAuthors().length==0){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.AUTHOR);
         }
         if(isNull(t.getTitle())){
@@ -70,29 +78,30 @@ public abstract class AbstractsServiceImpl<T extends AbstractsDto, S extends Abs
         }
     }
 
-    public T create(T t) throws WrongValueException {
+    public TRES create(TREQ t, String token) throws WrongValueException {
         validAbstracts(t);
         validFields(t);
-        t.setAuthors(t.getAuthors());
-        S s = modelToDto(t);
+        S s = dtoReqToModel(t);
         s.setCategory(categoryDao.getOne(t.getCategoryId()));
+        String email = abstractsService.getEmailFromToken(token);
+        Users users = usersService.getUserByEmail(email);
+        s.setUsers(users);
         S added = getDao().save(s);
-        return (T) getMapper().dtoToModel(added);
+        return (TRES) getMapper().modelToDtoRes(added);
     }
 
     @Transactional
-    public T update(Long id, T t) throws AppException {
-        S updated = getDao().save(modelToDto(t));
-        return (T) getMapper().dtoToModel(updated);
+    public TRES update(Long id, TREQ t) throws AppException {
+        S updated = getDao().save(dtoReqToModel(t));
+        return (TRES) getMapper().modelToDtoRes(updated);
     }
 
-    protected S setValue(S sTo, T tFrom){
+    protected S setValue(S sTo, TREQ tFrom){
         if (!sTo.getCategory().getId().equals(tFrom.getCategoryId())) {
             sTo.setCategory(categoryDao.getOne(tFrom.getCategoryId()));
         }
-        String rAuthors = Util.joinWithComma(tFrom.getAuthors());
-        if (!sTo.getAuthors().equals(rAuthors)) {
-            sTo.setAuthors(rAuthors);
+        if (!sTo.getAuthors().equals(tFrom.getAuthors())) {
+            sTo.setAuthors(tFrom.getAuthors());
         }
         if (!sTo.getTitle().equals(tFrom.getTitle())) {
             sTo.setTitle(tFrom.getTitle());

@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Entity
 public class ResearchAbstracts extends Abstracts {
 

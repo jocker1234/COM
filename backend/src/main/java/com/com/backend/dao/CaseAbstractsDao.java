@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CaseAbstractsDao extends JpaRepository<CaseAbstracts, Long> {
 
@@ -16,5 +18,7 @@ public interface CaseAbstractsDao extends JpaRepository<CaseAbstracts, Long> {
 
     @Query("select ca.status from CaseAbstracts ca where ca.id = :caseId")
     String getStatus(@Param("caseId") Long id);
+
+    List<CaseAbstracts> getAllByUsersEmail(String email);
 
 }

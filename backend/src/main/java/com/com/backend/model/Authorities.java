@@ -16,7 +16,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Entity
 @Table
 public class Authorities extends AbstractEntity {

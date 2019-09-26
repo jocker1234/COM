@@ -1,6 +1,10 @@
 package com.com.backend.model;
 
+import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import lombok.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -11,14 +15,17 @@ import javax.persistence.MappedSuperclass;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @MappedSuperclass
+@TypeDefs({
+        @TypeDef(name = "string-array", typeClass = StringArrayType.class)
+})
 public class Abstracts extends AbstractEntity {
 
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
-    private String authors;
+    @Type(type = "string-array")
+    @Column(nullable = false, columnDefinition = "text[]")
+    private String[] authors;
     @Column(nullable = false)
     private String tutors;
     @Column(nullable = false)

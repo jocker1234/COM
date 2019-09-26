@@ -2,30 +2,38 @@ package com.com.backend.service.serviceImpl;
 
 import com.com.backend.dao.CategoryDao;
 import com.com.backend.dao.ResearchAbstractsDao;
+import com.com.backend.dto.request.ResearchAbstractsDtoRequest;
+import com.com.backend.dto.response.ResearchAbstractsDtoResponse;
 import com.com.backend.model.ResearchAbstracts;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
 import com.com.backend.model.enums.Status;
-import com.com.backend.dto.ResearchAbstractsDto;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
 import com.com.backend.exception.WrongValueException;
 import com.com.backend.mapper.AbstractsMapper;
 import com.com.backend.mapper.ResearchAbstractsMapper;
+import com.com.backend.service.AbstractsService;
 import com.com.backend.service.ResearchAbstractsService;
+import com.com.backend.service.UsersService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ResearchAbstractsServiceImpl extends AbstractsServiceImpl<ResearchAbstractsDto, ResearchAbstracts> implements ResearchAbstractsService {
+public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<ResearchAbstractsDtoRequest,
+                                                                        ResearchAbstractsDtoResponse, ResearchAbstracts>
+                                            implements ResearchAbstractsService {
 
     private ResearchAbstractsDao researchAbstractsDao;
     private ResearchAbstractsMapper researchAbstractsMapper;
 
-    public ResearchAbstractsServiceImpl(CategoryDao categoryDao, ResearchAbstractsDao researchAbstractsDao, ResearchAbstractsMapper researchAbstractsMapper) {
-        super(categoryDao);
+    public ResearchAbstractsServiceImpl(UsersService usersService, CategoryDao categoryDao,
+                                        AbstractsService abstractsService, ResearchAbstractsDao researchAbstractsDao,
+                                        ResearchAbstractsMapper researchAbstractsMapper) {
+        super(usersService, categoryDao, abstractsService);
         this.researchAbstractsDao = researchAbstractsDao;
         this.researchAbstractsMapper = researchAbstractsMapper;
     }
@@ -40,7 +48,7 @@ public class ResearchAbstractsServiceImpl extends AbstractsServiceImpl<ResearchA
         return researchAbstractsDao;
     }
 
-    protected void validFields(ResearchAbstractsDto researchAbstracts) throws WrongValueException {
+    protected void validFields(ResearchAbstractsDtoRequest researchAbstracts) throws WrongValueException {
         if(isNull(researchAbstracts.getIntrodution())){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.INTRODUCTION);
         }
@@ -59,12 +67,14 @@ public class ResearchAbstractsServiceImpl extends AbstractsServiceImpl<ResearchA
     }
 
     @Override
-    protected ResearchAbstracts modelToDto(ResearchAbstractsDto researchAbstractsDto) {
-        return researchAbstractsMapper.modelToDto(researchAbstractsDto);
+    protected ResearchAbstracts dtoReqToModel(ResearchAbstractsDtoRequest researchAbstractsDto) {
+        ResearchAbstracts abstracts = researchAbstractsMapper.dtoReqToModel(researchAbstractsDto);
+        abstracts.setCategory(categoryDao.getOne(researchAbstractsDto.getCategoryId()));
+        return abstracts;
     }
 
     @Override
-    public ResearchAbstractsDto update(Long id, ResearchAbstractsDto ra) throws AppException {
+    public ResearchAbstractsDtoResponse update(Long id, ResearchAbstractsDtoRequest ra) throws AppException {
         validAbstracts(ra);
         validFields(ra);
         Optional<ResearchAbstracts> researchAbstracts = researchAbstractsDao.findById(id);
@@ -92,8 +102,12 @@ public class ResearchAbstractsServiceImpl extends AbstractsServiceImpl<ResearchA
                 thesis.setConclusions(ra.getConclusions());
             }
             return researchAbstractsDao.save(thesis);
-        }).orElseGet(() -> researchAbstractsDao.save(researchAbstractsMapper.modelToDto(ra)));
-        return researchAbstractsMapper.dtoToModel(researchAbstracts.get());
+        }).orElseGet(() -> {
+            ResearchAbstracts abstracts = researchAbstractsMapper.dtoReqToModel(ra);
+            abstracts.setCategory(categoryDao.getOne(ra.getCategoryId()));
+            return researchAbstractsDao.save(abstracts);
+        });
+        return researchAbstractsMapper.modelToDtoRes(researchAbstracts.get());
     }
 
     @Override
@@ -116,4 +130,11 @@ public class ResearchAbstractsServiceImpl extends AbstractsServiceImpl<ResearchA
             throw new AppException(ExceptionType.WRONG_STATUS);
         return researchAbstractsDao.changeStatusCase(Status.REJECTED.getStatus(), id);
     }
+
+    @Override
+    public List<ResearchAbstractsDtoResponse> getAllAbstractsByUserEmail(String email) {
+        List<ResearchAbstracts> caseAbstracts = researchAbstractsDao.getAllByUsersEmail(email);
+        return researchAbstractsMapper.modelListToDtoListRes(caseAbstracts);
+    }
+
 }

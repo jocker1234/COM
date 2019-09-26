@@ -26,7 +26,8 @@ public interface AuthoritiesMapper {
 
     @Mappings({
             @Mapping(target = "id", source = "authoritiesDto.id"),
-            @Mapping(target = "roleName", expression = "java(Role.findRole(authoritiesDto.getRoleName()))")
+            @Mapping(target = "roleName", expression = "java(Role.findRole(authoritiesDto.getRoleName()))"),
+            @Mapping(target = "users", ignore = true)
     })
     @Named("toEntity")
     Authorities authoritiesDtoToAuthorities(AuthoritiesDto authoritiesDto);

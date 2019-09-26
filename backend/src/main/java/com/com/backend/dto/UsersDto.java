@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class UsersDto extends AbstractDto {
 
     private String email;

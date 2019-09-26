@@ -13,7 +13,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @MappedSuperclass
 public abstract class AbstractEntity {
 

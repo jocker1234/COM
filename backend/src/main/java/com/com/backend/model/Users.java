@@ -21,7 +21,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Entity
 public class Users extends AbstractEntity {
 
@@ -84,34 +83,6 @@ public class Users extends AbstractEntity {
     @Column(nullable = false)
     private Set<Authorities> authoritiesSet;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Users)) return false;
-        if (!super.equals(o)) return false;
-        Users users = (Users) o;
-        return Objects.equals(email, users.email) &&
-                Objects.equals(password, users.password) &&
-                Objects.equals(registrationDate, users.registrationDate) &&
-                Objects.equals(activatedAccount, users.activatedAccount) &&
-                Objects.equals(firstName, users.firstName) &&
-                Objects.equals(lastName, users.lastName) &&
-                gender == users.gender &&
-                Objects.equals(dateOfBirth, users.dateOfBirth) &&
-                Objects.equals(country, users.country) &&
-                title == users.title &&
-                Objects.equals(university, users.university) &&
-                Objects.equals(faculty, users.faculty) &&
-                yearOfStudy == users.yearOfStudy &&
-                Objects.equals(phoneNumber, users.phoneNumber) &&
-                Objects.equals(needVisa, users.needVisa) &&
-                Objects.equals(authoritiesSet, users.authoritiesSet);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), email, password, registrationDate, activatedAccount,
-                firstName, lastName, gender, dateOfBirth, country, title, university, faculty, yearOfStudy,
-                phoneNumber, needVisa, authoritiesSet);
-    }
+
 }
