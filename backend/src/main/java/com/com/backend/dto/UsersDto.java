@@ -25,7 +25,7 @@ public class UsersDto extends AbstractDto {
     private String title;
     private String university;
     private String faculty;
-    private int yearOfStudy;
+    private Integer yearOfStudy;
     private String phoneNumber;
     private Boolean needVisa;
     private String passportNumber;
