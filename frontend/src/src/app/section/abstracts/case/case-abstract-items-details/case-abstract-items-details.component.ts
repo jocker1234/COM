@@ -10,17 +10,14 @@ import {AbstractsService} from "../../../abstracts.service";
 })
 export class CaseAbstractItemsDetailsComponent implements OnInit {
 
-  abstract: CaseAbstract;
+  abstract: CaseAbstract = new CaseAbstract();
   id: number;
 
   constructor(private route: ActivatedRoute, private abstractsService: AbstractsService) { }
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.abstractsService.getOneCaseAbstract(Number(this.id)).subscribe(value => {
-      this.abstract = value;
-      console.log(value);
-    });
+    this.abstractsService.getOneCaseAbstract(Number(this.id)).subscribe(value => this.abstract = value);
   }
 
   send() {

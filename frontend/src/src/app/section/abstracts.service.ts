@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {CaseAbstract} from "./abstracts/case-abstract";
 import {HandlingErrorsService} from "../handling-errors.service";
 import {ResearchAbstract} from "./abstracts/research-abstract";
+import {Abstract} from "./abstracts/abstract";
 
 const apiUrl = environment.apiUrl;
 
@@ -14,10 +15,15 @@ const apiUrl = environment.apiUrl;
 })
 export class AbstractsService {
 
-  private caseUrl = apiUrl + 'case';
-  private researchUrl = apiUrl + 'research';
+  private abstractUrl = apiUrl + 'abstracts';
+  private caseUrl = this.abstractUrl + '/case';
+  private researchUrl = this.abstractUrl + '/research';
 
   constructor(private http: HttpClient) { }
+
+  getAllUserAbstracts(): Observable<Abstract[]> {
+    return this.http.get<Abstract[]>(`${this.abstractUrl}/allUserAbstracts`).pipe(catchError(HandlingErrorsService.handleError));
+  }
 
   newCaseAbstract(caseAbstract: CaseAbstract): Observable<CaseAbstract> {
     return this.http.post<CaseAbstract>(`${this.caseUrl}`, caseAbstract)

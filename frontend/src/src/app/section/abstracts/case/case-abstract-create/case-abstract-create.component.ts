@@ -3,7 +3,6 @@ import {CaseAbstract} from "../../case-abstract";
 import {Category} from "../../../category";
 import {CategoryService} from "../../../category.service";
 import {AbstractsService} from "../../../abstracts.service";
-import {Authors} from "../../../authors";
 import {Router} from "@angular/router";
 
 @Component({

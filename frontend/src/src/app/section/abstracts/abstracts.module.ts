@@ -6,10 +6,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {httpInterceptorProvider} from "../auth/auth-interceptor";
+import { ChooseNewAbstractContentComponent } from './choose-new-abstract-content/choose-new-abstract-content.component';
 
 @NgModule({
   declarations: [
-    AbstractsComponent
+    AbstractsComponent,
+    ChooseNewAbstractContentComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,9 @@ import {httpInterceptorProvider} from "../auth/auth-interceptor";
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
+  ],
+  entryComponents: [
+    ChooseNewAbstractContentComponent
   ],
   providers: [httpInterceptorProvider],
 })
