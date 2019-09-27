@@ -148,8 +148,6 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public UsersDto getOne(Long id) throws AppException {
-        Users users = usersDao.getOne(id);
-        System.out.println(users.toString());
         UsersDto user = usersMapper.usersToUsersDto(usersDao.getOne(id));
         if (user == null)
             throw new AppException(EntityType.USER, ExceptionType.NOT_FOUND);

@@ -14,38 +14,38 @@ export class TokenStorageService {
   constructor() { }
 
   signOut() {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
     window.location.replace('')
   }
 
   public saveToken(accessToken: string) {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, accessToken);
+    window.localStorage.removeItem(TOKEN_KEY);
+    window.localStorage.setItem(TOKEN_KEY, accessToken);
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(TOKEN_KEY);
   }
 
   public saveEmail(email: string) {
-    window.sessionStorage.removeItem(EMAIL_KEY);
-    window.sessionStorage.setItem(EMAIL_KEY, email);
+    window.localStorage.removeItem(EMAIL_KEY);
+    window.localStorage.setItem(EMAIL_KEY, email);
   }
 
   public getEmail(): string {
-    return sessionStorage.getItem(EMAIL_KEY);
+    return localStorage.getItem(EMAIL_KEY);
   }
 
   public saveAuthorities(authorities: AuthoritiesResponse) {
-    window.sessionStorage.removeItem(AUTHORITIES_KEY);
-    window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
+    window.localStorage.removeItem(AUTHORITIES_KEY);
+    window.localStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
 
   public getAuthorities(): string[] {
     this.roles = [];
 
-    if (sessionStorage.getItem(TOKEN_KEY)) {
-      JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
+    if (localStorage.getItem(TOKEN_KEY)) {
+      JSON.parse(localStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
         this.roles.push(authority.authority);
       });
     }
@@ -53,11 +53,11 @@ export class TokenStorageService {
   }
 
   public saveUserId(id: number) {
-    window.sessionStorage.removeItem(USERID_KEY);
-    window.sessionStorage.setItem(USERID_KEY, String(id));
+    window.localStorage.removeItem(USERID_KEY);
+    window.localStorage.setItem(USERID_KEY, String(id));
   }
 
   public getUserId(): number {
-    return Number(sessionStorage.getItem(USERID_KEY));
+    return Number(localStorage.getItem(USERID_KEY));
   }
 }

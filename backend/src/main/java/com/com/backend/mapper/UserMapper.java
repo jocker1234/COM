@@ -32,7 +32,8 @@ public interface UserMapper {
             @Mapping(target = "phoneNumber", source = "users.phoneNumber"),
             @Mapping(target = "needVisa", source = "users.needVisa"),
             @Mapping(target = "passportNumber", source = "users.passportNumber"),
-            @Mapping(target = "authoritiesSet", source = "users.authoritiesSet")
+            @Mapping(target = "authoritiesSet", source = "users.authoritiesSet"),
+            @Mapping(target = "authorities", ignore = true)
     })
     @Named("toDto")
     UsersDto usersToUsersDto(Users users);

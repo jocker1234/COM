@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class LoginFormRequest {
 
     @NotBlank

@@ -4,6 +4,8 @@ import com.com.backend.model.enums.EntityType;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
 
+import java.util.Arrays;
+
 public class WrongValueException extends AppException {
 
     public WrongValueException(ExceptionType error) {
@@ -18,7 +20,7 @@ public class WrongValueException extends AppException {
     }
 
     public WrongValueException(ExceptionType error, String... msgParams) {
-        super(error, msgParams);
+        super(error, Arrays.asList(msgParams));
     }
 
     public WrongValueException(EntityType entityType, ExceptionType exceptionType) {

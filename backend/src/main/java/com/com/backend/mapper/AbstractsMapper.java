@@ -1,14 +1,18 @@
 package com.com.backend.mapper;
 
+import com.com.backend.dto.request.AbstractsDtoRequest;
+import com.com.backend.dto.response.AbstractsDtoResponse;
 import com.com.backend.model.Abstracts;
-import com.com.backend.dto.AbstractsDto;
 
 import java.util.List;
 
-public interface AbstractsMapper<T extends AbstractsDto, S extends Abstracts> {
+public interface AbstractsMapper<TREQ extends  AbstractsDtoRequest, TRES extends AbstractsDtoResponse, S extends Abstracts> {
 
-    List<T> dtoListToModelList(List<S> s);
-    T dtoToModel(S s);
-    S modelToDto(T t);
+    List<TREQ> modelListToDtoListReq(List<S> s);
+    List<TRES> modelListToDtoListRes(List<S> s);
+    S dtoReqToModel(TREQ t);
+    S dtoResToModel(TRES t);
+    TREQ modelToDtoReq(S t);
+    TRES modelToDtoRes(S t);
 
 }

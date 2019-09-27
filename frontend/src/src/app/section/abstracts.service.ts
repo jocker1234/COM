@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {CaseAbstract} from "./abstracts/case-abstract";
 import {HandlingErrorsService} from "../handling-errors.service";
 import {ResearchAbstract} from "./abstracts/research-abstract";
+import {Abstract} from "./abstracts/abstract";
 
 const apiUrl = environment.apiUrl;
 
@@ -14,10 +15,15 @@ const apiUrl = environment.apiUrl;
 })
 export class AbstractsService {
 
-  private caseUrl = apiUrl + 'case';
-  private researchUrl = apiUrl + 'research';
+  private abstractUrl = apiUrl + 'abstracts';
+  private caseUrl = this.abstractUrl + '/case';
+  private researchUrl = this.abstractUrl + '/research';
 
   constructor(private http: HttpClient) { }
+
+  getAllUserAbstracts(): Observable<Abstract[]> {
+    return this.http.get<Abstract[]>(`${this.abstractUrl}/allUserAbstracts`).pipe(catchError(HandlingErrorsService.handleError));
+  }
 
   newCaseAbstract(caseAbstract: CaseAbstract): Observable<CaseAbstract> {
     return this.http.post<CaseAbstract>(`${this.caseUrl}`, caseAbstract)
@@ -39,10 +45,10 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  /*sendCaseAbstract(id: number) {
-    return this.http.put(`${this.caseUrl}/${id}/send`)
+  sendCaseAbstract(id: number) {
+    return this.http.put(`${this.caseUrl}/${id}/send`, null)
       .pipe(catchError(HandlingErrorsService.handleError));
-  }*/
+  }
 
   newResearchAbstract(caseAbstract: ResearchAbstract): Observable<ResearchAbstract> {
     return this.http.post<ResearchAbstract>(`${this.researchUrl}`, caseAbstract)
@@ -64,10 +70,10 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  /*sendResearchAbstract(id: number) {
-    return this.http.put(`${this.researchUrl}/${id}/send`,)
+  sendResearchAbstract(id: number) {
+    return this.http.put(`${this.researchUrl}/${id}/send`,null)
       .pipe(catchError(HandlingErrorsService.handleError));
-  }*/
+  }
 
 
 

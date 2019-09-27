@@ -1,19 +1,21 @@
 package com.com.backend.mapper;
 
+import com.com.backend.dto.response.CaseAbstractsDtoResponse;
 import com.com.backend.util.Util;
 import com.com.backend.model.CaseAbstracts;
-import com.com.backend.dto.CaseAbstractsDto;
+import com.com.backend.dto.request.CaseAbstractsDtoRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring", imports = Util.class)
-public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDto, CaseAbstracts> {
+public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDtoRequest, CaseAbstractsDtoResponse, CaseAbstracts> {
 
     @Mappings({
             @Mapping(source = "s.id", target = "id"),
             @Mapping(source = "s.title", target = "title"),
-            @Mapping(target = "authors", expression = "java(Util.splitWithComma(s.getAuthors()))"),
+            @Mapping(source = "s.category", target = "category"),
+            @Mapping(source = "s.authors", target = "authors"),
             @Mapping(source = "s.tutors", target = "tutors"),
             @Mapping(source = "s.status", target = "status"),
             @Mapping(source = "s.type", target = "type"),
@@ -21,12 +23,28 @@ public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDto, C
             @Mapping(source = "s.caseReport", target = "caseReport"),
             @Mapping(source = "s.conclusions", target = "conclusions")
     })
-    CaseAbstractsDto dtoToModel(CaseAbstracts s);
+    CaseAbstractsDtoResponse modelToDtoRes(CaseAbstracts s);
 
     @Mappings({
             @Mapping(source = "s.id", target = "id"),
             @Mapping(source = "s.title", target = "title"),
-            @Mapping(target = "authors", expression = "java(Util.joinWithComma(s.getAuthors()))"),
+            @Mapping(source = "s.category", target = "category"),
+            @Mapping(source = "s.authors", target = "authors"),
+            @Mapping(source = "s.tutors", target = "tutors"),
+            @Mapping(source = "s.status", target = "status"),
+            @Mapping(source = "s.type", target = "type"),
+            @Mapping(source = "s.background", target = "background"),
+            @Mapping(source = "s.caseReport", target = "caseReport"),
+            @Mapping(source = "s.conclusions", target = "conclusions"),
+            @Mapping(target = "users", ignore = true)
+    })
+    CaseAbstracts dtoResToModel(CaseAbstractsDtoResponse s);
+
+    @Mappings({
+            @Mapping(source = "s.id", target = "id"),
+            @Mapping(source = "s.title", target = "title"),
+            @Mapping(source = "s.category.id", target = "categoryId"),
+            @Mapping(source = "s.authors", target = "authors"),
             @Mapping(source = "s.tutors", target = "tutors"),
             @Mapping(source = "s.status", target = "status"),
             @Mapping(source = "s.type", target = "type"),
@@ -34,6 +52,21 @@ public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDto, C
             @Mapping(source = "s.caseReport", target = "caseReport"),
             @Mapping(source = "s.conclusions", target = "conclusions")
     })
-    CaseAbstracts modelToDto(CaseAbstractsDto s);
+    CaseAbstractsDtoRequest modelToDtoReq(CaseAbstracts s);
+
+    @Mappings({
+            @Mapping(source = "s.id", target = "id"),
+            @Mapping(source = "s.title", target = "title"),
+            @Mapping(target = "category", ignore = true),
+            @Mapping(source = "s.authors", target = "authors"),
+            @Mapping(source = "s.tutors", target = "tutors"),
+            @Mapping(source = "s.status", target = "status"),
+            @Mapping(source = "s.type", target = "type"),
+            @Mapping(source = "s.background", target = "background"),
+            @Mapping(source = "s.caseReport", target = "caseReport"),
+            @Mapping(source = "s.conclusions", target = "conclusions"),
+            @Mapping(target = "users", ignore = true)
+    })
+    CaseAbstracts dtoReqToModel(CaseAbstractsDtoRequest s);
 
 }

@@ -2,31 +2,38 @@ package com.com.backend.service.serviceImpl;
 
 import com.com.backend.dao.CaseAbstractsDao;
 import com.com.backend.dao.CategoryDao;
+import com.com.backend.dto.request.CaseAbstractsDtoRequest;
+import com.com.backend.dto.response.CaseAbstractsDtoResponse;
 import com.com.backend.model.CaseAbstracts;
+import com.com.backend.model.ResearchAbstracts;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
 import com.com.backend.model.enums.Status;
-import com.com.backend.dto.CaseAbstractsDto;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
 import com.com.backend.exception.WrongValueException;
 import com.com.backend.mapper.AbstractsMapper;
 import com.com.backend.mapper.CaseAbstractsMapper;
+import com.com.backend.service.AbstractsService;
 import com.com.backend.service.CaseAbstractsService;
+import com.com.backend.service.UsersService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CaseAbstractsServiceImpl extends AbstractsServiceImpl<CaseAbstractsDto, CaseAbstracts> implements CaseAbstractsService {
+public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseAbstractsDtoRequest,
+                                                CaseAbstractsDtoResponse, CaseAbstracts> implements CaseAbstractsService {
 
     private CaseAbstractsDao caseAbstractsDao;
     private CaseAbstractsMapper caseAbstractsMapper;
 
-    public CaseAbstractsServiceImpl(CaseAbstractsDao caseAbstractsDao, CategoryDao categoryDao, CaseAbstractsMapper caseAbstractsMapper) {
-        super(categoryDao);
+    public CaseAbstractsServiceImpl(UsersService usersService, CategoryDao categoryDao, AbstractsService abstractsService,
+                                    CaseAbstractsDao caseAbstractsDao, CaseAbstractsMapper caseAbstractsMapper) {
+        super(usersService, categoryDao, abstractsService);
         this.caseAbstractsDao = caseAbstractsDao;
         this.caseAbstractsMapper = caseAbstractsMapper;
     }
@@ -42,11 +49,13 @@ public class CaseAbstractsServiceImpl extends AbstractsServiceImpl<CaseAbstracts
     }
 
     @Override
-    public CaseAbstracts modelToDto(CaseAbstractsDto caseAbstractsDto) {
-        return caseAbstractsMapper.modelToDto(caseAbstractsDto);
+    public CaseAbstracts dtoReqToModel(CaseAbstractsDtoRequest caseAbstractsDto) {
+        CaseAbstracts abstracts = caseAbstractsMapper.dtoReqToModel(caseAbstractsDto);
+        abstracts.setCategory(categoryDao.getOne(caseAbstractsDto.getCategoryId()));
+        return abstracts;
     }
 
-    public void validFields(CaseAbstractsDto caseAbstracts) throws WrongValueException {
+    public void validFields(CaseAbstractsDtoRequest caseAbstracts) throws WrongValueException {
         if (isNull(caseAbstracts.getCaseReport())) {
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.CASE_REPORT);
         }
@@ -60,7 +69,7 @@ public class CaseAbstractsServiceImpl extends AbstractsServiceImpl<CaseAbstracts
 
     @Override
     @Transactional
-    public CaseAbstractsDto update(Long id, CaseAbstractsDto caseAbstracts) throws AppException {
+    public CaseAbstractsDtoResponse update(Long id, CaseAbstractsDtoRequest caseAbstracts) throws AppException {
         validAbstracts(caseAbstracts);
         validFields(caseAbstracts);
         Optional<CaseAbstracts> caseAbstract = caseAbstractsDao.findById(id);
@@ -83,8 +92,12 @@ public class CaseAbstractsServiceImpl extends AbstractsServiceImpl<CaseAbstracts
             }
             System.out.println("asdasdas");
             return caseAbstractsDao.save(thesis);
-        }).orElseGet(() -> caseAbstractsDao.save(caseAbstractsMapper.modelToDto(caseAbstracts)));
-        return caseAbstractsMapper.dtoToModel(caseAbstract.get());
+        }).orElseGet(() -> {
+            CaseAbstracts abstracts = caseAbstractsMapper.dtoReqToModel(caseAbstracts);
+            abstracts.setCategory(categoryDao.getOne(caseAbstracts.getCategoryId()));
+            return caseAbstractsDao.save(abstracts);
+        });
+        return caseAbstractsMapper.modelToDtoRes(caseAbstract.get());
     }
 
     @Override
@@ -106,6 +119,12 @@ public class CaseAbstractsServiceImpl extends AbstractsServiceImpl<CaseAbstracts
         if(!caseAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);
         return caseAbstractsDao.changeStatusCase(Status.REJECTED.getStatus(), id);
+    }
+
+    @Override
+    public List<CaseAbstractsDtoResponse> getAllAbstractsByUserEmail(String email) {
+        List<CaseAbstracts> caseAbstracts = caseAbstractsDao.getAllByUsersEmail(email);
+        return caseAbstractsMapper.modelListToDtoListRes(caseAbstracts);
     }
 
 }

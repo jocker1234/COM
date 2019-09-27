@@ -7,10 +7,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {CaseAbstractCreateComponent} from './case-abstract-create/case-abstract-create.component';
 import {httpInterceptorProvider} from "../../auth/auth-interceptor";
+import {CaseAbstractItemsDetailsComponent} from "./case-abstract-items-details/case-abstract-items-details.component";
 
 @NgModule({
   declarations: [
-    CaseAbstractCreateComponent
+    CaseAbstractCreateComponent,
+    CaseAbstractItemsDetailsComponent
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import {ResearchAbstract} from "../../research-abstract";
 import {AbstractsService} from "../../../abstracts.service";
 import {Category} from "../../../category";
 import {CategoryService} from "../../../category.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-research-abstract-create',
@@ -15,7 +16,7 @@ export class ResearchAbstractCreateComponent implements OnInit {
   categories: Category[];
   research: ResearchAbstract = new ResearchAbstract();
 
-  constructor(private abstractService: AbstractsService, private categoryService: CategoryService) { }
+  constructor(private abstractService: AbstractsService, private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit(): void {
     this.research.authors = [];
@@ -24,7 +25,9 @@ export class ResearchAbstractCreateComponent implements OnInit {
 
   onSubmit() {
     this.research.authors.push(this.author);
-    this.abstractService.newResearchAbstract(this.research).subscribe(value => console.log("as " + value ));
+    this.abstractService.newResearchAbstract(this.research).subscribe(value => {
+      this.router.navigate(['abstracts/research/' + value.id])
+    });
   }
 
 }

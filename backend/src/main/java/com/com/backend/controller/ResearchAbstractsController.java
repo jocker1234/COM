@@ -1,15 +1,17 @@
 package com.com.backend.controller;
 
+import com.com.backend.dto.request.ResearchAbstractsDtoRequest;
+import com.com.backend.dto.response.ResearchAbstractsDtoResponse;
 import com.com.backend.model.ResearchAbstracts;
-import com.com.backend.dto.ResearchAbstractsDto;
-import com.com.backend.service.AbstractsService;
+import com.com.backend.service.AbstractsAbstractService;
 import com.com.backend.service.ResearchAbstractsService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/research")
-public class ResearchAbstractsController extends AbstractsController<ResearchAbstractsDto, ResearchAbstracts> {
+@RequestMapping("/abstracts/research")
+public class ResearchAbstractsController extends AbstractsAbstractController<ResearchAbstractsDtoRequest,
+                                                                    ResearchAbstractsDtoResponse, ResearchAbstracts> {
 
     private ResearchAbstractsService researchAbstractsService;
 
@@ -18,7 +20,7 @@ public class ResearchAbstractsController extends AbstractsController<ResearchAbs
     }
 
     @Override
-    public AbstractsService<ResearchAbstractsDto, ResearchAbstracts> getService() {
+    public AbstractsAbstractService<ResearchAbstractsDtoRequest, ResearchAbstractsDtoResponse, ResearchAbstracts> getService() {
         return researchAbstractsService;
     }
 }

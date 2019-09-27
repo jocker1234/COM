@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 @Entity
 public class Category extends AbstractEntity {
 

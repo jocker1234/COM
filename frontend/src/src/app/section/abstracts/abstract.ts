@@ -1,14 +1,13 @@
-import {User} from "../user/user";
 import {Category} from "../category";
-import {Authors} from "../authors";
 
 export class Abstract {
   id: number;
-  title: string;
-  authors: any[];
-  tutors: string;
-  users: User;
+  title: string = '';
+  authors: any[] = [];
+  tutors: string = '';
   categoryId: number;
+  category: Category;
+  type: string = '';
 
   constructor() {
   }

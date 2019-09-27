@@ -1,4 +1,4 @@
-package com.com.backend.dto;
+package com.com.backend.dto.request;
 
 import lombok.*;
 import org.springframework.lang.NonNull;
@@ -7,8 +7,7 @@ import org.springframework.lang.NonNull;
 @Setter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
-public class CaseAbstractsDto extends AbstractsDto {
+public class CaseAbstractsDtoRequest extends AbstractsDtoRequest {
 
     @NonNull
     private String background;
