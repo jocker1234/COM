@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="">
+      <ng-container *ngIf="type==='create'" [ngTemplateOutlet]="create"></ng-container>
+      <ng-container *ngIf="type==='details'" [ngTemplateOutlet]="details"></ng-container>
+      <ng-container *ngIf="type==='modify'" [ngTemplateOutlet]="modify"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #create>
+  <button class="btn btn-primary" (click)="saveAndSend()">Save and Send</button>
+  <button class="btn btn-primary" (click)="goBack()">Close</button>
+  <button class="btn btn-primary" (click)="save()">Save</button>
+</ng-template>
+<ng-template #details>
+  <div class="row">
+    <button class="btn btn-primary" (click)="goBack()">Back</button>
+    <div *ngIf="checkStatus()">
+      <button class="btn btn-primary" (click)="send()">Send</button>
+      <button class="btn btn-primary" (click)="delete()">Delete</button>
+      <button class="btn btn-primary" (click)="modifyAbstract()">Modify</button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #modify>
+  <div>
+    <button class="btn btn-primary" (click)="saveModifyAndSend()">save and send</button>
+    <button class="btn btn-primary" (click)="goBack()">close</button>
+    <button class="btn btn-primary" (click)="saveModify()">save</button>
+  </div>
+</ng-template>

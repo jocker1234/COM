@@ -75,6 +75,12 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
+  deleteCaseAbstract(id: number) {
+    return this.http.delete(`${this.caseUrl}/${id}`).pipe(catchError(HandlingErrorsService.handleError));
+  }
 
+  deleteResearchAbstract(id: number) {
+    return this.http.delete(`${this.researchUrl}/${id}`).pipe(catchError(HandlingErrorsService.handleError));
+  }
 
 }

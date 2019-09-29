@@ -6,8 +6,9 @@ export class Abstract {
   authors: any[] = [];
   tutors: string = '';
   categoryId: number;
-  category: Category;
+  category: Category = new Category();
   type: string = '';
+  status: string = '';
 
   constructor() {
   }

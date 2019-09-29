@@ -1,54 +1,62 @@
-<form class="needs-validation" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-  <div class="form-group">
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Title</label>
-      <input type="text" class="form-control" name="title" [(ngModel)]="research.title">
-      <span *ngIf="!(f.untouched || f.valid)"></span>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Authors</label>
-      <input type="text" class="form-control" name="authors" [(ngModel)]="author">
-      <span *ngIf="!(f.untouched || f.valid)"></span>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Tutor</label>
-      <input type="text" class="form-control" name="tutors" [(ngModel)]="research.tutors">
-      <span *ngIf="!(f.untouched || f.valid)"></span>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Category</label>
-      <div class="col-sm-7">
-        <select class="col-sm-7 form-control" name="country" [(ngModel)]="research.categoryId">
-          <option value="">Select category...</option>
-          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-        </select>
+<div class="container form">
+  <form class="needs-validation" [formGroup]="abstractForm"  novalidate>
+    <div class="form-group col">
+      <div class="row">
+        <label class="col-2 col-form-label">Title</label>
+        <input type="text" class="form-control col-7" formControlName="title">
+        <span *ngIf="!(abstractForm.get('title').untouched || abstractForm.get('title').valid)"></span>
+      </div>
+      <div class="row" formArrayName="authors">
+        <label class="col-2 col-form-label">Authors</label>
+        <div  class="col-10 row" *ngFor="let author of authors.controls; index as idx">
+          <input class="form-control col-5" [formControlName]="idx">
+          <span class="col-sm-1"></span>
+          <button type="button" (click)="addAuthorField()">Add Author</button>
+          <button class="col-1 btn btn-secondary" type="button" (click)="deleteAuthorField(idx)">Delete</button>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Tutor</label>
+        <input type="text" class="form-control col-7" formControlName="tutors">
+        <span *ngIf="!(abstractForm.get('tutors').untouched || abstractForm.get('tutors').valid)"></span>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Category</label>
+        <div class="col-7">
+          <select class="form-control col-7" formControlName="categoryId">
+            <option value="">Select category...</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Introduction</label>
+        <input type="text" class="form-control col-7" formControlName="introduction">
+        <span *ngIf="!(abstractForm.get('introduction').untouched || abstractForm.get('introduction').valid)"></span>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Aim of the study</label>
+        <input type="text" class="form-control col-7" formControlName="aimOfTheStudy">
+        <span *ngIf="!(abstractForm.get('aimOfTheStudy').untouched || abstractForm.get('aimOfTheStudy').valid)"></span>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Material and methods</label>
+        <input type="text" class="form-control col-7" formControlName="materialAndMethods">
+        <span *ngIf="!(abstractForm.get('materialAndMethods').untouched || abstractForm.get('materialAndMethods').valid)"></span>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Result</label>
+        <input type="text" class="form-control col-7" formControlName="results">
+        <span *ngIf="!(abstractForm.get('results').untouched || abstractForm.get('results').valid)"></span>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Conclusions</label>
+        <input type="text" class="form-control col-7" formControlName="conclusions">
+        <span *ngIf="!(abstractForm.get('conclusions').untouched || abstractForm.get('conclusions').valid)"></span>
       </div>
     </div>
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Introduction</label>
-      <input type="text" class="form-control" name="introdution" [(ngModel)]="research.introdution">
-      <span *ngIf="!(f.untouched || f.valid)"></span>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Aim of the study</label>
-      <input type="text" class="form-control" name="aimOfTheStudy" [(ngModel)]="research.aimOfTheStudy">
-      <span *ngIf="!(f.untouched || f.valid)"></span>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Material and methods</label>
-      <input type="text" class="form-control" name="materialAndMethods" [(ngModel)]="research.materialAndMethods">
-      <span *ngIf="!(f.untouched || f.valid)"></span>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Result</label>
-      <input type="text" class="form-control" name="results" [(ngModel)]="research.results">
-      <span *ngIf="!(f.untouched || f.valid)"></span>
-    </div>
-    <div class="col-md-6 mb-3">
-      <label class="col col-form-label">Conclusions</label>
-      <input type="text" class="form-control" name="conclusions" [(ngModel)]="research.conclusions">
-      <span *ngIf="!(f.untouched || f.valid)"></span>
-    </div>
+  </form>
+  <div class="float-right">
+    <app-abstract-action-buttons prefixUrl="abstracts/research/" type="create" [research]="abstractForm.value"></app-abstract-action-buttons>
   </div>
-  <button [disabled]="!f.value" type="submit">Send</button>
-</form>
+</div>

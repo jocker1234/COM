@@ -7,11 +7,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {httpInterceptorProvider} from "../auth/auth-interceptor";
 import { ChooseNewAbstractContentComponent } from './choose-new-abstract-content/choose-new-abstract-content.component';
+import { AbstractActionButtonsComponent } from './abstract-action-buttons/abstract-action-buttons.component';
 
 @NgModule({
   declarations: [
     AbstractsComponent,
-    ChooseNewAbstractContentComponent
+    ChooseNewAbstractContentComponent,
+    AbstractActionButtonsComponent
   ],
   imports: [
     CommonModule,
@@ -25,5 +27,8 @@ import { ChooseNewAbstractContentComponent } from './choose-new-abstract-content
     ChooseNewAbstractContentComponent
   ],
   providers: [httpInterceptorProvider],
+  exports: [
+    AbstractActionButtonsComponent
+  ]
 })
 export class AbstractsModule { }

@@ -8,11 +8,14 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {CaseAbstractCreateComponent} from './case-abstract-create/case-abstract-create.component';
 import {httpInterceptorProvider} from "../../auth/auth-interceptor";
 import {CaseAbstractItemsDetailsComponent} from "./case-abstract-items-details/case-abstract-items-details.component";
+import { CaseAbstractEditComponent } from './case-abstract-edit/case-abstract-edit.component';
+import {AbstractsModule} from "../abstracts.module";
 
 @NgModule({
   declarations: [
     CaseAbstractCreateComponent,
-    CaseAbstractItemsDetailsComponent
+    CaseAbstractItemsDetailsComponent,
+    CaseAbstractEditComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +23,8 @@ import {CaseAbstractItemsDetailsComponent} from "./case-abstract-items-details/c
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AbstractsModule
   ],
   providers: [httpInterceptorProvider],
 })

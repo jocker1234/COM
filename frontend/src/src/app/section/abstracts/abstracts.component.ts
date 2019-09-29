@@ -21,9 +21,11 @@ export class AbstractsComponent implements OnInit {
 
   ngOnInit() {
     this.abstractService.getAllUserAbstracts().subscribe(value => this.abstractList = value);
-    this.abstractList.forEach(abstract => {
-      this.categoryService.getCategoryById(abstract.categoryId).subscribe(category => abstract.category = category);
-    });
+    if (this.abstractList !== undefined) {
+      this.abstractList.forEach(abstract => {
+        this.categoryService.getCategoryById(abstract.categoryId).subscribe(category => abstract.category = category);
+      });
+    }
   }
 
   getRouterLink(abstract: Abstract) {
