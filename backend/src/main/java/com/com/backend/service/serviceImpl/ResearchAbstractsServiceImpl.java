@@ -49,7 +49,7 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
     }
 
     protected void validFields(ResearchAbstractsDtoRequest researchAbstracts) throws WrongValueException {
-        if(isNull(researchAbstracts.getIntrodution())){
+        if(isNull(researchAbstracts.getIntroduction())){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.INTRODUCTION);
         }
         if(isNull(researchAbstracts.getAimOfTheStudy())){
@@ -81,13 +81,13 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
         if(!researchAbstracts.isPresent()){
             throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         }
-        if(!researchAbstracts.get().getStatus().equals(Status.DO)) {
+        if(!researchAbstracts.get().getStatus().equals(Status.DO.getStatus())) {
             throw new AppException(ExceptionType.ABSTRACT_SENT);
         }
         researchAbstracts.map(thesis -> {
             thesis = setValue(thesis, ra);
-            if (!thesis.getIntrodution().equals(ra.getIntrodution())) {
-                thesis.setIntrodution(ra.getIntrodution());
+            if (!thesis.getIntroduction().equals(ra.getIntroduction())) {
+                thesis.setIntroduction(ra.getIntroduction());
             }
             if (!thesis.getAimOfTheStudy().equals(ra.getAimOfTheStudy())) {
                 thesis.setAimOfTheStudy(ra.getAimOfTheStudy());

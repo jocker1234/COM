@@ -10,7 +10,7 @@ import org.springframework.lang.NonNull;
 public class ResearchAbstractsDtoResponse extends AbstractsDtoResponse {
 
     @NonNull
-    private String introdution;
+    private String introduction;
     @NonNull
     private String aimOfTheStudy;
     @NonNull
