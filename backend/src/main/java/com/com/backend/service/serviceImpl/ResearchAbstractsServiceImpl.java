@@ -24,8 +24,7 @@ import java.util.Optional;
 
 @Service
 public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<ResearchAbstractsDtoRequest,
-                                                                        ResearchAbstractsDtoResponse, ResearchAbstracts>
-                                            implements ResearchAbstractsService {
+                                    ResearchAbstractsDtoResponse, ResearchAbstracts> implements ResearchAbstractsService {
 
     private ResearchAbstractsDao researchAbstractsDao;
     private ResearchAbstractsMapper researchAbstractsMapper;
@@ -129,6 +128,11 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
         if(!researchAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);
         return researchAbstractsDao.changeStatusCase(Status.REJECTED.getStatus(), id);
+    }
+
+    @Override
+    public int countUserAbstract(String email) {
+        return researchAbstractsDao.countResearchAbstractsByUsersEmail(email);
     }
 
     @Override

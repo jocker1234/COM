@@ -122,6 +122,11 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
     }
 
     @Override
+    public int countUserAbstract(String email) {
+        return caseAbstractsDao.countCaseAbstractsByUsersEmail(email);
+    }
+
+    @Override
     public List<CaseAbstractsDtoResponse> getAllAbstractsByUserEmail(String email) {
         List<CaseAbstracts> caseAbstracts = caseAbstractsDao.getAllByUsersEmail(email);
         return caseAbstractsMapper.modelListToDtoListRes(caseAbstracts);

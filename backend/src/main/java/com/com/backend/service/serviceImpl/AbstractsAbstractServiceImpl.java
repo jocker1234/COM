@@ -78,12 +78,16 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
         }
     }
 
-    public TRES create(TREQ t, String token) throws WrongValueException {
+    public TRES create(TREQ t, String token) throws AppException {
+        String email = abstractsService.getEmailFromToken(token);
+        int countAllAbstractUser = abstractsService.countAllAbstractUser(email);
+        if(countAllAbstractUser >= 2) {
+            throw new AppException(ExceptionType.ABSTRACT_AMMOUNT);
+        }
         validAbstracts(t);
         validFields(t);
         S s = dtoReqToModel(t);
         s.setCategory(categoryDao.getOne(t.getCategoryId()));
-        String email = abstractsService.getEmailFromToken(token);
         Users users = usersService.getUserByEmail(email);
         s.setUsers(users);
         S added = getDao().save(s);

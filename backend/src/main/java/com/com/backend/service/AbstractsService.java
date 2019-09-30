@@ -8,5 +8,6 @@ public interface AbstractsService {
 
     List<Abstracts> getAllAbstractUser(String token);
     String getEmailFromToken(String token);
+    int countAllAbstractUser(String email);
 
 }

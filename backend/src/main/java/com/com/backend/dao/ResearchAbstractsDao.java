@@ -22,4 +22,6 @@ public interface ResearchAbstractsDao extends JpaRepository<ResearchAbstracts, L
 
     List<ResearchAbstracts> getAllByUsersEmail(String email);
 
+    int countResearchAbstractsByUsersEmail(String email);
+
 }

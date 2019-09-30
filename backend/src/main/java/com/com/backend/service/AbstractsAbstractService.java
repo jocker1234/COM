@@ -12,7 +12,7 @@ import java.util.List;
 public interface AbstractsAbstractService <TREQ extends AbstractsDtoRequest, TRES extends AbstractsDtoResponse,
                                                                                                 S extends Abstracts> {
     List<TRES> getAll();
-    TRES create(TREQ t, String token) throws WrongValueException;
+    TRES create(TREQ t, String token) throws AppException;
     TRES update(Long id, TREQ t) throws AppException;
 
     void delete(Long id) throws AbstractNotFoundException;
@@ -23,6 +23,8 @@ public interface AbstractsAbstractService <TREQ extends AbstractsDtoRequest, TRE
 
     int approved(Long id) throws AppException;
     int rejected(Long id) throws AppException;
+
+    int countUserAbstract(String email);
 
     List<TRES> getAllAbstractsByUserEmail(String email);
 }

@@ -27,7 +27,8 @@ export class AbstractActionButtonsComponent implements OnInit {
   private id: number;
 
   constructor(private abstractService: AbstractsService, private router: Router,
-              private location: Location) { }
+              private location: Location) {
+  }
 
   ngOnInit() {
   }
@@ -42,32 +43,32 @@ export class AbstractActionButtonsComponent implements OnInit {
 
   save() {
     if (this.prefixUrl.includes("case") === true) {
-      this.case.type='C';
+      this.case.type = 'C';
       this.abstractService.newCaseAbstract(this.case).subscribe(value => {
-        this.router.navigate([this.prefixUrl + value.id]);
+        this.id = value.id;
       });
     } else if (this.prefixUrl.includes("research") === true) {
-      this.research.type='R';
+      this.research.type = 'R';
       this.abstractService.newResearchAbstract(this.research).subscribe(value => {
-        this.router.navigate([this.prefixUrl + value.id]);
+        this.id = value.id;
       });
     }
+    this.router.navigate([this.prefixUrl + this.id]);
   }
 
   saveAndSend() {
     if (this.prefixUrl.includes("case") === true) {
-      this.case.type='C';
+      this.case.type = 'C';
       this.abstractService.newCaseAbstract(this.case).subscribe(value => {
         this.abstractService.sendCaseAbstract(value.id).subscribe();
-        this.router.navigate([this.prefixUrl + value.id]);
       });
     } else if (this.prefixUrl.includes("research") === true) {
-      this.research.type='R';
+      this.research.type = 'R';
       this.abstractService.newResearchAbstract(this.research).subscribe(value => {
         this.abstractService.sendResearchAbstract(value.id).subscribe();
-        this.router.navigate([this.prefixUrl + value.id]);
       });
     }
+    this.router.navigate([this.prefixUrl + this.id]);
   }
 
   send() {
@@ -76,6 +77,7 @@ export class AbstractActionButtonsComponent implements OnInit {
     } else if (this.research !== undefined) {
       this.abstractService.sendResearchAbstract(this.research.id).subscribe();
     }
+    window.location.reload();
   }
 
   delete() {
@@ -97,31 +99,29 @@ export class AbstractActionButtonsComponent implements OnInit {
 
   saveModifyAndSend() {
     if (this.prefixUrl.includes("case") === true) {
-      this.case.type='C';
+      this.case.type = 'C';
       this.abstractService.saveCaseAbstract(this.id, this.case).subscribe(value => {
         this.abstractService.sendCaseAbstract(this.id).subscribe();
-        this.router.navigate([this.prefixUrl + this.id]);
       });
     } else if (this.prefixUrl.includes("research") === true) {
-      this.research.type='R';
+      this.research.type = 'R';
       this.abstractService.saveResearchAbstract(this.id, this.research).subscribe(value => {
         this.abstractService.sendResearchAbstract(this.id).subscribe();
-        this.router.navigate([this.prefixUrl + this.id]);
       });
     }
+    this.router.navigate([this.prefixUrl + this.id]);
   }
 
   saveModify() {
     if (this.prefixUrl.includes("case") === true) {
-      this.case.type='C';
+      this.case.type = 'C';
       this.abstractService.saveCaseAbstract(this.id, this.case).subscribe(value => {
-        this.router.navigate([this.prefixUrl + this.id]);
       });
     } else if (this.prefixUrl.includes("research") === true) {
-      this.research.type='R';
+      this.research.type = 'R';
       this.abstractService.saveResearchAbstract(this.id, this.research).subscribe(value => {
-        this.router.navigate([this.prefixUrl + this.id]);
       });
     }
+    this.router.navigate([this.prefixUrl + this.id]);
   }
 }
