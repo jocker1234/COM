@@ -10,12 +10,12 @@
 
 <ng-template #create>
   <button class="btn btn-primary" (click)="saveAndSend()">Save and Send</button>
-  <button class="btn btn-primary" (click)="goBack()">Close</button>
+  <button class="btn btn-primary" (click)="cancel()">Close</button>
   <button class="btn btn-primary" (click)="save()">Save</button>
 </ng-template>
 <ng-template #details>
   <div class="row">
-    <button class="btn btn-primary" (click)="goBack()">Back</button>
+    <button class="btn btn-primary" routerLink="/abstracts">Back</button>
     <div *ngIf="checkStatus()">
       <button class="btn btn-primary" (click)="send()">Send</button>
       <button class="btn btn-primary" (click)="delete()">Delete</button>
@@ -26,7 +26,7 @@
 <ng-template #modify>
   <div>
     <button class="btn btn-primary" (click)="saveModifyAndSend()">save and send</button>
-    <button class="btn btn-primary" (click)="goBack()">close</button>
+    <button class="btn btn-primary" (click)="cancel()">close</button>
     <button class="btn btn-primary" (click)="saveModify()">save</button>
   </div>
 </ng-template>

@@ -40,8 +40,8 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  saveCaseAbstract(id: number, caseAbstract: CaseAbstract) {
-    return this.http.put(`${this.caseUrl}/${id}/save`, caseAbstract)
+  saveCaseAbstract(id: number, caseAbstract: CaseAbstract): Observable<CaseAbstract> {
+    return this.http.put<CaseAbstract>(`${this.caseUrl}/${id}/save`, caseAbstract)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
@@ -65,8 +65,8 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  saveResearchAbstract(id: number, researchAbstract: ResearchAbstract) {
-    return this.http.put(`${this.researchUrl}/${id}/save`, researchAbstract)
+  saveResearchAbstract(id: number, researchAbstract: ResearchAbstract): Observable<ResearchAbstract> {
+    return this.http.put<ResearchAbstract>(`${this.researchUrl}/${id}/save`, researchAbstract)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
