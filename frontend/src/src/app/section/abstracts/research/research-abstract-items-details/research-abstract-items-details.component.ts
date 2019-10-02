@@ -19,12 +19,7 @@ export class ResearchAbstractItemsDetailsComponent implements OnInit {
     this.id= +this.route.snapshot.paramMap.get('id');
     this.abstractsService.getOneResearchAbstract(Number(this.id)).subscribe(value => {
       this.abstract = value;
-      console.log(value);
     });
-  }
-
-  send() {
-    this.abstractsService.sendResearchAbstract(Number(this.id));
   }
 
 }

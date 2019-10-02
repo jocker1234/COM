@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 public class ResearchAbstracts extends Abstracts {
 
     @Column(nullable = false)
-    private String introdution;
+    private String introduction;
     @Column(nullable = false)
     private String aimOfTheStudy;
     @Column(nullable = false)

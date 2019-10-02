@@ -10,10 +10,11 @@ import {FooterComponent} from "./footer/footer.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {UserModule} from "./section/user/user.module";
 import {httpInterceptorProvider} from "./section/auth/auth-interceptor";
+import {AbstractsModule} from "./section/abstracts/abstracts.module";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {httpInterceptorProvider} from "./section/auth/auth-interceptor";
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    UserModule
+    UserModule,
+    AbstractsModule
   ],
   providers: [httpInterceptorProvider],
   bootstrap: [AppComponent]

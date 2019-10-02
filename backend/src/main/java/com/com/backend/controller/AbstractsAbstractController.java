@@ -38,7 +38,7 @@ public abstract class AbstractsAbstractController<TREQ extends AbstractsDtoReque
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ACTIVE_PARTICIPANT')")
-    public ResponseEntity<TRES> create(@RequestBody TREQ t, @RequestHeader(value = "Authorization")String token) throws WrongValueException {
+    public ResponseEntity<TRES> create(@RequestBody TREQ t, @RequestHeader(value = "Authorization")String token) throws AppException {
         TRES result = getService().create(t, token);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }

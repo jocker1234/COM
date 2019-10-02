@@ -21,4 +21,6 @@ public interface CaseAbstractsDao extends JpaRepository<CaseAbstracts, Long> {
 
     List<CaseAbstracts> getAllByUsersEmail(String email);
 
+    int countCaseAbstractsByUsersEmail(String email);
+
 }

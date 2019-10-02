@@ -4,6 +4,7 @@ import {AbstractsService} from "../../../abstracts.service";
 import {Category} from "../../../category";
 import {CategoryService} from "../../../category.service";
 import {Router} from "@angular/router";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-research-abstract-create',
@@ -12,22 +13,39 @@ import {Router} from "@angular/router";
 })
 export class ResearchAbstractCreateComponent implements OnInit {
 
-  author: any;
   categories: Category[];
-  research: ResearchAbstract = new ResearchAbstract();
 
-  constructor(private abstractService: AbstractsService, private categoryService: CategoryService, private router: Router) { }
+  abstractForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    authors: new FormArray([
+      new FormControl('')
+    ]),
+    tutors: new FormControl('', [Validators.required]),
+    categoryId: new FormControl(''),
+    introduction: new FormControl(''),
+    aimOfTheStudy: new FormControl(''),
+    materialAndMethods: new FormControl(''),
+    results: new FormControl(''),
+    conclusions: new FormControl('')
+  });
+
+  constructor(protected abstractService: AbstractsService, protected categoryService: CategoryService,
+              protected router: Router) { }
 
   ngOnInit(): void {
-    this.research.authors = [];
     this.categoryService.getCategory().subscribe(data => this.categories = data);
   }
 
-  onSubmit() {
-    this.research.authors.push(this.author);
-    this.abstractService.newResearchAbstract(this.research).subscribe(value => {
-      this.router.navigate(['abstracts/research/' + value.id])
-    });
+  get authors(): FormArray {
+    return this.abstractForm.get('authors') as FormArray;
+  }
+
+  addAuthorField() {
+    this.authors.push(new FormControl());
+  }
+
+  deleteAuthorField(index: number) {
+    this.authors.removeAt(index);
   }
 
 }

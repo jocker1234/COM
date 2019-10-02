@@ -4,6 +4,7 @@ import {Category} from "../../../category";
 import {CategoryService} from "../../../category.service";
 import {AbstractsService} from "../../../abstracts.service";
 import {Router} from "@angular/router";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-case-abstract-create',
@@ -12,22 +13,36 @@ import {Router} from "@angular/router";
 })
 export class CaseAbstractCreateComponent implements OnInit {
 
-  author: any;
   categories: Category[];
-  case: CaseAbstract = new CaseAbstract();
 
-  constructor(private abstractService: AbstractsService, private categoryService: CategoryService, private router: Router) { }
+  abstractForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    authors: new FormArray([
+      new FormControl('')
+    ]),
+    tutors: new FormControl('', [Validators.required]),
+    categoryId: new FormControl(''),
+    background: new FormControl(''),
+    caseReport: new FormControl(''),
+    conclusions: new FormControl('')
+  });
+
+  constructor(protected abstractService: AbstractsService, protected categoryService: CategoryService, protected router: Router) { }
 
   ngOnInit() {
-    this.case.authors = [];
     this.categoryService.getCategory().subscribe(data => this.categories = data);
   }
 
-  onSubmit() {
-    this.case.authors.push(this.author);
-    this.abstractService.newCaseAbstract(this.case).subscribe(value => {
-      this.router.navigate(['abstracts/case/' + value.id])
-    });
+  get authors(): FormArray {
+    return this.abstractForm.get('authors') as FormArray;
+  }
+
+  addAuthorField() {
+    this.authors.push(new FormControl());
+  }
+
+  deleteAuthorField(index: number) {
+    this.authors.removeAt(index);
   }
 
 }

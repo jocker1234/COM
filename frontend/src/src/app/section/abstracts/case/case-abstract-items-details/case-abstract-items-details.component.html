@@ -18,7 +18,7 @@
     <div class="row">
       <p class="col-1"></p>
       <h5 class="col-2 col-form-label">Category</h5>
-      <p class="col-9">{{abstract.categoryId}}</p>
+      <p class="col-9">{{abstract.category.name}}</p>
     </div>
     <div class="row">
       <p class="col-1"></p>
@@ -35,5 +35,9 @@
       <h5 class="col-2 col-form-label">Conclusion</h5>
       <p class="col-9">{{abstract.conclusions}}</p>
     </div>
+  </div>
+  <div class="float-right">
+    <app-abstract-action-buttons prefixUrl="abstracts/case/" type="details" [case]="abstract" [id]="id">
+    </app-abstract-action-buttons>
   </div>
 </div>

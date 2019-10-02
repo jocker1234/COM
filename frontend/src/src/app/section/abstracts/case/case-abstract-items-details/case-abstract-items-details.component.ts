@@ -17,11 +17,9 @@ export class CaseAbstractItemsDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.abstractsService.getOneCaseAbstract(Number(this.id)).subscribe(value => this.abstract = value);
-  }
-
-  send() {
-    this.abstractsService.sendCaseAbstract(Number(this.id));
+    this.abstractsService.getOneCaseAbstract(Number(this.id)).subscribe(value => {
+      this.abstract = value;
+    });
   }
 
 }

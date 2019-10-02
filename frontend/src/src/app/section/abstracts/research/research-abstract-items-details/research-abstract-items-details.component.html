@@ -18,26 +18,26 @@
     <div class="row">
       <p class="col-1"></p>
       <h5 class="col-2 col-form-label">Category</h5>
-      <p class="col-9">{{abstract.categoryId}}</p>
+      <p class="col-9">{{abstract.category.name}}</p>
     </div>
     <div class="row">
       <p class="col-1"></p>
-      <h5 class="col-2 col-form-label">Background</h5>
-      <p class="col-9">{{abstract.introdution}}</p>
+      <h5 class="col-2 col-form-label">Introduction</h5>
+      <p class="col-9">{{abstract.introduction}}</p>
     </div>
     <div class="row">
       <p class="col-1"></p>
-      <h5 class="col-2 col-form-label">Case Report</h5>
+      <h5 class="col-2 col-form-label">Aim of the study</h5>
       <p class="col-9">{{abstract.aimOfTheStudy}}</p>
     </div>
     <div class="row">
       <p class="col-1"></p>
-      <h5 class="col-2 col-form-label">Conclusion</h5>
+      <h5 class="col-2 col-form-label">Material and methods</h5>
       <p class="col-9">{{abstract.materialAndMethods}}</p>
     </div>
     <div class="row">
       <p class="col-1"></p>
-      <h5 class="col-2 col-form-label">Conclusion</h5>
+      <h5 class="col-2 col-form-label">Result</h5>
       <p class="col-9">{{abstract.results}}</p>
     </div>
     <div class="row">
@@ -45,5 +45,9 @@
       <h5 class="col-2 col-form-label">Conclusion</h5>
       <p class="col-9">{{abstract.conclusions}}</p>
     </div>
+  </div>
+  <div class="float-right">
+    <app-abstract-action-buttons prefixUrl="abstracts/research/" type="details" [research]="abstract" [id]="id">
+    </app-abstract-action-buttons>
   </div>
 </div>

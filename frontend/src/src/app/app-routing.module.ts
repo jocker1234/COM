@@ -4,12 +4,14 @@ import {LoginComponent} from "./section/login/login.component";
 import {RegisterComponent} from "./section/register/register.component";
 import {PasswordResetComponent} from "./section/login/password-reset/password-reset.component";
 import {HomeComponent} from "./section/home/home.component";
+import {AuthGuard} from "./section/auth/auth-guard";
 
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',
@@ -33,7 +35,11 @@ const routes: Routes = [
   },
   {
     path: 'abstracts',
-    loadChildren: () => import('./section/abstracts/abstracts.module').then(value => value.AbstractsModule)
+    loadChildren: () => import('./section/abstracts/abstracts.module').then(value => value.AbstractsModule),
+    data: {
+      authorities: ['ROLE_ACTIVE_PARTICIPANT']
+    },
+    canActivate: [AuthGuard]
   }
 ];
 

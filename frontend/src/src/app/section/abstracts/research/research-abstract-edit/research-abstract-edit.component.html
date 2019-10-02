@@ -1,5 +1,5 @@
 <div class="container form">
-  <form class="needs-validation" [formGroup]="abstractForm" novalidate>
+  <form class="needs-validation" [formGroup]="abstractForm"  novalidate>
     <div class="form-group col">
       <div class="row">
         <label class="col-2 col-form-label">Title</label>
@@ -30,14 +30,24 @@
         </div>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Background</label>
-        <input type="text" class="form-control col-7" formControlName="background">
-        <span *ngIf="!(abstractForm.get('background').untouched || abstractForm.get('background').valid)"></span>
+        <label class="col-2 col-form-label">Introduction</label>
+        <input type="text" class="form-control col-7" formControlName="introduction">
+        <span *ngIf="!(abstractForm.get('introduction').untouched || abstractForm.get('introduction').valid)"></span>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Case Report</label>
-        <input type="text" class="form-control col-7" formControlName="caseReport">
-        <span *ngIf="!(abstractForm.get('caseReport').untouched || abstractForm.get('caseReport').valid)"></span>
+        <label class="col-2 col-form-label">Aim of the study</label>
+        <input type="text" class="form-control col-7" formControlName="aimOfTheStudy">
+        <span *ngIf="!(abstractForm.get('aimOfTheStudy').untouched || abstractForm.get('aimOfTheStudy').valid)"></span>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Material and methods</label>
+        <input type="text" class="form-control col-7" formControlName="materialAndMethods">
+        <span *ngIf="!(abstractForm.get('materialAndMethods').untouched || abstractForm.get('materialAndMethods').valid)"></span>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Result</label>
+        <input type="text" class="form-control col-7" formControlName="results">
+        <span *ngIf="!(abstractForm.get('results').untouched || abstractForm.get('results').valid)"></span>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Conclusions</label>
@@ -47,6 +57,7 @@
     </div>
   </form>
   <div class="float-right">
-    <app-abstract-action-buttons prefixUrl="abstracts/case/" type="create" [case]="abstractForm.value"></app-abstract-action-buttons>
+    <app-abstract-action-buttons prefixUrl="abstracts/research/" type="modify" [research]="abstractForm.value" [id]="id">
+    </app-abstract-action-buttons>
   </div>
 </div>

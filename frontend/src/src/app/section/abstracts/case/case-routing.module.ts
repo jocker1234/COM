@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {CaseAbstractCreateComponent} from "./case-abstract-create/case-abstract-create.component";
 import {CaseAbstractItemsDetailsComponent} from "./case-abstract-items-details/case-abstract-items-details.component";
+import {CaseAbstractEditComponent} from "./case-abstract-edit/case-abstract-edit.component";
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: ':id',
     component: CaseAbstractItemsDetailsComponent
+  },
+  {
+    path: ':id/edit',
+    component: CaseAbstractEditComponent
   },
 ];
 

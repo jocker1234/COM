@@ -18,7 +18,9 @@ public enum ExceptionType {
 
     WRONG_STATUS("wrong.status"),
     NOT_FOUND("not.found"),
-    WRONG_VALUE("wrong.value");
+    WRONG_VALUE("wrong.value"),
+
+    ABSTRACT_AMMOUNT("abstract.amount");
 
     private String message;
 

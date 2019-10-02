@@ -40,4 +40,11 @@ public class AbstractServiceImpl implements AbstractsService {
         return jwtProvider.getEmailFromJwtToken(token);
     }
 
+    @Override
+    public int countAllAbstractUser(String email) {
+        int countCase = caseAbstract.countUserAbstract(email);
+        int countResearch = researchAbstract.countUserAbstract(email);
+        return countCase + countResearch;
+    }
+
 }
