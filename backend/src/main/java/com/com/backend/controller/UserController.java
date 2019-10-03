@@ -50,7 +50,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
-    public ResponseEntity<Void> deleteUser(@Valid @PathVariable Long id) {
+    public ResponseEntity<Void> deleteUser(@Valid @PathVariable Long id) throws AppException {
         usersService.deleteUser(id);
         return ResponseEntity.ok().build();
     }

@@ -16,8 +16,10 @@ import com.com.backend.mapper.ResearchAbstractsMapper;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.ResearchAbstractsService;
 import com.com.backend.service.UsersService;
+import com.com.backend.util.Util;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,19 +50,19 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
     }
 
     protected void validFields(ResearchAbstractsDtoRequest researchAbstracts) throws WrongValueException {
-        if(isNull(researchAbstracts.getIntroduction())){
+        if(Util.isNull(researchAbstracts.getIntroduction())){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.INTRODUCTION);
         }
-        if(isNull(researchAbstracts.getAimOfTheStudy())){
+        if(Util.isNull(researchAbstracts.getAimOfTheStudy())){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.AIM_OF_THE_STUDY);
         }
-        if(isNull(researchAbstracts.getMaterialAndMethods())){
+        if(Util.isNull(researchAbstracts.getMaterialAndMethods())){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.MATERIAL_AND_METHODS);
         }
-        if(isNull(researchAbstracts.getResults())){
+        if(Util.isNull(researchAbstracts.getResults())){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.RESULT);
         }
-        if(isNull(researchAbstracts.getConclusions())){
+        if(Util.isNull(researchAbstracts.getConclusions())){
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.CONCLUSION);
         }
     }
@@ -73,6 +75,7 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
     }
 
     @Override
+    @Transactional
     public ResearchAbstractsDtoResponse update(Long id, ResearchAbstractsDtoRequest ra) throws AppException {
         validAbstracts(ra);
         validFields(ra);
@@ -101,15 +104,12 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
                 thesis.setConclusions(ra.getConclusions());
             }
             return researchAbstractsDao.save(thesis);
-        }).orElseGet(() -> {
-            ResearchAbstracts abstracts = researchAbstractsMapper.dtoReqToModel(ra);
-            abstracts.setCategory(categoryDao.getOne(ra.getCategoryId()));
-            return researchAbstractsDao.save(abstracts);
         });
         return researchAbstractsMapper.modelToDtoRes(researchAbstracts.get());
     }
 
     @Override
+    @Transactional
     public int forwardForApproval(Long id) throws AppException {
         if(!researchAbstractsDao.getStatus(id).equals(Status.DO.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);
@@ -117,6 +117,7 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
     }
 
     @Override
+    @Transactional
     public int approved(Long id) throws AppException {
         if(!researchAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);
@@ -124,6 +125,7 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
     }
 
     @Override
+    @Transactional
     public int rejected(Long id) throws AppException {
         if(!researchAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);

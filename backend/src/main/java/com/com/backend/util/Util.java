@@ -20,8 +20,16 @@ public class Util {
         return String.join(",", strings);
     }
 
-    public static List<String> splitWithComma(String s){
+    public static List<String> splitWithComma(String s) {
         return Arrays.stream(s.split(",")).collect(Collectors.toList());
-
     }
+
+    public static boolean isNull(String value) {
+        return !(value != null && !value.isEmpty());
+    }
+
+    public static boolean isNull(Object value) {
+        return !(value != null);
+    }
+
 }

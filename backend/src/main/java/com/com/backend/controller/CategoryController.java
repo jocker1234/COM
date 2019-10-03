@@ -1,6 +1,7 @@
 package com.com.backend.controller;
 
 import com.com.backend.dto.CategoryDto;
+import com.com.backend.exception.NotFoundException;
 import com.com.backend.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,14 +36,14 @@ public class CategoryController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
-    public ResponseEntity<List<CategoryDto>> delete(@Valid @PathVariable Long id) {
+    public ResponseEntity<List<CategoryDto>> delete(@Valid @PathVariable Long id) throws NotFoundException {
         List<CategoryDto> categoryDtos = categoryService.delete(id);
         return ResponseEntity.ok(categoryDtos);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
-    public ResponseEntity<List<CategoryDto>> update(@Valid @PathVariable Long id, @RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<List<CategoryDto>> update(@Valid @PathVariable Long id, @RequestBody CategoryDto categoryDto) throws NotFoundException {
         List<CategoryDto> categoryDtos = categoryService.update(id, categoryDto);
         return ResponseEntity.ok(categoryDtos);
     }

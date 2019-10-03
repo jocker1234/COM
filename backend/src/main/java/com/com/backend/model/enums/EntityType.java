@@ -6,7 +6,9 @@ public enum EntityType {
     YEAR_OF_STUDY,
     TITLE,
     COUNTRY,
-    GENDER
+    GENDER,
+
+    CATEGORY
     ;
 
 }

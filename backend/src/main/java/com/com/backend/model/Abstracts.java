@@ -30,12 +30,10 @@ public class Abstracts extends AbstractEntity {
     private String tutors;
     @Column(nullable = false)
     private String status;
-    //@Column(nullable = false)
+    @Column(nullable = false)
     private String type;
-
-    //@Column(nullable = false)
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private Users users;
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)

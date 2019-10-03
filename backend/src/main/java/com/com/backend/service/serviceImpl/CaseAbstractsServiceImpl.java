@@ -17,6 +17,7 @@ import com.com.backend.mapper.CaseAbstractsMapper;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.CaseAbstractsService;
 import com.com.backend.service.UsersService;
+import com.com.backend.util.Util;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,13 +57,13 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
     }
 
     public void validFields(CaseAbstractsDtoRequest caseAbstracts) throws WrongValueException {
-        if (isNull(caseAbstracts.getCaseReport())) {
+        if (Util.isNull(caseAbstracts.getCaseReport())) {
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.CASE_REPORT);
         }
-        if (isNull(caseAbstracts.getBackground())) {
+        if (Util.isNull(caseAbstracts.getBackground())) {
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.BACKGROUND);
         }
-        if (isNull(caseAbstracts.getConclusions())) {
+        if (Util.isNull(caseAbstracts.getConclusions())) {
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.CONCLUSION);
         }
     }
@@ -90,17 +91,13 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
             if (!thesis.getConclusions().equals(caseAbstracts.getConclusions())) {
                 thesis.setConclusions(caseAbstracts.getConclusions());
             }
-            System.out.println("asdasdas");
             return caseAbstractsDao.save(thesis);
-        }).orElseGet(() -> {
-            CaseAbstracts abstracts = caseAbstractsMapper.dtoReqToModel(caseAbstracts);
-            abstracts.setCategory(categoryDao.getOne(caseAbstracts.getCategoryId()));
-            return caseAbstractsDao.save(abstracts);
         });
         return caseAbstractsMapper.modelToDtoRes(caseAbstract.get());
     }
 
     @Override
+    @Transactional
     public int forwardForApproval(Long id) throws AppException {
         if(!caseAbstractsDao.getStatus(id).equals(Status.DO.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);
@@ -108,6 +105,7 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
     }
 
     @Override
+    @Transactional
     public int approved(Long id) throws AppException {
         if(!caseAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);
@@ -115,6 +113,7 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
     }
 
     @Override
+    @Transactional
     public int rejected(Long id) throws AppException {
         if(!caseAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);
