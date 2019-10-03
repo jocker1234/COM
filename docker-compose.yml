@@ -2,11 +2,25 @@ version: "3"
 services:
   # APP*****************************************
   springbootapp:
+    build: .
     image: springbootapp:latest
     network_mode: bridge
     container_name: springbootapp
-    expose:
-      - 8080
     ports:
       - 8080:8080
     restart: unless-stopped
+  frontend:
+    build: ./frontend/src
+    container_name: web
+    ports:
+      - 4200:80
+    volumes:
+      - $PWD:/usr/src/frontend
+    command: ng serve
+    working_dir: /usr/src/frontend
+  npm_install:
+    image: node:12.2.0
+    command: npm install
+    working_dir: /usr/src/frontend
+    volumes:
+      - $PWD:/usr/src/frontend
