@@ -9,6 +9,7 @@ import {ResearchAbstractCreateComponent} from "./research-abstract-create/resear
 import {ResearchAbstractItemsDetailsComponent} from "./research-abstract-items-details/research-abstract-items-details.component";
 import { ResearchAbstractEditComponent } from './research-abstract-edit/research-abstract-edit.component';
 import {AbstractsModule} from "../abstracts.module";
+import {TextareaAutosizeModule} from "ngx-textarea-autosize";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {AbstractsModule} from "../abstracts.module";
     NgbModule,
     ReactiveFormsModule,
     AbstractsModule,
+    TextareaAutosizeModule
   ]
 })
 export class ResearchModule { }

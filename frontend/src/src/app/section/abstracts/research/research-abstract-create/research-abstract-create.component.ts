@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ResearchAbstract} from "../../research-abstract";
 import {AbstractsService} from "../../../abstracts.service";
 import {Category} from "../../../category";
@@ -21,12 +21,12 @@ export class ResearchAbstractCreateComponent implements OnInit {
       new FormControl('')
     ]),
     tutors: new FormControl('', [Validators.required]),
-    categoryId: new FormControl(''),
-    introduction: new FormControl(''),
-    aimOfTheStudy: new FormControl(''),
-    materialAndMethods: new FormControl(''),
-    results: new FormControl(''),
-    conclusions: new FormControl('')
+    categoryId: new FormControl('', [Validators.required]),
+    introduction: new FormControl('', [Validators.required]),
+    aimOfTheStudy: new FormControl('', [Validators.required]),
+    materialAndMethods: new FormControl('', [Validators.required]),
+    results: new FormControl('', [Validators.required]),
+    conclusions: new FormControl('', [Validators.required])
   });
 
   constructor(protected abstractService: AbstractsService, protected categoryService: CategoryService,

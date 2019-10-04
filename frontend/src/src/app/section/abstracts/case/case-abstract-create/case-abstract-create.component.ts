@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CaseAbstract} from "../../case-abstract";
 import {Category} from "../../../category";
 import {CategoryService} from "../../../category.service";
@@ -21,10 +21,10 @@ export class CaseAbstractCreateComponent implements OnInit {
       new FormControl('')
     ]),
     tutors: new FormControl('', [Validators.required]),
-    categoryId: new FormControl(''),
-    background: new FormControl(''),
-    caseReport: new FormControl(''),
-    conclusions: new FormControl('')
+    categoryId: new FormControl('', [Validators.required]),
+    background: new FormControl('', [Validators.required]),
+    caseReport: new FormControl('', [Validators.required]),
+    conclusions: new FormControl('', [Validators.required])
   });
 
   constructor(protected abstractService: AbstractsService, protected categoryService: CategoryService, protected router: Router) { }

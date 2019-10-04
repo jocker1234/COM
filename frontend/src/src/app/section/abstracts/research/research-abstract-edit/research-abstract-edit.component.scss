@@ -1,9 +1,47 @@
-.row {
+div.row {
   margin-bottom: 30px;
 }
+
 .form {
   margin-bottom: 125px;
 }
+
 .float-right {
   margin-right: 150px;
+}
+
+.error-messages {
+  color: red;
+  font-size: 13px;
+}
+
+button {
+  height: 38px !important;
+  margin-left: 15px !important;
+}
+
+.author-input {
+  width: 550px;
+}
+
+div.row-author {
+  margin-left: 1px;
+  width: 300px;
+  margin-bottom: 0 !important;
+}
+
+div.row-author:not(:nth-child(2)) {
+  margin-left: 181px;
+  width: 550px;
+  margin-bottom: 0 !important;
+}
+
+div.row-author:not(:nth-child(2)) input{
+  width: 550px;
+}
+
+textarea {
+  width: 600px;
+  min-height: 5em;
+  max-height: 100%;
 }

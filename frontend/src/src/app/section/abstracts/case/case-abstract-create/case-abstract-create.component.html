@@ -3,22 +3,30 @@
     <div class="form-group col">
       <div class="row">
         <label class="col-2 col-form-label">Title</label>
-        <input type="text" class="form-control col-7" formControlName="title">
-        <span *ngIf="!(abstractForm.get('title').untouched || abstractForm.get('title').valid)"></span>
+        <div class="col-7">
+          <input type="text" class="form-control" formControlName="title">
+          <div class="error-messages" *ngIf="!(abstractForm.get('title').untouched || abstractForm.get('title').valid)">
+            Title field is required
+          </div>
+        </div>
       </div>
       <div class="row" formArrayName="authors">
         <label class="col-2 col-form-label">Authors</label>
-        <div  class="col-10 row" *ngFor="let author of authors.controls; index as idx">
-          <input class="form-control col-5" [formControlName]="idx">
-          <span class="col-sm-1"></span>
-          <button type="button" (click)="addAuthorField()">Add Author</button>
-          <button class="col-1 btn btn-secondary" type="button" (click)="deleteAuthorField(idx)">Delete</button>
+        <div class="col-7 row-author row" *ngFor="let author of authors.controls; index as idx">
+          <input class="form-control author-input" [formControlName]="idx">
+          <button class="btn btn-secondary" type="button" (click)="deleteAuthorField(idx)">-</button>
         </div>
+        <button type="btn button-plus" (click)="addAuthorField()">+</button>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Tutor</label>
-        <input type="text" class="form-control col-7" formControlName="tutors">
-        <span *ngIf="!(abstractForm.get('tutors').untouched || abstractForm.get('tutors').valid)"></span>
+        <div class="col-5">
+          <input type="text" class="form-control" formControlName="tutors">
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('tutors').untouched || abstractForm.get('tutors').valid)">
+          Tutor field is required
+        </span>
+        </div>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Category</label>
@@ -31,22 +39,41 @@
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Background</label>
-        <input type="text" class="form-control col-7" formControlName="background">
-        <span *ngIf="!(abstractForm.get('background').untouched || abstractForm.get('background').valid)"></span>
+        <div class="col-7">
+          <textarea type="text" class="form-control"
+                    formControlName="background" autosize></textarea>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('background').untouched || abstractForm.get('background').valid)">
+            Background field is required
+          </span>
+        </div>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Case Report</label>
-        <input type="text" class="form-control col-7" formControlName="caseReport">
-        <span *ngIf="!(abstractForm.get('caseReport').untouched || abstractForm.get('caseReport').valid)"></span>
+        <label class="col-2 col-form-label">Case report</label>
+        <div class="col-7">
+          <textarea type="text" class="form-control"
+                    formControlName="caseReport" autosize></textarea>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('caseReport').untouched || abstractForm.get('caseReport').valid)">
+            Case report field is reuired
+          </span>
+        </div>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Conclusions</label>
-        <input type="text" class="form-control col-7" formControlName="conclusions">
-        <span *ngIf="!(abstractForm.get('conclusions').untouched || abstractForm.get('conclusions').valid)"></span>
+        <div class="col-7">
+          <textarea type="text" class="form-control"
+                    formControlName="conclusions" autosize></textarea>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('conclusions').untouched || abstractForm.get('conclusions').valid)">
+            Conclusions field is required
+          </span>
+        </div>
       </div>
     </div>
   </form>
   <div class="float-right">
-    <app-abstract-action-buttons prefixUrl="abstracts/case/" type="create" [case]="abstractForm.value"></app-abstract-action-buttons>
+    <app-abstract-action-buttons prefixUrl="abstracts/case/" type="create"
+                                 [case]="abstractForm.value"></app-abstract-action-buttons>
   </div>
 </div>
