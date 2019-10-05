@@ -9,29 +9,10 @@
         </div>
       </div>
       <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-        <ul class="top_nav_menu" routerLinkActive="active">
-          <li>
-            <a routerLink="home">Home</a>
-          </li>
-          <li *ngIf="checkAuthorities('ROLE_ADMIN')" class="nav-item">
-            <a class="nav-link" routerLink="user">Users</a>
-          </li>
-          <li *ngIf="!roles" class="nav-item">
-            <a class="nav-link" routerLink="login">Login</a>
-          </li>
-          <li *ngIf="roles">
-            <a class="nav-link" routerLink="abstracts">Abstracts</a>
-          </li>
-          <li *ngIf="roles">
-            <a class="nav-link" routerLink="user/{{tokenStorage.getUserId()}}">Info</a>
-          </li>
-          <li *ngIf="roles">
-            <a class="nav-link" (click)="logout()">Logout</a>
-          </li>
-        </ul>
+        <ng-container *ngIf="!roles" [ngTemplateOutlet]="logeged"></ng-container>
+        <ng-container *ngIf="roles" [ngTemplateOutlet]="online"></ng-container>
       </div>
       <div>
-
       </div>
     </div>
   </div>
@@ -68,3 +49,45 @@
     </div>
   </div>
 </div>
+<ng-template #logeged>
+  <ul class="top_nav_menu" routerLinkActive="active">
+    <li>
+      <a routerLink="home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="login">Login</a>
+    </li>
+  </ul>
+</ng-template>
+<ng-template #online>
+  <ul class="top_nav_menu" routerLinkActive="active">
+    <li>
+      <a routerLink="home">Home</a>
+    </li>
+    <ng-container *ngIf="checkAuthorities('ROLE_ADMIN')" [ngTemplateOutlet]="admin"></ng-container>
+    <ng-container *ngIf="checkAuthorities('ROLE_ACTIVE_PARTICIPANT')" [ngTemplateOutlet]="active_user"></ng-container>
+    <ng-container *ngIf="checkAuthorities('ROLE_PASSIVE_PARTICIPANT')" [ngTemplateOutlet]="pasive_user"></ng-container>
+    <li>
+      <a class="nav-link" routerLink="user/{{tokenStorage.getUserId()}}">Info</a>
+    </li>
+    <li>
+      <a class="nav-link" (click)="logout()">Logout</a>
+    </li>
+  </ul>
+</ng-template>
+<ng-template #admin>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="user">Users</a>
+  </li>
+  <li>
+    <a class="nav-link" routerLink="abstracts">Abstracts</a>
+  </li>
+</ng-template>
+<ng-template #active_user>
+  <li>
+    <a class="nav-link" routerLink="abstracts">Abstracts</a>
+  </li>
+</ng-template>
+<ng-template #pasive_user>
+
+</ng-template>
