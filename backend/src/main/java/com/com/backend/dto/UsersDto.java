@@ -44,7 +44,6 @@ public class UsersDto extends AbstractDto {
     private String phoneNumber;
     @NonNull
     private Boolean needVisa;
-    @NonNull
     private String passportNumber;
     private Set<AuthoritiesDto> authoritiesSet;
     private String[] authorities;

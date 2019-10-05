@@ -97,17 +97,20 @@ public class UsersServiceImpl implements UsersService {
             Arrays.stream(userDto.getAuthorities()).forEach(role -> {
                 switch (role.toLowerCase()) {
                     case "admin":
-                    case "ROLE_ADMIN":
+                    case "role admin":
+                    case "role_admin":
                         Authorities authoritiesAdmin = authoritiesService.findByRole(Role.ROLE_ADMIN);
                         authoritiesDtos.add(authoritiesAdmin);
                         break;
                     case "active":
-                    case "ROLE_ACTIVE_PARTICIPANT":
+                    case "activate participant":
+                    case "role_active_participant":
                         Authorities authoritiesUser = authoritiesService.findByRole(Role.ROLE_ACTIVE_PARTICIPANT);
                         authoritiesDtos.add(authoritiesUser);
                         break;
                     case "pasive":
-                    case "ROLE_PASIVE_PARTICIPANT":
+                    case "pasive participant":
+                    case "role_pasive_participant":
                         Authorities authoritiesPM = authoritiesService.findByRole(Role.ROLE_PASSIVE_PARTICIPANT);
                         authoritiesDtos.add(authoritiesPM);
                         break;

@@ -16,11 +16,19 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: UserListDetailComponent
+    component: UserListDetailComponent,
+    data: {
+      authorities: ['ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT']
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: ':id/edit',
-    component: UserUpdateComponent
+    component: UserUpdateComponent,
+    data: {
+      authorities: ['ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT']
+    },
+    canActivate: [AuthGuard]
   }
 ];
 
