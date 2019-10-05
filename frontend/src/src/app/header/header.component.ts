@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../section/auth/token-storage.service";
 
 @Component({
@@ -9,7 +9,8 @@ import {TokenStorageService} from "../section/auth/token-storage.service";
 export class HeaderComponent implements OnInit {
   private roles: string[];
 
-  constructor(private tokenStorage: TokenStorageService) { }
+  constructor(private tokenStorage: TokenStorageService) {
+  }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -17,15 +18,12 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  checkAuthorities(role: string) {
-    if (this.tokenStorage.getToken()) {
-      this.roles.forEach(value => {
-        if (value === role) {
-          return true;
-        }
-      });
-      return false;
+  checkAuthorities(role: string): boolean {
+    const findRole = this.roles.find(value => value == role);
+    if (findRole != undefined) {
+      return true;
     }
+    return false;
   }
 
 
