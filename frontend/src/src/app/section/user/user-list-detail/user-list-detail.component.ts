@@ -8,7 +8,7 @@ import {TokenStorageService} from "../../auth/token-storage.service";
 @Component({
   selector: 'app-user-list-detail',
   templateUrl: './user-list-detail.component.html',
-  styleUrls: ['./user-list-detail.component.css']
+  styleUrls: ['./user-list-detail.component.scss']
 })
 export class UserListDetailComponent implements OnInit {
   user: User;

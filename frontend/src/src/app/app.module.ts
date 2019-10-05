@@ -15,6 +15,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {UserModule} from "./section/user/user.module";
 import {httpInterceptorProvider} from "./section/auth/auth-interceptor";
 import {AbstractsModule} from "./section/abstracts/abstracts.module";
+import {FieldErrorDisplayModule} from "./section/field-error-display/field-error-display.module";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import {AbstractsModule} from "./section/abstracts/abstracts.module";
     LoginComponent,
     RegisterComponent,
     PasswordResetComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,8 @@ import {AbstractsModule} from "./section/abstracts/abstracts.module";
     ReactiveFormsModule,
     NgbModule,
     UserModule,
-    AbstractsModule
+    AbstractsModule,
+    FieldErrorDisplayModule
   ],
   providers: [httpInterceptorProvider],
   bootstrap: [AppComponent]

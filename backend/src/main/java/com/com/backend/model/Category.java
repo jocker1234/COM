@@ -1,7 +1,9 @@
 package com.com.backend.model;
 
 import lombok.*;
+import org.springframework.lang.NonNull;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Getter
@@ -11,6 +13,7 @@ import javax.persistence.Entity;
 @Entity
 public class Category extends AbstractEntity {
 
+    @Column(nullable = false)
     private String name;
 
 }

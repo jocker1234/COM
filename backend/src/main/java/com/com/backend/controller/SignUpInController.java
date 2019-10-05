@@ -2,6 +2,7 @@ package com.com.backend.controller;
 
 import com.com.backend.config.security.JwtProvider;
 import com.com.backend.config.security.JwtResponse;
+import com.com.backend.exception.NotFoundException;
 import com.com.backend.model.Users;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.dto.LoginFormRequest;
@@ -45,7 +46,7 @@ public class SignUpInController {
     }
 
     @PostMapping("/signin")
-    public JwtResponse authenticationUser(@Valid @RequestBody LoginFormRequest loginRequest) {
+    public JwtResponse authenticationUser(@Valid @RequestBody LoginFormRequest loginRequest) throws NotFoundException {
 
         System.out.println("zalogowano1");
         Authentication authentication = authenticationManager.authenticate(

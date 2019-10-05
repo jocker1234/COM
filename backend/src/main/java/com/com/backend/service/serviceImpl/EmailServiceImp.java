@@ -58,7 +58,9 @@ public class EmailServiceImp implements EmailService {
     private void sendEmail(Mail mail) {
         MimeMessage message = emailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+            MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                    StandardCharsets.UTF_8.name());
+
             helper.setTo(mail.getTo());
             helper.setSubject(mail.getSubject());
             helper.setText(mail.getContent(), true);

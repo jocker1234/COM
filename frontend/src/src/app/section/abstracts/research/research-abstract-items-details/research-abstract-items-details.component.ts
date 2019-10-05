@@ -10,7 +10,7 @@ import {AbstractsService} from "../../../abstracts.service";
 })
 export class ResearchAbstractItemsDetailsComponent implements OnInit {
 
-  abstract: ResearchAbstract;
+  abstract: ResearchAbstract = new ResearchAbstract();
   id: number;
 
   constructor(private route: ActivatedRoute, private abstractsService: AbstractsService) { }

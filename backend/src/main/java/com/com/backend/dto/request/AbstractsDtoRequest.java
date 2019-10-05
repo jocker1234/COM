@@ -4,8 +4,6 @@ import com.com.backend.dto.AbstractDto;
 import lombok.*;
 import org.springframework.lang.NonNull;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,6 +20,6 @@ public class AbstractsDtoRequest extends AbstractDto {
     private String status;
     @NonNull
     private Long categoryId;
-
+    @NonNull
     private String type;
 }

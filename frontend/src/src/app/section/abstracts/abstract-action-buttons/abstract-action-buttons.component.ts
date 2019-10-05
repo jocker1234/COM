@@ -42,6 +42,7 @@ export class AbstractActionButtonsComponent implements OnInit {
   }
 
   save() {
+    console.log(this.research);
     if (this.prefixUrl.includes("case") === true) {
       this.case.type = 'C';
       this.abstractService.newCaseAbstract(this.case).subscribe(value => {

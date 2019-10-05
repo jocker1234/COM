@@ -28,16 +28,20 @@ export class AuthService {
   }
 
   signUp(info: SignUpInfo): Observable<string> {
-    return this.http.post<string>(`${this.signupUrl}`, info)
+    const user: SignUpInfo = new SignUpInfo(info.email, info.password, info.firstName, info.lastName, info.gender,
+      info.dateOfBirth, info.country, info.title, info.university, info.faculty, info.yearOfStudy, info.phoneNumber,
+      info.needVisa, info.passportNumber, []);
+    user.authorities.push(info.authorities.toString());
+    return this.http.post<string>(`${this.signupUrl}`, user)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  remaindPassword(email: string){
+  remaindPassword(email: string) {
     return this.http.post(`${this.remaindPasswordUrl}`, email)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  countryList(){
+  countryList() {
     return this.http.get(`${this.countryListUrl}`)
       .pipe(catchError(HandlingErrorsService.handleError));
   }

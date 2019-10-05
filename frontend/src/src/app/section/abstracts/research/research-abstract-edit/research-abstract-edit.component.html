@@ -1,29 +1,37 @@
 <div class="container form">
-  <form class="needs-validation" [formGroup]="abstractForm"  novalidate>
+  <form class="needs-validation" [formGroup]="abstractForm" novalidate>
     <div class="form-group col">
       <div class="row">
         <label class="col-2 col-form-label">Title</label>
-        <input type="text" class="form-control col-7" formControlName="title">
-        <span *ngIf="!(abstractForm.get('title').untouched || abstractForm.get('title').valid)"></span>
+        <div class="col-7">
+          <input type="text" class="form-control" formControlName="title">
+          <div class="error-messages" *ngIf="!(abstractForm.get('title').untouched || abstractForm.get('title').valid)">
+            Title field is required
+          </div>
+        </div>
       </div>
       <div class="row" formArrayName="authors">
         <label class="col-2 col-form-label">Authors</label>
-        <div  class="col-10 row" *ngFor="let author of authors.controls; index as idx">
-          <input class="form-control col-5" [formControlName]="idx">
-          <span class="col-sm-1"></span>
-          <button type="button" (click)="addAuthorField()">Add Author</button>
-          <button class="col-1 btn btn-secondary" type="button" (click)="deleteAuthorField(idx)">Delete</button>
+        <div class="col-7 row row-author" *ngFor="let author of authors.controls; index as idx">
+          <input class="form-control author-input" [formControlName]="idx">
+          <button class="btn btn-secondary" type="button" (click)="deleteAuthorField(idx)">-</button>
         </div>
+        <button type="btn button-plus" (click)="addAuthorField()">+</button>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Tutor</label>
-        <input type="text" class="form-control col-7" formControlName="tutors">
-        <span *ngIf="!(abstractForm.get('tutors').untouched || abstractForm.get('tutors').valid)"></span>
+        <div class="col-5">
+          <input type="text" class="form-control" formControlName="tutors">
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('tutors').untouched || abstractForm.get('tutors').valid)">
+          Tutor field is required
+        </span>
+        </div>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Category</label>
         <div class="col-7">
-          <select class="form-control col-7" formControlName="categoryId">
+          <select class="form-control col-7" formControlName="categoryId" [value]="category.id">
             <option value="">Select category...</option>
             <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
           </select>
@@ -31,33 +39,54 @@
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Introduction</label>
-        <input type="text" class="form-control col-7" formControlName="introduction">
-        <span *ngIf="!(abstractForm.get('introduction').untouched || abstractForm.get('introduction').valid)"></span>
+        <div class="col-7">
+        <textarea type="text" class="form-control"
+                  formControlName="introduction" autosize></textarea>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('introduction').untouched || abstractForm.get('introduction').valid)"></span>
+        </div>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Aim of the study</label>
-        <input type="text" class="form-control col-7" formControlName="aimOfTheStudy">
-        <span *ngIf="!(abstractForm.get('aimOfTheStudy').untouched || abstractForm.get('aimOfTheStudy').valid)"></span>
+        <div class="col-7">
+        <textarea type="text" class="form-control"
+                  formControlName="aimOfTheStudy" autosize></textarea>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('aimOfTheStudy').untouched || abstractForm.get('aimOfTheStudy').valid)"></span>
+        </div>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Material and methods</label>
-        <input type="text" class="form-control col-7" formControlName="materialAndMethods">
-        <span *ngIf="!(abstractForm.get('materialAndMethods').untouched || abstractForm.get('materialAndMethods').valid)"></span>
+        <div class="col-7">
+        <textarea type="text" class="form-control"
+                  formControlName="materialAndMethods" autosize></textarea>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('materialAndMethods').untouched || abstractForm.get('materialAndMethods').valid)"></span>
+        </div>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Result</label>
-        <input type="text" class="form-control col-7" formControlName="results">
-        <span *ngIf="!(abstractForm.get('results').untouched || abstractForm.get('results').valid)"></span>
+        <div class="col-7">
+        <textarea type="text" class="form-control"
+                  formControlName="results" autosize></textarea>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('results').untouched || abstractForm.get('results').valid)"></span>
+        </div>
       </div>
       <div class="row">
         <label class="col-2 col-form-label">Conclusions</label>
-        <input type="text" class="form-control col-7" formControlName="conclusions">
-        <span *ngIf="!(abstractForm.get('conclusions').untouched || abstractForm.get('conclusions').valid)"></span>
+        <div class="col-7">
+        <textarea type="text" class="form-control"
+                  formControlName="conclusions" autosize></textarea>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('conclusions').untouched || abstractForm.get('conclusions').valid)"></span>
+        </div>
       </div>
     </div>
   </form>
   <div class="float-right">
-    <app-abstract-action-buttons prefixUrl="abstracts/research/" type="modify" [research]="abstractForm.value" [id]="id">
+    <app-abstract-action-buttons prefixUrl="abstracts/research/" type="modify" [research]="abstractForm.value"
+                                 [id]="id">
     </app-abstract-action-buttons>
   </div>
 </div>
