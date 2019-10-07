@@ -40,6 +40,14 @@ const routes: Routes = [
       authorities: ['ROLE_ACTIVE_PARTICIPANT']
     },
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./section/admin/admin.module').then(value => value.AdminModule),
+    data: {
+      authorities: ['ROLE_ADMIN']
+    },
+    canActivate: [AuthGuard]
   }
 ];
 
