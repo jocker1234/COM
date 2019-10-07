@@ -16,6 +16,7 @@ import {UserModule} from "./section/user/user.module";
 import {httpInterceptorProvider} from "./section/auth/auth-interceptor";
 import {AbstractsModule} from "./section/abstracts/abstracts.module";
 import {FieldErrorDisplayModule} from "./section/field-error-display/field-error-display.module";
+import {AdminModule} from "./section/admin/admin.module";
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {FieldErrorDisplayModule} from "./section/field-error-display/field-error
     NgbModule,
     UserModule,
     AbstractsModule,
-    FieldErrorDisplayModule
+    FieldErrorDisplayModule,
+    AdminModule
   ],
   providers: [httpInterceptorProvider],
   bootstrap: [AppComponent]
