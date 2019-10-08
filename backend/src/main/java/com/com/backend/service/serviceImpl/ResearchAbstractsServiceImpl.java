@@ -118,6 +118,12 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
 
     @Override
     @Transactional
+    public int changeStatus(Long id, String status) {
+        return researchAbstractsDao.changeStatusCase(status, id);
+    }
+
+    @Override
+    @Transactional
     public int approved(Long id) throws AppException {
         if(!researchAbstractsDao.getStatus(id).equals(Status.FORWARDED.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);

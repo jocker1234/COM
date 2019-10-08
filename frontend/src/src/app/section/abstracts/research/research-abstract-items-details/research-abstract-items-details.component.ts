@@ -13,13 +13,14 @@ export class ResearchAbstractItemsDetailsComponent implements OnInit {
   abstract: ResearchAbstract = new ResearchAbstract();
   id: number;
 
-  constructor(private route: ActivatedRoute, private abstractsService: AbstractsService) { }
-
-  ngOnInit() {
+  constructor(private route: ActivatedRoute, private abstractsService: AbstractsService) {
     this.id= +this.route.snapshot.paramMap.get('id');
     this.abstractsService.getOneResearchAbstract(Number(this.id)).subscribe(value => {
       this.abstract = value;
     });
+  }
+
+  ngOnInit() {
   }
 
 }

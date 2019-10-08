@@ -3,43 +3,46 @@
 </div>
 
 <ng-template #loggedOut>
-  <h3>Already registered participant</h3><hr/>
-  <form name="fo rm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-    <div class="form-group row">
-      <label for="email" class="col-sm-2 col-form-label">Email</label>
-      <div class="col-sm-6">
-        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel"
-               placeholder="Enter email" required/>
-        <div *ngIf="f.submitted && email.invalid">
-          <div *ngIf="email.errors.required">Email is required</div>
+  <div class="container">
+    <h3>Already registered participant</h3>
+    <hr/>
+    <form name="fo rm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-6">
+          <input type="email" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel"
+                 placeholder="Enter email" required/>
+          <div *ngIf="f.submitted && email.invalid">
+            <div *ngIf="email.errors.required">Email is required</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="password" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-6">
-        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
-               placeholder="Password" required minlength="6"/>
-        <div *ngIf="f.submitted && password.invalid">
-          <div *ngIf="password.errors.required">Password is required</div>
-          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+      <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-6">
+          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
+                 placeholder="Password" required minlength="6"/>
+          <div *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <button type="submit" class="btn btn-primary">Sign in</button>
-        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
-          Login failed: {{errorMessage}}
+      <div class="form-group">
+        <div class="form-check">
+          <button type="submit" class="btn btn-primary">Sign in</button>
+          <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+            Login failed: {{errorMessage}}
+          </div>
         </div>
       </div>
+    </form>
+    <div>
+      <a class="alert-link text-primary" routerLink="/reset">Do not you remember the password?</a>
     </div>
-  </form>
-  <div>
-    <a class="alert-link text-primary" routerLink="/reset">Do not you remember the password?</a>
+    <hr>
+    <p>Don't have an account?
+      <a routerLink="/sign" class="btn btn-success">Sign Up</a>
+    </p>
   </div>
-  <hr>
-  <p>Don't have an account?
-    <a routerLink="/sign" class="btn btn-success">Sign Up</a>
-  </p>
 </ng-template>
