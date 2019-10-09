@@ -14,6 +14,7 @@ import com.com.backend.model.enums.Fields;
 import com.com.backend.model.enums.Status;
 import com.com.backend.service.AbstractsAbstractService;
 import com.com.backend.service.AbstractsService;
+import com.com.backend.service.EmailService;
 import com.com.backend.service.UsersService;
 import com.com.backend.util.Util;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -30,13 +31,16 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
         S extends Abstracts> implements AbstractsAbstractService<TREQ, TRES, S> {
 
     protected CategoryDao categoryDao;
-    private UsersService usersService;
-    private AbstractsService abstractsService;
+    protected UsersService usersService;
+    protected AbstractsService abstractsService;
+    protected EmailService emailService;
 
-    public AbstractsAbstractServiceImpl(UsersService usersService, CategoryDao categoryDao, AbstractsService abstractsService) {
-        this.usersService = usersService;
+    public AbstractsAbstractServiceImpl(CategoryDao categoryDao, UsersService usersService,
+                                        AbstractsService abstractsService, EmailService emailService) {
         this.categoryDao = categoryDao;
+        this.usersService = usersService;
         this.abstractsService = abstractsService;
+        this.emailService = emailService;
     }
 
     public abstract AbstractsMapper getMapper();

@@ -7,13 +7,16 @@ import com.com.backend.dto.request.AbstractsDtoRequest;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
 import com.com.backend.exception.WrongValueException;
+import com.com.backend.model.enums.Status;
 import com.com.backend.service.AbstractsAbstractService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -70,6 +73,17 @@ public abstract class AbstractsAbstractController<TREQ extends AbstractsDtoReque
         int result = getService().forwardForApproval(id);
         if (result == 0)
             throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}/rejectApprove")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity rejectionApproved(@PathVariable Long id, @RequestBody Map<String, String> params) throws AppException {
+        String status = params.get("status");
+        if(!(Status.APPROVED.getStatus().equals(status) || Status.REJECTED.getStatus().equals(status))){
+            throw new AppException(ExceptionType.WRONG_STATUS);
+        }
+        getService().changeStatus(id, status);
         return ResponseEntity.ok().build();
     }
 

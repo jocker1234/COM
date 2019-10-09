@@ -1,0 +1,60 @@
+<div id="admin-tab">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-case-tab" data-toggle="tab" href="#nav-case" role="tab" aria-controls="nav-case" aria-selected="true">Case</a>
+            <a class="nav-item nav-link" id="nav-research-tab" data-toggle="tab" href="#nav-research" role="tab" aria-controls="nav-research" aria-selected="false">Research</a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-case" role="tabpanel" aria-labelledby="nav-case-tab">
+            <table class="table" cellspacing="0">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Tutor</th>
+                <th scope="col">Category</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let abstract of case; index as i" routerLink="case/{{abstract.id}}">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{abstract.title}}</td>
+                <td>{{abstract.authors}}</td>
+                <td>{{abstract.tutors}}</td>
+                <td>{{abstract.category.name}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="nav-research" role="tabpanel" aria-labelledby="nav-research-tab">
+            <table class="table" cellspacing="0">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Tutor</th>
+                <th scope="col">Category</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let abstract of research; index as i" routerLink="research/{{abstract.id}}">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{abstract.title}}</td>
+                <td>{{abstract.authors}}</td>
+                <td>{{abstract.tutors}}</td>
+                <td>{{abstract.category.name}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

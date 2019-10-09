@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -19,7 +19,8 @@ export class AbstractsService {
   private caseUrl = this.abstractUrl + '/case';
   private researchUrl = this.abstractUrl + '/research';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAllUserAbstracts(): Observable<Abstract[]> {
     return this.http.get<Abstract[]>(`${this.abstractUrl}/allUserAbstracts`).pipe(catchError(HandlingErrorsService.handleError));
@@ -71,7 +72,7 @@ export class AbstractsService {
   }
 
   sendResearchAbstract(id: number) {
-    return this.http.put(`${this.researchUrl}/${id}/send`,null)
+    return this.http.put(`${this.researchUrl}/${id}/send`, null)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
@@ -83,4 +84,13 @@ export class AbstractsService {
     return this.http.delete(`${this.researchUrl}/${id}`).pipe(catchError(HandlingErrorsService.handleError));
   }
 
+  rejectionApprovedCase(id: number, status: string) {
+    return this.http.patch(`${this.caseUrl}/${id}/rejectApprove`, {"status": status})
+      .pipe(catchError(HandlingErrorsService.handleError));
+  }
+
+  rejectionApprovedResearch(id: number, status: string) {
+    return this.http.patch(`${this.researchUrl}/${id}/rejectApprove`, {"status": status})
+      .pipe(catchError(HandlingErrorsService.handleError));
+  }
 }

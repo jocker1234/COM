@@ -4,6 +4,7 @@ import com.com.backend.dao.CategoryDao;
 import com.com.backend.dao.ResearchAbstractsDao;
 import com.com.backend.dto.request.ResearchAbstractsDtoRequest;
 import com.com.backend.dto.response.ResearchAbstractsDtoResponse;
+import com.com.backend.model.Abstracts;
 import com.com.backend.model.ResearchAbstracts;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
@@ -14,6 +15,7 @@ import com.com.backend.exception.WrongValueException;
 import com.com.backend.mapper.AbstractsMapper;
 import com.com.backend.mapper.ResearchAbstractsMapper;
 import com.com.backend.service.AbstractsService;
+import com.com.backend.service.EmailService;
 import com.com.backend.service.ResearchAbstractsService;
 import com.com.backend.service.UsersService;
 import com.com.backend.util.Util;
@@ -31,10 +33,10 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
     private ResearchAbstractsDao researchAbstractsDao;
     private ResearchAbstractsMapper researchAbstractsMapper;
 
-    public ResearchAbstractsServiceImpl(UsersService usersService, CategoryDao categoryDao,
-                                        AbstractsService abstractsService, ResearchAbstractsDao researchAbstractsDao,
+    public ResearchAbstractsServiceImpl(CategoryDao categoryDao, UsersService usersService, AbstractsService abstractsService,
+                                        EmailService emailService, ResearchAbstractsDao researchAbstractsDao,
                                         ResearchAbstractsMapper researchAbstractsMapper) {
-        super(usersService, categoryDao, abstractsService);
+        super(categoryDao, usersService, abstractsService, emailService);
         this.researchAbstractsDao = researchAbstractsDao;
         this.researchAbstractsMapper = researchAbstractsMapper;
     }
@@ -114,6 +116,16 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
         if(!researchAbstractsDao.getStatus(id).equals(Status.DO.getStatus()))
             throw new AppException(ExceptionType.WRONG_STATUS);
         return researchAbstractsDao.changeStatusCase(Status.FORWARDED.getStatus(), id);
+    }
+
+    @Override
+    @Transactional
+    public void changeStatus(Long id, String status) throws AppException {
+        int result = researchAbstractsDao.changeStatusCase(status, id);
+        if(result == 0)
+            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
+        Abstracts abstracts = researchAbstractsDao.getOne(id);
+        emailService.sendDecisionAboutAbstract(abstracts.getUsers(), abstracts);
     }
 
     @Override
