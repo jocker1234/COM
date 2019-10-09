@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ResearchAbstract} from "../../../abstracts/research-abstract";
-import {CaseAbstract} from "../../../abstracts/case-abstract";
 import {AbstractsService} from "../../../abstracts.service";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
@@ -28,11 +26,11 @@ export class AdminAbstractActionButtonComponent implements OnInit {
   approved() {
     if (this.prefixUrl.includes("case") === true) {
       this.abstractService.rejectionApprovedCase(this.id, "A").subscribe(value => {
-
+        window.location.reload();
       });
     } else if (this.prefixUrl.includes("research") === true) {
       this.abstractService.rejectionApprovedResearch(this.id, "A").subscribe(value => {
-
+        window.location.reload();
       });
     }
   }
@@ -40,11 +38,11 @@ export class AdminAbstractActionButtonComponent implements OnInit {
   rejected() {
     if (this.prefixUrl.includes("case") === true) {
       this.abstractService.rejectionApprovedCase(this.id, "R").subscribe(value => {
-
+        window.location.reload();
       });
     } else if (this.prefixUrl.includes("research") === true) {
       this.abstractService.rejectionApprovedResearch(this.id, "R").subscribe(value => {
-
+        window.location.reload();
       });
     }
   }

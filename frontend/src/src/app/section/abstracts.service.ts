@@ -85,10 +85,12 @@ export class AbstractsService {
   }
 
   rejectionApprovedCase(id: number, status: string) {
-    return this.http.get(`${this.caseUrl}/${id}`).pipe(catchError(HandlingErrorsService.handleError));//TODO
+    return this.http.patch(`${this.caseUrl}/${id}/rejectApprove`, {"status": status})
+      .pipe(catchError(HandlingErrorsService.handleError));
   }
 
   rejectionApprovedResearch(id: number, status: string) {
-    return this.http.get(`${this.caseUrl}/${id}`).pipe(catchError(HandlingErrorsService.handleError));//TODO
+    return this.http.patch(`${this.researchUrl}/${id}/rejectApprove`, {"status": status})
+      .pipe(catchError(HandlingErrorsService.handleError));
   }
 }

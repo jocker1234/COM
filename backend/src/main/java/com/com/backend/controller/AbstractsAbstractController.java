@@ -16,6 +16,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -77,14 +78,12 @@ public abstract class AbstractsAbstractController<TREQ extends AbstractsDtoReque
 
     @PatchMapping("/{id}/rejectApprove")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity rejectionApproved(@PathVariable Long id, MultiValueMap<String, String> params) throws AppException {
-        String status = params.get("status").get(0);
-        if(status != Status.APPROVED.getStatus() || status != Status.REJECTED.getStatus()){
+    public ResponseEntity rejectionApproved(@PathVariable Long id, @RequestBody Map<String, String> params) throws AppException {
+        String status = params.get("status");
+        if(!(Status.APPROVED.getStatus().equals(status) || Status.REJECTED.getStatus().equals(status))){
             throw new AppException(ExceptionType.WRONG_STATUS);
         }
-        int result = getService().approved(id);
-        if(result == 0)
-            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
+        getService().changeStatus(id, status);
         return ResponseEntity.ok().build();
     }
 

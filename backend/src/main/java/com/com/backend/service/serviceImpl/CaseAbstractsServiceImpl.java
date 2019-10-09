@@ -16,6 +16,7 @@ import com.com.backend.model.enums.Fields;
 import com.com.backend.model.enums.Status;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.CaseAbstractsService;
+import com.com.backend.service.EmailService;
 import com.com.backend.service.UsersService;
 import com.com.backend.util.Util;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,9 +33,10 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
     private CaseAbstractsDao caseAbstractsDao;
     private CaseAbstractsMapper caseAbstractsMapper;
 
-    public CaseAbstractsServiceImpl(UsersService usersService, CategoryDao categoryDao, AbstractsService abstractsService,
-                                    CaseAbstractsDao caseAbstractsDao, CaseAbstractsMapper caseAbstractsMapper) {
-        super(usersService, categoryDao, abstractsService);
+    public CaseAbstractsServiceImpl(CategoryDao categoryDao, UsersService usersService, AbstractsService abstractsService,
+                                    EmailService emailService, CaseAbstractsDao caseAbstractsDao,
+                                    CaseAbstractsMapper caseAbstractsMapper) {
+        super(categoryDao, usersService, abstractsService, emailService);
         this.caseAbstractsDao = caseAbstractsDao;
         this.caseAbstractsMapper = caseAbstractsMapper;
     }
@@ -106,8 +108,12 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
 
     @Override
     @Transactional
-    public int changeStatus(Long id, String status) {
-        return caseAbstractsDao.changeStatusCase(status, id);
+    public void changeStatus(Long id, String status) throws AppException {
+        int result = caseAbstractsDao.changeStatusCase(status, id);
+        if(result == 0)
+            throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
+        Abstracts abstracts = caseAbstractsDao.getOne(id);
+        emailService.sendDecisionAboutAbstract(abstracts.getUsers(), abstracts);
     }
 
     @Override

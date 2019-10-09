@@ -21,7 +21,7 @@ public interface AbstractsAbstractService <TREQ extends AbstractsDtoRequest, TRE
 
     TRES getOne(Long id) throws AbstractNotFoundException;
 
-    int changeStatus(Long id, String status);
+    void changeStatus(Long id, String status) throws AppException;
     int approved(Long id) throws AppException;
     int rejected(Long id) throws AppException;
 
