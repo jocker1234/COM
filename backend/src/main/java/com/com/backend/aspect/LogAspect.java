@@ -16,7 +16,7 @@ public class LogAspect {
 
     private static final Logger LOG = LoggerFactory.getLogger(LogAspect.class);
 
-    private final String SERVICE_POINTCUT = "execution(* com.com.backend.controller..*(..))";
+    private final String SERVICE_POINTCUT = "execution(* com.com.backend.service..*(..))";
 
     @Around(SERVICE_POINTCUT)
     public Object logAdvice(ProceedingJoinPoint jp) throws Throwable {
