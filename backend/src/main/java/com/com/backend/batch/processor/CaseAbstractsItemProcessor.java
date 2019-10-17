@@ -13,16 +13,10 @@ import java.util.List;
 public class CaseAbstractsItemProcessor implements ItemProcessor<List<CaseAbstracts>, List<CaseAbstracts>> {
 
     private final Logger log = LoggerFactory.getLogger(CaseAbstractsItemProcessor.class);
-    private CaseAbstractsDao caseAbstractsDao;
-
-    public CaseAbstractsItemProcessor(CaseAbstractsDao caseAbstractsDao) {
-        this.caseAbstractsDao = caseAbstractsDao;
-    }
 
     @Override
     public List<CaseAbstracts> process(List<CaseAbstracts> caseAbstractsList) throws Exception {
-        List<CaseAbstracts> caseAbstractsList1 = caseAbstractsDao.findAll();
-        log.info("Processing result: " + caseAbstractsList1);
-        return caseAbstractsList1;
+        log.info("Processing result: " + caseAbstractsList);
+        return caseAbstractsList;
     }
 }

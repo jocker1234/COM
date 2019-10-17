@@ -3,26 +3,32 @@ package com.com.backend.batch.reader;
 import com.com.backend.dao.CaseAbstractsDao;
 import com.com.backend.model.CaseAbstracts;
 import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.NonTransientResourceException;
-import org.springframework.batch.item.ParseException;
-import org.springframework.batch.item.UnexpectedInputException;
+import org.springframework.batch.item.data.RepositoryItemReader;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
-public class CaseAbstractsReader implements ItemReader<List<CaseAbstracts>> {
+public class CaseAbstractsReader extends RepositoryItemReader<List<CaseAbstracts>> implements ItemReader<List<CaseAbstracts>> {
 
     private CaseAbstractsDao caseAbstractsDao;
 
     public CaseAbstractsReader(CaseAbstractsDao caseAbstractsDao) {
+        super();
         this.caseAbstractsDao = caseAbstractsDao;
     }
 
-    @Override
-    public List<CaseAbstracts> read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
-        List<CaseAbstracts> caseAbstractsList = caseAbstractsDao.findAll();
-        return caseAbstractsList;
+    @PostConstruct
+    protected void init() {
+        final Map<String, Sort.Direction> sorts = new HashMap<>();
+        sorts.put("id", Sort.Direction.ASC);
+        this.setRepository(caseAbstractsDao);
+        this.setSort(sorts);
+        this.setMethodName("findAll");
     }
 
 }
