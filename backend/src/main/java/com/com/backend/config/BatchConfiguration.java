@@ -1,6 +1,5 @@
 package com.com.backend.config;
 
-import com.com.backend.batch.CaseAbstractsJobListener;
 import com.com.backend.batch.processor.CaseAbstractsItemProcessor;
 import com.com.backend.batch.reader.CaseAbstractsReader;
 import com.com.backend.batch.writer.CaseAbstractsWriter;
@@ -32,8 +31,8 @@ public class BatchConfiguration {
     private CaseAbstractsItemProcessor caseAbstractsItemProcessor;
     @Autowired
     private CaseAbstractsWriter caseAbstractsWriter;
-    @Autowired
-    private CaseAbstractsJobListener caseAbstractsJobListener;
+    //@Autowired
+    //private CaseAbstractsJobListener caseAbstractsJobListener;
 
     @Bean(name = "caseAbstracts")
     public Job job () {
@@ -46,7 +45,7 @@ public class BatchConfiguration {
 
         return jobBuilderFactory.get("export-to-file")
                                 .incrementer(new RunIdIncrementer())
-                                .listener(caseAbstractsJobListener)
+                                //.listener(caseAbstractsJobListener)
                                 .start(step)
                                 .build();
     }
