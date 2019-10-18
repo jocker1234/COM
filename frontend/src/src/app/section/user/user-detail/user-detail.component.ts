@@ -6,11 +6,11 @@ import {Location} from '@angular/common';
 import {TokenStorageService} from "../../auth/token-storage.service";
 
 @Component({
-  selector: 'app-user-list-detail',
-  templateUrl: './user-list-detail.component.html',
-  styleUrls: ['./user-list-detail.component.scss']
+  selector: 'app-user-detail',
+  templateUrl: './user-detail.component.html',
+  styleUrls: ['./user-detail.component.scss']
 })
-export class UserListDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit {
   user: User;
   id: number;
 
@@ -19,10 +19,10 @@ export class UserListDetailComponent implements OnInit {
               private location: Location,
               private tokenStorage: TokenStorageService,
               private router: Router) {
+    this.getUser();
   }
 
   ngOnInit() {
-    this.getUser();
   }
 
   private getUser() {
@@ -30,11 +30,6 @@ export class UserListDetailComponent implements OnInit {
     this.userService.getUser(Number(this.id)).subscribe(user => {
       this.user = user
     });
-  }
-
-  delete() {
-    this.userService.deleteUser(this.id);
-    this.tokenStorage.signOut();
   }
 
   goBack(): void {

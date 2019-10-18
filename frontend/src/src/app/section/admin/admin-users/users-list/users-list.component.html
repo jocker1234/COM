@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="row" *ngFor="let user of users" routerLink="/user/{{user.id}}">
+    <tr class="row" *ngFor="let user of users" routerLink="{{user.id}}">
       <td class="col">{{user.id}}</td>
       <td class="col">{{user.email}}</td>
       <td class="col">{{user.firstName}}</td>

@@ -31,7 +31,11 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: () => import('./section/user/user.module').then(value => value.UserModule)
+    loadChildren: () => import('./section/user/user.module').then(value => value.UserModule),
+    data: {
+      authorities: ['ROLE_ACTIVE_PARTICIPANT', 'ROLE_ADMIN']
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'abstracts',

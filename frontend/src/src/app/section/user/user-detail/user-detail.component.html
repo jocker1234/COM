@@ -81,7 +81,6 @@
     <hr/>
   </table>
   <div class="float-right">
-    <button class="btn btn-primary" style="margin-right: 5px" routerLink="/user/{{user.id}}/edit">Edit Data</button>
-    <button class="btn btn-primary" (click)="delete()">Remove Account</button>
+    <app-button-user-details [id]="user.id"></app-button-user-details>
   </div>
 </div>
