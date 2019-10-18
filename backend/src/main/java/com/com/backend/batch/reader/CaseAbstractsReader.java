@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class CaseAbstractsReader extends RepositoryItemReader<List<CaseAbstracts>> implements ItemReader<List<CaseAbstracts>> {
+public class CaseAbstractsReader extends RepositoryItemReader<CaseAbstracts> {
 
     private CaseAbstractsDao caseAbstractsDao;
 
