@@ -20,4 +20,6 @@ public interface UsersService extends AbstractService<Users, UsersDto> {
 
     UsersDto updateUser(UsersDto usersDto) throws AppException;
     void deleteUser(Long id) throws AppException;
+
+    UsersDto getOneForAdmin(Long id) throws AppException;
 }

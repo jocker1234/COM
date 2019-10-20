@@ -1,5 +1,6 @@
 package com.com.backend.dto;
 
+import com.com.backend.dto.response.AbstractsDtoResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.lang.NonNull;
@@ -47,5 +48,6 @@ public class UsersDto extends AbstractDto {
     private String passportNumber;
     private Set<AuthoritiesDto> authoritiesSet;
     private String[] authorities;
+    private AbstractsDtoResponse[] abstractDtos;
 
 }

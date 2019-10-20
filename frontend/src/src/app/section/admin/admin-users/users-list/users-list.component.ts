@@ -8,9 +8,9 @@ import {User} from "../../../user/user";
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
-  users: User[];
+  protected users: User[];
 
-  constructor(private userService: UserService) {
+  constructor(protected userService: UserService) {
   }
 
   ngOnInit() {

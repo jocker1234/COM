@@ -11,11 +11,11 @@ import {TokenStorageService} from "../../auth/token-storage.service";
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
-  user: User;
-  id: number;
+  private user: User;
+  protected id: number;
 
-  constructor(private activatedRouter: ActivatedRoute,
-              private userService: UserService,
+  constructor(protected activatedRouter: ActivatedRoute,
+              protected userService: UserService,
               private location: Location,
               private tokenStorage: TokenStorageService,
               private router: Router) {
@@ -25,7 +25,7 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
   }
 
-  private getUser() {
+  protected getUser() {
     this.id = +this.activatedRouter.snapshot.paramMap.get('id');
     this.userService.getUser(Number(this.id)).subscribe(user => {
       this.user = user

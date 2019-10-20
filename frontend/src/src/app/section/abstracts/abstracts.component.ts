@@ -13,7 +13,7 @@ import {CategoryService} from "../category.service";
 })
 export class AbstractsComponent implements OnInit {
 
-  private abstractList: Abstract[];
+  protected abstractList: Abstract[];
 
   constructor(private abstractService: AbstractsService, private router: Router, private dialog: NgbModal,
               private categoryService: CategoryService) {
@@ -26,17 +26,6 @@ export class AbstractsComponent implements OnInit {
         this.categoryService.getCategoryById(abstract.categoryId).subscribe(category => abstract.category = category);
       });
     }
-  }
-
-  getRouterLink(abstract: Abstract) {
-    let url = "";
-    if (abstract.type == 'c' || abstract.type == 'C') {
-      url += "case/";
-    } else if (abstract.type == 'r' || abstract.type == 'R') {
-      url += "research/";
-    }
-    url += abstract.id;
-    return url;
   }
 
   openDialog(): void {

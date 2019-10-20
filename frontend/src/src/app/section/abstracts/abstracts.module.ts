@@ -8,12 +8,14 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {httpInterceptorProvider} from "../auth/auth-interceptor";
 import { ChooseNewAbstractContentComponent } from './choose-new-abstract-content/choose-new-abstract-content.component';
 import { AbstractActionButtonsComponent } from './abstract-action-buttons/abstract-action-buttons.component';
+import { AbstractsTableComponent } from './abstracts-table/abstracts-table.component';
 
 @NgModule({
   declarations: [
     AbstractsComponent,
     ChooseNewAbstractContentComponent,
-    AbstractActionButtonsComponent
+    AbstractActionButtonsComponent,
+    AbstractsTableComponent
   ],
   imports: [
     CommonModule,

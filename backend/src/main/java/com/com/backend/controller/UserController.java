@@ -1,7 +1,9 @@
 package com.com.backend.controller;
 
+import com.com.backend.dto.Mail;
 import com.com.backend.dto.UsersDto;
 import com.com.backend.exception.AppException;
+import com.com.backend.service.EmailService;
 import com.com.backend.service.UsersService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,14 +14,16 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private UsersService usersService;
+    private EmailService emailService;
 
-    public UserController(UsersService usersService) {
+    public UserController(UsersService usersService, EmailService emailService) {
         this.usersService = usersService;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -30,9 +34,16 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'ACTIVE_PARTICIPANT', 'PASSIVE_PARTICIPANT')")
+    @PreAuthorize("hasAnyRole('ACTIVE_PARTICIPANT', 'PASSIVE_PARTICIPANT')")
     public ResponseEntity<UsersDto> getUser(@Valid @PathVariable Long id) throws AppException {
         UsersDto users = usersService.getOne(id);
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/{id}/admin")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<UsersDto> getUserForAdmin(@Valid @PathVariable Long id) throws AppException {
+        UsersDto users = usersService.getOneForAdmin(id);
         return ResponseEntity.ok(users);
     }
 
@@ -52,6 +63,13 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
     public ResponseEntity<Void> deleteUser(@Valid @PathVariable Long id) throws AppException {
         usersService.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/single-mail")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> sendMail(@Valid @RequestBody Mail mail) {
+        emailService.sendSingleMail(mail);
         return ResponseEntity.ok().build();
     }
 

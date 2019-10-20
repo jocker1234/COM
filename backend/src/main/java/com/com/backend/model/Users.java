@@ -5,15 +5,10 @@ import com.com.backend.model.enums.Title;
 import com.com.backend.model.enums.YearOfStudy;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -74,7 +69,7 @@ public class Users extends AbstractEntity {
 
     private String passportNumber;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_authorities",
             joinColumns = @JoinColumn(
                     name = "user_id"),
@@ -82,6 +77,9 @@ public class Users extends AbstractEntity {
                     name = "authorities_id"))
     @Column(nullable = false)
     private Set<Authorities> authoritiesSet;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Abstracts> abstracts;
 
 
 

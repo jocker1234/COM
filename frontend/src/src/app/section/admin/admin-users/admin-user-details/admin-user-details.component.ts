@@ -1,23 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {UserDetailComponent} from "../../../user/user-detail/user-detail.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../user/user.service";
-import {TokenStorageService} from "../../../auth/token-storage.service";
-import {Location} from '@angular/common';
+import {User} from "../../../user/user";
 
 @Component({
   selector: 'app-admin-user-details',
-  templateUrl: './../../../user/user-detail/user-detail.component.html',
+  templateUrl: './admin-user-details.component.html',
   styleUrls: ['./admin-user-details.component.scss']
 })
-export class AdminUserDetailsComponent extends UserDetailComponent implements OnInit {
+export class AdminUserDetailsComponent implements OnInit  {
+  protected user: User;
+  protected id: number;
 
-  constructor(activatedRouter: ActivatedRoute, userService: UserService, location: Location,
-              tokenStorage: TokenStorageService, router: Router) {
-    super(activatedRouter, userService, location, tokenStorage, router);
+  constructor(protected activatedRouter: ActivatedRoute,
+              protected userService: UserService) {
+    this.getUser();
+  }
+
+  protected getUser() {
+    this.id = +this.activatedRouter.snapshot.paramMap.get('id');
+    this.userService.getUserForAdmin(Number(this.id)).subscribe(user => {
+      this.user = user;
+    });
   }
 
   ngOnInit() {
+
   }
+
+
 
 }

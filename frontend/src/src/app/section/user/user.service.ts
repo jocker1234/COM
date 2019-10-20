@@ -5,6 +5,7 @@ import {User} from "./user";
 import {catchError, tap} from "rxjs/operators";
 import {HandlingErrorsService} from "../../handling-errors.service";
 import {environment} from "../../../environments/environment";
+import {CaseAbstract} from "../abstracts/case-abstract";
 
 const apiUrl = environment.apiUrl;
 
@@ -13,13 +14,18 @@ const apiUrl = environment.apiUrl;
 })
 export class UserService {
 
-  private userUrl = apiUrl + 'user';
+  private userUrl = apiUrl + 'api/user';
 
   constructor(private http: HttpClient) {
   }
 
   getUsers(): Observable<User[]> {
     return this.http.get<any>(`${this.userUrl}`)
+      .pipe(catchError(HandlingErrorsService.handleError));
+  }
+
+  getUserForAdmin(id: number): Observable<User> {
+    return this.http.get<any>(`${this.userUrl}/${id}/admin`)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
@@ -37,6 +43,11 @@ export class UserService {
     let httpParams = new HttpParams();
     httpParams.append("isUpdated", isUpdate);
     return this.http.put(`${this.userUrl}/${id}?isUpdated=true`, user)
+      .pipe(catchError(HandlingErrorsService.handleError));
+  }
+
+  sendSingleMail(mail: any): Observable<any> {
+    return this.http.post<any>(`${this.userUrl}/single-mail`, mail)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 

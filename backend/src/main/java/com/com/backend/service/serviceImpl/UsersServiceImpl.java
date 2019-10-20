@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@Transactional
 public class UsersServiceImpl implements UsersService {
 
     private JwtProvider jwtProvider;
@@ -122,6 +121,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    @Transactional
     public UsersDto signUpUser(UsersDto usersDtoRequest) throws AppException {
         UsersDto userDto = usersDtoRequest;
 
@@ -165,6 +165,18 @@ public class UsersServiceImpl implements UsersService {
     public void deleteUser(Long id) throws AppException {
         getOne(id);
         usersDao.deleteById(id);
+    }
+
+    @Override
+    public UsersDto getOneForAdmin(Long id) throws AppException {
+        UsersDto user = usersMapper.userToUserDtoWithAbstracts(usersDao.findById(id).get());
+        if (user == null)
+            throw new AppException(EntityType.USER, ExceptionType.NOT_FOUND);
+        Arrays.stream(user.getAbstractDtos()).forEach(item -> {
+            item.setType(AbstractType.valueOf(item.getType()).getType());
+            item.setStatus(Status.findStatus(item.getStatus()).name());
+        });
+        return user;
     }
 
     @Override

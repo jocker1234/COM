@@ -11,7 +11,7 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", imports = YearOfStudy.class, uses = AuthoritiesMapper.class)
+@Mapper(componentModel = "spring", imports = YearOfStudy.class, uses = {AuthoritiesMapper.class})
 public interface UserMapper {
 
     @Mappings({
@@ -33,7 +33,8 @@ public interface UserMapper {
             @Mapping(target = "needVisa", source = "users.needVisa"),
             @Mapping(target = "passportNumber", source = "users.passportNumber"),
             @Mapping(target = "authoritiesSet", source = "users.authoritiesSet"),
-            @Mapping(target = "authorities", ignore = true)
+            @Mapping(target = "authorities", ignore = true),
+            @Mapping(target = "abstractDtos", ignore = true)
     })
     @Named("toDto")
     UsersDto usersToUsersDto(Users users);
@@ -56,7 +57,8 @@ public interface UserMapper {
             @Mapping(target = "phoneNumber", source = "usersDto.phoneNumber"),
             @Mapping(target = "needVisa", source = "usersDto.needVisa"),
             @Mapping(target = "passportNumber", source = "usersDto.passportNumber"),
-            @Mapping(target = "authoritiesSet", source = "usersDto.authoritiesSet")
+            @Mapping(target = "authoritiesSet", source = "usersDto.authoritiesSet"),
+            @Mapping(target = "abstracts", ignore = true)
     })
     @Named("to")
     Users usersDtoToUsers(UsersDto usersDto);
@@ -66,5 +68,29 @@ public interface UserMapper {
 
     @IterableMapping(qualifiedByName = "toDto")
     List<UsersDto> usersDtosToUserss(List<Users> users);
+
+    @Mappings({
+            @Mapping(target = "id", source = "users.id"),
+            @Mapping(target = "email", source = "users.email"),
+            @Mapping(target = "password", source = "users.password"),
+            @Mapping(target = "registrationDate", source = "users.registrationDate"),
+            @Mapping(target = "activatedAccount", source = "users.activatedAccount"),
+            @Mapping(target = "firstName", source = "users.firstName"),
+            @Mapping(target = "lastName", source = "users.lastName"),
+            @Mapping(target = "gender", source = "users.gender"),
+            @Mapping(target = "dateOfBirth", source = "users.dateOfBirth"),
+            @Mapping(target = "country", source = "users.country"),
+            @Mapping(target = "title", source = "users.title"),
+            @Mapping(target = "university", source = "users.university"),
+            @Mapping(target = "faculty", source = "users.faculty"),
+            @Mapping(target = "yearOfStudy", source = "users.yearOfStudy.year"),
+            @Mapping(target = "phoneNumber", source = "users.phoneNumber"),
+            @Mapping(target = "needVisa", source = "users.needVisa"),
+            @Mapping(target = "passportNumber", source = "users.passportNumber"),
+            @Mapping(target = "authoritiesSet", source = "users.authoritiesSet"),
+            @Mapping(target = "authorities", ignore = true),
+            @Mapping(target = "abstractDtos", source = "users.abstracts")
+    })
+    UsersDto userToUserDtoWithAbstracts(Users users);
 
 }
