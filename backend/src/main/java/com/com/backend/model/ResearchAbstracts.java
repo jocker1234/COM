@@ -4,12 +4,15 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
 @Entity
+@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public class ResearchAbstracts extends Abstracts {
 
     @Column(nullable = false)

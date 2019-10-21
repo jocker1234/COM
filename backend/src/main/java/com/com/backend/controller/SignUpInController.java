@@ -48,7 +48,6 @@ public class SignUpInController {
     @PostMapping("/signin")
     public JwtResponse authenticationUser(@Valid @RequestBody LoginFormRequest loginRequest) throws NotFoundException {
 
-        System.out.println("zalogowano1");
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
@@ -60,7 +59,6 @@ public class SignUpInController {
         Long userId = userService.getUserIdByEmail(userDetails.getUsername());
 
         JwtResponse jwtResponse = new JwtResponse(jwt, userDetails.getAuthorities(), userDetails.getUsername(), userId);
-        System.out.println("zalogowano2");
         return jwtResponse;
     }
 

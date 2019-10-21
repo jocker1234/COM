@@ -47,6 +47,7 @@ public class EmailServiceImp implements EmailService {
         String body = templateEngine.process(CREATE_EMAIL_TEMPLATE, context);
         Mail mail = new Mail(user.getEmail(), CREATE_EMAIL_TEMPLATE, body);
         sendEmail(mail);
+        log.info("Success send");
     }
 
     @Async
@@ -78,12 +79,17 @@ public class EmailServiceImp implements EmailService {
         sendEmail(mail);
     }
 
+    @Async
+    public void sendSingleMail(Mail mail) {
+        sendEmail(mail);
+    }
+
     private void sendEmail(Mail mail) {
         MimeMessage message = emailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                     StandardCharsets.UTF_8.name());
-
+            helper.setFrom("p.gogol@student.pb.edu.pl");
             helper.setTo(mail.getTo());
             helper.setSubject(mail.getSubject());
             helper.setText(mail.getContent(), true);

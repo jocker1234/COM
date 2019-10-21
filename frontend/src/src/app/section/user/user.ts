@@ -1,4 +1,5 @@
 import {AuthoritiesResponse} from "../auth/authorities-response";
+import {Abstract} from "../abstracts/abstract";
 
 export class User {
   id: number;
@@ -19,6 +20,7 @@ export class User {
   university: string;
   yearOfStudy: number;
   authoritiesSet: AuthoritiesResponse[];
+  abstractDtos: Abstract[] = [];
 
   constructor(user?: User) {
     if (user !== undefined) {

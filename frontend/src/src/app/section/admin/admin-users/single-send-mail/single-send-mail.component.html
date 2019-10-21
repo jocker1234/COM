@@ -1,0 +1,41 @@
+<div class="container">
+  <form id="contact-form" [formGroup]="mailForm" role="form">
+    <div class="controls">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_email">Email*</label>
+          <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *"
+                 required="required" data-error="Valid email is required." formControlName="to">
+          <app-field-error-display [displayError]="isFieldValid('to')"
+                                   errorMsg="Email field is required">
+          </app-field-error-display>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_name">Title*</label>
+          <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your title *"
+                 required="required" data-error="Title is required." formControlName="subject">
+          <app-field-error-display [displayError]="isFieldValid('subject')"
+                                   errorMsg="Title field is required">
+          </app-field-error-display>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="form_message">Message*</label>
+            <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4"
+                      required="required" data-error="Please, leave us a message." formControlName="content"></textarea>
+            <app-field-error-display [displayError]="isFieldValid('content')"
+                                     errorMsg="Message field is required">
+            </app-field-error-display>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-success btn-send" value="Send message" (click)="sendMail()" [disabled]="!mailForm.valid">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

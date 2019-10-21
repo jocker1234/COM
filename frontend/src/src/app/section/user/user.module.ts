@@ -2,19 +2,19 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {UserRoutingModule} from './user-routing.module';
-import {UserListDetailComponent} from "./user-list-detail/user-list-detail.component";
-import {UsersListComponent} from "./users-list/users-list.component";
+import {UserDetailComponent} from "./user-detail/user-detail.component";
 import {UserUpdateComponent} from "./user-update/user-update.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FieldErrorDisplayModule} from "../field-error-display/field-error-display.module";
+import { ButtonUserDetailsComponent } from './user-detail/button-user-details/button-user-details.component';
 
 @NgModule({
   declarations: [
-    UserListDetailComponent,
-    UsersListComponent,
-    UserUpdateComponent
+    UserDetailComponent,
+    UserUpdateComponent,
+    ButtonUserDetailsComponent
   ],
   imports: [
     CommonModule,

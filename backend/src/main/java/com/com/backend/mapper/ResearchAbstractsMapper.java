@@ -2,6 +2,7 @@ package com.com.backend.mapper;
 
 import com.com.backend.dto.request.ResearchAbstractsDtoRequest;
 import com.com.backend.dto.response.ResearchAbstractsDtoResponse;
+import com.com.backend.model.enums.AbstractType;
 import com.com.backend.util.Util;
 import com.com.backend.model.ResearchAbstracts;
 import com.com.backend.service.CategoryService;
@@ -9,7 +10,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", imports = Util.class, uses = {CategoryService.class})
+@Mapper(componentModel = "spring", imports = {Util.class, AbstractType.class}, uses = {CategoryService.class})
 public interface ResearchAbstractsMapper extends AbstractsMapper<ResearchAbstractsDtoRequest,
                                                                     ResearchAbstractsDtoResponse, ResearchAbstracts> {
 
@@ -36,7 +37,7 @@ public interface ResearchAbstractsMapper extends AbstractsMapper<ResearchAbstrac
             @Mapping(source = "s.authors", target = "authors"),
             @Mapping(source = "s.tutors", target = "tutors"),
             @Mapping(source = "s.status", target = "status"),
-            @Mapping(source = "s.type", target = "type"),
+            @Mapping(expression = "java(AbstractType.valueOf(s.getType()))", target = "type"),
             @Mapping(source = "s.introduction", target = "introduction"),
             @Mapping(source = "s.aimOfTheStudy", target = "aimOfTheStudy"),
             @Mapping(source = "s.materialAndMethods", target = "materialAndMethods"),
@@ -69,7 +70,7 @@ public interface ResearchAbstractsMapper extends AbstractsMapper<ResearchAbstrac
             @Mapping(source = "s.authors", target = "authors"),
             @Mapping(source = "s.tutors", target = "tutors"),
             @Mapping(source = "s.status", target = "status"),
-            @Mapping(source = "s.type", target = "type"),
+            @Mapping(expression = "java(AbstractType.valueOf(s.getType()))", target = "type"),
             @Mapping(source = "s.introduction", target = "introduction"),
             @Mapping(source = "s.aimOfTheStudy", target = "aimOfTheStudy"),
             @Mapping(source = "s.materialAndMethods", target = "materialAndMethods"),
