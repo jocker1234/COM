@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core'
 import {User} from "../../../../user/user";
-import {Md5} from "ts-md5";
 import {Router} from "@angular/router";
 
 @Component({
