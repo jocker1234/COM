@@ -26,13 +26,6 @@ export class AdminAbstractActionButtonComponent implements OnInit {
   ngOnInit() {
   }
 
-  checkStatus() {
-    if(status === 'F') {
-      return true;
-    }
-    return false;
-  }
-
   approved() {
     if (this.prefixUrl.includes("case") === true) {
       this.abstractService.rejectionApprovedCase(this.id, "A").subscribe(value => {
