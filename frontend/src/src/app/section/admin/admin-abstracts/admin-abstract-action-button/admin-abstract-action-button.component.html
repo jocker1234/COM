@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="">
-      <button class="btn btn-primary" (click)="rejected()">Reject</button>
-      <button class="btn btn-primary" (click)="approved()">Approve</button>
+      <button class="btn btn-primary" *ngIf="checkStatus()" (click)="rejected()">Reject</button>
+      <button class="btn btn-primary" *ngIf="checkStatus()" (click)="approved()">Approve</button>
       <button class="btn btn-primary" routerLink="../..">Cancel</button>
     </div>
   </div>

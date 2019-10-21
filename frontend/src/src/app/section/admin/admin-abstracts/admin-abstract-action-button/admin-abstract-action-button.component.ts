@@ -16,11 +16,21 @@ export class AdminAbstractActionButtonComponent implements OnInit {
   @Input()
   private id: number;
 
+  @Input()
+  private status: string;
+
   constructor(private abstractService: AbstractsService, private router: Router,
               private location: Location) {
   }
 
   ngOnInit() {
+  }
+
+  checkStatus() {
+    if(status === 'F') {
+      return true;
+    }
+    return false;
   }
 
   approved() {
