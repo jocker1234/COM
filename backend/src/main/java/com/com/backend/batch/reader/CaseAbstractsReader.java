@@ -2,18 +2,16 @@ package com.com.backend.batch.reader;
 
 import com.com.backend.dao.CaseAbstractsDao;
 import com.com.backend.model.CaseAbstracts;
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Component
-public class CaseAbstractsReader extends RepositoryItemReader<List<CaseAbstracts>> implements ItemReader<List<CaseAbstracts>> {
+public class CaseAbstractsReader extends RepositoryItemReader<CaseAbstracts> {
 
     private CaseAbstractsDao caseAbstractsDao;
 

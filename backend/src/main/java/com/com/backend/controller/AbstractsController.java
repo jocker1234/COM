@@ -30,7 +30,7 @@ public class AbstractsController {
     @Autowired
     private JobLauncher jobLauncher;
 
-    public BatchStatus exportAbstracts() throws JobExecutionAlreadyRunningException, JobRestartException,
+    /*public BatchStatus exportAbstracts() throws JobExecutionAlreadyRunningException, JobRestartException,
             JobInstanceAlreadyCompleteException, JobParametersInvalidException {
         Map<String, JobParameter> maps = new HashMap<>();
         maps.put("time", new JobParameter(System.currentTimeMillis()));
@@ -42,11 +42,12 @@ public class AbstractsController {
             System.out.println("...");
         }
         return jobExecution.getStatus();
-    }
+    }*/
 
     @RequestMapping("/export")
     public String handle() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
-        JobParameters jobParameters = new JobParameters();
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time",System.currentTimeMillis()).toJobParameters();
         jobLauncher.run(job, jobParameters);
         return "Batch job has been invoked";
     }
