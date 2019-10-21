@@ -181,7 +181,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public UsersDto getOne(Long id) throws AppException {
-        UsersDto user = usersMapper.usersToUsersDto(usersDao.getOne(id));
+        UsersDto user = usersMapper.usersToUsersDto(usersDao.findById(id).get());
         if (user == null)
             throw new AppException(EntityType.USER, ExceptionType.NOT_FOUND);
         return user;
