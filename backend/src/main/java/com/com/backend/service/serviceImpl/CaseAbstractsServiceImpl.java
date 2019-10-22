@@ -135,7 +135,8 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
 
     @Override
     public int countUserAbstract(String email) {
-        return caseAbstractsDao.countCaseAbstractsByUsersEmail(email);
+        List<String> statuses = Arrays.asList("A", "F");
+        return caseAbstractsDao.countCaseAbstractsByUsersEmailAndStatusIn(email, statuses);
     }
 
     @Override

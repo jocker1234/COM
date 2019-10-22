@@ -147,7 +147,8 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
 
     @Override
     public int countUserAbstract(String email) {
-        return researchAbstractsDao.countResearchAbstractsByUsersEmail(email);
+        List<String> statuses = Arrays.asList("A", "F");
+        return researchAbstractsDao.countCaseAbstractsByUsersEmailAndStatusIn(email, statuses);
     }
 
     @Override
