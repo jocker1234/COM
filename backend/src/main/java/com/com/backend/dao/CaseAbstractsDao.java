@@ -22,7 +22,7 @@ public interface CaseAbstractsDao extends PagingAndSortingRepository<CaseAbstrac
 
     List<CaseAbstracts> getAllByUsersEmail(String email);
 
-    int countCaseAbstractsByUsersEmail(String email);
+    int countCaseAbstractsByUsersEmailAndStatusIn(String email, List<String> statuses);
 
     List<CaseAbstracts> getAllByIdIsNotNull();
 

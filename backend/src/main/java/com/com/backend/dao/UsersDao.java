@@ -19,4 +19,7 @@ public interface UsersDao extends JpaRepository<Users, Long> {
 
     Users getUsersByEmail(String email);
 
+    @Query(value = "select u.email from Users u where u.id = :id")
+    String getEmailById(@Param("id") long id);
+
 }

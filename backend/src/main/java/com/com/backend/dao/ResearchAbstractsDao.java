@@ -1,6 +1,5 @@
 package com.com.backend.dao;
 
-import com.com.backend.model.CaseAbstracts;
 import com.com.backend.model.ResearchAbstracts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,6 +21,6 @@ public interface ResearchAbstractsDao extends JpaRepository<ResearchAbstracts, L
 
     List<ResearchAbstracts> getAllByUsersEmail(String email);
 
-    int countResearchAbstractsByUsersEmail(String email);
+    int countCaseAbstractsByUsersEmailAndStatusIn(String email, List<String> statuses);
 
 }

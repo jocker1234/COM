@@ -2,7 +2,11 @@ package com.com.backend.service.serviceImpl;
 
 import com.com.backend.config.security.JwtProvider;
 import com.com.backend.dao.UsersDao;
-import com.com.backend.dto.UsersDto;
+import com.com.backend.dto.request.UserCreateRequest;
+import com.com.backend.dto.request.UserRequest;
+import com.com.backend.dto.request.UserUpdateRequest;
+import com.com.backend.dto.response.UserResponse;
+import com.com.backend.dto.response.UserResponseWithAbstracts;
 import com.com.backend.exception.AppException;
 import com.com.backend.exception.NotFoundException;
 import com.com.backend.mapper.UserMapper;
@@ -44,12 +48,8 @@ public class UsersServiceImpl implements UsersService {
         this.emailService = emailService;
     }
 
-    public Users usersDtoToUsers(UsersDto dto) {
+    private Users usersDtoToUsers(UserCreateRequest dto) {
         return usersMapper.usersDtoToUsers(dto);
-    }
-
-    public UsersDto usersToUsersDto(Users dto) {
-        return usersMapper.usersToUsersDto(dto);
     }
 
     public String getEmailFromToken(String token) {
@@ -57,12 +57,16 @@ public class UsersServiceImpl implements UsersService {
         return jwtProvider.getEmailFromJwtToken(token);
     }
 
+    public String getEmailFromUserId(long id) {
+        return usersDao.getEmailById(id);
+    }
+
     @Override
     public Users findByEmail(String email) {
         return usersDao.findByEmail(email).orElse(null);
     }
 
-    private void validateUser(UsersDto userDto) throws AppException {
+    private void validateUser(UserRequest userDto) throws AppException {
         if (!Validation.emailValidation(userDto.getEmail()))
             throw new AppException(ExceptionType.EMAIL_FORMAT);
 
@@ -85,7 +89,7 @@ public class UsersServiceImpl implements UsersService {
             throw new AppException(ExceptionType.PASSPORT_NUMBER_FORMAT);
     }
 
-    private UsersDto validateAuthenticate(UsersDto userDto) throws AppException {
+    private UserCreateRequest validateAuthenticate(UserCreateRequest userDto) throws AppException {
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 
         if (userDto.getAuthorities() == null)
@@ -122,15 +126,15 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public UsersDto signUpUser(UsersDto usersDtoRequest) throws AppException {
-        UsersDto userDto = usersDtoRequest;
+    public UserResponse signUpUser(UserCreateRequest usersDtoRequest) throws AppException {
+        UserCreateRequest userDto = usersDtoRequest;
 
         userDto = validateAuthenticate(userDto);
         validateUser(userDto);
 
-        usersDao.save(usersDtoToUsers(userDto));
-        emailService.sendCreateEmail(userDto);
-        return userDto;
+        Users users = usersDao.save(usersDtoToUsers(userDto));
+        emailService.sendCreateEmail(users);
+        return usersMapper.usersToUsersResponse(users);
     }
 
     public boolean existsUserByEmail(String email) {
@@ -155,23 +159,49 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public UsersDto updateUser(UsersDto userDto) throws AppException {
-        validateUser(userDto);
-        return usersToUsersDto(usersDao.save(usersDtoToUsers(userDto)));
+    public UserResponse updateUser(UserUpdateRequest updateRequest) throws AppException {
+        validateUser(updateRequest);
+
+        Users user = usersDao.findById(updateRequest.getId()).get();
+        user = setData(user, updateRequest);
+
+        return usersMapper.usersToUsersResponseWithAbstracts(usersDao.save(user));
+    }
+
+    private Users setData(Users users, UserUpdateRequest updateRequest) {
+        users.setEmail(updateRequest.getEmail());
+        users.setFirstName(updateRequest.getFirstName());
+        users.setLastName(updateRequest.getLastName());
+        users.setGender(Gender.valueOf(updateRequest.getGender()));
+        users.setDateOfBirth(updateRequest.getDateOfBirth());
+        users.setCountry(updateRequest.getCountry());
+        users.setTitle(Title.valueOf(updateRequest.getTitle()));
+        users.setUniversity(updateRequest.getUniversity());
+        users.setFaculty(updateRequest.getFaculty());
+        users.setYearOfStudy(YearOfStudy.valueOf(updateRequest.getYearOfStudy()));
+        users.setPhoneNumber(updateRequest.getPhoneNumber());
+        users.setNeedVisa(updateRequest.getNeedVisa());
+        users.setPassportNumber(updateRequest.getPassportNumber());
+        return users;
     }
 
     @Override
     @Transactional
     public void deleteUser(Long id) throws AppException {
-        getOne(id);
+        if(!usersDao.existsById(id)){
+            throw new AppException(EntityType.USER, ExceptionType.NOT_FOUND);
+        }
+        //getOne(id);
         usersDao.deleteById(id);
     }
 
     @Override
-    public UsersDto getOneForAdmin(Long id) throws AppException {
-        UsersDto user = usersMapper.userToUserDtoWithAbstracts(usersDao.findById(id).get());
+    public UserResponseWithAbstracts getOneForAdmin(Long id) throws AppException {
+        UserResponseWithAbstracts user = usersMapper.usersToUsersResponseWithAbstracts(usersDao.findById(id).get());
+
         if (user == null)
             throw new AppException(EntityType.USER, ExceptionType.NOT_FOUND);
+
         Arrays.stream(user.getAbstractDtos()).forEach(item -> {
             item.setType(AbstractType.valueOf(item.getType()).getType());
             item.setStatus(Status.findStatus(item.getStatus()).name());
@@ -180,16 +210,16 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UsersDto getOne(Long id) throws AppException {
-        UsersDto user = usersMapper.usersToUsersDto(usersDao.findById(id).get());
+    public UserResponse getOne(Long id) throws AppException {
+        Users user = usersDao.findById(id).get();
         if (user == null)
             throw new AppException(EntityType.USER, ExceptionType.NOT_FOUND);
-        return user;
+        return usersMapper.usersToUsersResponse(user);
     }
 
     @Override
-    public List<UsersDto> getAll() {
-        return usersMapper.usersDtosToUserss(usersDao.findAll());
+    public List<UserResponse> getAll() {
+        return usersMapper.usersListToUsersResponseList(usersDao.findAll());
     }
 
 }

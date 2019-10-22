@@ -1,11 +1,9 @@
 package com.com.backend.service.serviceImpl;
 
-import com.com.backend.dao.UsersDao;
+import com.com.backend.dto.Mail;
 import com.com.backend.exception.AppException;
 import com.com.backend.model.Abstracts;
 import com.com.backend.model.Users;
-import com.com.backend.dto.Mail;
-import com.com.backend.dto.UsersDto;
 import com.com.backend.model.enums.Status;
 import com.com.backend.service.EmailService;
 import org.slf4j.Logger;
@@ -39,7 +37,7 @@ public class EmailServiceImp implements EmailService {
     }
 
     @Async
-    public void sendCreateEmail(UsersDto user) {
+    public void sendCreateEmail(Users user) {
         log.debug("Sending creation account email to '{}'", user.getEmail());
         Context context = new Context();
         context.setVariable("email", user.getEmail());

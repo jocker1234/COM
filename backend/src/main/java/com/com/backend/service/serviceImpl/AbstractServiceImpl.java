@@ -1,13 +1,11 @@
 package com.com.backend.service.serviceImpl;
 
-import com.com.backend.config.security.JwtProvider;
 import com.com.backend.model.Abstracts;
 import com.com.backend.service.AbstractsAbstractService;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.UsersService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

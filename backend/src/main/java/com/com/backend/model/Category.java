@@ -1,7 +1,6 @@
 package com.com.backend.model;
 
 import lombok.*;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

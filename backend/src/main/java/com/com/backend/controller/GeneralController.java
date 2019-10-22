@@ -1,6 +1,5 @@
 package com.com.backend.controller;
 
-import com.com.backend.service.UsersService;
 import com.com.backend.validation.Validation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
