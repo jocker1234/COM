@@ -5,6 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class AuthoritiesDto extends AbstractDto {
 

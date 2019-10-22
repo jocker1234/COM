@@ -5,7 +5,6 @@ import com.com.backend.model.Abstracts;
 import com.com.backend.dto.request.AbstractsDtoRequest;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
-import com.com.backend.exception.WrongValueException;
 
 import java.util.List;
 

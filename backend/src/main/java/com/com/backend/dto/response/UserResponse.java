@@ -1,12 +1,12 @@
-package com.com.backend.dto;
+package com.com.backend.dto.response;
 
-import com.com.backend.dto.response.AbstractsDtoResponse;
+import com.com.backend.dto.AbstractDto;
+import com.com.backend.dto.AuthoritiesDto;
 import lombok.*;
 import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.Email;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -14,15 +14,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UsersDto extends AbstractDto {
+public class UserResponse extends AbstractDto {
 
     @Email
     @NonNull
     private String email;
-    @NonNull
-    private String password;
-    private LocalDateTime registrationDate = LocalDateTime.now();
-    private Boolean activatedAccount = false;
     @NonNull
     private String firstName;
     @NonNull
@@ -47,7 +43,5 @@ public class UsersDto extends AbstractDto {
     private Boolean needVisa;
     private String passportNumber;
     private Set<AuthoritiesDto> authoritiesSet;
-    private String[] authorities;
-    private AbstractsDtoResponse[] abstractDtos;
 
 }

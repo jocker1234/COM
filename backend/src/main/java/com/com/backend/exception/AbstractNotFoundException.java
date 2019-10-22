@@ -5,8 +5,6 @@ import com.com.backend.model.enums.ExceptionType;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.Arrays;
-
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class AbstractNotFoundException extends NotFoundException {
 

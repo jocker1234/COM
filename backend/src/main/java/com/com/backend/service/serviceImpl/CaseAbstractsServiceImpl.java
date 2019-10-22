@@ -23,6 +23,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -134,7 +135,8 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
 
     @Override
     public int countUserAbstract(String email) {
-        return caseAbstractsDao.countCaseAbstractsByUsersEmail(email);
+        List<String> statuses = Arrays.asList("A", "F");
+        return caseAbstractsDao.countCaseAbstractsByUsersEmailAndStatusIn(email, statuses);
     }
 
     @Override

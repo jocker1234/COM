@@ -1,28 +1,21 @@
-package com.com.backend.dto;
+package com.com.backend.dto.request;
 
-import com.com.backend.dto.response.AbstractsDtoResponse;
 import lombok.*;
 import org.springframework.lang.NonNull;
 
 import javax.validation.constraints.Email;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UsersDto extends AbstractDto {
+public class UserRequest {
 
     @Email
     @NonNull
     private String email;
-    @NonNull
-    private String password;
-    private LocalDateTime registrationDate = LocalDateTime.now();
-    private Boolean activatedAccount = false;
     @NonNull
     private String firstName;
     @NonNull
@@ -46,8 +39,5 @@ public class UsersDto extends AbstractDto {
     @NonNull
     private Boolean needVisa;
     private String passportNumber;
-    private Set<AuthoritiesDto> authoritiesSet;
-    private String[] authorities;
-    private AbstractsDtoResponse[] abstractDtos;
 
 }

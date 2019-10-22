@@ -14,6 +14,8 @@ public enum ExceptionType {
     TITLE_NOT_FOUND("title.not.found"),
     YEAR_OF_STUDY_NOT_FOUND("year_of_study.not.found"),
 */
+    PRIVILEGES("privileges"),
+
     ABSTRACT_SENT("abstract.sent"),
 
     WRONG_STATUS("wrong.status"),

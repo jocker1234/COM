@@ -7,6 +7,7 @@ import org.springframework.lang.NonNull;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class AbstractsDtoRequest extends AbstractDto {
 

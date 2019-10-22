@@ -1,4 +1,4 @@
-package com.com.backend.dto;
+package com.com.backend.dto.request;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AbstractDto {
+public class UserUpdateRequest extends UserRequest {
 
     private Long id;
 

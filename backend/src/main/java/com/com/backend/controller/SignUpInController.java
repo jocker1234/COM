@@ -2,11 +2,12 @@ package com.com.backend.controller;
 
 import com.com.backend.config.security.JwtProvider;
 import com.com.backend.config.security.JwtResponse;
+import com.com.backend.dto.request.UserCreateRequest;
+import com.com.backend.dto.response.UserResponse;
 import com.com.backend.exception.NotFoundException;
 import com.com.backend.model.Users;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.dto.LoginFormRequest;
-import com.com.backend.dto.UsersDto;
 import com.com.backend.exception.AppException;
 import com.com.backend.service.EmailService;
 import com.com.backend.service.UsersService;
@@ -58,15 +59,14 @@ public class SignUpInController {
 
         Long userId = userService.getUserIdByEmail(userDetails.getUsername());
 
-        JwtResponse jwtResponse = new JwtResponse(jwt, userDetails.getAuthorities(), userDetails.getUsername(), userId);
-        return jwtResponse;
+        return new JwtResponse(jwt, userDetails.getAuthorities(), userDetails.getUsername(), userId);
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registrationUser(@Valid @RequestBody UsersDto usersDtoRequest) throws AppException {
+    public ResponseEntity<?> registrationUser(@Valid @RequestBody UserCreateRequest usersDtoRequest) throws AppException {
         if (userService.existsUserByEmail(usersDtoRequest.getEmail()))
             throw new AppException(ExceptionType.EMAIL_EXIST);
-        UsersDto user = userService.signUpUser(usersDtoRequest);
+        UserResponse user = userService.signUpUser(usersDtoRequest);
 
         return ResponseEntity.ok(user);
     }

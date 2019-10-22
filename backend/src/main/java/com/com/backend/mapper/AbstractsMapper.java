@@ -3,7 +3,6 @@ package com.com.backend.mapper;
 import com.com.backend.dto.request.AbstractsDtoRequest;
 import com.com.backend.dto.response.AbstractsDtoResponse;
 import com.com.backend.model.Abstracts;
-import org.mapstruct.*;
 
 import java.util.List;
 

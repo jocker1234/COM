@@ -3,7 +3,6 @@ package com.com.backend.config;
 import com.com.backend.batch.listener.CaseAbstractsJobListener;
 import com.com.backend.batch.processor.CaseAbstractsItemProcessor;
 import com.com.backend.batch.reader.CaseAbstractsReader;
-import com.com.backend.batch.writer.CaseAbstractsWriter;
 import com.com.backend.batch.writer.FlatFileCaseAbstractsWriter;
 import com.com.backend.dto.response.CaseAbstractsDtoResponse;
 import com.com.backend.model.CaseAbstracts;
@@ -16,9 +15,6 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
-import java.util.function.Function;
 
 @Configuration
 @EnableBatchProcessing
