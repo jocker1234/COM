@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryDao extends JpaRepository<Category, Long> {
+
+    Boolean existsById(long id);
+
 }
