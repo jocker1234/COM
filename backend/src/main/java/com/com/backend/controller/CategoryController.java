@@ -28,21 +28,21 @@ public class CategoryController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<CategoryDto>> create(@Valid @RequestBody CategoryDto categoryRequest) {
         List<CategoryDto> categoryDtos = categoryService.create(categoryRequest);
         return ResponseEntity.ok(categoryDtos);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<CategoryDto>> delete(@Valid @PathVariable Long id) throws NotFoundException {
         List<CategoryDto> categoryDtos = categoryService.delete(id);
         return ResponseEntity.ok(categoryDtos);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<CategoryDto>> update(@Valid @PathVariable Long id, @RequestBody CategoryDto categoryDto) throws NotFoundException {
         List<CategoryDto> categoryDtos = categoryService.update(id, categoryDto);
         return ResponseEntity.ok(categoryDtos);

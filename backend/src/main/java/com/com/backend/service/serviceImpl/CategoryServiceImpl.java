@@ -36,6 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public List<CategoryDto> create(CategoryDto categoryDto) {
         Category category = categoryMapper.entityToData(categoryDto);
         categoryDao.save(category);
@@ -45,16 +46,18 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public List<CategoryDto> delete(Long id) throws NotFoundException {
+        if (!categoryDao.existsById(id))
+            throw new NotFoundException(EntityType.CATEGORY, ExceptionType.NOT_FOUND);
         categoryDao.delete(getOne(id));
         return getAll();
     }
 
-    @Override
     @Transactional
     public List<CategoryDto> update(Long id, CategoryDto categoryDto) throws NotFoundException {
-        if (getOne(id) == null)
+        if (!categoryDao.existsById(id))
             throw new NotFoundException(EntityType.CATEGORY, ExceptionType.NOT_FOUND);
         Category category = categoryMapper.entityToData(categoryDto);
+        category.setId(id);
         categoryDao.save(category);
         return this.getAll();
     }
