@@ -11,29 +11,39 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    data: {
+      breadcrumb: 'Login'
+    },
   },
   {
     path: 'sign',
-    component: RegisterComponent
+    component: RegisterComponent,
+    data: {
+      breadcrumb: 'Registration'
+    },
   },
   {
     path: 'reset',
-    component: PasswordResetComponent
+    component: PasswordResetComponent,
+    data: {
+      breadcrumb: 'Remind password'
+    },
   },
   {
     path: 'user',
     loadChildren: () => import('./section/user/user.module').then(value => value.UserModule),
     data: {
-      authorities: ['ROLE_ACTIVE_PARTICIPANT', 'ROLE_ADMIN']
+      authorities: ['ROLE_ACTIVE_PARTICIPANT', 'ROLE_ADMIN'],
+      breadcrumb: 'User'
     },
     canActivate: [AuthGuard]
   },
@@ -41,7 +51,8 @@ const routes: Routes = [
     path: 'abstracts',
     loadChildren: () => import('./section/abstracts/abstracts.module').then(value => value.AbstractsModule),
     data: {
-      authorities: ['ROLE_ACTIVE_PARTICIPANT']
+      authorities: ['ROLE_ACTIVE_PARTICIPANT'],
+      breadcrumb: 'Abstracts'
     },
     canActivate: [AuthGuard]
   },
@@ -49,7 +60,8 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./section/admin/admin.module').then(value => value.AdminModule),
     data: {
-      authorities: ['ROLE_ADMIN']
+      authorities: ['ROLE_ADMIN'],
+      breadcrumb: 'Admin'
     },
     canActivate: [AuthGuard]
   }

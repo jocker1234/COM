@@ -1,0 +1,40 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/scss/_breadcrumb.scss");
+
+.breadcrumb-item.active {
+  color: #858a8f !important;
+}
+
+.breadcrumb li {
+  display: inline;
+  color: white;
+  text-transform: uppercase;
+}
+
+.breadcrumb li + li:before {
+  content: " > "!important;
+  color: white!important;
+}
+
+.breadcrumbs > span {
+  color: #FFFFFF;
+  text-transform: uppercase;
+  margin: 0 10px;
+}
+
+.breadcrumb {
+  background-color: #2B4859;
+  padding: 20px;
+  position: relative;
+  color: #fff;
+  margin: 0 0 25px -10px;
+  font-size: 12px;
+
+  a {
+    transition: all 0.2s ease-out;
+    color: white;
+  }
+}
+
+a {
+  outline: none !important;
+}

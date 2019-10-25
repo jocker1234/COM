@@ -6,11 +6,17 @@ import {UserUpdateComponent} from "./user-update/user-update.component";
 const routes: Routes = [
   {
     path: ':id',
-    component: UserDetailComponent
+    component: UserDetailComponent,
+    data: {
+      breadcrumb: 'User Details'
+    },
   },
   {
     path: ':id/edit',
     component: UserUpdateComponent,
+    data: {
+      breadcrumb: 'Edit User'
+    },
   }
 ];
 

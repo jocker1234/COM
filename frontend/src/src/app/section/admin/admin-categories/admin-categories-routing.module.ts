@@ -6,7 +6,10 @@ import {CategoryListComponent} from "./category-list/category-list.component";
 const routes: Routes = [
   {
     path: '',
-    component: CategoryListComponent
+    component: CategoryListComponent,
+    data: {
+      breadcrumb: 'Category list'
+    },
   },
 ];
 

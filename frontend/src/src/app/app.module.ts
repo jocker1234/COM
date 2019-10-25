@@ -17,6 +17,7 @@ import {httpInterceptorProvider} from "./section/auth/auth-interceptor";
 import {AbstractsModule} from "./section/abstracts/abstracts.module";
 import {FieldErrorDisplayModule} from "./section/field-error-display/field-error-display.module";
 import {AdminModule} from "./section/admin/admin.module";
+import { BreadCrumbComponent } from './bread-crumb/bread-crumb.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {AdminModule} from "./section/admin/admin.module";
     RegisterComponent,
     PasswordResetComponent,
     FooterComponent,
+    BreadCrumbComponent,
   ],
   imports: [
     BrowserModule,
