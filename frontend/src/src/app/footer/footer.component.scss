@@ -1,25 +1,38 @@
 #footer .footer_widgets {
   color: #ffffff;
-  background-color: #4C6575;
-  position: relative;
-  background: #4C6575;
-  padding: 40px 0;
-  font-size: 14px;
-  line-height: 24px;
-  font-weight: 300;
 }
+
+#footer .footer_widgets {
+  background-color: #4C6575;
+}
+
 #footer .copyright {
   color: #ffffff;
+}
+
+#footer .copyright {
   background-color: #395261;
+}
+
+#footer .copyright {
   position: relative;
   background: #395261;
   text-align: center;
   font-size: 14px;
+  color: #fff;
   font-weight: 300;
   padding: 23px 0;
   line-height: 1;
 }
+
 #footer .copyright a {
   color: #9AA6AD;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
+}
+
+a {
+  outline: none !important;
 }
