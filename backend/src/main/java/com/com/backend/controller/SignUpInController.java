@@ -26,8 +26,8 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
+@CrossOrigin(value = {"http://localhost:4200", "http://54.37.234.192:4200"})
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200")
 public class SignUpInController {
 
     private AuthenticationManager authenticationManager;

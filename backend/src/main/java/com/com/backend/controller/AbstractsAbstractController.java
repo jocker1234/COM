@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
 public abstract class AbstractsAbstractController<TREQ extends AbstractsDtoRequest, TRES extends AbstractsDtoResponse,
                                                                                                 S extends Abstracts> {
 

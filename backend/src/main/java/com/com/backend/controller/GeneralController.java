@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin(value = {"http://localhost:4200", "http://54.37.234.192:4200"})
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200")
 public class GeneralController {
 
     @GetMapping("/countryList")

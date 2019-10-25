@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(value = {"http://localhost:4200", "http://54.37.234.192:4200"})
 @RequestMapping("/abstracts")
 public class AbstractsController {
 
