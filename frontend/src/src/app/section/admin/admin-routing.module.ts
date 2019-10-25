@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./admin-users/admin-users.module').then(value => value.AdminUsersModule)
   },
+  {
+    path: 'category',
+    loadChildren: () => import('./admin-categories/admin-categories.module').then(value => value.AdminCategoriesModule)
+  },
 ];
 
 @NgModule({
