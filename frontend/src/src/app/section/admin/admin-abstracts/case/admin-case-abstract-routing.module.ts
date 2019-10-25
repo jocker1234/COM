@@ -6,7 +6,10 @@ import {AdminCaseAbstractDetailsComponent} from "./admin-case-abstract-details/a
 const routes: Routes = [
   {
     path: ':id',
-    component:AdminCaseAbstractDetailsComponent
+    component:AdminCaseAbstractDetailsComponent,
+    data: {
+      breadcrumb: 'Case Abstract Details'
+    },
   }
 ];
 

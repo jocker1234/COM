@@ -8,15 +8,24 @@ import {SingleSendMailComponent} from "./single-send-mail/single-send-mail.compo
 const routes: Routes = [
   {
     path: '',
-    component: UsersListComponent
+    component: UsersListComponent,
+    data: {
+      breadcrumb: 'Users List'
+    },
   },
   {
     path: ':id',
-    component: AdminUserDetailsComponent
+    component: AdminUserDetailsComponent,
+    data: {
+      breadcrumb: 'User Details'
+    },
   },
   {
     path: ':id/send-mail',
-    component: SingleSendMailComponent
+    component: SingleSendMailComponent,
+    data: {
+      breadcrumb: 'Send Mail'
+    },
   },
 ];
 
