@@ -10,20 +10,27 @@ import {AbstractsService} from "../../abstracts.service";
 })
 export class AdminAbstractsComponent implements OnInit {
 
-  private case: CaseAbstract[];
-  private research: ResearchAbstract[];
+  private _case: CaseAbstract[];
+  private _research: ResearchAbstract[];
 
   constructor(private abstractService: AbstractsService) { }
 
   ngOnInit() {
     this.abstractService.getAllCaseAbstract().subscribe(value => {
-      this.case = value;
+      this._case = value;
       console.log(value);
     });
     this.abstractService.getAllResearchAbstract().subscribe(value => {
-      this.research = value;
+      this._research = value;
       console.log(value);
     });
   }
 
+  get case(): CaseAbstract[] {
+    return this._case;
+  }
+
+  get research(): ResearchAbstract[] {
+    return this._research;
+  }
 }

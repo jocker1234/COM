@@ -1,5 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {CaseAbstract} from "../../case-abstract";
+import {Component, OnInit} from '@angular/core';
 import {Category} from "../../../category";
 import {CategoryService} from "../../../category.service";
 import {AbstractsService} from "../../../abstracts.service";

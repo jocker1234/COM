@@ -7,28 +7,35 @@ import {TokenStorageService} from "../section/auth/token-storage.service";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  private roles: string[];
+  private _roles: string[];
 
-  constructor(private tokenStorage: TokenStorageService) {
+  constructor(private _tokenStorage: TokenStorageService) {
   }
 
   ngOnInit() {
-    if (this.tokenStorage.getToken()) {
-      this.roles = this.tokenStorage.getAuthorities();
+    if (this._tokenStorage.getToken()) {
+      this._roles = this._tokenStorage.getAuthorities();
     }
   }
 
+  get roles(): string[] {
+    return this._roles;
+  }
+
+  get tokenStorage(): TokenStorageService {
+    return this._tokenStorage;
+  }
+
   checkAuthorities(role: string): boolean {
-    const findRole = this.roles.find(value => value == role);
+    const findRole = this._roles.find(value => value == role);
     if (findRole != undefined) {
       return true;
     }
     return false;
   }
 
-
   logout() {
-    this.tokenStorage.signOut();
+    this._tokenStorage.signOut();
     window.location.reload();
   }
 

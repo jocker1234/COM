@@ -9,11 +9,15 @@ import {Abstract} from "../abstract";
 export class AbstractsTableComponent implements OnInit {
 
   @Input()
-  protected abstractList: Abstract[];
+  private _abstractList: Abstract[];
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  get abstractList(): Abstract[] {
+    return this._abstractList;
   }
 
   getRouterLink(abstract: Abstract) {

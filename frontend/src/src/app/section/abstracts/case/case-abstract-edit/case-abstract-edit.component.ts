@@ -13,8 +13,8 @@ import {FormBuilder} from "@angular/forms";
 })
 export class CaseAbstractEditComponent extends CaseAbstractCreateComponent implements OnInit {
 
-  private id: number;
-  private category: Category;
+  private _id: number;
+  private _category: Category;
 
   constructor(protected abstractService: AbstractsService, protected categoryService: CategoryService,
               protected router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
@@ -23,13 +23,20 @@ export class CaseAbstractEditComponent extends CaseAbstractCreateComponent imple
 
   ngOnInit() {
     this.categoryService.getCategory().subscribe(data => this.categories = data);
-    this.id = +this.route.snapshot.paramMap.get('id');
-    this.abstractService.getOneCaseAbstract(Number(this.id)).subscribe(value => {
+    this._id = +this.route.snapshot.paramMap.get('_id');
+    this.abstractService.getOneCaseAbstract(Number(this._id)).subscribe(value => {
       this.abstractForm.patchValue(value);
-      this.category = value.category;
-      this.abstractForm.get('categoryId').setValue(this.category.id);
+      this._category = value.category;
+      this.abstractForm.get('categoryId').setValue(this._category.id);
       this.abstractForm.setControl('authors', this.fb.array(value.authors));
     });
   }
 
+  get id(): number {
+    return this._id;
+  }
+
+  get category(): Category {
+    return this._category;
+  }
 }

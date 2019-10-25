@@ -10,7 +10,7 @@ import {httpInterceptorProvider} from "../../auth/auth-interceptor";
 import {CaseAbstractItemsDetailsComponent} from "./case-abstract-items-details/case-abstract-items-details.component";
 import { CaseAbstractEditComponent } from './case-abstract-edit/case-abstract-edit.component';
 import {AbstractsModule} from "../abstracts.module";
-import {TextareaAutosizeModule} from "ngx-textarea-autosize";
+import {AutosizeModule} from "ngx-autosize";
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import {TextareaAutosizeModule} from "ngx-textarea-autosize";
     NgbModule,
     ReactiveFormsModule,
     AbstractsModule,
-    TextareaAutosizeModule
+    AutosizeModule
   ],
   providers: [httpInterceptorProvider],
 })

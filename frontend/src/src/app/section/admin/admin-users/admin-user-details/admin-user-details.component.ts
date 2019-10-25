@@ -10,7 +10,7 @@ import {User} from "../../../user/user";
   styleUrls: ['./admin-user-details.component.scss']
 })
 export class AdminUserDetailsComponent implements OnInit  {
-  protected user: User;
+  private _user: User;
   protected id: number;
 
   constructor(protected activatedRouter: ActivatedRoute,
@@ -18,10 +18,14 @@ export class AdminUserDetailsComponent implements OnInit  {
     this.getUser();
   }
 
+  get user(): User {
+    return this._user;
+  }
+
   protected getUser() {
     this.id = +this.activatedRouter.snapshot.paramMap.get('id');
     this.userService.getUserForAdmin(Number(this.id)).subscribe(user => {
-      this.user = user;
+      this._user = user;
     });
   }
 

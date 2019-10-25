@@ -9,13 +9,14 @@ import {httpInterceptorProvider} from "../auth/auth-interceptor";
 import { ChooseNewAbstractContentComponent } from './choose-new-abstract-content/choose-new-abstract-content.component';
 import { AbstractActionButtonsComponent } from './abstract-action-buttons/abstract-action-buttons.component';
 import { AbstractsTableComponent } from './abstracts-table/abstracts-table.component';
+import {AutosizeModule} from "ngx-autosize";
 
 @NgModule({
   declarations: [
     AbstractsComponent,
     ChooseNewAbstractContentComponent,
     AbstractActionButtonsComponent,
-    AbstractsTableComponent
+    AbstractsTableComponent,
   ],
   imports: [
     CommonModule,

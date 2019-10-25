@@ -13,19 +13,24 @@ import {CategoryService} from "../category.service";
 })
 export class AbstractsComponent implements OnInit {
 
-  protected abstractList: Abstract[];
+  private _abstractList: Abstract[];
 
   constructor(private abstractService: AbstractsService, private router: Router, private dialog: NgbModal,
               private categoryService: CategoryService) {
   }
 
   ngOnInit() {
-    this.abstractService.getAllUserAbstracts().subscribe(value => this.abstractList = value);
-    if (this.abstractList !== undefined) {
-      this.abstractList.forEach(abstract => {
+    this.abstractService.getAllUserAbstracts().subscribe(value => this._abstractList = value);
+    if (this._abstractList !== undefined) {
+      this._abstractList.forEach(abstract => {
         this.categoryService.getCategoryById(abstract.categoryId).subscribe(category => abstract.category = category);
       });
     }
+  }
+
+
+  get abstractList(): Abstract[] {
+    return this._abstractList;
   }
 
   openDialog(): void {

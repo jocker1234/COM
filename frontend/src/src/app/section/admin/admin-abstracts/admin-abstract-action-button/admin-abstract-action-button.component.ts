@@ -17,13 +17,17 @@ export class AdminAbstractActionButtonComponent implements OnInit {
   private id: number;
 
   @Input()
-  private status: string;
+  private _status: string;
 
   constructor(private abstractService: AbstractsService, private router: Router,
               private location: Location) {
   }
 
   ngOnInit() {
+  }
+
+  get status(): string {
+    return this._status;
   }
 
   approved() {

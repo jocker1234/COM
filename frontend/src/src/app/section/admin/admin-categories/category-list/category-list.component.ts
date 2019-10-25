@@ -9,14 +9,17 @@ import {CategoryService} from "../../../category.service";
 })
 export class CategoryListComponent implements OnInit {
 
-  private categories: Category[];
+  private _categories: Category[];
 
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.categoryService.getCategory().subscribe(value => {
-      this.categories = value;
+      this._categories = value;
     });
   }
 
+  get categories(): Category[] {
+    return this._categories;
+  }
 }
