@@ -11,7 +11,7 @@ import {TokenStorageService} from "../../auth/token-storage.service";
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
-  private user: User;
+  protected user: User;
   protected id: number;
 
   constructor(protected activatedRouter: ActivatedRoute,

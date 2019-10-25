@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-        <ng-container *ngIf="!roles" [ngTemplateOutlet]="logeged"></ng-container>
+        <ng-container *ngIf="!roles" [ngTemplateOutlet]="offline"></ng-container>
         <ng-container *ngIf="roles" [ngTemplateOutlet]="online"></ng-container>
       </div>
       <div>
@@ -49,45 +49,67 @@
     </div>
   </div>
 </div>
-<ng-template #logeged>
-  <ul class="top_nav_menu" routerLinkActive="active">
-    <li>
+<ng-template #offline>
+  <ul id="menu-primary-menu-1" class="top_nav_menu" routerLinkActive="active">
+    <li id="menu-item-1-1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1-1">
       <a routerLink="home">Home</a>
     </li>
-    <li class="nav-item">
+    <li id="menu-item-1-2" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1-2">
       <a class="nav-link" routerLink="login">Login</a>
     </li>
   </ul>
 </ng-template>
 <ng-template #online>
-  <ul class="top_nav_menu" routerLinkActive="active">
-    <li>
+  <ul id="menu-primary-menu-2" class="top_nav_menu" routerLinkActive="active">
+    <li id="menu-item-2-1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-1">
       <a routerLink="home">Home</a>
     </li>
     <ng-container *ngIf="checkAuthorities('ROLE_ADMIN')" [ngTemplateOutlet]="admin"></ng-container>
     <ng-container *ngIf="checkAuthorities('ROLE_ACTIVE_PARTICIPANT')" [ngTemplateOutlet]="active_user"></ng-container>
     <ng-container *ngIf="checkAuthorities('ROLE_PASSIVE_PARTICIPANT')" [ngTemplateOutlet]="pasive_user"></ng-container>
-    <li>
+    <li id="menu-item-info" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-info">
       <a class="nav-link" routerLink="user/{{tokenStorage.getUserId()}}">Info</a>
     </li>
-    <li>
+    <li id="menu-item-logout" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-logout">
       <a class="nav-link" (click)="logout()">Logout</a>
     </li>
   </ul>
 </ng-template>
 <ng-template #admin>
-  <li class="nav-item">
+  <li id="menu-item-2-2-1"
+      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-2-2-1">
     <a class="nav-link" routerLink="admin/user">Users</a>
+    <ul class="sub-menu">
+      <li id="menu-item-2-2-1-1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-2-1-1">
+        <a href="admin/user">List</a>
+      </li>
+      <li id="menu-item-2-2-1-2" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-2-1-2">
+        <a href="">Group Mail</a>
+      </li>
+      <li id="menu-item-2-2-1-3" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-2-1-3">
+        <a href="">Export</a>
+      </li>
+    </ul>
   </li>
-  <li>
+  <li id="menu-item-2-3-1"
+      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-2-3-1">
     <a class="nav-link" routerLink="admin/abstract">Abstracts</a>
+    <ul class="sub-menu">
+      <li id="menu-item-2-3-1-1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-3-1-1">
+        <a href="admin/abstract">List</a>
+      </li>
+      <li id="menu-item-2-3-1-2" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-3-1-2">
+        <a href="">Export</a>
+      </li>
+    </ul>
   </li>
-  <li>
+  <li id="menu-item-2-4-1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-4-1">
     <a class="nav-link" routerLink="admin/category">Category</a>
   </li>
 </ng-template>
 <ng-template #active_user>
-  <li>
+  <li id="menu-item-2-1-2"
+      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-2-1-2">
     <a class="nav-link" routerLink="abstracts">Abstracts</a>
   </li>
 </ng-template>

@@ -17,8 +17,8 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
+@CrossOrigin(value = {"http://localhost:4200", "http://54.37.234.192:4200"})
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private UsersService usersService;

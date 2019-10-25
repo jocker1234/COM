@@ -5,10 +5,12 @@ import com.com.backend.dto.response.CaseAbstractsDtoResponse;
 import com.com.backend.model.CaseAbstracts;
 import com.com.backend.service.AbstractsAbstractService;
 import com.com.backend.service.CaseAbstractsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(value = {"http://localhost:4200", "http://54.37.234.192:4200"})
 @RequestMapping("/abstracts/case")
 public class CaseAbstractsController extends AbstractsAbstractController<CaseAbstractsDtoRequest,
                                                                             CaseAbstractsDtoResponse, CaseAbstracts> {
