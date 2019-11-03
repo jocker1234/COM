@@ -3,7 +3,7 @@ export class SignUpInfo {
   password: string;
   firstName: string;
   lastName: string;
-  gender: string;
+  //gender: string;
   dateOfBirth: Date;
   country: string;
   title: string;
@@ -16,15 +16,15 @@ export class SignUpInfo {
   authorities: string[];
 
 
-  constructor(email, password, firstName, lastName, gender
-    , dateOfBirth, country, title, university, faculty, yearOfStudy
-    , phoneNumber, needVisa, passportNumber, authorities) {
+  constructor(email, password, firstName, lastName, /*gender,*/
+              dateOfBirth, country, title, university, faculty, yearOfStudy,
+              phoneNumber, needVisa, passportNumber, authorities) {
 
     this.email = email;
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.gender = gender;
+    //this.gender = gender;
     this.dateOfBirth = dateOfBirth;
     this.country = country;
     this.title = title;

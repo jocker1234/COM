@@ -35,9 +35,9 @@ public class Users extends AbstractEntity {
     @Column(nullable = false)
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Gender gender;
+    //@Enumerated(EnumType.STRING)
+    //@Column(nullable = false)
+    //private Gender gender;
 
     @Column(nullable = false)
     private LocalDate dateOfBirth;

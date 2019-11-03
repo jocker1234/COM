@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CaseAbstractCreateComponent} from "../case-abstract-create/case-abstract-create.component";
-import {AbstractsService} from "../../../abstracts.service";
-import {CategoryService} from "../../../category.service";
+import {AbstractsService} from "../../../../service/abstracts.service";
+import {CategoryService} from "../../../../service/category.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Category} from "../../../category";
 import {FormBuilder} from "@angular/forms";

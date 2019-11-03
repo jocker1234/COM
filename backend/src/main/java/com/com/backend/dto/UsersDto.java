@@ -27,8 +27,8 @@ public class UsersDto extends AbstractDto {
     private String firstName;
     @NonNull
     private String lastName;
-    @NonNull
-    private String gender;
+    //@NonNull
+    //private String gender;
     @NonNull
     private LocalDate dateOfBirth;
     @NonNull

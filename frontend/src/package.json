@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=54.37.234.192 --configuration=production &",
+    "start": "ng serve --configuration=production &",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -21,6 +21,7 @@
     "@angular/router": "~8.2.4",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "angular-countries": "^1.1.5",
+    "google-libphonenumber": "^3.2.6",
     "jwt-decode": "^2.2.0",
     "ngx-autosize": "^1.6.4",
     "rxjs": "~6.4.0",

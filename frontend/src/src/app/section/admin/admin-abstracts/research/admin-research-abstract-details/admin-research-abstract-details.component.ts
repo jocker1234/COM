@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ResearchAbstractItemsDetailsComponent} from "../../../../abstracts/research/research-abstract-items-details/research-abstract-items-details.component";
 import {ActivatedRoute} from "@angular/router";
-import {AbstractsService} from "../../../../abstracts.service";
+import {AbstractsService} from "../../../../../service/abstracts.service";
 
 @Component({
   selector: 'app-admin-research-abstract-details',

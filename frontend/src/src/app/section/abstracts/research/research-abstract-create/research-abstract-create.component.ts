@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ResearchAbstract} from "../../research-abstract";
-import {AbstractsService} from "../../../abstracts.service";
+import {AbstractsService} from "../../../../service/abstracts.service";
 import {Category} from "../../../category";
-import {CategoryService} from "../../../category.service";
+import {CategoryService} from "../../../../service/category.service";
 import {Router} from "@angular/router";
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 

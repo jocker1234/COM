@@ -70,8 +70,8 @@ public class UsersServiceImpl implements UsersService {
         if (!Validation.emailValidation(userDto.getEmail()))
             throw new AppException(ExceptionType.EMAIL_FORMAT);
 
-        if (Gender.valueOf(userDto.getGender()) == null)
-            throw new AppException(EntityType.GENDER, ExceptionType.NOT_FOUND);
+        //if (Gender.valueOf(userDto.getGender()) == null)
+        //    throw new AppException(EntityType.GENDER, ExceptionType.NOT_FOUND);
 
         if (!Validation.countryValidation(userDto.getCountry()))
             throw new AppException(EntityType.COUNTRY, ExceptionType.NOT_FOUND);
@@ -172,7 +172,7 @@ public class UsersServiceImpl implements UsersService {
         users.setEmail(updateRequest.getEmail());
         users.setFirstName(updateRequest.getFirstName());
         users.setLastName(updateRequest.getLastName());
-        users.setGender(Gender.valueOf(updateRequest.getGender()));
+        //users.setGender(Gender.valueOf(updateRequest.getGender()));
         users.setDateOfBirth(updateRequest.getDateOfBirth());
         users.setCountry(updateRequest.getCountry());
         users.setTitle(Title.valueOf(updateRequest.getTitle()));

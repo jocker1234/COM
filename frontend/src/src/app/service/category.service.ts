@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {Category} from "./category";
+import {Category} from "../section/category";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
-import {HandlingErrorsService} from "../handling-errors.service";
+import {HandlingErrorsService} from "./handling-errors.service";
 
 const apiUrl = environment.apiUrl;
 

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractsService} from "../../../abstracts.service";
+import {AbstractsService} from "../../../../service/abstracts.service";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
 

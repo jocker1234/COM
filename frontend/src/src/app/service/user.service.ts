@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {User} from "./user";
+import {User} from "../section/user/user";
 import {catchError, tap} from "rxjs/operators";
-import {HandlingErrorsService} from "../../handling-errors.service";
-import {environment} from "../../../environments/environment";
-import {CaseAbstract} from "../abstracts/case-abstract";
+import {HandlingErrorsService} from "./handling-errors.service";
+import {environment} from "../../environments/environment";
+import {CaseAbstract} from "../section/abstracts/case-abstract";
 
 const apiUrl = environment.apiUrl;
 
@@ -42,8 +42,7 @@ export class UserService {
   updateUser(id: number, user: User, isUpdate: string) {
     let httpParams = new HttpParams();
     httpParams.append("isUpdated", isUpdate);
-    return this.http.put(`${this.userUrl}/${id}?isUpdated=true`, user)
-      .pipe(catchError(HandlingErrorsService.handleError));
+    return this.http.put(`${this.userUrl}/${id}?isUpdated=true`, user);
   }
 
   sendSingleMail(mail: any): Observable<any> {

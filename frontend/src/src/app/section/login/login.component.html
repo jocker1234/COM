@@ -1,11 +1,17 @@
-<div *ngIf="isLoggedIn; else loggedOut">
-  Logged in as {{roles}}.
+<div *ngIf="isLoggedIn; then navigate() else loggedOut">
 </div>
 
 <ng-template #loggedOut>
   <div class="container">
     <h3>Already registered participant</h3>
     <hr/>
+    <div class="row" *ngIf="checkErrorIsNotUndefined()">
+      <p class="col-sm-3 col-form-label"></p>
+      <p class="col-sm-7">
+        <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+        </app-error-display>
+      </p>
+    </div>
     <form name="fo rm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
       <div class="form-group row">
         <label for="email" class="col-sm-2 col-form-label">Email</label>
@@ -31,14 +37,11 @@
       <div class="form-group">
         <div class="form-check">
           <button type="submit" class="btn btn-primary">Sign in</button>
-          <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
-            Login failed: {{errorMessage}}
-          </div>
         </div>
       </div>
     </form>
     <div>
-      <a class="alert-link text-primary" routerLink="/reset">Do not you remember the password?</a>
+      <a class="alert-link text-primary" routerLink="/reset">Do not remember your password?</a>
     </div>
     <hr>
     <p>Don't have an account?

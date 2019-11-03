@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CaseAbstract} from "../../abstracts/case-abstract";
 import {ResearchAbstract} from "../../abstracts/research-abstract";
-import {AbstractsService} from "../../abstracts.service";
+import {AbstractsService} from "../../../service/abstracts.service";
 
 @Component({
   selector: 'app-admin-abstracts',

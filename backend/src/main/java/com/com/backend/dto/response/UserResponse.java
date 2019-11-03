@@ -23,8 +23,8 @@ public class UserResponse extends AbstractDto {
     private String firstName;
     @NonNull
     private String lastName;
-    @NonNull
-    private String gender;
+    //@NonNull
+    //private String gender;
     @NonNull
     private LocalDate dateOfBirth;
     @NonNull
@@ -37,7 +37,7 @@ public class UserResponse extends AbstractDto {
     private String faculty;
     @NonNull
     private Integer yearOfStudy;
-    @NonNull
+    //@NonNull
     private String phoneNumber;
     @NonNull
     private Boolean needVisa;

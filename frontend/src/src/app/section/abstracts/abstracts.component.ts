@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Abstract} from "./abstract";
-import {AbstractsService} from "../abstracts.service";
+import {AbstractsService} from "../../service/abstracts.service";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChooseNewAbstractContentComponent} from "./choose-new-abstract-content/choose-new-abstract-content.component";
-import {CategoryService} from "../category.service";
+import {CategoryService} from "../../service/category.service";
 
 @Component({
   selector: 'app-abstracts',

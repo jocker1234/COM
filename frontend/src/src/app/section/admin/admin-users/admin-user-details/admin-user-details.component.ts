@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {UserDetailComponent} from "../../../user/user-detail/user-detail.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../../../user/user.service";
+import {UserService} from "../../../../service/user.service";
 import {User} from "../../../user/user";
 
 @Component({

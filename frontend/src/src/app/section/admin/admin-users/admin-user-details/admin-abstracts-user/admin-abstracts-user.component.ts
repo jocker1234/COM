@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UsersListComponent} from "../../users-list/users-list.component";
-import {UserService} from "../../../../user/user.service";
-import {AbstractsService} from "../../../../abstracts.service";
+import {UserService} from "../../../../../service/user.service";
+import {AbstractsService} from "../../../../../service/abstracts.service";
 import {AbstractsComponent} from "../../../../abstracts/abstracts.component";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {CategoryService} from "../../../../category.service";
+import {CategoryService} from "../../../../../service/category.service";
 import {Abstract} from "../../../../abstracts/abstract";
 import {AbstractsTableComponent} from "../../../../abstracts/abstracts-table/abstracts-table.component";
 
