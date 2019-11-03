@@ -9,7 +9,7 @@ export class User {
   email: string;
   faculty: string;
   firstName: string;
-  gender: string;
+  //gender: string;
   lastName: string;
   needVisa: string;
   passportNumber: string;
@@ -31,7 +31,7 @@ export class User {
       this.email = user.email;
       this.faculty = user.faculty;
       this.firstName = user.firstName;
-      this.gender = user.gender;
+      //this.gender = user.gender;
       this.lastName = user.lastName;
       this.needVisa = user.needVisa;
       this.passportNumber = user.passportNumber;

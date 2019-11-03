@@ -1,4 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
+import { PhoneNumberUtil} from 'google-libphonenumber';
 
 export class CustomValidators {
 
@@ -15,6 +16,20 @@ export class CustomValidators {
       // if true, return no error (no error), else return error passed in the second parameter
       return valid ? null : error;
     };
+  }
+
+  static PhoneNumberValidator(regionCode: string = undefined): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      let validNumber = false;
+      try {
+        const phoneNumber = PhoneNumberUtil.getInstance().parseAndKeepRawInput(
+          control.value, regionCode
+        );
+        validNumber = PhoneNumberUtil.getInstance().isValidNumber(phoneNumber);
+      } catch (e) { }
+
+      return validNumber ? null : { 'wrongNumber': { value: control.value } };
+    }
   }
 
 }

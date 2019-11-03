@@ -3,10 +3,10 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {environment} from "../../environments/environment";
-import {CaseAbstract} from "./abstracts/case-abstract";
-import {HandlingErrorsService} from "../handling-errors.service";
-import {ResearchAbstract} from "./abstracts/research-abstract";
-import {Abstract} from "./abstracts/abstract";
+import {CaseAbstract} from "../section/abstracts/case-abstract";
+import {HandlingErrorsService} from "./handling-errors.service";
+import {ResearchAbstract} from "../section/abstracts/research-abstract";
+import {Abstract} from "../section/abstracts/abstract";
 
 const apiUrl = environment.apiUrl;
 

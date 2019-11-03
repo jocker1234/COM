@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../../service/auth.service';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {AuthLoginInfo} from '../auth/login-info';
 import {JwtResponse} from '../auth/jwt-response';
 import {Router} from "@angular/router";
+import {HandlingErrorsService} from "../../service/handling-errors.service";
+import {ErrorHandler} from "../error-handler";
 
 @Component({
   selector: 'app-login',
@@ -18,6 +20,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   private loginInfo: AuthLoginInfo;
+  error: ErrorHandler;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -29,6 +32,10 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getAuthorities();
     }
+  }
+
+  checkErrorIsNotUndefined() {
+    return this.error !== undefined;
   }
 
   onSubmit() {
@@ -48,11 +55,30 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getAuthorities();
         this.reloadPage();
       },
-      error => {
-        this.errorMessage = error.error.message;
+      error1 => {
+        this.error = new ErrorHandler(error1.error.message);
+        scroll(0,0)
         this.isLoginFailed = true;
       }
     );
+  }
+
+  navigate() {
+    if (this.checkRole(this.roles, 'ROLE_ADMIN')) {
+      this.router.navigateByUrl('/admin/abstract');
+    } else if (this.checkRole(this.roles, 'ROLE_ACTIVE_PARTICIPANT')) {
+      this.router.navigateByUrl('/abstracts');
+    } else if (this.checkRole(this.roles,'ROLE_PASSIVE_PARTICIPANT')) {
+      this.router.navigate(['/user/' + this.tokenStorage.getUserId()]);
+    }
+  }
+
+  checkRole(listRole: string[], role: string) {
+    for (let i = 0; i < listRole.length; i++) {
+      if (listRole[i] === role) {
+        return true;
+      }
+    }
   }
 
   reloadPage() {

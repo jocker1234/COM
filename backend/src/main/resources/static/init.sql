@@ -25,7 +25,7 @@ create table users
     email             varchar(255)                        not null,
     faculty           varchar(255)                        not null,
     first_name        varchar(255)                        not null,
-    gender            varchar(255)                        not null,
+    /*gender            varchar(255)                        not null,*/
     last_name         varchar(255)                        not null,
     need_visa         boolean   default false             not null,
     passport_number   varchar(255),

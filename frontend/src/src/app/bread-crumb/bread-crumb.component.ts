@@ -36,7 +36,6 @@ export class BreadCrumbComponent implements OnInit {
       };
       breadcrumbs.push(breadcrumb);
     }
-    console.log(breadcrumbs)
     //get the child routes
     let children: ActivatedRoute[] = route.children;
 

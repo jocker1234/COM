@@ -1,4 +1,11 @@
 <div class="container edit-user">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-3 col-form-label"></p>
+    <p class="col-sm-7">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
   <h2>Update Data</h2><br/>
   <form name="form" (ngSubmit)="save()" [formGroup]="userEdit" novalidate>
     <div class="form-group row" [ngClass]="displayFieldCss('email')">
@@ -33,7 +40,7 @@
         </app-field-error-display>
       </div>
     </div>
-    <div class="form-group row">
+    <!--<div class="form-group row">
       <label class="col-sm-3 col-form-label">Gender</label>
       <div class="col-sm-7">
         <select class="col-sm-7 form-control" name="gender" formControlName="gender">
@@ -44,7 +51,7 @@
         <app-field-error-display [displayError]="isFieldValid('gender')" errorMsg="Gender field is required">
         </app-field-error-display>
       </div>
-    </div>
+    </div>-->
     <div class="form-group row">
       <label class="col-sm-3 col-form-label">Date of birth</label>
       <div class="col-sm-7">
@@ -118,7 +125,7 @@
         </app-field-error-display>
       </div>
     </div>
-    <div class="form-group row">
+    <!--<div class="form-group row">
       <label class="col-sm-3 col-form-label">Do you need visa?</label>
       <div class="col-sm-7">
         <input type="radio" value="true" formControlName="needVisa" required/>Yes
@@ -126,8 +133,8 @@
         <app-field-error-display [displayError]="isFieldValid('needVisa')" errorMsg="Do you need visa?">
         </app-field-error-display>
       </div>
-    </div>
-    <div class="form-group row" *ngIf="userEdit.get('needVisa').value == 'true'">
+    </div>-->
+    <div class="form-group row"><!-- *ngIf="userEdit.get('needVisa').value == 'true'">-->
       <label class="col-sm-3 col-form-label">ID/Passport</label>
       <div class="col-sm-7">
         <input type="text" class="form-control" name="passportNumber" formControlName="passportNumber"/>

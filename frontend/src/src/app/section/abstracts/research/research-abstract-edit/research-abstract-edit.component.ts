@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ResearchAbstractCreateComponent} from "../research-abstract-create/research-abstract-create.component";
-import {AbstractsService} from "../../../abstracts.service";
-import {CategoryService} from "../../../category.service";
+import {AbstractsService} from "../../../../service/abstracts.service";
+import {CategoryService} from "../../../../service/category.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Category} from "../../../category";
 import {FormBuilder} from "@angular/forms";

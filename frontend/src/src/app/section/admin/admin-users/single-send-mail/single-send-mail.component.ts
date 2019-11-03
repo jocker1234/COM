@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../../../user/user.service";
+import {UserService} from "../../../../service/user.service";
 
 @Component({
   selector: 'app-single-send-mail',

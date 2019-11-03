@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {CaseAbstract} from "../../case-abstract";
 import {ActivatedRoute} from "@angular/router";
-import {AbstractsService} from "../../../abstracts.service";
+import {AbstractsService} from "../../../../service/abstracts.service";
 
 @Component({
   selector: 'app-case-abstract-items-details',

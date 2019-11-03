@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Category} from "../../../category";
-import {CategoryService} from "../../../category.service";
-import {AbstractsService} from "../../../abstracts.service";
+import {CategoryService} from "../../../../service/category.service";
+import {AbstractsService} from "../../../../service/abstracts.service";
 import {Router} from "@angular/router";
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 

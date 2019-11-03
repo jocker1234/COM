@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../user.service";
+import {UserService} from "../../../service/user.service";
 import {User} from "../user";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {Location} from "@angular/common";
-import {AuthService} from "../../auth/auth.service";
+import {AuthService} from "../../../service/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthoritiesResponse} from "../../auth/authorities-response";
+import {HandlingErrorsService} from "../../../service/handling-errors.service";
+import {CustomValidators} from "../../../custom-validators";
+import {ErrorHandler} from "../../error-handler";
 
 @Component({
   selector: 'app-user-update',
@@ -18,8 +21,10 @@ export class UserUpdateComponent implements OnInit {
   id: number;
   countries: {};
   authorities: AuthoritiesResponse[];
+  error: ErrorHandler;
 
   userEdit = new FormGroup({
+    authorities: new FormControl(null, [Validators.required]),
     email: new FormControl(null, Validators.compose([
       Validators.email,
       Validators.required
@@ -38,17 +43,22 @@ export class UserUpdateComponent implements OnInit {
     ])),*/
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
-    gender: new FormControl(null, [Validators.required]),
+    //gender: new FormControl(null, [Validators.required]),
     dateOfBirth: new FormControl(null, [Validators.required]),
     country: new FormControl(null, [Validators.required]),
     title: new FormControl(null, [Validators.required]),
     university: new FormControl(null, [Validators.required]),
     faculty: new FormControl(null, [Validators.required]),
     yearOfStudy: new FormControl(null, [Validators.required]),
-    phoneNumber: new FormControl(null, [Validators.required]),
-    needVisa: new FormControl(null, [Validators.required]),
-    passportNumber: new FormControl(null)
+    phoneNumber: new FormControl(null, CustomValidators.PhoneNumberValidator(this.getCountry())),
+    //needVisa: new FormControl(null, [Validators.required]),
+    passportNumber: new FormControl(null,
+      CustomValidators.patternValidator(/^[_A-Za-z]{2}[0-9]{7}$/, {hasCapitalCase: true}))
   });
+
+  private getCountry() {
+    return this.userEdit.get('country').value();
+  }
 
   constructor(
     private userService: UserService,
@@ -84,10 +94,19 @@ export class UserUpdateComponent implements OnInit {
     window.history.back();
   }
 
+  checkErrorIsNotUndefined() {
+    return this.error !== undefined;
+  }
+
   save() {
     this.isSaving = true;
-    if (!this.userEdit.value.needVisa)
-      this.userEdit.value.passportNumber = "";
+    /*if (!this.userEdit.value.needVisa)
+      this.userEdit.value.passportNumber = "";*/
+    if(this.userEdit.value.passportNumber !== ""){
+      this.userEdit.value.needVisa = true;
+    } else {
+      this.userEdit.value.needVisa = false;
+    }
     const user: User = this.userEdit.value;
     user.authoritiesSet = this.authorities;
     user.id = this.id;
@@ -98,7 +117,9 @@ export class UserUpdateComponent implements OnInit {
         console.log(user);
         this.userService.updateUser(this.token.getUserId(), user, "true").subscribe(response => {
           this.onSaveSuccess(response);
-        }, error => {
+        }, error1 => {
+          this.error = new ErrorHandler(error1.error.message);
+          scroll(0,0)
           this.onSaveError();
         });
       }

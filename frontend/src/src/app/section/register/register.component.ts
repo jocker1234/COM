@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {SignUpInfo} from '../auth/signup-info';
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../../service/auth.service';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../../custom-validators";
+import {ErrorHandler} from "../error-handler";
 
 @Component({
   selector: 'app-register',
@@ -12,15 +13,14 @@ import {CustomValidators} from "../../custom-validators";
 })
 export class RegisterComponent implements OnInit {
   form: any = {};
-  signupInfo: SignUpInfo;
   isSignedUp = false;
   isSignUpFailed = false;
-  errorMessage = '';
   countries: {};
   isChecked: boolean = false;
   regulationsValid = true;
+  error: ErrorHandler;
 
-  userRole: string[] = [null,'Activate Participant', 'Pasive Participant'];
+  userRole: string[] = [null, 'Activate Participant', 'Pasive Participant'];
 
   registration = new FormGroup({
     authorities: new FormControl(null, [Validators.required]),
@@ -42,16 +42,19 @@ export class RegisterComponent implements OnInit {
     ])),
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
-    gender: new FormControl(null, [Validators.required]),
+    //gender: new FormControl(null, [Validators.required]),
     dateOfBirth: new FormControl(null, [Validators.required]),
     country: new FormControl(null, [Validators.required]),
     title: new FormControl(null, [Validators.required]),
     university: new FormControl(null, [Validators.required]),
     faculty: new FormControl(null, [Validators.required]),
     yearOfStudy: new FormControl(null, [Validators.required]),
-    phoneNumber: new FormControl(null, [Validators.required]),
-    needVisa: new FormControl(null, [Validators.required]),
-    passportNumber: new FormControl(null)
+    phoneNumber: new FormControl(null),
+      //CustomValidators.patternValidator(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
+                                                  //{hasCapitalCase: true})/*[Validators.required]*/),
+    //needVisa: new FormControl(null, [Validators.required]),
+    passportNumber: new FormControl(null,
+      CustomValidators.patternValidator(/^[_A-Za-z]{2}[0-9]{7}$/, {hasCapitalCase: true}))
   });
 
   constructor(private authService: AuthService,
@@ -61,6 +64,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.authService.countryList().subscribe(data => this.countries = data);
   }
+
+  /*passportNumberValidation(){
+    if(this.registration.get('needVisa').value === 'true') {
+      this.registration.addControl('passportNumber', new FormControl(Validators.required));
+    }
+    console.log(this.registration);
+  }*/
 
   checkBox() {
     this.isChecked = !this.isChecked;
@@ -80,6 +90,10 @@ export class RegisterComponent implements OnInit {
     };
   }
 
+  checkErrorIsNotUndefined() {
+    return this.error !== undefined;
+  }
+
   onSubmit() {
     if (this.isChecked && this.registration.valid) {
       this.authService.signUp(this.registration.value).subscribe(
@@ -87,6 +101,9 @@ export class RegisterComponent implements OnInit {
           this.isSignedUp = true;
           this.isSignUpFailed = false;
           this.router.navigate(['/login']);
+        }, error1 => {
+          this.error = new ErrorHandler(error1.error.message);
+          scroll(0,0)
         }
       );
     } else {

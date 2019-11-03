@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AuthoritiesResponse} from "./authorities-response";
 import * as jwt_decode from 'jwt-decode';
+import {Router} from "@angular/router";
 
 const TOKEN_KEY = 'AuthToken';
 const TOKEN_EXPIRED = 'TokenExpired'
@@ -13,12 +14,12 @@ const USERID_KEY = 'AuthUserId';
 })
 export class TokenStorageService {
   private roles: Array<string> = [];
-  constructor() { }
+  constructor(private router: Router) { }
 
   signOut() {
     if (window.localStorage.length !== 0) {
       window.localStorage.clear();
-      window.location.replace('');
+      this.router.navigateByUrl('/login');
     }
   }
 
