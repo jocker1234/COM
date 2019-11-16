@@ -4,6 +4,7 @@ import {User} from "../user";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common';
 import {TokenStorageService} from "../../auth/token-storage.service";
+import {ErrorHandler} from "../../error-handler";
 
 @Component({
   selector: 'app-user-detail',
@@ -11,8 +12,9 @@ import {TokenStorageService} from "../../auth/token-storage.service";
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
-  private _user: User;
-  protected id: number;
+  protected _user: User;
+  private _id: number;
+  protected _error: ErrorHandler;
 
   constructor(protected activatedRouter: ActivatedRoute,
               protected userService: UserService,
@@ -26,12 +28,26 @@ export class UserDetailComponent implements OnInit {
   }
 
   protected getUser() {
-    this.id = +this.activatedRouter.snapshot.paramMap.get('id');
-    this.userService.getUser(Number(this.id)).subscribe(user => {
+    this._id = +this.activatedRouter.snapshot.paramMap.get('id');
+    this.userService.getUser(Number(this._id)).subscribe(user => {
       this._user = user
+    }, error1 => {
+      this._error = new ErrorHandler(error1.error.message);
+      scroll(0,0)
     });
   }
 
+  checkErrorIsNotUndefined() {
+    return this._error !== undefined;
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
+  get error(): ErrorHandler {
+    return this._error;
+  }
 
   get user(): User {
     return this._user;

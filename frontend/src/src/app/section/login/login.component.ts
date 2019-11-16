@@ -5,7 +5,6 @@ import {TokenStorageService} from '../auth/token-storage.service';
 import {AuthLoginInfo} from '../auth/login-info';
 import {JwtResponse} from '../auth/jwt-response';
 import {Router} from "@angular/router";
-import {HandlingErrorsService} from "../../service/handling-errors.service";
 import {ErrorHandler} from "../error-handler";
 
 @Component({

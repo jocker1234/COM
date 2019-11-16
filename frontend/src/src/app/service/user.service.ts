@@ -30,8 +30,7 @@ export class UserService {
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.userUrl}/${id}`)
-      .pipe(catchError(HandlingErrorsService.handleError));
+    return this.http.get<User>(`${this.userUrl}/${id}`);
   }
 
   deleteUser(id: number) {

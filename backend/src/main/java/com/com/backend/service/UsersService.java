@@ -12,6 +12,7 @@ import com.com.backend.model.Users;
 public interface UsersService extends AbstractService<Users, UserResponse> {
 
     String getEmailFromToken(String token);
+    Long getUserIDFromToken(String token) throws NotFoundException;
     String getEmailFromUserId(long id);
     Users findByEmail(String email);
     UserResponse signUpUser(UserCreateRequest usersDtoRequest) throws AppException;

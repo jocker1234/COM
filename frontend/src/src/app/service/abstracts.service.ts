@@ -37,8 +37,7 @@ export class AbstractsService {
   }
 
   getOneCaseAbstract(id: number): Observable<CaseAbstract> {
-    return this.http.get<CaseAbstract>(`${this.caseUrl}/${id}`)
-      .pipe(catchError(HandlingErrorsService.handleError));
+    return this.http.get<CaseAbstract>(`${this.caseUrl}/${id}`);
   }
 
   saveCaseAbstract(id: number, caseAbstract: CaseAbstract): Observable<CaseAbstract> {
@@ -62,8 +61,7 @@ export class AbstractsService {
   }
 
   getOneResearchAbstract(id: number): Observable<ResearchAbstract> {
-    return this.http.get<ResearchAbstract>(`${this.researchUrl}/${id}`)
-      .pipe(catchError(HandlingErrorsService.handleError));
+    return this.http.get<ResearchAbstract>(`${this.researchUrl}/${id}`);
   }
 
   saveResearchAbstract(id: number, researchAbstract: ResearchAbstract): Observable<ResearchAbstract> {

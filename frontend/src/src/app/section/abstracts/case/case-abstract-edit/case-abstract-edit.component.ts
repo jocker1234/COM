@@ -22,8 +22,8 @@ export class CaseAbstractEditComponent extends CaseAbstractCreateComponent imple
   }
 
   ngOnInit() {
+    this._id = +this.route.snapshot.paramMap.get('id');
     this.categoryService.getCategory().subscribe(data => this.categories = data);
-    this._id = +this.route.snapshot.paramMap.get('_id');
     this.abstractService.getOneCaseAbstract(Number(this._id)).subscribe(value => {
       this.abstractForm.patchValue(value);
       this._category = value.category;

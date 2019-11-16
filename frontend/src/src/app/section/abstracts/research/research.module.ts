@@ -10,6 +10,7 @@ import {ResearchAbstractItemsDetailsComponent} from "./research-abstract-items-d
 import { ResearchAbstractEditComponent } from './research-abstract-edit/research-abstract-edit.component';
 import {AbstractsModule} from "../abstracts.module";
 import {AutosizeModule} from "ngx-autosize";
+import {FieldErrorDisplayModule} from "../../field-error-display/field-error-display.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {AutosizeModule} from "ngx-autosize";
     ReactiveFormsModule,
     AbstractsModule,
     AutosizeModule,
+    FieldErrorDisplayModule,
   ]
 })
 export class ResearchModule { }

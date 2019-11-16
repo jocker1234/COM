@@ -31,36 +31,40 @@ public abstract class AbstractsAbstractController<TREQ extends AbstractsDtoReque
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
-    public ResponseEntity<TRES> getOne(@PathVariable Long id) throws AbstractNotFoundException {
-        TRES t = getService().getOne(id);
+    public ResponseEntity<TRES> getOne(@RequestHeader(value = "Authorization")String token, @PathVariable Long id)
+                                                                                                throws AppException {
+        TRES t = getService().getOne(id, token);
         return ResponseEntity.ok(t);
     }
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ACTIVE_PARTICIPANT')")
-    public ResponseEntity<TRES> create(@RequestBody TREQ t, @RequestHeader(value = "Authorization")String token) throws AppException {
+    public ResponseEntity<TRES> create(@RequestBody TREQ t, @RequestHeader(value = "Authorization")String token)
+                                                                                                    throws AppException {
         TRES result = getService().create(t, token);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ACTIVE_PARTICIPANT')")
-    public ResponseEntity<TRES> update(@PathVariable Long id, @RequestBody TREQ t) throws AppException {
-        TRES result = getService().update(id, t);
+    public ResponseEntity<TRES> update(@RequestHeader(value = "Authorization")String token, @PathVariable Long id,
+                                                                            @RequestBody TREQ t) throws AppException {
+        TRES result = getService().update(id, t, token);
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ACTIVE_PARTICIPANT')")
-    public ResponseEntity<?> delete(@PathVariable Long id) throws AbstractNotFoundException {
-        getService().delete(id);
+    public ResponseEntity<?> delete(@RequestHeader(value = "Authorization")String token, @PathVariable Long id)
+                                                                                                throws AppException {
+        getService().delete(id, token);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/save")
     @PreAuthorize("hasAnyRole('ROLE_ACTIVE_PARTICIPANT')")
-    public ResponseEntity save(@PathVariable Long id, @RequestBody TREQ t) throws AppException {
-        TRES result = getService().update(id, t);
+    public ResponseEntity save(@RequestHeader(value = "Authorization")String token, @PathVariable Long id, @RequestBody TREQ t) throws AppException {
+        TRES result = getService().update(id, t, token);
         return ResponseEntity.ok(result);
     }
 

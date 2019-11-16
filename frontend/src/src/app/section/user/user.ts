@@ -19,7 +19,7 @@ export class User {
   title: string;
   university: string;
   yearOfStudy: number;
-  authoritiesSet: AuthoritiesResponse[];
+  authoritiesSet: AuthoritiesResponse[] = [];
   abstractDtos: Abstract[] = [];
 
   constructor(user?: User) {

@@ -35,9 +35,9 @@ export class AbstractActionButtonsComponent implements OnInit {
 
   checkStatus(): boolean {
     if (this.case !== undefined) {
-      return this.case.status === 'D';
+      return this.case.status === 'SEND';
     } else if (this.research !== undefined) {
-      return this.research.status === 'D';
+      return this.research.status === 'SEND';
     }
   }
 

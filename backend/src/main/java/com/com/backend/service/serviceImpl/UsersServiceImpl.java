@@ -22,10 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -55,6 +52,10 @@ public class UsersServiceImpl implements UsersService {
     public String getEmailFromToken(String token) {
         token = token.replaceFirst("Bearer ", "");
         return jwtProvider.getEmailFromJwtToken(token);
+    }
+
+    public Long getUserIDFromToken(String token) throws NotFoundException {
+        return getUserIdByEmail(getEmailFromToken(token));
     }
 
     public String getEmailFromUserId(long id) {
@@ -210,11 +211,15 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UserResponse getOne(Long id) throws AppException {
-        Users user = usersDao.findById(id).get();
-        if (user == null)
+    public UserResponse getOne(Long id, String token) throws AppException {
+        long userId = getUserIDFromToken(token);
+        Optional<Users> user = usersDao.findById(id);
+        if (!user.isPresent())
             throw new AppException(EntityType.USER, ExceptionType.NOT_FOUND);
-        return usersMapper.usersToUsersResponse(user);
+        if(user.get().getId() != userId){
+            throw new AppException(ExceptionType.NO_ACCESS);
+        }
+        return usersMapper.usersToUsersResponse(user.get());
     }
 
     @Override

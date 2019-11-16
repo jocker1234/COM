@@ -18,6 +18,8 @@ public class AbstractsDtoRequest extends AbstractDto {
     @NonNull
     private String tutors;
     @NonNull
+    private String affiliation;
+    @NonNull
     private String status;
     @NonNull
     private Long categoryId;

@@ -21,6 +21,7 @@ public enum ExceptionType {
     WRONG_STATUS("wrong.status"),
     NOT_FOUND("not.found"),
     WRONG_VALUE("wrong.value"),
+    NO_ACCESS("no.access"),
 
     ABSTRACT_AMMOUNT("abstract.amount");
 

@@ -20,6 +20,7 @@ export class CaseAbstractCreateComponent implements OnInit {
       new FormControl('')
     ]),
     tutors: new FormControl('', [Validators.required]),
+    affiliation: new FormControl('', [Validators.required]),
     categoryId: new FormControl('', [Validators.required]),
     background: new FormControl('', [Validators.required]),
     caseReport: new FormControl('', [Validators.required]),

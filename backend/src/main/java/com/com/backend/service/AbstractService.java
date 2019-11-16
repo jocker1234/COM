@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AbstractService<T extends AbstractEntity, TDTO extends AbstractDto> {
 
-    TDTO getOne(Long id) throws AppException;
+    TDTO getOne(Long id, String token) throws AppException;
 
     List<TDTO> getAll();
 

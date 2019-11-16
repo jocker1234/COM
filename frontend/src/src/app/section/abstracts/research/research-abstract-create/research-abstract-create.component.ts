@@ -21,6 +21,7 @@ export class ResearchAbstractCreateComponent implements OnInit {
       new FormControl('')
     ]),
     tutors: new FormControl('', [Validators.required]),
+    affiliation: new FormControl('', [Validators.required]),
     categoryId: new FormControl('', [Validators.required]),
     introduction: new FormControl('', [Validators.required]),
     aimOfTheStudy: new FormControl('', [Validators.required]),

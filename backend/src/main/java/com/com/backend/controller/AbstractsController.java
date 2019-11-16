@@ -1,8 +1,13 @@
 package com.com.backend.controller;
 
+import com.com.backend.exception.AppException;
 import com.com.backend.model.Abstracts;
 import com.com.backend.service.AbstractsService;
-import org.springframework.batch.core.*;
+import com.com.backend.service.UsersService;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
@@ -21,6 +26,9 @@ public class AbstractsController {
 
     @Autowired
     private AbstractsService abstractsService;
+
+    @Autowired
+    private UsersService usersService;
 
     @Autowired
     @Qualifier("caseAbstracts")
@@ -54,5 +62,12 @@ public class AbstractsController {
     public ResponseEntity AbstractsForUser(@RequestHeader(value = "Authorization")String token) {
         List<Abstracts> abstractsList = abstractsService.getAllAbstractUser(token);
         return ResponseEntity.ok(abstractsList);
+    }
+
+    @GetMapping("/countUserAbstracts")
+    public ResponseEntity countAbstractsForUser(@RequestHeader(value = "Authorization")String token) throws AppException {
+        String email = usersService.getEmailFromToken(token);
+        long count = abstractsService.countAllAbstractUser(email);
+        return ResponseEntity.ok(count);
     }
 }

@@ -9,7 +9,7 @@
   <h2>Update Data</h2><br/>
   <form name="form" (ngSubmit)="save()" [formGroup]="userEdit" novalidate>
     <div class="form-group row" [ngClass]="displayFieldCss('email')">
-      <label class="col-sm-3 col-form-label">E-mail*</label>
+      <label class="col-sm-3 col-form-label">E-mail *</label>
       <div class="col-sm-7">
         <input type="text" class="form-control" name="email" formControlName="email" required/>
         <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Email field is required">
@@ -25,7 +25,7 @@
       </div>
     </div-->
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">First name</label>
+      <label class="col-sm-3 col-form-label">First name *</label>
       <div class="col-sm-7">
         <input type="text" class="form-control" name="firstName" formControlName="firstName" required/>
         <app-field-error-display [displayError]="isFieldValid('firstName')" errorMsg="First name is required">
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Last name</label>
+      <label class="col-sm-3 col-form-label">Last name *</label>
       <div class="col-sm-7">
         <input type="text" class="form-control" name="lastName" formControlName="lastName" required/>
         <app-field-error-display [displayError]="isFieldValid('lastName')" errorMsg="Last name is required">
@@ -53,7 +53,7 @@
       </div>
     </div>-->
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Date of birth</label>
+      <label class="col-sm-3 col-form-label">Date of birth *</label>
       <div class="col-sm-7">
         <input class="form-control" type="date" name="dateOfBirth" formControlName="dateOfBirth">
         <app-field-error-display [displayError]="isFieldValid('dateOfBirth')"
@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Country</label>
+      <label class="col-sm-3 col-form-label">Country *</label>
       <div class="col-sm-7">
         <select class="col-sm-7 form-control" name="country" formControlName="country">
           <option value="null"></option>
@@ -73,7 +73,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Title</label>
+      <label class="col-sm-3 col-form-label">Title *</label>
       <div class="col-sm-7">
         <select class="col-sm-7 form-control" name="title" formControlName="title">
           <option value="null" selected></option>
@@ -85,7 +85,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">University</label>
+      <label class="col-sm-3 col-form-label">University *</label>
       <div class="col-sm-7">
         <input type="text" class="form-control" name="university" formControlName="university" required/>
         <app-field-error-display [displayError]="isFieldValid('university')" errorMsg="University is required">
@@ -93,7 +93,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Faculty</label>
+      <label class="col-sm-3 col-form-label">Faculty *</label>
       <div class="col-sm-7">
         <input type="text" class="form-control" name="faculty" formControlName="faculty" required/>
         <app-field-error-display [displayError]="isFieldValid('faculty')" errorMsg="Faculty is required">
@@ -101,7 +101,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-3 col-form-label">Year of study</label>
+      <label class="col-sm-3 col-form-label">Year of study *</label>
       <div class="col-sm-7">
         <select class="col-sm-7 form-control" name="yearOfStudy" formControlName="yearOfStudy">>
           <option value="null" selected></option>

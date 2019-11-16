@@ -10,6 +10,7 @@ import { ChooseNewAbstractContentComponent } from './choose-new-abstract-content
 import { AbstractActionButtonsComponent } from './abstract-action-buttons/abstract-action-buttons.component';
 import { AbstractsTableComponent } from './abstracts-table/abstracts-table.component';
 import {AutosizeModule} from "ngx-autosize";
+import {FieldErrorDisplayModule} from "../field-error-display/field-error-display.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {AutosizeModule} from "ngx-autosize";
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
+    FieldErrorDisplayModule,
   ],
   entryComponents: [
     ChooseNewAbstractContentComponent

@@ -23,7 +23,7 @@ export class ResearchAbstractEditComponent extends ResearchAbstractCreateCompone
 
   ngOnInit() {
     this.categoryService.getCategory().subscribe(data => this.categories = data);
-    this._id = +this.route.snapshot.paramMap.get('_id');
+    this._id = +this.route.snapshot.paramMap.get('id');
     this.abstractService.getOneResearchAbstract(Number(this._id)).subscribe(value => {
       this.abstractForm.patchValue(value);
       this._category = value.category;

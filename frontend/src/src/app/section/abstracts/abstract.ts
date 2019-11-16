@@ -5,6 +5,7 @@ export class Abstract {
   title: string = '';
   authors: any[] = [];
   tutors: string = '';
+  affiliation: string = '';
   categoryId: number;
   category: Category = new Category();
   type: string = '';

@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Abstract} from "./abstract";
 import {AbstractsService} from "../../service/abstracts.service";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChooseNewAbstractContentComponent} from "./choose-new-abstract-content/choose-new-abstract-content.component";
 import {CategoryService} from "../../service/category.service";
+import {ErrorHandler} from "../error-handler";
 
 @Component({
   selector: 'app-abstracts',
@@ -17,6 +18,7 @@ export class AbstractsComponent implements OnInit {
 
   constructor(private abstractService: AbstractsService, private router: Router, private dialog: NgbModal,
               private categoryService: CategoryService) {
+    console.log(history.state);
   }
 
   ngOnInit() {
@@ -28,14 +30,12 @@ export class AbstractsComponent implements OnInit {
     }
   }
 
-
   get abstractList(): Abstract[] {
     return this._abstractList;
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ChooseNewAbstractContentComponent);
-
   }
 
 }

@@ -7,6 +7,7 @@ public enum Fields {
     AUTHOR("Author"),
     TITLE("Title"),
     TUTORS("Tutors"),
+    AFFILIATION("Affiliation"),
 
     //Case
     CASE_REPORT("Case report"),

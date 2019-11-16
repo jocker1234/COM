@@ -19,9 +19,11 @@ public class AbstractsDtoResponse extends AbstractDto {
     @NonNull
     private String tutors;
     @NonNull
+    private String affiliation;
+    @NonNull
     private String status;
     @NonNull
     private CategoryDto category;
-
+    @NonNull
     private String type;
 }
