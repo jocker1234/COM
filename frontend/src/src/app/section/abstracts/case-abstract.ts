@@ -7,7 +7,7 @@ export class CaseAbstract extends Abstract{
 
   constructor() {
     super();
-    this.type = 'C';
+    //this.type = 'C';
   }
 
 }

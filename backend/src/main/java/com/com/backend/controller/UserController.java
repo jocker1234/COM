@@ -38,8 +38,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ACTIVE_PARTICIPANT', 'PASSIVE_PARTICIPANT', 'ADMIN')")
-    public ResponseEntity<UserResponse> getUser(@Valid @PathVariable Long id) throws AppException {
-        UserResponse users = usersService.getOne(id);
+    public ResponseEntity<UserResponse> getUser(@RequestHeader(value = "Authorization")String token,
+                                                                    @Valid @PathVariable Long id) throws AppException {
+        UserResponse users = usersService.getOne(id, token);
         return ResponseEntity.ok(users);
     }
 
@@ -63,7 +64,7 @@ public class UserController {
         }*/
 
         if(!usersService.getEmailFromUserId(usersDto.getId()).equals(email)) {
-            throw new AppException(ExceptionType.PRIVILEGES);
+            throw new AppException(ExceptionType.NO_ACCESS);
         }
 
         if(isUpdated.equals("false"))
@@ -79,7 +80,7 @@ public class UserController {
                                            @Valid @PathVariable Long id) throws AppException {
         String email = usersService.getEmailFromToken(token);
         if(!usersService.getUserIdByEmail(email).equals(id)) {
-            throw new AppException(ExceptionType.PRIVILEGES);
+            throw new AppException(ExceptionType.NO_ACCESS);
         }
 
         usersService.deleteUser(id);

@@ -2,7 +2,7 @@
   <form class="needs-validation" [formGroup]="abstractForm" novalidate>
     <div class="form-group col">
       <div class="row">
-        <label class="col-2 col-form-label">Title</label>
+        <label class="col-2 col-form-label">Title *</label>
         <div class="col-7">
           <input type="text" class="form-control" formControlName="title">
           <div class="error-messages" *ngIf="!(abstractForm.get('title').untouched || abstractForm.get('title').valid)">
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="row" formArrayName="authors">
-        <label class="col-2 col-form-label">Authors</label>
+        <label class="col-2 col-form-label">Authors *</label>
         <div class="col-7 row row-author" *ngFor="let author of authors.controls; index as idx">
           <input class="form-control author-input" [formControlName]="idx">
           <button class="btn btn-secondary" type="button" (click)="deleteAuthorField(idx)">-</button>
@@ -19,7 +19,7 @@
         <button type="btn button-plus" (click)="addAuthorField()">+</button>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Tutor</label>
+        <label class="col-2 col-form-label">Tutor *</label>
         <div class="col-5">
           <input type="text" class="form-control" formControlName="tutors">
           <span class="error-messages"
@@ -29,7 +29,17 @@
         </div>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Category</label>
+        <label class="col-2 col-form-label">Affiliation *</label>
+        <div class="col-5">
+          <input type="text" class="form-control" formControlName="affiliation">
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('affiliation').untouched || abstractForm.get('affiliation').valid)">
+          Affiliation field is required
+        </span>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-2 col-form-label">Category *</label>
         <div class="col-7">
           <select class="form-control col-7" formControlName="categoryId">
             <option value="">Select category...</option>
@@ -38,7 +48,7 @@
         </div>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Introduction</label>
+        <label class="col-2 col-form-label">Introduction *</label>
         <div class="col-7">
         <textarea type="text" class="form-control"
                   formControlName="introduction" autosize></textarea>
@@ -47,7 +57,7 @@
         </div>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Aim of the study</label>
+        <label class="col-2 col-form-label">Aim of the study *</label>
         <div class="col-7">
         <textarea type="text" class="form-control"
                   formControlName="aimOfTheStudy" autosize></textarea>
@@ -56,7 +66,7 @@
         </div>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Material and methods</label>
+        <label class="col-2 col-form-label">Material and methods *</label>
         <div class="col-7">
         <textarea type="text" class="form-control"
                   formControlName="materialAndMethods" autosize></textarea>
@@ -65,7 +75,7 @@
         </div>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Result</label>
+        <label class="col-2 col-form-label">Result *</label>
         <div class="col-7">
         <textarea type="text" class="form-control"
                   formControlName="results" autosize></textarea>
@@ -74,7 +84,7 @@
         </div>
       </div>
       <div class="row">
-        <label class="col-2 col-form-label">Conclusions</label>
+        <label class="col-2 col-form-label">Conclusions *</label>
         <div class="col-7">
         <textarea type="text" class="form-control"
                   formControlName="conclusions" autosize></textarea>

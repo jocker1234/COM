@@ -6,7 +6,8 @@ import java.util.Map;
 public enum Status {
 
     DO("D"),
-    FORWARDED("F"),
+    //FORWARDED("F"),
+    SEND("S"),
     APPROVED("A"),
     REJECTED("R");
 

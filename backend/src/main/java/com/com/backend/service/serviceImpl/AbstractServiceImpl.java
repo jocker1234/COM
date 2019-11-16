@@ -1,9 +1,14 @@
 package com.com.backend.service.serviceImpl;
 
+import com.com.backend.dao.AbstractsDao;
+import com.com.backend.exception.AppException;
 import com.com.backend.model.Abstracts;
+import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.service.AbstractsAbstractService;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.UsersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -17,13 +22,16 @@ public class AbstractServiceImpl implements AbstractsService {
     private UsersService usersService;
     private AbstractsAbstractService researchAbstract;
     private AbstractsAbstractService caseAbstract;
+    private AbstractsDao abstractsDao;
 
     public AbstractServiceImpl(UsersService usersService,
                                @Lazy @Qualifier("researchAbstractsServiceImpl") AbstractsAbstractService researchAbstract,
-                               @Lazy @Qualifier("caseAbstractsServiceImpl") AbstractsAbstractService caseAbstract) {
+                               @Lazy @Qualifier("caseAbstractsServiceImpl") AbstractsAbstractService caseAbstract,
+                               AbstractsDao abstractsDao) {
         this.usersService = usersService;
         this.researchAbstract = researchAbstract;
         this.caseAbstract = caseAbstract;
+        this.abstractsDao = abstractsDao;
     }
 
     public List<Abstracts> getAllAbstractUser(String token) {
@@ -35,10 +43,12 @@ public class AbstractServiceImpl implements AbstractsService {
     }
 
     @Override
-    public int countAllAbstractUser(String email) {
-        int countCase = caseAbstract.countUserAbstract(email);
-        int countResearch = researchAbstract.countUserAbstract(email);
-        return countCase + countResearch;
+    public long countAllAbstractUser(String email) throws AppException {
+        long id = usersService.getUserIdByEmail(email);
+        long count = abstractsDao.countAllAbstracts(id);
+        if(count >= 2)
+            throw new AppException(ExceptionType.ABSTRACT_AMMOUNT);
+        return count;
     }
 
 }

@@ -2,6 +2,7 @@ package com.com.backend.mapper;
 
 import com.com.backend.dto.response.CaseAbstractsDtoResponse;
 import com.com.backend.model.enums.AbstractType;
+import com.com.backend.model.enums.Status;
 import com.com.backend.util.Util;
 import com.com.backend.model.CaseAbstracts;
 import com.com.backend.dto.request.CaseAbstractsDtoRequest;
@@ -9,7 +10,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", imports = {Util.class, AbstractType.class})
+@Mapper(componentModel = "spring", imports = {Util.class, AbstractType.class, Status.class})
 public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDtoRequest, CaseAbstractsDtoResponse, CaseAbstracts> {
 
     @Mappings({
@@ -17,9 +18,10 @@ public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDtoReq
             @Mapping(source = "s.title", target = "title"),
             @Mapping(source = "s.category", target = "category"),
             @Mapping(source = "s.authors", target = "authors"),
+            @Mapping(source = "s.affiliation", target = "affiliation"),
             @Mapping(source = "s.tutors", target = "tutors"),
-            @Mapping(source = "s.status", target = "status"),
-            @Mapping(source = "s.type", target = "type"),
+            @Mapping(expression = "java(Status.findStatus(s.getStatus()).name())", target = "status"),
+            @Mapping(expression = "java(s.getType().getDesc())", target = "type"),
             @Mapping(source = "s.background", target = "background"),
             @Mapping(source = "s.caseReport", target = "caseReport"),
             @Mapping(source = "s.conclusions", target = "conclusions")
@@ -32,6 +34,7 @@ public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDtoReq
             @Mapping(source = "s.category", target = "category"),
             @Mapping(source = "s.authors", target = "authors"),
             @Mapping(source = "s.tutors", target = "tutors"),
+            @Mapping(source = "s.affiliation", target = "affiliation"),
             @Mapping(source = "s.status", target = "status"),
             @Mapping(expression = "java(AbstractType.valueOf(s.getType()))", target = "type"),
             @Mapping(source = "s.background", target = "background"),
@@ -47,6 +50,7 @@ public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDtoReq
             @Mapping(source = "s.category.id", target = "categoryId"),
             @Mapping(source = "s.authors", target = "authors"),
             @Mapping(source = "s.tutors", target = "tutors"),
+            @Mapping(source = "s.affiliation", target = "affiliation"),
             @Mapping(source = "s.status", target = "status"),
             @Mapping(source = "s.type", target = "type"),
             @Mapping(source = "s.background", target = "background"),
@@ -61,6 +65,7 @@ public interface CaseAbstractsMapper extends AbstractsMapper<CaseAbstractsDtoReq
             @Mapping(target = "category", ignore = true),
             @Mapping(source = "s.authors", target = "authors"),
             @Mapping(source = "s.tutors", target = "tutors"),
+            @Mapping(source = "s.affiliation", target = "affiliation"),
             @Mapping(source = "s.status", target = "status"),
             @Mapping(expression = "java(AbstractType.valueOf(s.getType()))", target = "type"),
             @Mapping(source = "s.background", target = "background"),

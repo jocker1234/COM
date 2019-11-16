@@ -50,7 +50,7 @@ export class UserUpdateComponent implements OnInit {
     university: new FormControl(null, [Validators.required]),
     faculty: new FormControl(null, [Validators.required]),
     yearOfStudy: new FormControl(null, [Validators.required]),
-    phoneNumber: new FormControl(null, CustomValidators.PhoneNumberValidator(this.getCountry())),
+    phoneNumber: new FormControl(null, /*CustomValidators.PhoneNumberValidator(this.getCountry())*/),
     //needVisa: new FormControl(null, [Validators.required]),
     passportNumber: new FormControl(null,
       CustomValidators.patternValidator(/^[_A-Za-z]{2}[0-9]{7}$/, {hasCapitalCase: true}))

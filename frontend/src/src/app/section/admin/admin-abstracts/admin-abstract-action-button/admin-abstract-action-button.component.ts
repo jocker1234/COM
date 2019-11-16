@@ -30,6 +30,14 @@ export class AdminAbstractActionButtonComponent implements OnInit {
     return this._status;
   }
 
+  checkStatus() {
+    if(this.status === 'S' || this.status === 'A' || this.status === 'R') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   approved() {
     if (this.prefixUrl.includes("case") === true) {
       this.abstractService.rejectionApprovedCase(this.id, "A").subscribe(value => {

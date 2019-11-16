@@ -22,9 +22,9 @@ export class AbstractsTableComponent implements OnInit {
 
   getRouterLink(abstract: Abstract) {
     let url = "";
-    if (abstract.type == 'c' || abstract.type == 'C') {
+    if (abstract.type == 'c' || abstract.type == 'C' || abstract.type === 'Case Report') {
       url += "case/";
-    } else if (abstract.type == 'r' || abstract.type == 'R') {
+    } else if (abstract.type == 'r' || abstract.type == 'R' || abstract.type === 'Research') {
       url += "research/";
     }
     url += abstract.id;

@@ -11,6 +11,7 @@ import {CaseAbstractItemsDetailsComponent} from "./case-abstract-items-details/c
 import { CaseAbstractEditComponent } from './case-abstract-edit/case-abstract-edit.component';
 import {AbstractsModule} from "../abstracts.module";
 import {AutosizeModule} from "ngx-autosize";
+import {FieldErrorDisplayModule} from "../../field-error-display/field-error-display.module";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {AutosizeModule} from "ngx-autosize";
     NgbModule,
     ReactiveFormsModule,
     AbstractsModule,
-    AutosizeModule
+    AutosizeModule,
+    FieldErrorDisplayModule
   ],
   providers: [httpInterceptorProvider],
 })

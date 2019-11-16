@@ -9,6 +9,6 @@ export class ResearchAbstract extends Abstract{
 
   constructor() {
     super();
-    this.type = 'R';
+    //this.type = 'R';
   }
 }

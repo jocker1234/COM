@@ -1,4 +1,11 @@
 <div class="jumbotron container">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-3 col-form-label"></p>
+    <p class="col-sm-7">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
   <div class="col">
     <div class="row">
       <p class="col-1"></p>
@@ -14,6 +21,16 @@
       <p class="col-1"></p>
       <h5 class="col-2 col-form-label">Tutor</h5>
       <p class="col-9">{{abstract.tutors}}</p>
+    </div>
+    <div class="row">
+      <p class="col-1"></p>
+      <h5 class="col-2 col-form-label">Affiliation</h5>
+      <p class="col-9">{{abstract.affiliation}}</p>
+    </div>
+    <div class="row">
+      <p class="col-1"></p>
+      <h5 class="col-2 col-form-label">Type</h5>
+      <p class="col-9">{{abstract.type}}</p>
     </div>
     <div class="row">
       <p class="col-1"></p>

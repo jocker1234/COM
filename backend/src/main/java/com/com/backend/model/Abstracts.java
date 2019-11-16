@@ -30,6 +30,8 @@ public abstract class Abstracts extends AbstractEntity {
     @Column(nullable = false)
     private String tutors;
     @Column(nullable = false)
+    private String affiliation;
+    @Column(nullable = false)
     private String status;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

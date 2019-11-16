@@ -1,10 +1,30 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-body">
-      <ul>
-        <li class="card" style="width: 18rem;"><a routerLink="abstracts/case/new" (click)="closeDialog()">Case</a></li>
-        <li class="card" style="width: 18rem;"><a routerLink="abstracts/research/new" (click)="closeDialog()">Research</a></li>
-      </ul>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title text-center">
+                <a routerLink="abstracts/case/new" (click)="closeDialog()">
+                  Case Report
+                </a>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title text-center align-middle">
+                <a routerLink="abstracts/research/new" (click)="closeDialog()">
+                  Research
+                </a>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

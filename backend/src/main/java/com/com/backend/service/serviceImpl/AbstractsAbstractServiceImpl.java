@@ -9,6 +9,7 @@ import com.com.backend.exception.WrongValueException;
 import com.com.backend.mapper.AbstractsMapper;
 import com.com.backend.model.Abstracts;
 import com.com.backend.model.Users;
+import com.com.backend.model.enums.AbstractType;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
 import com.com.backend.model.enums.Status;
@@ -56,10 +57,14 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
         return getMapper().modelListToDtoListRes(s);
     }
 
-    public TRES getOne(Long id) throws AbstractNotFoundException {
+    public TRES getOne(Long id, String token) throws AppException {
+        long userId = usersService.getUserIDFromToken(token);
         Optional<S> s = getDao().findById(id);
         if (!s.isPresent()) {
             throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
+        }
+        if(s.get().getUsers().getId() != userId){
+            throw new AppException(ExceptionType.NO_ACCESS);
         }
         return (TRES) getMapper().modelToDtoRes(s.get());
     }
@@ -77,14 +82,18 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
         if (Util.isNull(t.getTutors())) {
             throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.TUTORS);
         }
+        if (Util.isNull(t.getAffiliation())) {
+            throw new WrongValueException(ExceptionType.WRONG_VALUE, Fields.AFFILIATION);
+        }
         if (Util.isNull(t.getStatus())) {
             t.setStatus(Status.DO.getStatus());
         }
+        t.setType(AbstractType.findType(t.getType()).name());
     }
 
     public TRES create(TREQ t, String token) throws AppException {
         String email = usersService.getEmailFromToken(token);
-        int countAllAbstractUser = abstractsService.countAllAbstractUser(email);
+        long countAllAbstractUser = abstractsService.countAllAbstractUser(email);
         if (countAllAbstractUser >= 2) {
             throw new AppException(ExceptionType.ABSTRACT_AMMOUNT);
         }
@@ -99,7 +108,7 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
     }
 
     @Transactional
-    public TRES update(Long id, TREQ t) throws AppException {
+    public TRES update(Long id, TREQ t, String token) throws AppException {
         S updated = getDao().save(dtoReqToModel(t));
         return (TRES) getMapper().modelToDtoRes(updated);
     }
@@ -117,11 +126,18 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
         if (!sTo.getTutors().equals(tFrom.getTutors())) {
             sTo.setTutors(tFrom.getTutors());
         }
+        if (!sTo.getAffiliation().equals(tFrom.getAffiliation())) {
+            sTo.setAffiliation(tFrom.getAffiliation());
+        }
         return sTo;
     }
 
     @Transactional
-    public void delete(Long id) throws AbstractNotFoundException {
+    public void delete(Long id, String token) throws AppException {
+        long userId = usersService.getUserIDFromToken(token);
+        if(id != userId){
+            throw new AppException(ExceptionType.NO_ACCESS);
+        }
         try {
             getDao().deleteById(id);
         } catch (EmptyResultDataAccessException e) {

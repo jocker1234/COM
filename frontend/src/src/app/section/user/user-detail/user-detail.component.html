@@ -1,3 +1,10 @@
+<div class="row" *ngIf="checkErrorIsNotUndefined()">
+  <p class="col-sm-3 col-form-label"></p>
+  <p class="col-sm-7">
+    <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+    </app-error-display>
+  </p>
+</div>
 <div *ngIf="user" class="container table-user">
   <table class="col">
     <tr><h4>Account data</h4></tr>
