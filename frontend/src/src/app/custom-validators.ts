@@ -17,7 +17,7 @@ export class CustomValidators {
     };
   }
 
-  static PhoneNumberValidator(regionCode: string = undefined): ValidatorFn {
+  /*static PhoneNumberValidator(regionCode: string = undefined): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       let validNumber = false;
       try {
@@ -29,6 +29,6 @@ export class CustomValidators {
 
       return validNumber ? null : { 'wrongNumber': { value: control.value } };
     }
-  }
+  }*/
 
 }
