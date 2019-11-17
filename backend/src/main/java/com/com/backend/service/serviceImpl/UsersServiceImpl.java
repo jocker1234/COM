@@ -223,7 +223,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UserResponse> getAll() {
+    public List<UserResponse> getAll(String token) {
         return usersMapper.usersListToUsersResponseList(usersDao.findAll());
     }
 

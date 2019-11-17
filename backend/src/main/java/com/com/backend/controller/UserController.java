@@ -4,6 +4,7 @@ import com.com.backend.dto.Mail;
 import com.com.backend.dto.request.UserUpdateRequest;
 import com.com.backend.dto.response.UserResponse;
 import com.com.backend.dto.response.UserResponseWithAbstracts;
+import com.com.backend.exception.AccessException;
 import com.com.backend.exception.AppException;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.service.EmailService;
@@ -31,8 +32,8 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> getAll(){
-        List<UserResponse> getAll = usersService.getAll();
+    public ResponseEntity<?> getAll(@RequestHeader(value = "Authorization")String token) throws AccessException {
+        List<UserResponse> getAll = usersService.getAll(token);
         return ResponseEntity.ok(getAll);
     }
 

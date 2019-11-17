@@ -55,6 +55,18 @@ public class ExceptionControllerAdvice {
         return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
+    @ExceptionHandler(AccessException.class)
+    public ResponseEntity<ExceptionResponse> exceptionHandler(HttpServletRequest request, AccessException ex) {
+        ExceptionResponse response = new ExceptionResponse();
+        response.setMessage(getMessage(ex));
+        response.setError(ex.getError());
+        response.setTimestamp(LocalDateTime.now());
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setPath(request.getServletPath());
+
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
+
     private String getMessage(AppException ex) {
         Optional<String> templateContent = Optional.ofNullable(messageSource.getMessage(ex.getMessage(), ex.getParameters(), LocaleContextHolder.getLocale()));
         if (templateContent.isPresent() && ex.parameters != null) {

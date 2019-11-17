@@ -9,6 +9,7 @@ import com.com.backend.service.AuthoritiesService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -32,6 +33,11 @@ public class AuthoritiesServiceImpl implements AuthoritiesService {
     public Authorities findByRole(Role roleName) {
         return authoritiesDao.findAuthoritiesByRoleName(roleName)
                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+    }
+
+    @Override
+    public List<String> getUserAuthorities(String email) {
+        return authoritiesDao.getUserAuthorities(email);
     }
 
 }
