@@ -27,4 +27,16 @@ export class CategoryService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
+  createCategory(category: Category): Observable<Category[]> {
+    return this.http.post<Category[]>(`${this.categoryUrl}`, category);
+  }
+
+  updateCategory(id: number, category: Category): Observable<Category[]> {
+    return this.http.put<Category[]>(`${this.categoryUrl}/${id}`, category);
+  }
+
+  deleteCategory(id: number): Observable<Category[]> {
+    return this.http.delete<Category[]>(`${this.categoryUrl}/${id}`);
+  }
+
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminCategoriesRoutingModule } from './admin-categories-routing.module';
 import {CategoryListComponent} from "./category-list/category-list.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {CategoryListComponent} from "./category-list/category-list.component";
   ],
   imports: [
     CommonModule,
-    AdminCategoriesRoutingModule
+    AdminCategoriesRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminCategoriesModule { }
