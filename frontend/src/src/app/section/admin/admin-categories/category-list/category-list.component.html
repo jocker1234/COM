@@ -1,17 +1,47 @@
 <div class="container">
-  <h2>List users</h2>
-  <table class="table">
-    <thead>
-    <tr class="row">
-      <td class="col">ID</td>
-      <td class="col">Name</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="row" *ngFor="let category of categories">
-      <td class="col">{{category.id}}</td>
-      <td class="col">{{category.name}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="form">
+    <ng-container *ngIf="editable===false" [ngTemplateOutlet]="create"></ng-container>
+    <ng-container *ngIf="editable===true" [ngTemplateOutlet]="editDelete"></ng-container>
+  </div>
+  <div class="text-center">
+    <h2>List users</h2>
+    <table class="table table-sm">
+      <thead>
+      <tr class="row">
+        <!-- <td class="col">ID</td>-->
+        <td class="col-3 none-border"></td>
+        <td class="col-6 bg-secondary">Name</td>
+        <td class="col-3 none-border"></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="row" *ngFor="let category of categories">
+        <!--<td class="col">{{category.id}}</td>-->
+        <td class="col-3 none-border"></td>
+        <td class="col-6" (click)="prepareToUpdate(category)">{{category.name}}</td>
+        <td class="col-3 none-border"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+<ng-template #create>
+  <form [formGroup]="categoryForm">
+    <div class="row">
+      <input type="text" class="form-control col-5" formControlName="name">
+      <button class="btn btn-primary button" (click)="addCategory()">Add</button>
+    </div>
+  </form>
+</ng-template>
+<ng-template #editDelete>
+  <form [formGroup]="categoryForm">
+    <div class="row">
+      <input type="text" class="form-control col-5" formControlName="name">
+      <button class="btn btn-primary button" (click)="updateCategory()">Update</button>
+      <button class="btn btn-primary nextButton" (click)="deleteCategory()">Delete</button>
+      <button class="btn btn-primary nextButton" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</ng-template>
+
+
