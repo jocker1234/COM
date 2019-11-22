@@ -42,7 +42,7 @@ export class DictionaryService {
   }
 
   findByKey(key: string):Observable<string> {
-    return this.http.get<string>(`${this.dictionaryUrl}/key/${key}`, {responseType: 'json'});
+    return this.http.get<string>(`${this.dictionaryUrl}/key/${key}`, {responseType: 'text' as 'json'});
   }
 }
 
