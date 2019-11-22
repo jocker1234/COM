@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Directory extends AbstractEntity {
+public class Dictionary extends AbstractEntity {
 
     @Column(nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP", updatable = false)
     private LocalDateTime addDate;
@@ -23,5 +25,8 @@ public class Directory extends AbstractEntity {
     @Column(nullable = false, updatable = false)
     private String key;
     private String value;
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] image;
 
 }

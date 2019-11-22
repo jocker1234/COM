@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(value = {"http://localhost:4200", "http://54.37.234.192:4200"})
@@ -71,24 +72,25 @@ public class SignUpInController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/reset")
-    public ResponseEntity<?> resetPassword(@Valid @RequestBody String email) throws AppException {
+    @PostMapping("/forgot")
+    public ResponseEntity<?> forgotPassword(@Valid @RequestBody String email, HttpServletRequest request) throws AppException {
         if (email == null)
             throw new AppException(ExceptionType.EMAIL_EXIST);
 
         Users user = userService.getUserByEmail(email);
-        emailService.reamindPassword(user);
+        user = userService.setResetToken(user);
+
+        String appUrl = request.getScheme() + "://" + request.getServerName();
+
+        emailService.reamindPassword(user, appUrl);
 
         return ResponseEntity.ok().build();
     }
 
-    public void exit(HttpServletRequest request, HttpServletResponse response) {
-        new SecurityContextLogoutHandler().logout(request, null, null);
-        try {
-            response.sendRedirect(request.getHeader("http://localhost:4200"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @PatchMapping("/reset")
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> params) throws AppException {
+        userService.changePassword(params);
+        return ResponseEntity.ok("You have successfully reset your password. You may now login.");
     }
 
 }

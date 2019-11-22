@@ -5,7 +5,6 @@ import {User} from "../section/user/user";
 import {catchError, tap} from "rxjs/operators";
 import {HandlingErrorsService} from "./handling-errors.service";
 import {environment} from "../../environments/environment";
-import {CaseAbstract} from "../section/abstracts/case-abstract";
 
 const apiUrl = environment.apiUrl;
 
@@ -49,4 +48,26 @@ export class UserService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
+  sortUsers(criteria: SearchCriteria, users: User[]): User[] {
+    return users.sort((a,b) => {
+      if(criteria.sortDirection === 'desc'){
+        return a[criteria.sortColumn] - b[criteria.sortColumn];
+      } else {
+        return a[criteria.sortColumn] - b[criteria.sortColumn];
+      }
+    });
+  }
+
+  createAdmin(user: any) {
+    return this.http.post<string>(`${this.userUrl}/create-admin`, user);
+  }
+
+  getAdmins() {
+    return this.http.get<any>(`${this.userUrl}/admins`);
+  }
+}
+
+export class SearchCriteria {
+  sortColumn: string;
+  sortDirection: string;
 }

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-3 col-form-label"></p>
+    <p class="col-sm-7">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
+  <h2>List users</h2>
+  <button class="btn btn-primary button-new" routerLink="new">Add Admin</button>
+  <table class="table" sortable-table (sorted)="onSorted($event)">
+    <thead>
+    <tr class="row">
+      <td class="col" sortable-column="id" sort-direction="asc">ID</td>
+      <td class="col" sortable-column="email">Email</td>
+      <td class="col" sortable-column="firstName">First name</td>
+      <td class="col" sortable-column="lastName">Last name</td>
+      <td class="col" sortable-column="country">Country</td>
+      <td class="col" sortable-column="university">University</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="row" *ngFor="let user of users" routerLink="{{user.id}}">
+      <td class="col">{{user.id}}</td>
+      <td class="col">{{user.email}}</td>
+      <td class="col">{{user.firstName}}</td>
+      <td class="col">{{user.lastName}}</td>
+      <td class="col">{{user.country}}</td>
+      <td class="col">{{user.university}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

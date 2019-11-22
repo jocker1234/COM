@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DirectoryDtoRequest extends AbstractDto {
+public class DictionaryDtoRequest extends AbstractDto {
 
     @NonNull
     private String key;

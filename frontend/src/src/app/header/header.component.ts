@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../section/auth/token-storage.service";
+import {DictionaryStorageService} from "../service/dictionary-storage.service";
 
 @Component({
   selector: 'app-header',
@@ -8,14 +9,36 @@ import {TokenStorageService} from "../section/auth/token-storage.service";
 })
 export class HeaderComponent implements OnInit {
   private _roles: string[];
+  private _place: string;
+  private _time: string;
 
-  constructor(private _tokenStorage: TokenStorageService) {
+  constructor(private _tokenStorage: TokenStorageService, private dictionaryStorage: DictionaryStorageService) {
   }
 
   ngOnInit() {
+    this.time;
+    this.setPlace();
+    this.setTime();
     if (this._tokenStorage.getToken()) {
       this._roles = this._tokenStorage.getAuthorities();
     }
+  }
+
+
+  get place(): string {
+    return this._place;
+  }
+
+  setPlace() {
+    this._place = this.dictionaryStorage.getLocation();
+  }
+
+  get time(): string {
+    return this._time;
+  }
+
+  setTime() {
+    this._time = this.dictionaryStorage.getTime();
   }
 
   get roles(): string[] {

@@ -91,4 +91,30 @@ export class AbstractsService {
     return this.http.patch(`${this.researchUrl}/${id}/rejectApprove`, {"status": status})
       .pipe(catchError(HandlingErrorsService.handleError));
   }
+
+  sortCaseAbstracts(criteria: SearchCriteria, caseAbstracts: CaseAbstract[]): CaseAbstract[] {
+    return caseAbstracts.sort((a,b) => {
+      if(criteria.sortDirection === 'desc'){
+        return a[criteria.sortColumn] - b[criteria.sortColumn];
+      }
+      else {
+        return a[criteria.sortColumn] - b[criteria.sortColumn];
+      }
+    });
+  }
+
+  sortResearchAbstracts(criteria: SearchCriteria, researchAbstracts: ResearchAbstract[]) {
+    return researchAbstracts.sort((a,b) => {
+      if(criteria.sortDirection === 'desc'){
+        return a[criteria.sortColumn] - b[criteria.sortColumn];
+      } else {
+        return a[criteria.sortColumn] - b[criteria.sortColumn];
+      }
+    });
+    }
+}
+
+export class SearchCriteria {
+  sortColumn: string;
+  sortDirection: string;
 }

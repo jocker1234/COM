@@ -29,43 +29,45 @@ public class Users extends AbstractEntity {
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean activatedAccount;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String lastName;
 
     //@Enumerated(EnumType.STRING)
     //@Column(nullable = false)
     //private Gender gender;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private LocalDate dateOfBirth;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String country;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private Title title;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String university;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String faculty;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private YearOfStudy yearOfStudy;
 
-    @Column(length = 9)
+    //@Column(length = 9)
     private String phoneNumber;
 
-    @Column(nullable = false, columnDefinition = "boolean default false")
+    @Column(/*nullable = false,*/ columnDefinition = "boolean default false")
     private Boolean needVisa;
 
     private String passportNumber;
+
+    private String resetToken;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_authorities",

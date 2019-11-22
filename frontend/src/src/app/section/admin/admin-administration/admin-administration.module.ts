@@ -1,16 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AdminAdministrationRoutingModule } from './admin-administration-routing.module';
-import { DirectoryComponent } from './directory/directory.component';
-import { AdministratorComponent } from './administrator/administrator.component';
+import {AdminAdministrationRoutingModule} from './admin-administration-routing.module';
+import {FieldErrorDisplayModule} from "../../field-error-display/field-error-display.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [DirectoryComponent, AdministratorComponent],
+  declarations: [
+  ],
   imports: [
     CommonModule,
-    AdminAdministrationRoutingModule
+    AdminAdministrationRoutingModule,
+    FieldErrorDisplayModule,
+    ReactiveFormsModule
   ]
 })
-export class AdminAdministrationModule { }
+export class AdminAdministrationModule {
+}

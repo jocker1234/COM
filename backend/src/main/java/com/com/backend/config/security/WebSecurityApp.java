@@ -76,7 +76,7 @@ public class WebSecurityApp extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .requestMatchers(EndpointRequest.toAnyEndpoint())
                     .hasRole("ADMIN")
-                .antMatchers("/api/auth/**", "/actuator/**")
+                .antMatchers("/api/auth/**", "/api/dictionary/key/{key}", "/actuator/**")
                     .permitAll()
                 .anyRequest()
                     .authenticated()

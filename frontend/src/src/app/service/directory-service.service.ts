@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {Directory} from "../section/admin/admin-administration/directory";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Dictionary} from "../section/admin/admin-administration/dictionary";
 
 const apiUrl = environment.apiUrl;
 
@@ -15,17 +15,17 @@ export class DirectoryServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getAllParameters(): Observable<Directory[]> {
-    return this.http.get<Directory[]>(`${this.directoryUrl}`);
+  getAllParameters(): Observable<Dictionary[]> {
+    return this.http.get<Dictionary[]>(`${this.directoryUrl}`);
   }
 
-  getOneParameter(id: number): Observable<Directory> {
+  getOneParameter(id: number): Observable<Dictionary> {
 
-    return this.http.get<Directory>(`${this.directoryUrl}/${id}`);
+    return this.http.get<Dictionary>(`${this.directoryUrl}/${id}`);
   }
 
-  updateParametr(directory:Directory): Observable<Directory> {
-    return this.http.get<Directory>(`${this.directoryUrl}`);
+  updateParametr(directory:Dictionary): Observable<Dictionary> {
+    return this.http.get<Dictionary>(`${this.directoryUrl}`);
   }
 
 }

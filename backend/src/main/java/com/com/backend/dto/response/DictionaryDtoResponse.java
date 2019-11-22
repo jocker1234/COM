@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DirectoryDtoResponse extends AbstractDto {
+public class DictionaryDtoResponse extends AbstractDto {
 
     @NonNull
     private LocalDateTime addDate;
@@ -20,5 +20,6 @@ public class DirectoryDtoResponse extends AbstractDto {
     @NonNull
     private String key;
     private String value;
+    private String image;
 
 }

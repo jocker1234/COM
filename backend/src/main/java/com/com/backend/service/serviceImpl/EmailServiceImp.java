@@ -49,11 +49,10 @@ public class EmailServiceImp implements EmailService {
     }
 
     @Async
-    public void reamindPassword(Users user) {
+    public void reamindPassword(Users user, String appUrl) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         Context context = new Context();
-        context.setVariable("email",user.getEmail());
-        context.setVariable("password", user.getPassword());
+        context.setVariable("appUrl",appUrl + "/reset?token=" + user.getResetToken());
         String body = templateEngine.process(PASSWORD_RESET_EMAIL_TEMPLATE, context);
         Mail mail = new Mail(user.getEmail(), PASSWORD_RESET_EMAIL_TEMPLATE, body);
         sendEmail(mail);

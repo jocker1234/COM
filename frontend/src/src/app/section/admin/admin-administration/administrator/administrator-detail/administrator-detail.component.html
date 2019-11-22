@@ -1,0 +1,48 @@
+<div *ngIf="user" class="container table-user">
+  <table class="col">
+    <tr><h4>Account data</h4></tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Email</td>
+      <td class="col-sm-7">{{user.email}}</td>
+    </tr>
+    <hr/>
+    <tr><h4>Personal data</h4></tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">First name</td>
+      <td class="col-sm-7">{{user.firstName}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Last name</td>
+      <td class="col-sm-7">{{user.lastName}}</td>
+    </tr>
+    <!--<tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Gender</td>
+      <td class="col-sm-7">{{user.gender}}</td>
+    </tr>-->
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Date of birth</td>
+      <td class="col-sm-7">{{user.dateOfBirth | date:'dd/MM/yyyy HH:mm'}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Country</td>
+      <td class="col-sm-7">{{user.country}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Phone number</td>
+      <td class="col-sm-7">{{user.phoneNumber}}</td>
+    </tr>
+    <hr/>
+    <div class="float-right">
+      <button class="btn btn-primary" style="margin-right: 300px; width: 75px" routerLink="..">
+        Back
+      </button>
+    </div>
+  </table>
+</div>

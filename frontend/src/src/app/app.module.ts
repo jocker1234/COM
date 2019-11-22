@@ -18,7 +18,7 @@ import {AbstractsModule} from "./section/abstracts/abstracts.module";
 import {FieldErrorDisplayModule} from "./section/field-error-display/field-error-display.module";
 import {AdminModule} from "./section/admin/admin.module";
 import { BreadCrumbComponent } from './bread-crumb/bread-crumb.component';
-import { ErrorDisplayComponent } from './section/field-error-display/error-display/error-display.component';
+import { ChangePasswordComponent } from './section/login/change-password/change-password.component';
 
 
 @NgModule({
@@ -32,6 +32,7 @@ import { ErrorDisplayComponent } from './section/field-error-display/error-displ
     PasswordResetComponent,
     FooterComponent,
     BreadCrumbComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

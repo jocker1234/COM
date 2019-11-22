@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-3 col-form-label"></p>
+    <p class="col-sm-7">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
+  <h2>List users</h2>
+  <table class="table" sortable-table (sorted)="onSorted($event)">
+    <thead>
+    <tr class="row">
+      <td class="col" sortable-column="id" sort-direction="asc">ID</td>
+      <td class="col" sortable-column="key">Key</td>
+      <td class="col" sortable-column="value">Value</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="row" *ngFor="let dictionary of dictionaries" routerLink="{{dictionary.id}}">
+      <td class="col">{{dictionary.id}}</td>
+      <td class="col">{{dictionary.key}}</td>
+      <td class="col">{{dictionary.value}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
