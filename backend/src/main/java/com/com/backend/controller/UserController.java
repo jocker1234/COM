@@ -1,9 +1,13 @@
 package com.com.backend.controller;
 
 import com.com.backend.dto.Mail;
+import com.com.backend.dto.request.UserAdminDtoRequest;
+import com.com.backend.dto.request.UserCreateRequest;
 import com.com.backend.dto.request.UserUpdateRequest;
+import com.com.backend.dto.response.UserAdminDtoResponse;
 import com.com.backend.dto.response.UserResponse;
 import com.com.backend.dto.response.UserResponseWithAbstracts;
+import com.com.backend.exception.AccessException;
 import com.com.backend.exception.AppException;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.service.EmailService;
@@ -31,8 +35,18 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> getAll(){
-        List<UserResponse> getAll = usersService.getAll();
+    public ResponseEntity<?> getAllWithoutAdmins(@RequestHeader(value = "Authorization")String token) throws AccessException {
+        List<UserResponse> getAll = usersService.getAll(token);
+        return ResponseEntity.ok(getAll);
+    }
+
+    @GetMapping("/admins")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getAllAdmins(@RequestHeader(value = "Authorization")String token) throws AppException {
+        if(!usersService.checkIfAdmin(token)) {
+            throw new AppException(ExceptionType.NO_ACCESS);
+        }
+        List<UserAdminDtoResponse> getAll = usersService.getAllAdmins(token);
         return ResponseEntity.ok(getAll);
     }
 
@@ -93,6 +107,31 @@ public class UserController {
         emailService.sendSingleMail(mail);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/create-admin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> createAdmin(@Valid @RequestBody UserAdminDtoRequest usersDtoRequest) throws AppException {
+        if (usersService.existsUserByEmail(usersDtoRequest.getEmail()))
+            throw new AppException(ExceptionType.EMAIL_EXIST);
+        UserAdminDtoResponse user = usersService.createAdmin(usersDtoRequest);
+
+        return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping("/{id}/admin")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteUserAdmin(@RequestHeader(value = "Authorization") String token,
+                                           @Valid @PathVariable Long id) throws AppException {
+        String email = usersService.getEmailFromToken(token);
+        if(!usersService.getUserIdByEmail(email).equals(id) || !usersService.checkIfAdmin(token)) {
+            throw new AppException(ExceptionType.NO_ACCESS);
+        }
+
+        usersService.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
+
+
 
 }
 

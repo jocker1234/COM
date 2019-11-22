@@ -1,14 +1,14 @@
 <div class="container">
   <h2>List users</h2>
-  <table class="table">
+  <table class="table" sortable-table (sorted)="onSorted($event)">
     <thead>
     <tr class="row">
-      <td class="col">ID</td>
-      <td class="col">Email</td>
-      <td class="col">First name</td>
-      <td class="col">Last name</td>
-      <td class="col">Country</td>
-      <td class="col">University</td>
+      <td class="col" sortable-column="id" sort-direction="asc">ID</td>
+      <td class="col" sortable-column="email">Email</td>
+      <td class="col" sortable-column="firstName">First name</td>
+      <td class="col" sortable-column="lastName">Last name</td>
+      <td class="col" sortable-column="country">Country</td>
+      <td class="col" sortable-column="university">University</td>
     </tr>
     </thead>
     <tbody>

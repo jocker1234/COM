@@ -23,6 +23,13 @@ const routes: Routes = [
       breadcrumb: 'Category'
     },
   },
+  {
+    path: 'administration',
+    loadChildren: () => import('./admin-administration/admin-administration.module').then(value => value.AdminAdministrationModule),
+    data: {
+      breadcrumb: 'Administration'
+    },
+  },
 ];
 
 @NgModule({

@@ -29,7 +29,7 @@
           </div>
           <div class="text">
             <strong>Where?</strong>
-            <span>ul. Szpitalna 37, 15-295 Białystok</span>
+            <span>{{place}}</span>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
           </div>
           <div class="text">
             <strong>When?</strong>
-            <span>May, 17th - 18th, 2019</span>
+            <span>{{time}}</span>
           </div>
         </div>
       </div>
@@ -108,6 +108,18 @@
   </li>
   <li id="menu-item-2-4-1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-4-1">
     <a class="nav-link" routerLink="admin/category">Category</a>
+  </li>
+  <li id="menu-item-2-5-1"
+      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-2-5-1">
+    <a class="nav-link" routerLink="admin/abstract">Administration</a>
+    <ul class="sub-menu">
+      <li id="menu-item-2-5-1-1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-5-1-1">
+        <a href="admin/administration/dictionary">Dictionary</a>
+      </li>
+      <li id="menu-item-2-5-1-2" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2-5-1-2">
+        <a href="admin/administration/admins">Administrators</a>
+      </li>
+    </ul>
   </li>
 </ng-template>
 <ng-template #active_user>

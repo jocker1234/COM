@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-3 col-form-label"></p>
+    <p class="col-sm-7">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
+  <h3>Registration</h3>
+  <hr>
+  <form name="form" (ngSubmit)="onSubmit()" [formGroup]="createAdmin" novalidate>
+    <div class="form-group row" [ngClass]="displayFieldCss('email')">
+      <label class="col-sm-3 col-form-label">E-mail *</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="email" formControlName="email" required/>
+        <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Email field is required">
+        </app-field-error-display>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Password *</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="email" formControlName="password" required/>
+        <app-field-error-display [displayError]="isFieldValid('password')" errorMsg="Password is required">
+        </app-field-error-display>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">First name</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="firstName" formControlName="firstName" required/>
+        <app-field-error-display [displayError]="isFieldValid('firstName')" errorMsg="First name is required">
+        </app-field-error-display>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Last name</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="lastName" formControlName="lastName" required/>
+        <app-field-error-display [displayError]="isFieldValid('lastName')" errorMsg="Last name is required">
+        </app-field-error-display>
+      </div>
+    </div>
+    <!--<div class="form-group row">
+      <label class="col-sm-3 col-form-label">Gender</label>
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="gender" formControlName="gender">
+          <option value="null" selected></option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        <app-field-error-display [displayError]="isFieldValid('gender')" errorMsg="Gender field is required">
+        </app-field-error-display>
+      </div>
+    </div>-->
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Date of birth</label>
+      <div class="col-sm-7">
+        <input class="form-control" type="date" name="dateOfBirth" formControlName="dateOfBirth">
+        <app-field-error-display [displayError]="isFieldValid('dateOfBirth')"
+                                 errorMsg="Date of birth field is required">
+        </app-field-error-display>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Country</label>
+      <div class="col-sm-7">
+        <select class="col-sm-7 form-control" name="country" formControlName="country">
+          <option value="null"></option>
+          <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+        </select>
+        <app-field-error-display [displayError]="isFieldValid('country')" errorMsg="Country field is required">
+        </app-field-error-display>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Phone number</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="phoneNumber" formControlName="phoneNumber"/>
+        <app-field-error-display [displayError]="isFieldValid('phoneNumber')"
+                                 errorMsg="Wrong format number">
+        </app-field-error-display>
+      </div>
+    </div>
+    <div class="form-group ng-hide float-right">
+      <button class="btn btn-primary">Create</button>
+      <button class="btn btn-primary" style="margin-left: 15px; margin-right: 75px; width: 75px" routerLink="..">
+        Back
+      </button>
+    </div>
+  </form>
+</div>

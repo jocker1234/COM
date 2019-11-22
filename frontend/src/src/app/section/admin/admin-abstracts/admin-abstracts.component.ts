@@ -17,11 +17,11 @@ export class AdminAbstractsComponent implements OnInit {
 
   ngOnInit() {
     this.abstractService.getAllCaseAbstract().subscribe(value => {
-      this._case = value;
+      this._case = this.abstractService.sortCaseAbstracts({sortColumn: 'id', sortDirection:'asc'}, value);
       console.log(value);
     });
     this.abstractService.getAllResearchAbstract().subscribe(value => {
-      this._research = value;
+      this._research = this.abstractService.sortResearchAbstracts({sortColumn: 'id', sortDirection:'asc'}, value);
       console.log(value);
     });
   }
@@ -32,5 +32,14 @@ export class AdminAbstractsComponent implements OnInit {
 
   get research(): ResearchAbstract[] {
     return this._research;
+  }
+
+  onSortedCase($event){
+    this.abstractService.sortCaseAbstracts($event, this.case);
+  }
+
+
+  onSortedResearch($event) {
+    this.abstractService.sortResearchAbstracts($event, this.research);
   }
 }

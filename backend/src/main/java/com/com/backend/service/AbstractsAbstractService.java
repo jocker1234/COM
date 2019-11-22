@@ -7,6 +7,7 @@ import com.com.backend.dto.request.AbstractsDtoRequest;
 import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 public interface AbstractsAbstractService <TREQ extends AbstractsDtoRequest, TRES extends AbstractsDtoResponse,

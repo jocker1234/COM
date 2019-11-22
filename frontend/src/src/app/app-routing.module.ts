@@ -5,6 +5,7 @@ import {RegisterComponent} from "./section/register/register.component";
 import {PasswordResetComponent} from "./section/login/password-reset/password-reset.component";
 import {HomeComponent} from "./section/home/home.component";
 import {AuthGuard} from "./section/auth/auth-guard";
+import {ChangePasswordComponent} from "./section/login/change-password/change-password.component";
 
 
 const routes: Routes = [
@@ -32,10 +33,17 @@ const routes: Routes = [
     },
   },
   {
-    path: 'reset',
+    path: 'forgot',
     component: PasswordResetComponent,
     data: {
       breadcrumb: 'Remind password'
+    },
+  },
+  {
+    path: 'reset',
+    component: ChangePasswordComponent,
+    data: {
+      breadcrumb: 'Change password'
     },
   },
   {

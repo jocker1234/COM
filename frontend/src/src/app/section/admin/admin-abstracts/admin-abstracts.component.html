@@ -10,20 +10,20 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-case" role="tabpanel" aria-labelledby="nav-case-tab">
-            <table class="table" cellspacing="0">
+            <table class="table" cellspacing="0" sortable-table (sorted)="onSortedCase($event)">
               <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Status</th>
+                <th scope="col" sortable-column="id" sort-direction="asc">#</th>
+                <th scope="col" sortable-column="title">Title</th>
+                <th scope="col" sortable-column="status">Status</th>
                 <th scope="col">Author</th>
                 <th scope="col">Tutor</th>
-                <th scope="col">Category</th>
+                <th scope="col"sortable-column="category">Category</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let abstract of case; index as i" routerLink="case/{{abstract.id}}">
-                <th scope="row">{{i + 1}}</th>
+                <th scope="row">{{abstract.id}}</th>
                 <td>{{abstract.title}}</td>
                 <td>{{abstract.status}}</td>
                 <td>{{abstract.authors}}</td>
@@ -34,20 +34,20 @@
             </table>
           </div>
           <div class="tab-pane fade" id="nav-research" role="tabpanel" aria-labelledby="nav-research-tab">
-            <table class="table" cellspacing="0">
+            <table class="table" cellspacing="0" sortable-table (sorted)="onSortedResearch($event)">
               <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Status</th>
+                <th scope="col" sortable-column="id" sort-direction="asc">#</th>
+                <th scope="col" sortable-column="title" >Title</th>
+                <th scope="col" sortable-column="status">Status</th>
                 <th scope="col">Author</th>
                 <th scope="col">Tutor</th>
-                <th scope="col">Category</th>
+                <th scope="col"sortable-column="category">Category</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let abstract of research; index as i" routerLink="research/{{abstract.id}}">
-                <th scope="row">{{i + 1}}</th>
+                <th scope="row">{{abstract.id}}</th>
                 <td>{{abstract.title}}</td>
                 <td>{{abstract.status}}</td>
                 <td>{{abstract.authors}}</td>

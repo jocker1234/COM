@@ -2,11 +2,14 @@ package com.com.backend.service.serviceImpl;
 
 import com.com.backend.config.security.JwtProvider;
 import com.com.backend.dao.UsersDao;
+import com.com.backend.dto.request.UserAdminDtoRequest;
 import com.com.backend.dto.request.UserCreateRequest;
 import com.com.backend.dto.request.UserRequest;
 import com.com.backend.dto.request.UserUpdateRequest;
+import com.com.backend.dto.response.UserAdminDtoResponse;
 import com.com.backend.dto.response.UserResponse;
 import com.com.backend.dto.response.UserResponseWithAbstracts;
+import com.com.backend.exception.AccessException;
 import com.com.backend.exception.AppException;
 import com.com.backend.exception.NotFoundException;
 import com.com.backend.mapper.UserMapper;
@@ -18,10 +21,17 @@ import com.com.backend.service.EmailService;
 import com.com.backend.service.UsersService;
 import com.com.backend.util.Util;
 import com.com.backend.validation.Validation;
+import com.sun.mail.smtp.SMTPTransport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.*;
 
 @Service
@@ -91,6 +101,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     private UserCreateRequest validateAuthenticate(UserCreateRequest userDto) throws AppException {
+
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 
         if (userDto.getAuthorities() == null)
@@ -128,6 +139,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     @Transactional
     public UserResponse signUpUser(UserCreateRequest usersDtoRequest) throws AppException {
+
         UserCreateRequest userDto = usersDtoRequest;
 
         userDto = validateAuthenticate(userDto);
@@ -156,6 +168,20 @@ public class UsersServiceImpl implements UsersService {
         if (Util.isNull(users))
             throw new NotFoundException(EntityType.USER, ExceptionType.NOT_FOUND);
         return users;
+    }
+
+    public Users setResetToken(Users users) {
+        users.setResetToken(UUID.randomUUID().toString());
+        users = usersDao.save(users);
+        return users;
+    }
+
+    @Transactional
+    public void changePassword(Map<String, String> map) {
+        Users user = usersDao.getUsersByResetToken(map.get("resetToken"));
+        user.setResetToken(null);
+        user.setPassword(bCryptPasswordEncoder.encode(map.get("password")));
+        usersDao.save(user);
     }
 
     @Override
@@ -223,8 +249,51 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UserResponse> getAll() {
-        return usersMapper.usersListToUsersResponseList(usersDao.findAll());
+    public List<UserResponse> getAll(String token) {
+        List list = new ArrayList();
+        list.add(Role.ROLE_ACTIVE_PARTICIPANT.name());
+        list.add(Role.ROLE_PASSIVE_PARTICIPANT.name());
+        return usersMapper.usersListToUsersResponseList(usersDao.findAllByRole(list));
+    }
+
+    @Override
+    public List<UserAdminDtoResponse> getAllAdmins(String token) {
+        List<String> list = new ArrayList();
+        list.add(Role.ROLE_ADMIN.name());
+        return usersMapper.usersAdminListToUsersAdminResponseList(usersDao.findAllByRole(list));
+    }
+
+    @Override
+    @Transactional
+    public UserAdminDtoResponse createAdmin(UserAdminDtoRequest usersDtoRequest) throws AppException {
+        usersDtoRequest = validateAdminAuthenticate(usersDtoRequest);
+
+        if (!Validation.emailValidation(usersDtoRequest.getEmail()))
+            throw new AppException(ExceptionType.EMAIL_FORMAT);
+
+        Users users = usersDao.save(usersMapper.usersDtoToUsers(usersDtoRequest));
+        emailService.sendCreateEmail(users);
+        return usersMapper.usersAdminToUsersAdminResponse(users);
+    }
+
+    private UserAdminDtoRequest validateAdminAuthenticate(UserAdminDtoRequest userDto) throws AppException {
+        userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+
+        Set<Authorities> authoritiesDtos = new HashSet<>();
+        Authorities authoritiesAdmin = authoritiesService.findByRole(Role.ROLE_ADMIN);
+        authoritiesDtos.add(authoritiesAdmin);
+        userDto.setAuthoritiesSet(authoritiesService.dtosToEntities(authoritiesDtos));
+
+        return userDto;
+    }
+
+    public Boolean checkIfAdmin(String token) throws AccessException {
+        String email = getEmailFromToken(token);
+        List<String> authorities = authoritiesService.getUserAuthorities(email);
+        if(!authorities.contains(Role.ROLE_ADMIN.name())) {
+            throw new AccessException(ExceptionType.NO_ACCESS);
+        }
+        return true;
     }
 
 }

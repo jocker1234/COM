@@ -15,11 +15,15 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsers().subscribe(users => {
-      this._users = users;
+      this._users = this.userService.sortUsers({sortColumn: 'id', sortDirection:'asc'}, users);;
     });
   }
 
   get users(): User[] {
     return this._users;
+  }
+
+  onSorted($event) {
+    this._users = this.userService.sortUsers($event, this.users);
   }
 }

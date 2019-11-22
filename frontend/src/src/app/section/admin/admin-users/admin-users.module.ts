@@ -9,6 +9,7 @@ import { AdminAbstractsUserComponent } from './admin-user-details/admin-abstract
 import { SingleSendMailComponent } from './single-send-mail/single-send-mail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FieldErrorDisplayModule} from "../../field-error-display/field-error-display.module";
+import {AdminModule} from "../admin.module";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {FieldErrorDisplayModule} from "../../field-error-display/field-error-dis
     AdminUsersRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    FieldErrorDisplayModule
+    FieldErrorDisplayModule,
+    AdminModule
   ]
 })
 export class AdminUsersModule {

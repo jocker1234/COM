@@ -8,7 +8,7 @@ import com.com.backend.model.Users;
 public interface EmailService {
 
     void sendCreateEmail(Users user);
-    void reamindPassword(Users user);
+    void reamindPassword(Users user, String appUrl);
     void sendDecisionAboutAbstract(Users user, Abstracts abstracts) throws AppException;
     void sendSingleMail(Mail mail);
 

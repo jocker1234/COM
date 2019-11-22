@@ -16,8 +16,9 @@ const apiUrl = environment.apiUrl;
 export class AuthService {
   private loginUrl = apiUrl + 'api/auth/signin';
   private signupUrl = apiUrl + 'api/auth/signup';
-  private remaindPasswordUrl = apiUrl + 'api/auth/reset';
+  private remaindPasswordUrl = apiUrl + 'api/auth/forgot';
   private countryListUrl = apiUrl + 'api/auth/countryList';
+  private changePasswordUrl = apiUrl + 'api/auth/reset';
 
   constructor(private http: HttpClient) {
   }
@@ -44,4 +45,7 @@ export class AuthService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
+  changePassword(value: any, resetToken: string) {
+    return this.http.patch(`${this.changePasswordUrl}`, {"password": value.password, "resetToken": resetToken});
+  }
 }

@@ -1,0 +1,46 @@
+<div *ngIf="dictionary" class="container table-user">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-3 col-form-label"></p>
+    <p class="col-sm-7">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
+  <table class="col">
+    <tr><h4>Parameter data</h4></tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Add Date</td>
+      <td class="col-sm-7">{{dictionary.addDate | date:'dd/MM/yyyy HH:mm'}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Edit Date</td>
+      <td class="col-sm-7">{{dictionary.editDate | date:'dd/MM/yyyy HH:mm'}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Key</td>
+      <td class="col-sm-7">{{dictionary.key}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Value</td>
+      <td class="col-sm-7">{{dictionary.value}}</td>
+    </tr>
+    <tr class="row">
+      <td class="col-sm-1"></td>
+      <td class="col-sm-4 col-form-label">Image</td>
+      <td class="col-sm-7">{{image}}</td>
+    </tr>
+    <hr/>
+    <div class="float-right">
+      <button class="btn btn-primary" style="margin-right: 25px; width: 75px" routerLink="edit">
+        Edit
+      </button>
+      <button class="btn btn-primary" style="margin-right: 200px; width: 75px" routerLink="..">
+        Back
+      </button>
+    </div>
+  </table>
+</div>

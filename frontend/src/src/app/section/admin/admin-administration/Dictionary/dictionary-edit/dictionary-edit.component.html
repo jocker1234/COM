@@ -1,0 +1,36 @@
+<div class="container form">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-3 col-form-label"></p>
+    <p class="col-sm-7">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
+  <tr><h4>Parameter data</h4></tr>
+  <form class="needs-validation" (ngSubmit)="onSubmit()"  [formGroup]="dictionaryForm" novalidate>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Key</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="key" formControlName="key" disabled/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Value</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" name="value" formControlName="value"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <input formControlName="image" name="file" type="file" (change)="onFileChanged($event)" #fileInput>
+      <img [src]="imgUrl" height="200" *ngIf="imgUrl">
+    </div>
+    <div class="float-right">
+      <button class="btn btn-primary" style="margin-right: 25px; width: 75px">
+        Save
+      </button>
+      <button class="btn btn-primary" style="margin-right: 100px; width: 75px" routerLink="..">
+        Back
+      </button>
+    </div>
+  </form>
+</div>
