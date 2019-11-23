@@ -18,7 +18,6 @@ export class AbstractsComponent implements OnInit {
 
   constructor(private abstractService: AbstractsService, private router: Router, private dialog: NgbModal,
               private categoryService: CategoryService) {
-    console.log(history.state);
   }
 
   ngOnInit() {
