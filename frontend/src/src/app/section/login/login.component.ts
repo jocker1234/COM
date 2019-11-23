@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        this.reloadPage();
       },
       error1 => {
         this.error = new ErrorHandler(error1.error.message);
@@ -60,6 +59,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       }
     );
+    this.router.navigate(['..']);
   }
 
   navigate() {

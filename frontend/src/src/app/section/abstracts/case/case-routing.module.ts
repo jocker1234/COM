@@ -9,21 +9,24 @@ const routes: Routes = [
     path: 'new',
     component: CaseAbstractCreateComponent,
     data: {
-      breadcrumb: 'Create Case Report'
+      breadcrumb: 'Create Case Report',
+      title: 'Create Case Report',
     },
   },
   {
     path: ':id',
     component: CaseAbstractItemsDetailsComponent,
     data: {
-      breadcrumb: 'Case Report Details'
+      breadcrumb: 'Case Report Details',
+      title: 'Case Report Details',
     },
   },
   {
     path: ':id/edit',
     component: CaseAbstractEditComponent,
     data: {
-      breadcrumb: 'Edit Case Report'
+      breadcrumb: 'Edit Case Report',
+      title: 'Edit Case Report',
     },
   },
 ];

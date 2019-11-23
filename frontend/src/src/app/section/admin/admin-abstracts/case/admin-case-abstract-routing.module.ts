@@ -8,7 +8,8 @@ const routes: Routes = [
     path: ':id',
     component:AdminCaseAbstractDetailsComponent,
     data: {
-      breadcrumb: 'Case Report Details'
+      breadcrumb: 'Case Report Details',
+      title: 'Case Report Details',
     },
   }
 ];

@@ -1,0 +1,5 @@
+<div *ngFor="let title of title$ | async; last as isLast; index as i">
+  <h1 *ngIf="isLast">
+    {{ title.title }}
+  </h1>
+</div>

@@ -9,21 +9,24 @@ const routes: Routes = [
     path: '',
     component: AdministratorListComponent,
     data: {
-      breadcrumb: 'Administrator List'
+      breadcrumb: 'Administrator List',
+      title: 'Administrator List',
     },
   },
   {
     path: 'new',
     component: AdministratorCreateComponent,
     data: {
-      breadcrumb: 'Administrator Create'
+      breadcrumb: 'Administrator Create',
+      title: 'Administrator Create',
     },
   },
   {
     path: ':id',
     component: AdministratorDetailComponent,
     data: {
-      breadcrumb: 'Administrator Details'
+      breadcrumb: 'Administrator Details',
+      title: 'Administrator Details',
     },
   },
 ];

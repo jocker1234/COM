@@ -22,28 +22,32 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: {
-      breadcrumb: 'Login'
+      breadcrumb: 'Login',
+      title: "Login"
     },
   },
   {
     path: 'sign',
     component: RegisterComponent,
     data: {
-      breadcrumb: 'Registration'
+      breadcrumb: 'Registration',
+      title: "Registration"
     },
   },
   {
     path: 'forgot',
     component: PasswordResetComponent,
     data: {
-      breadcrumb: 'Remind password'
+      breadcrumb: 'Remind password',
+      title: "Remind Password"
     },
   },
   {
     path: 'reset',
     component: ChangePasswordComponent,
     data: {
-      breadcrumb: 'Change password'
+      breadcrumb: 'Change password',
+      title: "Change Password"
     },
   },
   {

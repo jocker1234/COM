@@ -10,21 +10,24 @@ const routes: Routes = [
     path: 'new',
     component: ResearchAbstractCreateComponent,
     data: {
-      breadcrumb: 'Create Research Abstract'
+      breadcrumb: 'Create Research Abstract',
+      title: 'Create Research Abstract',
     },
   },
   {
     path: ':id',
     component: ResearchAbstractItemsDetailsComponent,
     data: {
-      breadcrumb: 'Research Abstract Details'
+      breadcrumb: 'Research Abstract Details',
+      title: 'Research Abstract Details',
     },
   },
   {
     path: ':id/edit',
     component: ResearchAbstractEditComponent,
     data: {
-      breadcrumb: 'Edit Research Abstract'
+      breadcrumb: 'Edit Research Abstract',
+      title: 'Edit Research Abstract',
     },
   },
 ];

@@ -9,21 +9,24 @@ const routes: Routes = [
     path: '',
     component: DictionaryListComponent,
     data: {
-      breadcrumb: 'Dictionary List'
+      breadcrumb: 'Dictionary List',
+      title: 'Dictionary List',
     },
   },
   {
     path: ':id',
     component: DictionaryDetailsComponent,
     data: {
-      breadcrumb: 'Dictionary Details'
+      breadcrumb: 'Dictionary Details',
+      title: 'Dictionary Details',
     },
   },
   {
     path: ':id/edit',
     component: DictionaryEditComponent,
     data: {
-      breadcrumb: 'Dictionary Edit'
+      breadcrumb: 'Dictionary Edit',
+      title: 'Dictionary Edit',
     },
   },
 ];
