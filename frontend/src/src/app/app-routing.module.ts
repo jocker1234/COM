@@ -10,15 +10,6 @@ import {ChangePasswordComponent} from "./section/login/change-password/change-pa
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
-  {
     path: 'login',
     component: LoginComponent,
     data: {
@@ -45,6 +36,15 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Change password'
     },
+  },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   {
     path: 'user',
