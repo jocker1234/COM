@@ -5,7 +5,7 @@ import {DictionaryStorageService} from "../service/dictionary-storage.service";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   private _roles: string[];
@@ -13,12 +13,11 @@ export class HeaderComponent implements OnInit {
   private _time: string;
 
   constructor(private _tokenStorage: TokenStorageService, private dictionaryStorage: DictionaryStorageService) {
+    this.setPlace();
+    this.setTime();
   }
 
   ngOnInit() {
-    this.time;
-    this.setPlace();
-    this.setTime();
     if (this._tokenStorage.getToken()) {
       this._roles = this._tokenStorage.getAuthorities();
     }

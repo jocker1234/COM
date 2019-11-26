@@ -9,7 +9,8 @@ const routes: Routes = [
     path: '',
     component: AdminAbstractsComponent,
     data: {
-      breadcrumb: 'Abstracts List'
+      breadcrumb: 'Abstracts List',
+      title: 'Abstracts List',
     },
   },
   {

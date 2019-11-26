@@ -1,4 +1,4 @@
-<div *ngIf="isLoggedIn; then navigate() else loggedOut">
+<div *ngIf="isLoggedIn; else loggedOut">
 </div>
 
 <ng-template #loggedOut>

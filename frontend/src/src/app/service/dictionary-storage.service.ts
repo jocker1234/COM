@@ -12,6 +12,11 @@ export class DictionaryStorageService {
 
   constructor(private router: Router, private dictionaryService: DictionaryService) { }
 
+  public loadData() {
+    this.getLocation();
+    this.getTime();
+  }
+
   public saveLocation(location: string) {
     window.sessionStorage.removeItem(LOCATION_CONFERENCE);
     window.sessionStorage.setItem(LOCATION_CONFERENCE, location);
@@ -36,7 +41,8 @@ export class DictionaryStorageService {
     if(window.sessionStorage.getItem(TIME_CONFERENCE)===null || window.sessionStorage.getItem(TIME_CONFERENCE) === undefined) {
       this.dictionaryService.findByKey(TIME_CONFERENCE).subscribe(value => {
         console.log(value);
-        this.saveTime(value)
+        this.saveTime(value);
+        window.location.reload();
       },error1 => {
         console.log(error1)
       });

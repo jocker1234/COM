@@ -19,6 +19,7 @@ import {FieldErrorDisplayModule} from "./section/field-error-display/field-error
 import {AdminModule} from "./section/admin/admin.module";
 import { BreadCrumbComponent } from './bread-crumb/bread-crumb.component';
 import { ChangePasswordComponent } from './section/login/change-password/change-password.component';
+import { TitleComponent } from './title/title.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ChangePasswordComponent } from './section/login/change-password/change-
     FooterComponent,
     BreadCrumbComponent,
     ChangePasswordComponent,
+    TitleComponent,
   ],
   imports: [
     BrowserModule,

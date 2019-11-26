@@ -18,11 +18,9 @@ export class AdminAbstractsComponent implements OnInit {
   ngOnInit() {
     this.abstractService.getAllCaseAbstract().subscribe(value => {
       this._case = this.abstractService.sortCaseAbstracts({sortColumn: 'id', sortDirection:'asc'}, value);
-      console.log(value);
     });
     this.abstractService.getAllResearchAbstract().subscribe(value => {
       this._research = this.abstractService.sortResearchAbstracts({sortColumn: 'id', sortDirection:'asc'}, value);
-      console.log(value);
     });
   }
 

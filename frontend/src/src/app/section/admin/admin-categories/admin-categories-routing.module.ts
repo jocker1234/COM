@@ -8,7 +8,8 @@ const routes: Routes = [
     path: '',
     component: CategoryListComponent,
     data: {
-      breadcrumb: 'Category list'
+      breadcrumb: 'Category list',
+      title: 'Category list',
     },
   },
 ];
