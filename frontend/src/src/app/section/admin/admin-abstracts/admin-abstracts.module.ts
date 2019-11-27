@@ -5,6 +5,7 @@ import {AdminAbstractsComponent} from "./admin-abstracts.component";
 import {AdminAbstractActionButtonComponent} from "./admin-abstract-action-button/admin-abstract-action-button.component";
 import {AdminAbstractsRoutingModule} from "./admin-abstracts-routing.module";
 import {AdminModule} from "../admin.module";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {AdminModule} from "../admin.module";
     CommonModule,
     AdminAbstractsRoutingModule,
     AdminModule,
+    FontAwesomeModule,
   ]
 })
 export class AdminAbstractsModule { }

@@ -21,17 +21,10 @@ import com.com.backend.service.EmailService;
 import com.com.backend.service.UsersService;
 import com.com.backend.util.Util;
 import com.com.backend.validation.Validation;
-import com.sun.mail.smtp.SMTPTransport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.util.*;
 
 @Service
@@ -246,6 +239,10 @@ public class UsersServiceImpl implements UsersService {
             throw new AppException(ExceptionType.NO_ACCESS);
         }
         return usersMapper.usersToUsersResponse(user.get());
+    }
+
+    public Users getUser(Long id) {
+        return usersDao.getOne(id);
     }
 
     @Override

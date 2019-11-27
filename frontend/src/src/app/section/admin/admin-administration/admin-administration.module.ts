@@ -8,12 +8,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
+
   ],
   imports: [
     CommonModule,
     AdminAdministrationRoutingModule,
     FieldErrorDisplayModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class AdminAdministrationModule {

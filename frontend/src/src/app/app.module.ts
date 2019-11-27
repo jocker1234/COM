@@ -20,6 +20,7 @@ import {AdminModule} from "./section/admin/admin.module";
 import { BreadCrumbComponent } from './bread-crumb/bread-crumb.component';
 import { ChangePasswordComponent } from './section/login/change-password/change-password.component';
 import { TitleComponent } from './title/title.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { TitleComponent } from './title/title.component';
     UserModule,
     AbstractsModule,
     FieldErrorDisplayModule,
-    AdminModule
+    AdminModule,
+    FontAwesomeModule
   ],
   providers: [httpInterceptorProvider],
   bootstrap: [AppComponent]

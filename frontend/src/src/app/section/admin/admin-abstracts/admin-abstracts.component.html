@@ -4,21 +4,27 @@
       <div class="col-md-12">
         <nav>
           <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-case-tab" data-toggle="tab" href="#nav-case" role="tab" aria-controls="nav-case" aria-selected="true">Case Report</a>
-            <a class="nav-item nav-link" id="nav-research-tab" data-toggle="tab" href="#nav-research" role="tab" aria-controls="nav-research" aria-selected="false">Research</a>
+            <a class="nav-item nav-link active" id="nav-case-tab" data-toggle="tab" href="#nav-case" role="tab"
+               aria-controls="nav-case" aria-selected="true">Case Report</a>
+            <a class="nav-item nav-link" id="nav-research-tab" data-toggle="tab" href="#nav-research" role="tab"
+               aria-controls="nav-research" aria-selected="false">Research</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-case" role="tabpanel" aria-labelledby="nav-case-tab">
-            <table class="table" cellspacing="0" sortable-table (sorted)="onSortedCase($event)">
+            <table class="table" cellspacing="0">
               <thead>
               <tr>
-                <th scope="col" sortable-column="id" sort-direction="asc">#</th>
-                <th scope="col" sortable-column="title">Title</th>
-                <th scope="col" sortable-column="status">Status</th>
+                <th scope="col" sortable="id" (sort)="onSortedCase($event)">
+                  #
+                </th>
+                <th scope="col" sortable="title" (sort)="onSortedCase($event)">
+                  Title
+                </th>
+                <th scope="col" sortable="status" (sort)="onSortedCase($event)">Status</th>
                 <th scope="col">Author</th>
                 <th scope="col">Tutor</th>
-                <th scope="col"sortable-column="category">Category</th>
+                <th scope="col" sortable="category.name" (sort)="onSortedCase($event)">Category</th>
               </tr>
               </thead>
               <tbody>
@@ -27,22 +33,22 @@
                 <td>{{abstract.title}}</td>
                 <td>{{abstract.status}}</td>
                 <td>{{abstract.authors}}</td>
-                <td >{{abstract.tutors}}</td>
+                <td>{{abstract.tutors}}</td>
                 <td>{{abstract.category.name}}</td>
               </tr>
               </tbody>
             </table>
           </div>
           <div class="tab-pane fade" id="nav-research" role="tabpanel" aria-labelledby="nav-research-tab">
-            <table class="table" cellspacing="0" sortable-table (sorted)="onSortedResearch($event)">
+            <table class="table" cellspacing="0">
               <thead>
               <tr>
-                <th scope="col" sortable-column="id" sort-direction="asc">#</th>
-                <th scope="col" sortable-column="title" >Title</th>
-                <th scope="col" sortable-column="status">Status</th>
+                <th scope="col" sortable="id" (sort)="onSortedResearch($event)">#</th>
+                <th scope="col" sortable="title" (sort)="onSortedResearch($event)">Title</th>
+                <th scope="col" sortable="status" (sort)="onSortedResearch($event)">Status</th>
                 <th scope="col">Author</th>
                 <th scope="col">Tutor</th>
-                <th scope="col"sortable-column="category">Category</th>
+                <th scope="col" sortable="category.name" (sort)="onSortedResearch($event)">Category</th>
               </tr>
               </thead>
               <tbody>

@@ -1,25 +1,25 @@
 <div class="container">
   <h2>List users</h2>
-  <table class="table" sortable-table (sorted)="onSorted($event)">
+  <table class="table">
     <thead>
     <tr class="row">
-      <td class="col" sortable-column="id" sort-direction="asc">ID</td>
-      <td class="col" sortable-column="email">Email</td>
-      <td class="col" sortable-column="firstName">First name</td>
-      <td class="col" sortable-column="lastName">Last name</td>
-      <td class="col" sortable-column="country">Country</td>
-      <td class="col" sortable-column="university">University</td>
+      <th class="col" sortable="id" (sort)="onSortedUser($event)">ID</th>
+      <th class="col" sortable="email" (sort)="onSortedUser($event)">Email</th>
+      <th class="col" sortable="firstName" (sort)="onSortedUser($event)">First name</th>
+      <th class="col" sortable="lastName" (sort)="onSortedUser($event)">Last name</th>
+      <th class="col" sortable="country" (sort)="onSortedUser($event)">Country</th>
+      <th class="col" sortable="university" (sort)="onSortedUser($event)">University</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="row" *ngFor="let user of users" routerLink="{{user.id}}">
-      <td class="col">{{user.id}}</td>
-      <td class="col">{{user.email}}</td>
-      <td class="col">{{user.firstName}}</td>
-      <td class="col">{{user.lastName}}</td>
-      <td class="col">{{user.country}}</td>
-      <td class="col">{{user.university}}</td>
-    </tr>
+      <tr class="row" *ngFor="let user of users" routerLink="{{user.id}}">
+        <td class="col">{{user.id}}</td>
+        <td class="col">{{user.email}}</td>
+        <td class="col">{{user.firstName}}</td>
+        <td class="col">{{user.lastName}}</td>
+        <td class="col">{{user.country}}</td>
+        <td class="col">{{user.university}}</td>
+      </tr>
     </tbody>
   </table>
 </div>
