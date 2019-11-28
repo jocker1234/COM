@@ -9,10 +9,7 @@ import com.com.backend.exception.WrongValueException;
 import com.com.backend.mapper.AbstractsMapper;
 import com.com.backend.model.Abstracts;
 import com.com.backend.model.Users;
-import com.com.backend.model.enums.AbstractType;
-import com.com.backend.model.enums.ExceptionType;
-import com.com.backend.model.enums.Fields;
-import com.com.backend.model.enums.Status;
+import com.com.backend.model.enums.*;
 import com.com.backend.service.AbstractsAbstractService;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.EmailService;
@@ -64,7 +61,9 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
         if (!s.isPresent()) {
             throw new AbstractNotFoundException(ExceptionType.NOT_FOUND);
         }
-        if(s.get().getUsers().getId() != userId){
+        S s1 = s.get();
+        Users users = usersService.getUser(userId);
+        if(s.get().getUsers().getId() != userId && !users.getAuthoritiesSet().stream().anyMatch(n -> n.getRoleName().equals(Role.ROLE_ADMIN))){
             throw new AppException(ExceptionType.NO_ACCESS);
         }
         return (TRES) getMapper().modelToDtoRes(s.get());

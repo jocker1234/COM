@@ -2,18 +2,15 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {AdminRoutingModule} from './admin-routing.module';
-import {SortableTableDirective} from "./sortable-column/sortable-table.directive";
-import { SortableColumnComponent } from './sortable-column/sortable-column.component';
+import {SortableHeaderDirective} from "../../sortable/sortable-header.directive";
 
 
 @NgModule({
   declarations: [
-    SortableTableDirective,
-    SortableColumnComponent,
+    SortableHeaderDirective,
   ],
   exports: [
-    SortableTableDirective,
-    SortableColumnComponent
+    SortableHeaderDirective,
   ],
   imports: [
     CommonModule,
