@@ -18,10 +18,10 @@ export class AdminAbstractsComponent implements OnInit {
   private _research: ResearchAbstract[];
   private caseCopy: CaseAbstract[];
   private researchCopy: ResearchAbstract[];
-  private keySortC = undefined;
-  private reverseSortC = undefined;
-  private keySortR = undefined;
-  private reverseSortR = undefined;
+  private _keySortC = undefined;
+  private _reverseSortC = undefined;
+  private _keySortR = undefined;
+  private _reverseSortR = undefined;
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
 
@@ -46,9 +46,26 @@ export class AdminAbstractsComponent implements OnInit {
     return this._research;
   }
 
+
+  get keySortC(): any {
+    return this._keySortC;
+  }
+
+  get keySortR(): any {
+    return this._keySortR;
+  }
+
+  get reverseSortC(): any {
+    return this._reverseSortC;
+  }
+
+  get reverseSortR(): any {
+    return this._reverseSortR;
+  }
+
   onSortedCase({column, direction}: SortEvent){
-    this.keySortC = column;
-    this.reverseSortC = direction === '' ? undefined : direction === 'asc' ? true : false;
+    this._keySortC = column;
+    this._reverseSortC = direction === '' ? undefined : direction === 'asc' ? true : false;
     this.headers.forEach(header => {
       if(header.sortable != column) {
         header.direction = '';
@@ -65,8 +82,8 @@ export class AdminAbstractsComponent implements OnInit {
   }
 
   onSortedResearch({column, direction}: SortEvent) {
-    this.keySortR = column;
-    this.reverseSortC = direction === '' ? undefined : direction === 'asc' ? true : false;
+    this._keySortR = column;
+    this._reverseSortC = direction === '' ? undefined : direction === 'asc' ? true : false;
     this.headers.forEach(header => {
       if(header.sortable != column) {
         header.direction = '';

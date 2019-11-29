@@ -17,8 +17,8 @@ export class AdministratorListComponent implements OnInit {
   private _admins: User[];
   private adminsCopy: User[];
   private _error: ErrorHandler;
-  private keySort = undefined;
-  private reverseSort = undefined;
+  private _keySort = undefined;
+  private _reverseSort = undefined;
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
 
@@ -43,11 +43,19 @@ export class AdministratorListComponent implements OnInit {
     return this._error !== undefined;
   }
 
+  get keySort(): any {
+    return this._keySort;
+  }
+
+  get reverseSort(): any {
+    return this._reverseSort;
+  }
+
   onSortedAdmin({column, direction}: SortEvent) {
     console.log(column)
     console.log(direction)
-    this.keySort = column;
-    this.reverseSort = direction === '' ? undefined : direction === 'asc' ? true : false;
+    this._keySort = column;
+    this._reverseSort = direction === '' ? undefined : direction === 'asc' ? true : false;
     this.headers.forEach(header => {
       if(header.sortable != column) {
         header.direction = '';
