@@ -19,8 +19,8 @@ export class UsersListComponent implements OnInit {
   @ViewChildren(SortableHeaderDirective) headers: QueryList<SortableHeaderDirective>;
   private _users: User[];
   private usersCopy: User[];
-  private keySort = undefined;
-  private reverseSort = undefined;
+  private _keySort = undefined;
+  private _reverseSort = undefined;
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
   private _countries: {};
@@ -83,9 +83,18 @@ export class UsersListComponent implements OnInit {
     return this._title;
   }
 
+
+  get keySort(): any {
+    return this._keySort;
+  }
+
+  get reverseSort(): any {
+    return this._reverseSort;
+  }
+
   onSortedUser({column, direction}: SortEvent) {
-    this.keySort = column;
-    this.reverseSort = direction === '' ? undefined : direction === 'asc' ? true : false;
+    this._keySort = column;
+    this._reverseSort = direction === '' ? undefined : direction === 'asc' ? true : false;
     this.headers.forEach(header => {
       if(header.sortable != column) {
         header.direction = '';
