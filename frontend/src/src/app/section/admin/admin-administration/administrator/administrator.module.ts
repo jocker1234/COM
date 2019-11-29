@@ -7,6 +7,7 @@ import {AdministratorDetailComponent} from "./administrator-detail/administrator
 import {AdministratorListComponent} from "./administrator-list/administrator-list.component";
 import {FieldErrorDisplayModule} from "../../../field-error-display/field-error-display.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     AdministratorRoutingModule,
     FieldErrorDisplayModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ]
 })
 export class AdministratorModule { }

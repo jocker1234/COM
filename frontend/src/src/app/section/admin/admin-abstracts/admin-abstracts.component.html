@@ -14,27 +14,55 @@
           <div class="tab-pane fade show active" id="nav-case" role="tabpanel" aria-labelledby="nav-case-tab">
             <table class="table" cellspacing="0">
               <thead>
-              <tr>
-                <th scope="col" sortable="id" (sort)="onSortedCase($event)">
-                  #
+              <tr class="row">
+                <th class="col col-md-1" sortable="id" (sort)="onSortedCase($event)">
+                  <div>
+                    #
+                    <span *ngIf="keySortC === 'id' && reverseSortC === true"><fa-icon
+                      [icon]="faAngleDown"></fa-icon></span>
+                    <span *ngIf="keySortC === 'id' && reverseSortC === false"><fa-icon
+                      [icon]="faAngleUp"></fa-icon></span>
+                  </div>
                 </th>
-                <th scope="col" sortable="title" (sort)="onSortedCase($event)">
-                  Title
+                <th class="col col-md-3" sortable="title" (sort)="onSortedCase($event)">
+                  <div>
+                    Title
+                    <span *ngIf="keySortC === 'title' && reverseSortC === true"><fa-icon
+                      [icon]="faAngleDown"></fa-icon></span>
+                    <span *ngIf="keySortC === 'title' && reverseSortC === false"><fa-icon
+                      [icon]="faAngleUp"></fa-icon></span>
+                  </div>
                 </th>
-                <th scope="col" sortable="status" (sort)="onSortedCase($event)">Status</th>
-                <th scope="col">Author</th>
-                <th scope="col">Tutor</th>
-                <th scope="col" sortable="category.name" (sort)="onSortedCase($event)">Category</th>
+                <th class="col col-md-2" sortable="status" (sort)="onSortedCase($event)">
+                  <div>
+                    Status
+                    <span *ngIf="keySortC === 'status' && reverseSortC === true"><fa-icon
+                      [icon]="faAngleDown"></fa-icon></span>
+                    <span *ngIf="keySortC === 'status' && reverseSortC === false"><fa-icon
+                      [icon]="faAngleUp"></fa-icon></span>
+                  </div>
+                </th>
+                <th class="col col-md-2">Author</th>
+                <th class="col col-md-2">Tutor</th>
+                <th class="col col-md-2" sortable="category.name" (sort)="onSortedCase($event)">
+                  <div>
+                    Category
+                    <span *ngIf="keySortC === 'category.name' && reverseSortC === true"><fa-icon
+                      [icon]="faAngleDown"></fa-icon></span>
+                    <span *ngIf="keySortC === 'category.name' && reverseSortC === false"><fa-icon
+                      [icon]="faAngleUp"></fa-icon></span>
+                  </div>
+                </th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let abstract of case; index as i" routerLink="case/{{abstract.id}}">
-                <th scope="row">{{abstract.id}}</th>
-                <td>{{abstract.title}}</td>
-                <td>{{abstract.status}}</td>
-                <td>{{abstract.authors}}</td>
-                <td>{{abstract.tutors}}</td>
-                <td>{{abstract.category.name}}</td>
+              <tr class="row" *ngFor="let abstract of case; index as i" routerLink="case/{{abstract.id}}">
+                <td class="col col-md-1" style="word-break:break-word;">{{abstract.id}}</td>
+                <td class="col col-md-3" style="word-break:break-word;">{{abstract.title}}</td>
+                <td class="col col-md-2" style="word-break:break-word;">{{abstract.status}}</td>
+                <td class="col col-md-2" style="word-break:break-word;">{{abstract.authors}}</td>
+                <td class="col col-md-2" style="word-break:break-word;">{{abstract.tutors}}</td>
+                <td class="col col-md-2" style="word-break:break-word;">{{abstract.category.name}}</td>
               </tr>
               </tbody>
             </table>
@@ -42,23 +70,55 @@
           <div class="tab-pane fade" id="nav-research" role="tabpanel" aria-labelledby="nav-research-tab">
             <table class="table" cellspacing="0">
               <thead>
-              <tr>
-                <th scope="col" sortable="id" (sort)="onSortedResearch($event)">#</th>
-                <th scope="col" sortable="title" (sort)="onSortedResearch($event)">Title</th>
-                <th scope="col" sortable="status" (sort)="onSortedResearch($event)">Status</th>
-                <th scope="col">Author</th>
-                <th scope="col">Tutor</th>
-                <th scope="col" sortable="category.name" (sort)="onSortedResearch($event)">Category</th>
+              <tr class="row">
+                <th class="col col-md-1" sortable="id" (sort)="onSortedResearch($event)">
+                  <div>
+                    #
+                    <span *ngIf="keySortR === 'id' && reverseSortR === true"><fa-icon
+                      [icon]="faAngleDown"></fa-icon></span>
+                    <span *ngIf="keySortR === 'id' && reverseSortR === false"><fa-icon
+                      [icon]="faAngleUp"></fa-icon></span>
+                  </div>
+                </th>
+                <th class="col col-md-3" sortable="title" (sort)="onSortedResearch($event)">
+                  <div>
+                    Title
+                    <span *ngIf="keySortR === 'title' && reverseSortR === true"><fa-icon
+                      [icon]="faAngleDown"></fa-icon></span>
+                    <span *ngIf="keySortR === 'title' && reverseSortR === false"><fa-icon
+                      [icon]="faAngleUp"></fa-icon></span>
+                  </div>
+                </th>
+                <th class="col col-md-2" sortable="status" (sort)="onSortedResearch($event)">
+                  <div>
+                    Status
+                    <span *ngIf="keySortR === 'status' && reverseSortR === true"><fa-icon
+                      [icon]="faAngleDown"></fa-icon></span>
+                    <span *ngIf="keySortR === 'status' && reverseSortR === false"><fa-icon
+                      [icon]="faAngleUp"></fa-icon></span>
+                  </div>
+                </th>
+                <th class="col col-md-2">Author</th>
+                <th class="col col-md-2">Tutor</th>
+                <th class="col col-md-2" sortable="category.name" (sort)="onSortedResearch($event)">
+                  <div>
+                    Category
+                    <span *ngIf="keySortR === 'category.name' && reverseSortR === true"><fa-icon
+                      [icon]="faAngleDown"></fa-icon></span>
+                    <span *ngIf="keySortR === 'category.name' && reverseSortR === false"><fa-icon
+                      [icon]="faAngleUp"></fa-icon></span>
+                  </div>
+                </th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let abstract of research; index as i" routerLink="research/{{abstract.id}}">
-                <th scope="row">{{abstract.id}}</th>
-                <td>{{abstract.title}}</td>
-                <td>{{abstract.status}}</td>
-                <td>{{abstract.authors}}</td>
-                <td>{{abstract.tutors}}</td>
-                <td>{{abstract.category.name}}</td>
+              <tr class="row" *ngFor="let abstract of research; index as i" routerLink="research/{{abstract.id}}">
+                <td class="col col-md-1" style="word-break:break-word;">{{abstract.id}}</td>
+                <td class="col col-md-3" style="word-break:break-word;">{{abstract.title}}</td>
+                <td class="col col-md-2" style="word-break:break-word;">{{abstract.status}}</td>
+                <td class="col col-md-2" style="word-break:break-word;">{{abstract.authors}}</td>
+                <td class="col col-md-2" style="word-break:break-word;">{{abstract.tutors}}</td>
+                <td class="col col-md-2" style="word-break:break-word;">{{abstract.category.name}}</td>
               </tr>
               </tbody>
             </table>

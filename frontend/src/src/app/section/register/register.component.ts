@@ -21,6 +21,8 @@ export class RegisterComponent implements OnInit {
   error: ErrorHandler;
 
   userRole: string[] = [null, 'Activate Participant', 'Pasive Participant'];
+  title: string[] = [null, 'Student', 'PhD Student'];
+  yearOfStudy: string[] = [null, '1', '2', '3', '4', '5', '6'];
 
   registration = new FormGroup({
     authorities: new FormControl(null, [Validators.required]),
