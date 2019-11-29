@@ -21,7 +21,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     AdministratorRoutingModule,
     FieldErrorDisplayModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ]
 })
 export class AdministratorModule { }

@@ -20,7 +20,8 @@ import {AdminModule} from "./section/admin/admin.module";
 import { BreadCrumbComponent } from './bread-crumb/bread-crumb.component';
 import { ChangePasswordComponent } from './section/login/change-password/change-password.component';
 import { TitleComponent } from './title/title.component';
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {FaConfig, FaIconLibrary} from "@fortawesome/angular-fontawesome";
+import {faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
 
 
 @NgModule({
@@ -47,11 +48,17 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     UserModule,
     AbstractsModule,
     FieldErrorDisplayModule,
-    AdminModule,
-    FontAwesomeModule
+    AdminModule
   ],
-  providers: [httpInterceptorProvider],
+  providers: [
+    httpInterceptorProvider,
+    FaIconLibrary,
+    FaConfig
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faAngleDown, faAngleUp);
+  }
 }
