@@ -11,18 +11,50 @@
   <table class="table">
     <thead>
       <tr class="row">
-        <th class="col" sortable="id" (sort)="onSortedUser($event)">ID</th>
-        <th class="col" sortable="email" (sort)="onSortedUser($event)">Email</th>
-        <th class="col" sortable="firstName" (sort)="onSortedUser($event)">First name</th>
-        <th class="col" sortable="lastName" (sort)="onSortedUser($event)">Last name</th>
+        <th class="col" sortable="id" (sort)="onSortedAdmin($event)">
+          <div>
+            ID
+            <span *ngIf="keySort === 'id' && reverseSort === true"><fa-icon
+              [icon]="faAngleDown"></fa-icon></span>
+            <span *ngIf="keySort === 'id' && reverseSort === false"><fa-icon
+              [icon]="faAngleUp"></fa-icon></span>
+          </div>
+        </th>
+        <th class="col" sortable="email" (sort)="onSortedAdmin($event)">
+          <div>
+            Email
+            <span *ngIf="keySort === 'email' && reverseSort === true"><fa-icon
+              [icon]="faAngleDown"></fa-icon></span>
+            <span *ngIf="keySort === 'email' && reverseSort === false"><fa-icon
+              [icon]="faAngleUp"></fa-icon></span>
+          </div>
+        </th>
+        <th class="col" sortable="firstName" (sort)="onSortedAdmin($event)">
+          <div>
+            First name
+            <span *ngIf="keySort === 'firstName' && reverseSort === true"><fa-icon
+              [icon]="faAngleDown"></fa-icon></span>
+            <span *ngIf="keySort === 'firstName' && reverseSort === false"><fa-icon
+              [icon]="faAngleUp"></fa-icon></span>
+          </div>
+        </th>
+        <th class="col" sortable="lastName" (sort)="onSortedAdmin($event)">
+          <div>
+            Last name
+            <span *ngIf="keySort === 'lastName' && reverseSort === true"><fa-icon
+              [icon]="faAngleDown"></fa-icon></span>
+            <span *ngIf="keySort === 'lastName' && reverseSort === false"><fa-icon
+              [icon]="faAngleUp"></fa-icon></span>
+          </div>
+        </th>
       </tr>
     </thead>
     <tbody>
-      <tr class="row" *ngFor="let user of users" routerLink="{{user.id}}">
-        <td class="col">{{user.id}}</td>
-        <td class="col">{{user.email}}</td>
-        <td class="col">{{user.firstName}}</td>
-        <td class="col">{{user.lastName}}</td>
+      <tr class="row" *ngFor="let user of admins" routerLink="{{user.id}}">
+        <td class="col col-md-2" style="word-break:break-word;">{{user.id}}</td>
+        <td class="col col-md-4" style="word-break:break-word;">{{user.email}}</td>
+        <td class="col col-md-3" style="word-break:break-word;">{{user.firstName}}</td>
+        <td class="col col-md-3" style="word-break:break-word;">{{user.lastName}}</td>
       </tr>
     </tbody>
   </table>

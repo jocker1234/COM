@@ -10,6 +10,8 @@ import { SingleSendMailComponent } from './single-send-mail/single-send-mail.com
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FieldErrorDisplayModule} from "../../field-error-display/field-error-display.module";
 import {AdminModule} from "../admin.module";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {AutosizeModule} from "ngx-autosize";
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {AdminModule} from "../admin.module";
     ReactiveFormsModule,
     FormsModule,
     FieldErrorDisplayModule,
-    AdminModule
+    AdminModule,
+    FontAwesomeModule,
+    AutosizeModule
   ]
 })
 export class AdminUsersModule {

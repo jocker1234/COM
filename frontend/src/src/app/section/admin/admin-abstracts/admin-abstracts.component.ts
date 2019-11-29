@@ -4,6 +4,7 @@ import {ResearchAbstract} from "../../abstracts/research-abstract";
 import {AbstractsService} from "../../../service/abstracts.service";
 import {compare, SortableHeaderDirective} from "../../../sortable/sortable-header.directive";
 import {SortEvent} from "../../../sortable/sort-event";
+import {faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-abstracts',
@@ -17,9 +18,12 @@ export class AdminAbstractsComponent implements OnInit {
   private _research: ResearchAbstract[];
   private caseCopy: CaseAbstract[];
   private researchCopy: ResearchAbstract[];
-  private keySort = 'title';
-  private reverseSort = true;
-
+  private keySortC = undefined;
+  private reverseSortC = undefined;
+  private keySortR = undefined;
+  private reverseSortR = undefined;
+  faAngleDown = faAngleDown;
+  faAngleUp = faAngleUp;
 
   constructor(private abstractService: AbstractsService) { }
 
@@ -43,8 +47,8 @@ export class AdminAbstractsComponent implements OnInit {
   }
 
   onSortedCase({column, direction}: SortEvent){
-    this.keySort = column;
-    this.reverseSort = direction === 'asc' ? true : false;
+    this.keySortC = column;
+    this.reverseSortC = direction === '' ? undefined : direction === 'asc' ? true : false;
     this.headers.forEach(header => {
       if(header.sortable != column) {
         header.direction = '';
@@ -61,6 +65,8 @@ export class AdminAbstractsComponent implements OnInit {
   }
 
   onSortedResearch({column, direction}: SortEvent) {
+    this.keySortR = column;
+    this.reverseSortC = direction === '' ? undefined : direction === 'asc' ? true : false;
     this.headers.forEach(header => {
       if(header.sortable != column) {
         header.direction = '';

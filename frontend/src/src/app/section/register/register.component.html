@@ -93,9 +93,7 @@
         <label class="col-sm-3 col-form-label">Title *</label>
         <div class="col-sm-7">
           <select class="col-sm-7 form-control" name="title" formControlName="title">
-            <option value="null" selected></option>
-            <option value="Student">Student</option>
-            <option value="PhD_Student">PhD Student</option>
+            <option *ngFor="let title of title" value="{{title}}">{{title}}</option>
           </select>
           <app-field-error-display [displayError]="isFieldValid('title')" errorMsg="Title field is required">
           </app-field-error-display>
@@ -120,14 +118,8 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Year of study *</label>
         <div class="col-sm-7">
-          <select class="col-sm-7 form-control" name="yearOfStudy" formControlName="yearOfStudy">>
-            <option value="null" selected></option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
+          <select class="col-sm-7 form-control" name="yearOfStudy" formControlName="yearOfStudy">
+            <option *ngFor="let yearOfStudy of yearOfStudy" value="{{yearOfStudy}}">{{yearOfStudy}}</option>
           </select>
           <app-field-error-display [displayError]="isFieldValid('yearOfStudy')"
                                    errorMsg="Year of study field is required">
