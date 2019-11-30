@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(value = {"http://localhost:4200", "http://54.37.234.192:4200"})
@@ -35,8 +36,9 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> getAllWithoutAdmins(@RequestHeader(value = "Authorization")String token) throws AccessException {
-        List<UserResponse> getAll = usersService.getAll(token);
+    public ResponseEntity<?> getAllWithoutAdmins(@RequestHeader(value = "Authorization")String token,
+                                                 @RequestParam Map<String, String> allParams) throws AccessException {
+        List<UserResponse> getAll = usersService.getAllUsers(token, allParams);
         return ResponseEntity.ok(getAll);
     }
 

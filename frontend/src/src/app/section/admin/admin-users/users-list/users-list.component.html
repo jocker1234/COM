@@ -1,13 +1,13 @@
 <div class="container">
   <h2>List users</h2>
   <div>
-    <form [formGroup]="serarchCriteria">
+    <form [formGroup]="searchCriteria">
       <h5>Account data</h5>
       <div class="form-row">
         <div class="form-group col-md-3">
           <label for="inputState1-1">Country</label>
           <select id="inputState1-1" class="form-control" formControlName="country">
-            <option value="null" selected>Country</option>
+            <option value="" selected>Country</option>
             <option *ngFor="let country of countries" [value]="country">{{country}}</option>
           </select>
         </div>
@@ -18,14 +18,14 @@
         <div class="form-group col-md-3">
           <label for="inputState1-3">Title</label>
           <select id="inputState1-3" class="form-control" formControlName="title">
-            <option value="null" selected>Title</option>
+            <option value="" selected>Title</option>
             <option *ngFor="let title of title" value="{{title}}">{{title}}</option>
           </select>
         </div>
         <div class="form-group col-md-3">
           <label for="inputState1-4">Year of study</label>
           <select id="inputState1-4" class="form-control" formControlName="yearOfStudy">
-            <option value="null" selected>Year of study</option>
+            <option value="0" selected>Year of study</option>
             <option *ngFor="let yearOfStudy of yearOfStudy" value="{{yearOfStudy}}">{{yearOfStudy}}</option>
           </select>
         </div>
@@ -36,21 +36,21 @@
         <div class="form-group col-md-4">
           <label for="inputState2-1">Status</label>
           <select id="inputState2-1" class="form-control" formControlName="status">
-            <option value="null" selected>Status</option>
+            <option value="" selected>Status</option>
             <option *ngFor="let status of status" value="{{status}}">{{status}}</option>
           </select>
         </div>
         <div class="form-group col-md-4">
           <label for="inputState2-2">Type</label>
           <select id="inputState2-2" class="form-control" formControlName="type">
-            <option value="null" selected>Type</option>
+            <option value="" selected>Type</option>
             <option *ngFor="let type of type" value="{{type}}">{{type}}</option>
           </select>
         </div>
         <div class="form-group col-md-4">
           <label for="inputState2-3">Category</label>
           <select id="inputState2-3" class="form-control" formControlName="category">
-            <option value="null" selected>Category</option>
+            <option value="" selected>Category</option>
             <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
           </select>
         </div>
