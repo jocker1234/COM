@@ -18,6 +18,7 @@ import java.util.Map;
 
 public interface UsersService extends AbstractService<Users, UserResponse> {
 
+    List<UserResponse> getAllUsers(String token, Map<String, String> mapParams) throws AccessException;
     Users getUser(Long id);
     String getEmailFromToken(String token);
     Long getUserIDFromToken(String token) throws NotFoundException;

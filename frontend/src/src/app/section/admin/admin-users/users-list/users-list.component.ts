@@ -26,18 +26,28 @@ export class UsersListComponent implements OnInit {
   private _countries: {};
   private _title: string[] = ['Student', 'PhD Student'];
   private _yearOfStudy: string[] = ['1', '2', '3', '4', '5', '6'];
-  private _status: string[] = ['Send', 'Accept', 'Rejected'];
-  private _type: string[] = ['Case report', 'Research'];
+  private _status: string[] = ['Send', 'Approved', 'Rejected'];
+  private _type: string[] = ['Case_Report', 'Research'];
   private _categories: Category[];
 
-  serarchCriteria = new FormGroup({
-    country: new FormControl(null),
-    university: new FormControl(null),
-    title: new FormControl(null),
-    yearOfStudy: new FormControl(null),
-    status: new FormControl(null),
-    type: new FormControl(null),
-    category: new FormControl(null)
+  searchCriteria = new FormGroup({
+    country: new FormControl(''),
+    university: new FormControl(''),
+    title: new FormControl(''),
+    yearOfStudy: new FormControl('0'),
+    status: new FormControl(''),
+    type: new FormControl(''),
+    category: new FormControl('')
+  });
+
+  private searchCriteriaReset = new FormGroup({
+    country: new FormControl(''),
+    university: new FormControl(''),
+    title: new FormControl(''),
+    yearOfStudy: new FormControl('0'),
+    status: new FormControl(''),
+    type: new FormControl(''),
+    category: new FormControl('')
   });
 
   constructor(private categoryService: CategoryService, private authService: AuthService,
@@ -45,9 +55,9 @@ export class UsersListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(users => {
-      this._users = users;
-      this.usersCopy = users;
+    this.userService.getUsers(this.searchCriteria.value).subscribe(usersData => {
+      this._users = usersData;
+      this.usersCopy = usersData;
     });
     this.authService.countryList().subscribe(data => this._countries = data);
     this.categoryService.getCategory().subscribe(value => {
@@ -111,10 +121,15 @@ export class UsersListComponent implements OnInit {
   }
 
   clearForm() {
-    this.serarchCriteria.reset();
+    this.searchCriteria.reset(this.searchCriteriaReset.value);
+    console.log(this.searchCriteria.value)
   }
 
   find() {
-
+    console.log(this.searchCriteria.value)
+    this.userService.getUsers(this.searchCriteria.value).subscribe(usersData => {
+      this._users = usersData;
+      console.log(usersData)
+    });
   }
 }

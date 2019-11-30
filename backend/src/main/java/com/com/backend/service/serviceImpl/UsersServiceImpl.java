@@ -241,16 +241,38 @@ public class UsersServiceImpl implements UsersService {
         return usersMapper.usersToUsersResponse(user.get());
     }
 
+    @Override
+    public List<UserResponse> getAll(String token) throws AccessException {
+        checkIfAdmin(token);
+        List<Users> users = usersDao.findAll();
+        return usersMapper.usersListToUsersResponseList(users);
+    }
+
     public Users getUser(Long id) {
         return usersDao.getOne(id);
     }
 
     @Override
-    public List<UserResponse> getAll(String token) {
-        List list = new ArrayList();
-        list.add(Role.ROLE_ACTIVE_PARTICIPANT.name());
-        list.add(Role.ROLE_PASSIVE_PARTICIPANT.name());
-        return usersMapper.usersListToUsersResponseList(usersDao.findAllByRole(list));
+    public List<UserResponse> getAllUsers(String token, Map<String, String> mapParams) throws AccessException {
+        checkIfAdmin(token);
+
+        String q = mapParams.getOrDefault("country", "");
+        String w = mapParams.getOrDefault("university", "");
+        String e = mapParams.getOrDefault("title", "");
+        Integer r = Integer
+                .valueOf(mapParams
+                        .getOrDefault("yearOfStudy", "0")==null?"0":mapParams
+                                            .get("yearOfStudy"));//==0?null: Integer.valueOf(mapParams.get("yearOfStudy"));
+        String t = "";
+        if(!mapParams.get("status").equals(""))
+            t = Status.valueOf(mapParams.getOrDefault("status", "").toUpperCase()).getStatus();
+        String y = mapParams.getOrDefault("typeAbstract", "").toUpperCase();
+        String u = mapParams.getOrDefault("nameCategory", "");
+
+        List<Users> users = usersDao.findAllByParametersWithoutAdmin(
+                q,w,e,r,t,y,u
+        );
+        return usersMapper.usersListToUsersResponseList(users);
     }
 
     @Override

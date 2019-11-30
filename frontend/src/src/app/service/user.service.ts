@@ -18,8 +18,19 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<any>(`${this.userUrl}`)
+  getUsers(searchCriteria: any): Observable<User[]> {
+    let httpParams = new HttpParams({
+      fromObject: {
+        'country': searchCriteria.country,
+        'university': searchCriteria.university,
+        'title': searchCriteria.title,
+        'yearOfStudy': searchCriteria.yearOfStudy,
+        'status': searchCriteria.status,
+        'typeAbstract': searchCriteria.type,
+        'nameCategory': searchCriteria.category
+      }
+    });
+    return this.http.get<any>(`${this.userUrl}`, {params: httpParams})
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
