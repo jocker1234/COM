@@ -43,7 +43,12 @@ public class EmailServiceImp implements EmailService {
         context.setVariable("email", user.getEmail());
         context.setVariable("date", "17-18 of May 2019");
         String body = templateEngine.process(CREATE_EMAIL_TEMPLATE, context);
-        Mail mail = new Mail(user.getEmail(), CREATE_EMAIL_TEMPLATE, body);
+
+        Mail mail = new Mail();
+        mail.setTo(user.getEmail());
+        mail.setSubject(CREATE_EMAIL_TEMPLATE);
+        mail.setContent(body);
+
         sendEmail(mail);
         log.info("Success send");
     }
@@ -54,7 +59,12 @@ public class EmailServiceImp implements EmailService {
         Context context = new Context();
         context.setVariable("appUrl",appUrl + "/reset?token=" + user.getResetToken());
         String body = templateEngine.process(PASSWORD_RESET_EMAIL_TEMPLATE, context);
-        Mail mail = new Mail(user.getEmail(), PASSWORD_RESET_EMAIL_TEMPLATE, body);
+
+        Mail mail = new Mail();
+        mail.setTo(user.getEmail());
+        mail.setSubject(PASSWORD_RESET_EMAIL_TEMPLATE);
+        mail.setContent(body);
+
         sendEmail(mail);
 
     }
@@ -72,13 +82,23 @@ public class EmailServiceImp implements EmailService {
         } else {
             throw new AppException();
         }
-        Mail mail = new Mail(user.getEmail(), APPROVED_ABSTRACT, body);
+
+        Mail mail = new Mail();
+        mail.setTo(user.getEmail());
+        mail.setSubject(APPROVED_ABSTRACT);
+        mail.setContent(body);
+
         sendEmail(mail);
     }
 
     @Async
     public void sendSingleMail(Mail mail) {
         sendEmail(mail);
+    }
+
+    @Async
+    public void sendGroupMail(Mail mail) {
+        sendGroupEmail(mail);
     }
 
     private void sendEmail(Mail mail) {
@@ -88,6 +108,21 @@ public class EmailServiceImp implements EmailService {
                     StandardCharsets.UTF_8.name());
             helper.setFrom("p.gogol@student.pb.edu.pl");
             helper.setTo(mail.getTo());
+            helper.setSubject(mail.getSubject());
+            helper.setText(mail.getContent(), true);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        emailSender.send(message);
+    }
+
+    private void sendGroupEmail(Mail mail) {
+        MimeMessage message = emailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                    StandardCharsets.UTF_8.name());
+            helper.setFrom("p.gogol@student.pb.edu.pl");
+            helper.setTo(mail.getMultiTo());
             helper.setSubject(mail.getSubject());
             helper.setText(mail.getContent(), true);
         } catch (MessagingException e) {

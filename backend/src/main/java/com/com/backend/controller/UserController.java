@@ -110,6 +110,13 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/group-mail")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> sendGroupMail(@Valid @RequestBody Mail mail) {
+        emailService.sendGroupMail(mail);
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/create-admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createAdmin(@Valid @RequestBody UserAdminDtoRequest usersDtoRequest) throws AppException {

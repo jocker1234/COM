@@ -12,6 +12,8 @@ import {FieldErrorDisplayModule} from "../../field-error-display/field-error-dis
 import {AdminModule} from "../admin.module";
 import {AutosizeModule} from "ngx-autosize";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { MultiSendMailComponent } from './multi-send-mail/multi-send-mail.component';
+import { CheckMultiUserToMailComponent } from './check-multi-user-to-mail/check-multi-user-to-mail.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     AdminUserDetailsComponent,
     ButtonUserDetailsComponent,
     AdminAbstractsUserComponent,
-    SingleSendMailComponent
+    SingleSendMailComponent,
+    MultiSendMailComponent,
+    CheckMultiUserToMailComponent
   ],
   exports: [
     ButtonUserDetailsComponent

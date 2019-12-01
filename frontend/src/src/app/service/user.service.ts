@@ -59,22 +59,17 @@ export class UserService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  sortUsers(criteria: SearchCriteria, users: User[]): User[] {
-    return users.sort((a,b) => {
-      if(criteria.sortDirection === 'desc'){
-        return a[criteria.sortColumn] - b[criteria.sortColumn];
-      } else {
-        return a[criteria.sortColumn] - b[criteria.sortColumn];
-      }
-    });
-  }
-
   createAdmin(user: any) {
     return this.http.post<string>(`${this.userUrl}/create-admin`, user);
   }
 
   getAdmins() {
     return this.http.get<any>(`${this.userUrl}/admins`);
+  }
+
+  sendGroupMail(mail: any): Observable<any> {
+    return this.http.post<any>(`${this.userUrl}/group-mail`, mail)
+      .pipe(catchError(HandlingErrorsService.handleError));
   }
 }
 

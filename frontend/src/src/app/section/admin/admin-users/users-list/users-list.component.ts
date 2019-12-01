@@ -8,6 +8,7 @@ import {AuthService} from "../../../../service/auth.service";
 import {CategoryService} from "../../../../service/category.service";
 import {Category} from "../../../category";
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ErrorHandler} from "../../../error-handler";
 
 @Component({
   selector: 'app-users-list',
@@ -17,18 +18,19 @@ import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 export class UsersListComponent implements OnInit {
 
   @ViewChildren(SortableHeaderDirective) headers: QueryList<SortableHeaderDirective>;
-  private _users: User[];
-  private usersCopy: User[];
-  private _keySort = undefined;
-  private _reverseSort = undefined;
+  protected _users: User[];
+  protected usersCopy: User[];
+  protected _keySort = undefined;
+  protected _reverseSort = undefined;
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
-  private _countries: {};
-  private _title: string[] = ['Student', 'PhD Student'];
-  private _yearOfStudy: string[] = ['1', '2', '3', '4', '5', '6'];
-  private _status: string[] = ['Send', 'Approved', 'Rejected'];
-  private _type: string[] = ['Case_Report', 'Research'];
-  private _categories: Category[];
+  protected _countries: {};
+  protected _title: string[] = ['Student', 'PhD Student'];
+  protected _yearOfStudy: string[] = ['1', '2', '3', '4', '5', '6'];
+  protected _status: string[] = ['Send', 'Approved', 'Rejected'];
+  protected _type: string[] = ['Case_Report', 'Research'];
+  protected _categories: Category[];
+  protected _error: ErrorHandler;
 
   searchCriteria = new FormGroup({
     country: new FormControl(''),
@@ -40,7 +42,7 @@ export class UsersListComponent implements OnInit {
     category: new FormControl('')
   });
 
-  private searchCriteriaReset = new FormGroup({
+  protected searchCriteriaReset = new FormGroup({
     country: new FormControl(''),
     university: new FormControl(''),
     title: new FormControl(''),
@@ -50,7 +52,7 @@ export class UsersListComponent implements OnInit {
     category: new FormControl('')
   });
 
-  constructor(private categoryService: CategoryService, private authService: AuthService,
+  constructor(protected categoryService: CategoryService, protected authService: AuthService,
               protected userService: UserService) {
   }
 
@@ -129,5 +131,13 @@ export class UsersListComponent implements OnInit {
     this.userService.getUsers(this.searchCriteria.value).subscribe(usersData => {
       this._users = usersData;
     });
+  }
+
+  get error(): ErrorHandler {
+    return this._error;
+  }
+
+  checkErrorIsNotUndefined() {
+    return this._error !== undefined;
   }
 }

@@ -11,5 +11,5 @@ public interface EmailService {
     void reamindPassword(Users user, String appUrl);
     void sendDecisionAboutAbstract(Users user, Abstracts abstracts) throws AppException;
     void sendSingleMail(Mail mail);
-
+    void sendGroupMail(Mail mail);
 }

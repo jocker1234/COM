@@ -10,6 +10,7 @@ import lombok.*;
 public class Mail {
 
     private String to;
+    private String[] multiTo;
     private String subject;
     private String content;
 

@@ -26,7 +26,15 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Research'
     },
-  }
+  },
+  {
+    path: 'export',
+    component: AdminAbstractsComponent,
+    data: {
+      breadcrumb: 'Export Abstracts',
+      title: 'Export Abstracts',
+    },
+  },
 ];
 
 @NgModule({

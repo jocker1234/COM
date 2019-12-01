@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   private loginInfo: AuthLoginInfo;
-  error: ErrorHandler;
+  private _error: ErrorHandler;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -33,8 +33,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  get error(): ErrorHandler {
+    return this._error;
+  }
+
   checkErrorIsNotUndefined() {
-    return this.error !== undefined;
+    return this._error !== undefined;
   }
 
   onSubmit() {
@@ -55,7 +59,7 @@ export class LoginComponent implements OnInit {
         this.navigate();
       },
       error1 => {
-        this.error = new ErrorHandler(error1.error.message);
+        this._error = new ErrorHandler(error1._error.message);
         scroll(0,0);
         this.isLoginFailed = true;
       }
