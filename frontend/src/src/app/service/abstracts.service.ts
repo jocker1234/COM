@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -31,8 +31,15 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  getAllCaseAbstract(): Observable<CaseAbstract[]> {
-    return this.http.get<CaseAbstract[]>(`${this.caseUrl}`)
+  getAllCaseAbstract(searchCriteria: any): Observable<CaseAbstract[]> {
+    let httpParams = new HttpParams({
+      fromObject: {
+        'status': searchCriteria.status,
+        'typeAbstract': searchCriteria.type,
+        'nameCategory': searchCriteria.category
+      }
+    });
+    return this.http.get<CaseAbstract[]>(`${this.caseUrl}`, {params: httpParams})
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
@@ -55,8 +62,15 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  getAllResearchAbstract(): Observable<ResearchAbstract[]> {
-    return this.http.get<ResearchAbstract[]>(`${this.researchUrl}`)
+  getAllResearchAbstract(searchCriteria: any): Observable<ResearchAbstract[]> {
+    let httpParams = new HttpParams({
+      fromObject: {
+        'status': searchCriteria.status,
+        'typeAbstract': searchCriteria.type,
+        'nameCategory': searchCriteria.category
+      }
+    });
+    return this.http.get<ResearchAbstract[]>(`${this.researchUrl}`,{params: httpParams})
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 

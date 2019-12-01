@@ -11,6 +11,7 @@ import com.com.backend.mapper.AbstractsMapper;
 import com.com.backend.mapper.CaseAbstractsMapper;
 import com.com.backend.model.Abstracts;
 import com.com.backend.model.CaseAbstracts;
+import com.com.backend.model.Users;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
 import com.com.backend.model.enums.Status;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -149,4 +151,17 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
         return caseAbstractsMapper.modelListToDtoListRes(caseAbstracts);
     }
 
+    @Override
+    public List<CaseAbstractsDtoResponse> getAll(Map<String, String> allParams) {
+        String t = "";
+        if(!allParams.get("status").equals(""))
+            t = Status.valueOf(allParams.getOrDefault("status", "").toUpperCase()).getStatus();
+        String y = allParams.getOrDefault("typeAbstract", "").toUpperCase();
+        String u = allParams.getOrDefault("nameCategory", "");
+
+        List<CaseAbstracts> abstracts = caseAbstractsDao.findAbstract(
+                t,y,u
+        );
+        return caseAbstractsMapper.modelListToDtoListRes(abstracts);
+    }
 }

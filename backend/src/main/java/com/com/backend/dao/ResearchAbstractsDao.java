@@ -23,4 +23,14 @@ public interface ResearchAbstractsDao extends JpaRepository<ResearchAbstracts, L
 
     int countCaseAbstractsByUsersEmailAndStatusIn(String email, List<String> statuses);
 
+    @Query(value = "SELECT DISTINCT(ra.*) " +
+            "FROM research_abstracts ra JOIN category c ON ra.category_id = c.id " +
+            "WHERE (:status = '' OR ra.status IN (:status)) AND (:typeAbstract = '' OR ra.type IN (:typeAbstract)) " +
+            "AND (:nameCategory = '' OR c.name IN (:nameCategory))", nativeQuery = true
+    )
+    List<ResearchAbstracts> findAbstract(
+            @Param("status") String status, @Param("typeAbstract") String typeAbstract,
+            @Param("nameCategory") String nameCategory
+    );
+
 }

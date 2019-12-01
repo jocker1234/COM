@@ -5,6 +5,7 @@ import com.com.backend.dao.ResearchAbstractsDao;
 import com.com.backend.dto.request.ResearchAbstractsDtoRequest;
 import com.com.backend.dto.response.ResearchAbstractsDtoResponse;
 import com.com.backend.model.Abstracts;
+import com.com.backend.model.CaseAbstracts;
 import com.com.backend.model.ResearchAbstracts;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -161,4 +163,17 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
         return researchAbstractsMapper.modelListToDtoListRes(caseAbstracts);
     }
 
+    @Override
+    public List<ResearchAbstractsDtoResponse> getAll(Map<String, String> allParams) {
+        String t = "";
+        if(!allParams.get("status").equals(""))
+            t = Status.valueOf(allParams.getOrDefault("status", "").toUpperCase()).getStatus();
+        String y = allParams.getOrDefault("typeAbstract", "").toUpperCase();
+        String u = allParams.getOrDefault("nameCategory", "");
+
+        List<ResearchAbstracts> abstracts = researchAbstractsDao.findAbstract(
+                t,y,u
+        );
+        return researchAbstractsMapper.modelListToDtoListRes(abstracts);
+    }
 }

@@ -9,10 +9,11 @@ import com.com.backend.exception.AppException;
 
 import javax.mail.MessagingException;
 import java.util.List;
+import java.util.Map;
 
 public interface AbstractsAbstractService <TREQ extends AbstractsDtoRequest, TRES extends AbstractsDtoResponse,
                                                                                                 S extends Abstracts> {
-    List<TRES> getAll();
+    List<TRES> getAll(Map<String, String> allParams);
     TRES create(TREQ t, String token) throws AppException;
     TRES update(Long id, TREQ t, String token) throws AppException;
 

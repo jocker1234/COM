@@ -1,5 +1,38 @@
 <div id="admin-tab">
   <div class="container">
+    <div>
+      <form [formGroup]="searchCriteria">
+        <h5>Abstract data</h5>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputState2-1">Status</label>
+            <select id="inputState2-1" class="form-control" formControlName="status">
+              <option value="" selected>Status</option>
+              <option *ngFor="let status of status" value="{{status}}">{{status}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState2-2">Type</label>
+            <select id="inputState2-2" class="form-control" formControlName="type">
+              <option value="" selected>Type</option>
+              <option *ngFor="let type of type" value="{{type}}">{{type}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState2-3">Category</label>
+            <select id="inputState2-3" class="form-control" formControlName="category">
+              <option value="" selected>Category</option>
+              <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
+            </select>
+          </div>
+        </div>
+        <hr/>
+        <div class="row float-right" style="margin-bottom: 25px">
+          <button class="btn btn-primary" style="margin-right: 10px" (click)="clearForm()">Clear</button>
+          <button class="btn btn-primary" (click)="find()">Find</button>
+        </div>
+      </form>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <nav>

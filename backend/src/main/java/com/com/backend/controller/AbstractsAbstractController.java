@@ -24,8 +24,8 @@ public abstract class AbstractsAbstractController<TREQ extends AbstractsDtoReque
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACTIVE_PARTICIPANT', 'ROLE_PASSIVE_PARTICIPANT')")
-    public ResponseEntity<List<TRES>> getAll() {
-        List<TRES> t = getService().getAll();
+    public ResponseEntity<List<TRES>> getAll(@RequestParam Map<String, String> allParams) {
+        List<TRES> t = getService().getAll(allParams);
         return ResponseEntity.ok(t);
     }
 
