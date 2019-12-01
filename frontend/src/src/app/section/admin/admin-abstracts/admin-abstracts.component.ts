@@ -5,6 +5,9 @@ import {AbstractsService} from "../../../service/abstracts.service";
 import {compare, SortableHeaderDirective} from "../../../sortable/sortable-header.directive";
 import {SortEvent} from "../../../sortable/sort-event";
 import {faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
+import {Category} from "../../category";
+import {CategoryService} from "../../../service/category.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-admin-abstracts',
@@ -24,17 +27,35 @@ export class AdminAbstractsComponent implements OnInit {
   private _reverseSortR = undefined;
   faAngleDown = faAngleDown;
   faAngleUp = faAngleUp;
+  private _status: string[] = ['Send', 'Approved', 'Rejected'];
+  private _type: string[] = ['Case_Report', 'Research'];
+  private _categories: Category[];
 
-  constructor(private abstractService: AbstractsService) { }
+  searchCriteria = new FormGroup({
+    status: new FormControl(''),
+    type: new FormControl(''),
+    category: new FormControl('')
+  });
+
+  private searchCriteriaReset = new FormGroup({
+    status: new FormControl(''),
+    type: new FormControl(''),
+    category: new FormControl('')
+  });
+
+  constructor(private categoryService: CategoryService, private abstractService: AbstractsService) { }
 
   ngOnInit() {
-    this.abstractService.getAllCaseAbstract().subscribe(value => {
+    this.abstractService.getAllCaseAbstract(this.searchCriteria.value).subscribe(value => {
       this._case = value;
       this.caseCopy = value;
     });
-    this.abstractService.getAllResearchAbstract().subscribe(value => {
+    this.abstractService.getAllResearchAbstract(this.searchCriteria.value).subscribe(value => {
       this._research = value;
       this.researchCopy = value;
+    });
+    this.categoryService.getCategory().subscribe(value => {
+      this._categories = value;
     });
   }
 
@@ -61,6 +82,18 @@ export class AdminAbstractsComponent implements OnInit {
 
   get reverseSortR(): any {
     return this._reverseSortR;
+  }
+
+  get status(): string[] {
+    return this._status;
+  }
+
+  get type(): string[] {
+    return this._type;
+  }
+
+  get categories(): Category[] {
+    return this._categories;
   }
 
   onSortedCase({column, direction}: SortEvent){
@@ -97,5 +130,18 @@ export class AdminAbstractsComponent implements OnInit {
         return direction === 'asc' ? res : -res;
       });
     }
+  }
+
+  clearForm() {
+    this.searchCriteria.reset(this.searchCriteriaReset.value);
+  }
+
+  find() {
+    this.abstractService.getAllCaseAbstract(this.searchCriteria.value).subscribe(usersData => {
+      this._case = usersData;
+    });
+    this.abstractService.getAllResearchAbstract(this.searchCriteria.value).subscribe(usersData => {
+      this._research = usersData;
+    });
   }
 }

@@ -26,4 +26,14 @@ public interface CaseAbstractsDao extends PagingAndSortingRepository<CaseAbstrac
 
     List<CaseAbstracts> getAllByIdIsNotNull();
 
+    @Query(value = "SELECT DISTINCT(ca.*) " +
+            "FROM case_abstracts ca JOIN category c ON ca.category_id = c.id " +
+            "WHERE (:status = '' OR ca.status IN (:status)) AND (:typeAbstract = '' OR ca.type IN (:typeAbstract)) " +
+            "AND (:nameCategory = '' OR c.name IN (:nameCategory))", nativeQuery = true
+    )
+    List<CaseAbstracts> findAbstract(
+            @Param("status") String status, @Param("typeAbstract") String typeAbstract,
+            @Param("nameCategory") String nameCategory
+    );
+
 }

@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -50,7 +51,7 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
 
     protected abstract S dtoReqToModel(TREQ t);
 
-    public List<TRES> getAll() {
+    public List<TRES> getAll(Map<String, String> allParams) {
         List<S> s = getDao().findAll();
         return getMapper().modelListToDtoListRes(s);
     }

@@ -6,6 +6,7 @@ import {AdminAbstractActionButtonComponent} from "./admin-abstract-action-button
 import {AdminAbstractsRoutingModule} from "./admin-abstracts-routing.module";
 import {AdminModule} from "../admin.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     AdminAbstractsRoutingModule,
     AdminModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class AdminAbstractsModule { }

@@ -93,7 +93,6 @@ export class UsersListComponent implements OnInit {
     return this._title;
   }
 
-
   get keySort(): any {
     return this._keySort;
   }
@@ -101,6 +100,7 @@ export class UsersListComponent implements OnInit {
   get reverseSort(): any {
     return this._reverseSort;
   }
+
 
   onSortedUser({column, direction}: SortEvent) {
     this._keySort = column;
@@ -122,14 +122,12 @@ export class UsersListComponent implements OnInit {
 
   clearForm() {
     this.searchCriteria.reset(this.searchCriteriaReset.value);
-    console.log(this.searchCriteria.value)
   }
 
   find() {
     console.log(this.searchCriteria.value)
     this.userService.getUsers(this.searchCriteria.value).subscribe(usersData => {
       this._users = usersData;
-      console.log(usersData)
     });
   }
 }
