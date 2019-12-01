@@ -20,7 +20,8 @@
         </div>
         <div class="form-group col-md-3">
           <label for="formGroupExampleInput">University</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="University" formControlName="university">
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="University"
+                 formControlName="university">
         </div>
         <div class="form-group col-md-3">
           <label for="inputState1-3">Title</label>
@@ -72,16 +73,21 @@
   <table class="table" cellspacing="0">
     <thead>
     <tr class="row">
-      <th class="col" sortable="id" (sort)="onSortedUser($event)">
-        <div>
-          ID
-          <span *ngIf="keySort === 'id' && reverseSort === true"><fa-icon
-            [icon]="faAngleDown"></fa-icon></span>
-          <span *ngIf="keySort === 'id' && reverseSort === false"><fa-icon
-            [icon]="faAngleUp"></fa-icon></span>
+      <th class="col col-md-1">
+        <div class="row">
+          <div class="col-sm-6">
+            <input type="checkbox" class="input-checkbox" (click)="selectAllUser()">
+          </div>
+          <div class="col-sm-6" sortable="id" (sort)="onSortedUser($event)">
+            ID
+            <span *ngIf="keySort === 'id' && reverseSort === true"><fa-icon
+              [icon]="faAngleDown"></fa-icon></span>
+            <span *ngIf="keySort === 'id' && reverseSort === false"><fa-icon
+              [icon]="faAngleUp"></fa-icon></span>
+          </div>
         </div>
       </th>
-      <th class="col" sortable="email" (sort)="onSortedUser($event)">
+      <th class="col col-md-3" sortable="email" (sort)="onSortedUser($event)">
         <div>
           Email
           <span *ngIf="keySort === 'email' && reverseSort === true"><fa-icon
@@ -90,7 +96,7 @@
             [icon]="faAngleUp"></fa-icon></span>
         </div>
       </th>
-      <th class="col" sortable="firstName" (sort)="onSortedUser($event)">
+      <th class="col col-md-2" sortable="firstName" (sort)="onSortedUser($event)">
         <div>
           First name
           <span *ngIf="keySort === 'firstName' && reverseSort === true"><fa-icon
@@ -99,7 +105,7 @@
             [icon]="faAngleUp"></fa-icon></span>
         </div>
       </th>
-      <th class="col" sortable="lastName" (sort)="onSortedUser($event)">
+      <th class="col col-md-2" sortable="lastName" (sort)="onSortedUser($event)">
         <div>
           Last name
           <span *ngIf="keySort === 'lastName' && reverseSort === true"><fa-icon
@@ -108,7 +114,7 @@
             [icon]="faAngleUp"></fa-icon></span>
         </div>
       </th>
-      <th class="col" sortable="country" (sort)="onSortedUser($event)">
+      <th class="col col-md-2" sortable="country" (sort)="onSortedUser($event)">
         <div>
           Country
           <span *ngIf="keySort === 'country' && reverseSort === true"><fa-icon
@@ -117,7 +123,7 @@
             [icon]="faAngleUp"></fa-icon></span>
         </div>
       </th>
-      <th class="col" sortable="university" (sort)="onSortedUser($event)">
+      <th class="col col-md-2" sortable="university" (sort)="onSortedUser($event)">
         <div>
           University
           <span *ngIf="keySort === 'university' && reverseSort === true"><fa-icon
@@ -129,8 +135,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="row" *ngFor="let user of users" routerLink="{{user.id}}">
-      <td class="col col-md-1">{{user.id}}</td>
+    <tr class="row" *ngFor="let user of users; index as i">
+      <td class="col col-md-1">
+        <div class="row">
+          <div class="col-sm-6">
+            <input id="checkbox-{{i}}" type="checkbox" (click)="checkUser(user.id, user.email)">
+          </div>
+          <div class="col-sm-6">
+            {{user.id}}
+          </div>
+        </div>
+      </td>
       <td class="col col-md-3" style="word-break:break-word;">{{user.email}}</td>
       <td class="col col-md-2" style="word-break:break-word;">{{user.firstName}}</td>
       <td class="col col-md-2" style="word-break:break-word;">{{user.lastName}}</td>
@@ -139,4 +154,7 @@
     </tr>
     </tbody>
   </table>
+  <button [ngClass]="{disabled: userCheck.length === 0}" class="float-right btn btn-primary" (click)="clickSendMail()">
+    Send mails
+  </button>
 </div>

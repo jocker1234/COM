@@ -3,6 +3,7 @@ import {UserDetailComponent} from "../../../user/user-detail/user-detail.compone
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../../service/user.service";
 import {User} from "../../../user/user";
+import {ErrorHandler} from "../../../error-handler";
 
 @Component({
   selector: 'app-admin-user-details',
@@ -12,6 +13,7 @@ import {User} from "../../../user/user";
 export class AdminUserDetailsComponent implements OnInit  {
   private _user: User;
   protected id: number;
+  private _error: ErrorHandler;
 
   constructor(protected activatedRouter: ActivatedRoute,
               protected userService: UserService) {
@@ -33,6 +35,12 @@ export class AdminUserDetailsComponent implements OnInit  {
 
   }
 
+  get error(): ErrorHandler {
+    return this._error;
+  }
 
+  checkErrorIsNotUndefined() {
+    return this._error !== undefined;
+  }
 
 }

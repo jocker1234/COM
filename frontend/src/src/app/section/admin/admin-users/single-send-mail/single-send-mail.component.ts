@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../../../service/user.service";
+import {ErrorHandler} from "../../../error-handler";
 
 @Component({
   selector: 'app-single-send-mail',
@@ -11,6 +12,7 @@ import {UserService} from "../../../../service/user.service";
 export class SingleSendMailComponent implements OnInit {
 
   private mail: string;
+  private _error: ErrorHandler;
 
   constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
     if (this.router.getCurrentNavigation().extras.state !== undefined) {
@@ -38,4 +40,13 @@ export class SingleSendMailComponent implements OnInit {
       this.router.navigate(["/admin/user/" + id]);
     });
   }
+
+  get error(): ErrorHandler {
+    return this._error;
+  }
+
+  checkErrorIsNotUndefined() {
+    return this._error !== undefined;
+  }
+
 }

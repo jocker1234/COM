@@ -11,9 +11,9 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="form_email">Email*</label>
-          <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *"
-                 required="required" data-error="Valid email is required." formControlName="to">
-          <app-field-error-display [displayError]="isFieldValid('to')"
+          <textarea id="form_email" type="text" name="email" class="form-control mail-to" placeholder="Please enter your email *"
+                    required="required" data-error="Valid email is required." formControlName="multiTo" autosize></textarea>
+          <app-field-error-display [displayError]="isFieldValid('multiTo')"
                                    errorMsg="Email field is required">
           </app-field-error-display>
         </div>
