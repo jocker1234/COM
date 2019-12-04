@@ -31,7 +31,7 @@ public class AbstractsController {
     private UsersService usersService;
 
     @Autowired
-    @Qualifier("caseAbstracts")
+    @Qualifier("databaseToCsvFileJob")
     private Job job;
     @Autowired
     private JobLauncher jobLauncher;

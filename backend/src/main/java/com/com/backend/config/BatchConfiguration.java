@@ -1,30 +1,93 @@
 package com.com.backend.config;
 
-import com.com.backend.batch.listener.CaseAbstractsJobListener;
-import com.com.backend.batch.processor.CaseAbstractsItemProcessor;
-import com.com.backend.batch.reader.CaseAbstractsReader;
-import com.com.backend.batch.writer.FlatFileCaseAbstractsWriter;
-import com.com.backend.dto.response.CaseAbstractsDtoResponse;
-import com.com.backend.model.CaseAbstracts;
+import com.com.backend.batch.listener.JobListener;
+import com.com.backend.batch.processor.UsersItemProcessor;
+import com.com.backend.batch.reader.UsersReader;
+import com.com.backend.batch.writer.UsersItemWriter;
+import com.com.backend.batch.writer.UsersItemWriter1;
+import com.com.backend.dao.UsersDao;
+import com.com.backend.model.Users;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration {
+
+    private static final Integer CHUNK = 100;
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
     @Autowired
+    private UsersItemWriter usersWriter;
+    @Autowired
+    private UsersItemProcessor usersProcessor;
+    @Autowired
+    private UsersReader usersReader;
+
+    @Bean
+    public SXSSFWorkbook workbook() {
+        return new SXSSFWorkbook(CHUNK);
+    }
+
+    @Bean
+    public ItemWriter<Users> usersWriter(SXSSFWorkbook workbook) {
+        SXSSFSheet sheet = workbook.createSheet("Users");
+        return new UsersItemWriter1(sheet);
+    }
+
+    @Bean
+    public FileOutputStream fileOutputStream() throws FileNotFoundException {
+        return new FileOutputStream("C:/Users/Patryk/Desktop/inzynierka/COM/backend/users.xlsx");
+    }
+
+    @Bean
+    JobListener jobListener(SXSSFWorkbook workbook, FileOutputStream fileOutputStream, UsersDao usersDao) throws IOException {
+        return new JobListener(workbook, fileOutputStream, usersDao);
+    }
+
+    @Bean
+    Step databaseToCsvFileStep(@Qualifier("usersWriter") ItemWriter<Users> writer) {
+        return stepBuilderFactory.get("databaseToCsvFileStep")
+                .<Users, Users>chunk(CHUNK)
+                .reader(usersReader)
+                .processor(usersProcessor)
+                .writer(writer)
+                .build();
+    }
+
+    @Bean(name = "databaseToCsvFileJob")
+    Job databaseToCsvFileJob(Step step, @Qualifier("jobListener") JobExecutionListener listener) {
+        return jobBuilderFactory.get("databaseToCsvFileJob")
+                .start(step)
+                .listener(listener)
+                .build();
+    }
+
+    /*@Autowired
     private CaseAbstractsReader caseAbstractsReader;
     @Autowired
     private CaseAbstractsItemProcessor caseAbstractsItemProcessor;
@@ -32,6 +95,7 @@ public class BatchConfiguration {
     private FlatFileCaseAbstractsWriter caseAbstractsWriter;
     @Autowired
     private CaseAbstractsJobListener caseAbstractsJobListener;
+
 
     @Bean(name = "caseAbstracts")
     public Job job () {
@@ -48,7 +112,7 @@ public class BatchConfiguration {
                                 .flow(step)
                                 .end()
                                 .build();
-    }
+    }*/
 
     /*@Bean
     public Step exportFile() {
@@ -79,4 +143,4 @@ public class BatchConfiguration {
                 });
     }*/
 
-    }
+}
