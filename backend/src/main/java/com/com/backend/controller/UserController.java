@@ -140,6 +140,13 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteAllUser(@RequestHeader(value = "Authorization") String token) throws AppException {
+        usersService.deleteAllUsers(token);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 }

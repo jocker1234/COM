@@ -1,22 +1,26 @@
 package com.com.backend.config;
 
 import com.com.backend.batch.listener.JobListener;
+import com.com.backend.batch.listener.JobListenerAbstracts;
+import com.com.backend.batch.processor.AbstractsProcessor;
 import com.com.backend.batch.processor.UsersItemProcessor;
+import com.com.backend.batch.reader.AbstractsReader;
 import com.com.backend.batch.reader.UsersReader;
+import com.com.backend.batch.writer.AbstractsWriter;
 import com.com.backend.batch.writer.UsersItemWriter;
 import com.com.backend.batch.writer.UsersItemWriter1;
 import com.com.backend.dao.UsersDao;
+import com.com.backend.model.Abstracts;
 import com.com.backend.model.Users;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,27 +30,25 @@ import org.springframework.context.annotation.Configuration;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration {
 
-    private static final Integer CHUNK = 100;
+    private static final Integer CHUNK = 1000;
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
     @Autowired
-    private UsersItemWriter usersWriter;
-    @Autowired
     private UsersItemProcessor usersProcessor;
     @Autowired
     private UsersReader usersReader;
+    @Autowired
+    private AbstractsProcessor abstractsProcessor;
+    @Autowired
+    private AbstractsReader abstractsReader;
 
     @Bean
     public SXSSFWorkbook workbook() {
@@ -54,24 +56,19 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public ItemWriter<Users> usersWriter(SXSSFWorkbook workbook) {
+    public ItemWriter<Users> usersWriterXlsx(SXSSFWorkbook workbook) {
         SXSSFSheet sheet = workbook.createSheet("Users");
         return new UsersItemWriter1(sheet);
     }
 
     @Bean
-    public FileOutputStream fileOutputStream() throws FileNotFoundException {
-        return new FileOutputStream("C:/Users/Patryk/Desktop/inzynierka/COM/backend/users.xlsx");
+    JobListener jobListenerXlsx(SXSSFWorkbook workbook) throws IOException {
+        return new JobListener(workbook);
     }
 
     @Bean
-    JobListener jobListener(SXSSFWorkbook workbook, FileOutputStream fileOutputStream, UsersDao usersDao) throws IOException {
-        return new JobListener(workbook, fileOutputStream, usersDao);
-    }
-
-    @Bean
-    Step databaseToCsvFileStep(@Qualifier("usersWriter") ItemWriter<Users> writer) {
-        return stepBuilderFactory.get("databaseToCsvFileStep")
+    Step exportToXlsxStepAbstracts(@Qualifier("usersWriterXlsx") ItemWriter<Users> writer) {
+        return stepBuilderFactory.get("exportToXlsxStepAbstracts")
                 .<Users, Users>chunk(CHUNK)
                 .reader(usersReader)
                 .processor(usersProcessor)
@@ -79,9 +76,44 @@ public class BatchConfiguration {
                 .build();
     }
 
-    @Bean(name = "databaseToCsvFileJob")
-    Job databaseToCsvFileJob(Step step, @Qualifier("jobListener") JobExecutionListener listener) {
-        return jobBuilderFactory.get("databaseToCsvFileJob")
+    @Bean(name = "jobExportUsersToXlsx")
+    Job exportToXlsxJob(@Qualifier("exportToXlsxStepAbstracts") Step step,
+                             @Qualifier("jobListenerXlsx") JobExecutionListener listener) {
+        return jobBuilderFactory.get("exportToXlsxJob")
+                .start(step)
+                .listener(listener)
+                .build();
+    }
+
+    @Bean
+    public XWPFDocument document() {
+        return new XWPFDocument();
+    }
+
+    @Bean
+    public ItemWriter<Abstracts> abstractsWriterDocx(XWPFDocument document) {
+        return new AbstractsWriter(document);
+    }
+
+    @Bean
+    JobListenerAbstracts jobListenerDocx(XWPFDocument document) throws IOException {
+        return new JobListenerAbstracts(document);
+    }
+
+    @Bean
+    Step exportToDocxStepAbstracts(@Qualifier("abstractsWriterDocx") ItemWriter<Abstracts> writer) {
+        return stepBuilderFactory.get("exportToDocxStepAbstracts")
+                .<Abstracts, Abstracts>chunk(CHUNK)
+                .reader(abstractsReader)
+                .processor(abstractsProcessor)
+                .writer(writer)
+                .build();
+    }
+
+    @Bean(name = "jobExportAbstractsToDocx")
+    Job jobExportAbstractsToDocx(@Qualifier("exportToDocxStepAbstracts") Step step,
+                                 @Qualifier("jobListenerDocx") JobExecutionListener listener) {
+        return jobBuilderFactory.get("jobExportAbstractsToDocx")
                 .start(step)
                 .listener(listener)
                 .build();

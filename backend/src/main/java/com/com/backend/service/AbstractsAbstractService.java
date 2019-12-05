@@ -1,6 +1,7 @@
 package com.com.backend.service;
 
 import com.com.backend.dto.response.AbstractsDtoResponse;
+import com.com.backend.exception.AccessException;
 import com.com.backend.exception.NotFoundException;
 import com.com.backend.model.Abstracts;
 import com.com.backend.dto.request.AbstractsDtoRequest;
@@ -30,4 +31,5 @@ public interface AbstractsAbstractService <TREQ extends AbstractsDtoRequest, TRE
     int countUserAbstract(String email);
 
     List<TRES> getAllAbstractsByUserEmail(String email);
+    void deleteAllAbstracts(String token) throws AccessException;
 }

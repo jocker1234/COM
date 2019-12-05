@@ -283,6 +283,16 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public void deleteAllUsers(String token) throws AccessException {
+        checkIfAdmin(token);
+        List<String> roles = new ArrayList<>();
+        roles.add(Role.ROLE_PASSIVE_PARTICIPANT.name());
+        roles.add(Role.ROLE_ACTIVE_PARTICIPANT.name());
+        List<Users> usersToDrop = usersDao.findAllByRole(roles);
+        usersDao.deleteAll(usersToDrop);
+    }
+
+    @Override
     @Transactional
     public UserAdminDtoResponse createAdmin(UserAdminDtoRequest usersDtoRequest) throws AppException {
         usersDtoRequest = validateAdminAuthenticate(usersDtoRequest);

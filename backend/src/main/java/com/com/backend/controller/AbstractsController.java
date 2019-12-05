@@ -3,6 +3,8 @@ package com.com.backend.controller;
 import com.com.backend.exception.AppException;
 import com.com.backend.model.Abstracts;
 import com.com.backend.service.AbstractsService;
+import com.com.backend.service.CaseAbstractsService;
+import com.com.backend.service.ResearchAbstractsService;
 import com.com.backend.service.UsersService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
@@ -15,6 +17,7 @@ import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +29,16 @@ public class AbstractsController {
 
     @Autowired
     private AbstractsService abstractsService;
+    @Autowired
+    private CaseAbstractsService caseAbstractsService;
+    @Autowired
+    private ResearchAbstractsService researchAbstractsService;
 
     @Autowired
     private UsersService usersService;
 
     @Autowired
-    @Qualifier("databaseToCsvFileJob")
+    @Qualifier("jobExportAbstractsToDocx")
     private Job job;
     @Autowired
     private JobLauncher jobLauncher;
@@ -69,5 +76,14 @@ public class AbstractsController {
         String email = usersService.getEmailFromToken(token);
         long count = abstractsService.countAllAbstractUser(email);
         return ResponseEntity.ok(count);
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> deleteAllAbstracts(@RequestHeader(value = "Authorization")String token)
+            throws AppException {
+        caseAbstractsService.deleteAllAbstracts(token);
+        researchAbstractsService.deleteAllAbstracts(token);
+        return ResponseEntity.noContent().build();
     }
 }

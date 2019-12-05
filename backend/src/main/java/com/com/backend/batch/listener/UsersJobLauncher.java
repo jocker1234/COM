@@ -30,7 +30,7 @@ public class UsersJobLauncher {
     private final JobLauncher jobLauncher;
 
     @Autowired
-    UsersJobLauncher(@Qualifier("databaseToCsvFileJob") Job job, JobLauncher jobLauncher) {
+    UsersJobLauncher(@Qualifier("jobExportUsersToXlsx") Job job, JobLauncher jobLauncher) {
         this.job = job;
         this.jobLauncher = jobLauncher;
     }

@@ -4,6 +4,7 @@ import com.com.backend.dao.CategoryDao;
 import com.com.backend.dao.ResearchAbstractsDao;
 import com.com.backend.dto.request.ResearchAbstractsDtoRequest;
 import com.com.backend.dto.response.ResearchAbstractsDtoResponse;
+import com.com.backend.exception.AccessException;
 import com.com.backend.model.Abstracts;
 import com.com.backend.model.CaseAbstracts;
 import com.com.backend.model.ResearchAbstracts;
@@ -161,6 +162,12 @@ public class ResearchAbstractsServiceImpl extends AbstractsAbstractServiceImpl<R
     public List<ResearchAbstractsDtoResponse> getAllAbstractsByUserEmail(String email) {
         List<ResearchAbstracts> caseAbstracts = researchAbstractsDao.getAllByUsersEmail(email);
         return researchAbstractsMapper.modelListToDtoListRes(caseAbstracts);
+    }
+
+    @Override
+    public void deleteAllAbstracts(String token) throws AccessException {
+        usersService.checkIfAdmin(token);
+        researchAbstractsDao.deleteAll();
     }
 
     @Override
