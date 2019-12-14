@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-2 col-form-label"></p>
+    <p class="col-sm-8">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
+  <div class="d-flex justify-content-around">
+    <button (click)="dropUsers()" class="btn btn-primary">Delete users</button>
+    <button (click)="dropAbstracts()" class="btn btn-primary">Delete Abstracts</button>
+    <button (click)="dropAllData()" class="btn btn-primary">Delete All Data</button>
+  </div>
+</div>

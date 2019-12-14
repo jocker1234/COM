@@ -7,11 +7,15 @@ import {AdminAbstractsRoutingModule} from "./admin-abstracts-routing.module";
 import {AdminModule} from "../admin.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AbstractsExportComponent } from './abstracts-export/abstracts-export.component';
+import {FieldErrorDisplayModule} from "../../field-error-display/field-error-display.module";
+import {FieldSuccessfulDisplayModule} from "../../field-successfull-display/field-successful-display.module";
 
 @NgModule({
   declarations: [
     AdminAbstractsComponent,
     AdminAbstractActionButtonComponent,
+    AbstractsExportComponent,
   ],
   exports: [
     AdminAbstractActionButtonComponent,
@@ -23,6 +27,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
+    FieldErrorDisplayModule,
+    FieldSuccessfulDisplayModule
   ]
 })
 export class AdminAbstractsModule { }

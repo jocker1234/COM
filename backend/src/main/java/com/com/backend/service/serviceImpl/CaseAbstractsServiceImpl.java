@@ -5,6 +5,7 @@ import com.com.backend.dao.CategoryDao;
 import com.com.backend.dto.request.CaseAbstractsDtoRequest;
 import com.com.backend.dto.response.CaseAbstractsDtoResponse;
 import com.com.backend.exception.AbstractNotFoundException;
+import com.com.backend.exception.AccessException;
 import com.com.backend.exception.AppException;
 import com.com.backend.exception.WrongValueException;
 import com.com.backend.mapper.AbstractsMapper;
@@ -149,6 +150,12 @@ public class CaseAbstractsServiceImpl extends AbstractsAbstractServiceImpl<CaseA
     public List<CaseAbstractsDtoResponse> getAllAbstractsByUserEmail(String email) {
         List<CaseAbstracts> caseAbstracts = caseAbstractsDao.getAllByUsersEmail(email);
         return caseAbstractsMapper.modelListToDtoListRes(caseAbstracts);
+    }
+
+    @Override
+    public void deleteAllAbstracts(String token) throws AccessException {
+        usersService.checkIfAdmin(token);
+        caseAbstractsDao.deleteAll();
     }
 
     @Override

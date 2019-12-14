@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AdminAbstractsComponent} from "./admin-abstracts.component";
 import {PasswordResetComponent} from "../../login/password-reset/password-reset.component";
+import {AbstractsExportComponent} from "./abstracts-export/abstracts-export.component";
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'export',
-    component: AdminAbstractsComponent,
+    component: AbstractsExportComponent,
     data: {
       breadcrumb: 'Export Abstracts',
       title: 'Export Abstracts',

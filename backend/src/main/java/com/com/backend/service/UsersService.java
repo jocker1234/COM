@@ -41,4 +41,6 @@ public interface UsersService extends AbstractService<Users, UserResponse> {
 
     Boolean checkIfAdmin(String token) throws AccessException;
     List<UserAdminDtoResponse> getAllAdmins(String token);
+
+    void deleteAllUsers(String token) throws AccessException;
 }

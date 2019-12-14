@@ -5,6 +5,7 @@ import {AdminUserDetailsComponent} from "./admin-user-details/admin-user-details
 import {SingleSendMailComponent} from "./single-send-mail/single-send-mail.component";
 import {MultiSendMailComponent} from "./multi-send-mail/multi-send-mail.component";
 import {CheckMultiUserToMailComponent} from "./check-multi-user-to-mail/check-multi-user-to-mail.component";
+import {UsersExportComponent} from "./users-export/users-export.component";
 
 
 const routes: Routes = [
@@ -33,8 +34,8 @@ const routes: Routes = [
     },
   },
   {
-    path: 'export',//TODO
-    component: MultiSendMailComponent,
+    path: 'export',
+    component: UsersExportComponent,
     data: {
       breadcrumb: 'Export User',
       title: 'Export User',

@@ -16,7 +16,7 @@ class CorsFilter extends OncePerRequestFilter {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, PATCH");
         response.setHeader("Access-Control-Allow-Headers",
                 "authorization, content-type, xsrf-token, Cache-Control, remember-me, WWW-Authenticate");
-        response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
+        response.addHeader("Access-Control-Expose-Headers", "xsrf-token, X-Total-Results, Authorization, Content-type, Content-Disposition");
         filterChain.doFilter(request, response);
     }
 

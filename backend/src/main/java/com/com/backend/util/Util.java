@@ -1,5 +1,11 @@
 package com.com.backend.util;
 
+import org.joda.time.DateTime;
+
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -30,6 +36,17 @@ public class Util {
 
     public static boolean isNull(Object value) {
         return !(value != null);
+    }
+
+    public static String setDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withZone(ZoneId.systemDefault());
+        Instant instant = Instant.now();
+        String date = formatter.format(instant);
+        return date.replaceAll("[/,\\s,:]", "-");
+    }
+
+    public static long getTimeInMillis(DateTime start, DateTime stop){
+        return stop.getMillis() - start.getMillis();
     }
 
 }

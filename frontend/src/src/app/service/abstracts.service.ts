@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -7,6 +7,7 @@ import {CaseAbstract} from "../section/abstracts/case-abstract";
 import {HandlingErrorsService} from "./handling-errors.service";
 import {ResearchAbstract} from "../section/abstracts/research-abstract";
 import {Abstract} from "../section/abstracts/abstract";
+import * as fileSaver from 'file-saver';
 
 const apiUrl = environment.apiUrl;
 
@@ -70,7 +71,7 @@ export class AbstractsService {
         'nameCategory': searchCriteria.category
       }
     });
-    return this.http.get<ResearchAbstract[]>(`${this.researchUrl}`,{params: httpParams})
+    return this.http.get<ResearchAbstract[]>(`${this.researchUrl}`, {params: httpParams})
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
@@ -106,26 +107,21 @@ export class AbstractsService {
       .pipe(catchError(HandlingErrorsService.handleError));
   }
 
-  sortCaseAbstracts(criteria: SearchCriteria, caseAbstracts: CaseAbstract[]): CaseAbstract[] {
-    return caseAbstracts.sort((a,b) => {
-      if(criteria.sortDirection === 'desc'){
-        return a[criteria.sortColumn] - b[criteria.sortColumn];
-      }
-      else {
-        return a[criteria.sortColumn] - b[criteria.sortColumn];
-      }
+  dropAllAbstracts(): Observable<any> {
+    return this.http.delete(`${this.abstractUrl}`);
+  }
+
+  exports(): Observable<any>  {
+    let headers = new HttpHeaders();
+    headers = headers.append('Accept', 'application/octet-stream; charset=utf-8');
+    headers = headers.append('Content-Type', 'application/octet-stream;');
+    return this.http.get(`${this.abstractUrl}/exportAbstract`, {
+      headers: headers,
+      observe: 'response',
+      responseType: 'blob'
     });
   }
 
-  sortResearchAbstracts(criteria: SearchCriteria, researchAbstracts: ResearchAbstract[]) {
-    return researchAbstracts.sort((a,b) => {
-      if(criteria.sortDirection === 'desc'){
-        return a[criteria.sortColumn] - b[criteria.sortColumn];
-      } else {
-        return a[criteria.sortColumn] - b[criteria.sortColumn];
-      }
-    });
-    }
 }
 
 export class SearchCriteria {

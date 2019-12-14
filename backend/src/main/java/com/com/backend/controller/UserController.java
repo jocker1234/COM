@@ -12,14 +12,26 @@ import com.com.backend.exception.AppException;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.service.EmailService;
 import com.com.backend.service.UsersService;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @RestController
 @CrossOrigin(value = {"http://localhost:4200", "http://54.37.234.192:4200"})
@@ -28,6 +40,12 @@ public class UserController {
 
     private UsersService usersService;
     private EmailService emailService;
+
+    @Autowired
+    @Qualifier("jobExportUsersToCsv")
+    private Job job;
+    @Autowired
+    private JobLauncher jobLauncher;
 
     public UserController(UsersService usersService, EmailService emailService) {
         this.usersService = usersService;
@@ -138,6 +156,33 @@ public class UserController {
 
         usersService.deleteUser(id);
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteAllUser(@RequestHeader(value = "Authorization") String token) throws AppException {
+        usersService.deleteAllUsers(token);
+        return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value = "/exportUser", produces = "text/csv")
+    public ResponseEntity handleU(HttpServletResponse response) throws Exception {
+        Random random = new Random();
+        int randomNumber = random.nextInt(9999) + 1;
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis())
+                .addLong("randomNumber", (long) randomNumber)
+                .toJobParameters();
+        jobLauncher.run(job, jobParameters);
+        String path = System.getProperty("user.dir") + "/backend/file/users-" + randomNumber + ".csv";
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.parseMediaType("text/csv"));
+        header.add("filename", "users-" + randomNumber + ".csv");
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=users-" + randomNumber + ".csv");
+        ResponseEntity responseEntity = new ResponseEntity<>(
+                new FileSystemResource("C:/Users/Patryk/Desktop/inzynierka/COM/backend/file/users-" + randomNumber + ".csv"),
+                header, HttpStatus.OK);
+        return responseEntity;
     }
 
 

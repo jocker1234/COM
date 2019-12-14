@@ -19,7 +19,6 @@ import java.util.Map;
 @RestController
 public abstract class AbstractsAbstractController<TREQ extends AbstractsDtoRequest, TRES extends AbstractsDtoResponse,
                                                                                                 S extends Abstracts> {
-
     public abstract AbstractsAbstractService<TREQ, TRES, S> getService();
 
     @GetMapping

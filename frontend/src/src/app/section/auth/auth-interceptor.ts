@@ -13,8 +13,6 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.token.getToken();
     req = req.clone({
       setHeaders: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Accept': 'application/json',
         'Accept-Language': 'en'
       }
     });

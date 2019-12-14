@@ -14,6 +14,8 @@ import {AutosizeModule} from "ngx-autosize";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import { MultiSendMailComponent } from './multi-send-mail/multi-send-mail.component';
 import { CheckMultiUserToMailComponent } from './check-multi-user-to-mail/check-multi-user-to-mail.component';
+import { UsersExportComponent } from './users-export/users-export.component';
+import {FieldSuccessfulDisplayModule} from "../../field-successfull-display/field-successful-display.module";
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { CheckMultiUserToMailComponent } from './check-multi-user-to-mail/check-
     AdminAbstractsUserComponent,
     SingleSendMailComponent,
     MultiSendMailComponent,
-    CheckMultiUserToMailComponent
+    CheckMultiUserToMailComponent,
+    UsersExportComponent
   ],
   exports: [
     ButtonUserDetailsComponent
@@ -37,7 +40,9 @@ import { CheckMultiUserToMailComponent } from './check-multi-user-to-mail/check-
     FieldErrorDisplayModule,
     AdminModule,
     AutosizeModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FieldErrorDisplayModule,
+    FieldSuccessfulDisplayModule
   ]
 })
 export class AdminUsersModule {

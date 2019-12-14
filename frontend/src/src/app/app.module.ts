@@ -22,6 +22,8 @@ import { ChangePasswordComponent } from './section/login/change-password/change-
 import { TitleComponent } from './title/title.component';
 import {FaConfig, FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import {faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
+import { ExportComponent } from './export/export.component';
+import {FieldSuccessfulDisplayModule} from "./section/field-successfull-display/field-successful-display.module";
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import {faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
     BreadCrumbComponent,
     ChangePasswordComponent,
     TitleComponent,
+    ExportComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import {faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
     UserModule,
     AbstractsModule,
     FieldErrorDisplayModule,
-    AdminModule
+    AdminModule,
+    FieldSuccessfulDisplayModule
   ],
   providers: [
     httpInterceptorProvider,

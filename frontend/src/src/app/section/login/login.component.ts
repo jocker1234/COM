@@ -59,7 +59,8 @@ export class LoginComponent implements OnInit {
         this.navigate();
       },
       error1 => {
-        this._error = new ErrorHandler(error1._error.message);
+        console.log(error1)
+        this._error = new ErrorHandler(error1.error.message);
         scroll(0,0);
         this.isLoginFailed = true;
       }

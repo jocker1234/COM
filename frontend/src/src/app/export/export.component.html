@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-2 col-form-label"></p>
+    <p class="col-sm-8">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
+  <div class="row" *ngIf="checkSuccessfulIsNotUndefined()">
+    <p class="col-sm-2 col-form-label"></p>
+    <p class="col-sm-8">
+      <app-successfull-display [_displaySuccessful]="checkSuccessfulIsNotUndefined()" [_successful]="successful">
+      </app-successfull-display>
+    </p>
+  </div>
+  <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="form-group row">
+      <div class="col-sm-2"></div>
+      <span class="col-sm-2 col-form-label">Type</span>
+      <input class="form-control col-sm-6" type="text" name="type" [(ngModel)]="export.type" #type="ngModel" disabled>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2"></div>
+      <span class="col-sm-2 col-form-label">Format file</span>
+      <input class="form-control col-sm-6" type="text" name="format" [(ngModel)]="export.format" #format="ngModel" disabled>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2"></div>
+      <span class="col-sm-2 col-form-label">Name file</span>
+      <input class="form-control col-sm-6" type="text" name="fileName" [(ngModel)]="export.fileName" #fileName="ngModel">
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2"></div>
+      <button class="btn btn-primary col-sm-8">Export</button>
+      <div class="col-sm-2"></div>
+    </div>
+  </form>
+</div>
