@@ -1,7 +1,10 @@
 package com.com.backend.batch.reader;
 
+import com.com.backend.dao.AbstractsDao;
 import com.com.backend.dao.CaseAbstractsDao;
-import com.com.backend.model.CaseAbstracts;
+import com.com.backend.model.Abstracts;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
@@ -10,23 +13,29 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Component
-public class CaseAbstractsReader extends RepositoryItemReader<CaseAbstracts> {
+@StepScope
+public class CaseAbstractsReader extends RepositoryItemReader<Abstracts> {
 
-    private CaseAbstractsDao caseAbstractsDao;
+    private CaseAbstractsDao abstractsDao;
 
-    public CaseAbstractsReader(CaseAbstractsDao caseAbstractsDao) {
-        super();
-        this.caseAbstractsDao = caseAbstractsDao;
+    public CaseAbstractsReader(CaseAbstractsDao abstractsDao) {
+        this.abstractsDao = abstractsDao;
     }
 
     @PostConstruct
-    protected void init() {
-        final Map<String, Sort.Direction> sorts = new HashMap<>();
-        sorts.put("id", Sort.Direction.ASC);
-        this.setRepository(caseAbstractsDao);
-        this.setSort(sorts);
-        this.setMethodName("findAll");
+    public void init() {
+        log.info("Start reading");
+        setRepository(abstractsDao);
+        setSort(sortByIdAsc());
+        setMethodName("findAll");
+    }
+
+    private Map<String, Sort.Direction> sortByIdAsc() {
+        Map<String, Sort.Direction> sortConfiguration = new HashMap<>();
+        sortConfiguration.put("id", Sort.Direction.ASC);
+        return sortConfiguration;
     }
 
 }

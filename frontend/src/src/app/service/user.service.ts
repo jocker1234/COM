@@ -71,6 +71,21 @@ export class UserService {
     return this.http.post<any>(`${this.userUrl}/group-mail`, mail)
       .pipe(catchError(HandlingErrorsService.handleError));
   }
+
+  dropAllUsers(): Observable<any> {
+    return this.http.delete(`${this.userUrl}`);
+  }
+
+  exports(): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Accept', 'text/csv; charset=utf-8');
+    headers = headers.append('Content-Type', 'text/csv;');
+    return this.http.get(`${this.userUrl}/exportUser`, {
+      headers: headers,
+      observe: 'response',
+      responseType: 'blob'
+    });
+  }
 }
 
 export class SearchCriteria {

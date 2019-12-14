@@ -1,5 +1,6 @@
 package com.com.backend.batch.listener;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -19,11 +20,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-@EnableScheduling
+@Slf4j
+//@Component
+//@EnableScheduling
 public class UsersJobLauncher {
-
-    private final Logger LOGGER = LoggerFactory.getLogger(CaseAbstractsJobListener.class);
 
     private final Job job;
 
@@ -37,11 +37,11 @@ public class UsersJobLauncher {
 
     //@Scheduled(cron = "0 * * * * *")
     void launchDatabaseToCsvFileJob() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
-        LOGGER.info("Starting databaseToCsvFile job");
+        log.info("Starting databaseToCsvFile job");
 
         jobLauncher.run(job, newExecution());
 
-        LOGGER.info("Stopping databaseToCsvFile job");
+        log.info("Stopping databaseToCsvFile job");
     }
 
     private JobParameters newExecution() {

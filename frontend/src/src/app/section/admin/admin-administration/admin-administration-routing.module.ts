@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {DictionaryEditComponent} from "./Dictionary/dictionary-edit/dictionary-edit.component";
+import {DropDataComponent} from "./drop-data/drop-data.component";
 
 const routes: Routes = [
   {
@@ -14,6 +16,14 @@ const routes: Routes = [
     loadChildren: () => import('./administrator/administrator.module').then(value => value.AdministratorModule),
     data: {
       breadcrumb: 'Administrator'
+    },
+  },
+  {
+    path: 'clearData',
+    component: DropDataComponent,
+    data: {
+      breadcrumb: 'Data cleaning',
+      title: 'Data cleaning',
     },
   },
 ];

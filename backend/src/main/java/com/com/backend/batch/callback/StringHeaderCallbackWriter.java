@@ -1,15 +1,15 @@
-package com.com.backend.batch;
+package com.com.backend.batch.callback;
 
 import org.springframework.batch.item.file.FlatFileHeaderCallback;
 
 import java.io.IOException;
 import java.io.Writer;
 
-public class StringHeaderWriter implements FlatFileHeaderCallback {
+public class StringHeaderCallbackWriter implements FlatFileHeaderCallback {
 
     private final String header;
 
-    public StringHeaderWriter(String header) {
+    public StringHeaderCallbackWriter(String header) {
         this.header = header;
     }
 

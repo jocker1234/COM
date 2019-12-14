@@ -6,6 +6,7 @@ import {PasswordResetComponent} from "./section/login/password-reset/password-re
 import {HomeComponent} from "./section/home/home.component";
 import {AuthGuard} from "./section/auth/auth-guard";
 import {ChangePasswordComponent} from "./section/login/change-password/change-password.component";
+import {UserDetailComponent} from "./section/user/user-detail/user-detail.component";
 
 
 const routes: Routes = [
@@ -43,13 +44,13 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent,
+    component: UserDetailComponent,
     canActivate: [AuthGuard],
   },
-  {
+  /*{
     path: 'home',
     component: HomeComponent,
-  },
+  },*/
   {
     path: 'user',
     loadChildren: () => import('./section/user/user.module').then(value => value.UserModule),

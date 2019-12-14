@@ -31,6 +31,11 @@ public interface UsersDao extends JpaRepository<Users, Long> {
             "WHERE a.role_name IN (?1)", nativeQuery = true)
     List<Users> findAllByRole(List<String> list);
 
+    @Query(value = "SELECT u.* FROM users u JOIN users_authorities ua ON u.id = ua.user_id " +
+            "JOIN authorities a ON ua.authorities_id = a.id " +
+            "WHERE a.role_name NOT IN ('ROLE_ADMIN')", nativeQuery = true)
+    List<Users> findAllByRoleWithoutAdmin();
+
     @Query(value = "SELECT DISTINCT(u.*) " +
             "FROM (SELECT u.* " +
                 "FROM users u JOIN users_authorities ua on u.id = ua.user_id " +

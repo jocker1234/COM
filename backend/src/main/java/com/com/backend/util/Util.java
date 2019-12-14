@@ -1,5 +1,7 @@
 package com.com.backend.util;
 
+import org.joda.time.DateTime;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -41,6 +43,10 @@ public class Util {
         Instant instant = Instant.now();
         String date = formatter.format(instant);
         return date.replaceAll("[/,\\s,:]", "-");
+    }
+
+    public static long getTimeInMillis(DateTime start, DateTime stop){
+        return stop.getMillis() - start.getMillis();
     }
 
 }
