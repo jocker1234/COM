@@ -59,7 +59,7 @@ public class AbstractsController {
         header.add("filename", "users.xlsx");
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=abstracts-" + randomNumber + ".docx");
         ResponseEntity responseEntity = new ResponseEntity<>(
-                new FileSystemResource("C:/Users/Patryk/Desktop/inzynierka/COM/backend/file/abstracts-" + randomNumber + ".docx"),
+                new FileSystemResource(System.getProperty("user.dir") + "/backend/file/abstracts-" + randomNumber + ".docx"),
                 header, HttpStatus.OK);
         return responseEntity;
     }

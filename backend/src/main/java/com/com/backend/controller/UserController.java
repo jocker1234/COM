@@ -180,7 +180,7 @@ public class UserController {
         header.add("filename", "users-" + randomNumber + ".csv");
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=users-" + randomNumber + ".csv");
         ResponseEntity responseEntity = new ResponseEntity<>(
-                new FileSystemResource("C:/Users/Patryk/Desktop/inzynierka/COM/backend/file/users-" + randomNumber + ".csv"),
+                new FileSystemResource(System.getProperty("user.dir") + "/backend/file/users-" + randomNumber + ".csv"),
                 header, HttpStatus.OK);
         return responseEntity;
     }
