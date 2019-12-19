@@ -15,6 +15,7 @@ import {ErrorHandler} from "../error-handler";
 export class AbstractsComponent implements OnInit {
 
   private _abstractList: Abstract[];
+  private _error: ErrorHandler;
 
   constructor(private abstractService: AbstractsService, private router: Router, private dialog: NgbModal,
               private categoryService: CategoryService) {
@@ -34,7 +35,23 @@ export class AbstractsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ChooseNewAbstractContentComponent);
+    let count;
+    this.abstractService.countAbstracts().subscribe(value => {
+      count = value
+    });
+    if(count <= 2) {
+      const dialogRef = this.dialog.open(ChooseNewAbstractContentComponent);
+    } else {
+      this._error = new ErrorHandler("You have submitted the maximum amount of work");
+    }
+  }
+
+  get error(): ErrorHandler {
+    return this._error;
+  }
+
+  checkErrorIsNotUndefined() {
+    return this._error !== undefined;
   }
 
 }

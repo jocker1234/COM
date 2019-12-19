@@ -111,6 +111,10 @@ export class AbstractsService {
     return this.http.delete(`${this.abstractUrl}`);
   }
 
+  countAbstracts(): Observable<any> {
+    return this.http.get(`${this.abstractUrl}/countUserAbstracts`);
+  }
+
   exports(): Observable<any>  {
     let headers = new HttpHeaders();
     headers = headers.append('Accept', 'application/octet-stream; charset=utf-8');

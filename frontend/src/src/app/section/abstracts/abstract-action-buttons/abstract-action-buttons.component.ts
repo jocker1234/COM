@@ -16,6 +16,8 @@ export class AbstractActionButtonsComponent implements OnInit {
   prefixUrl: string;
   @Input()
   type: string;
+  @Input()
+  insertable: boolean;
 
   @Input()
   research: ResearchAbstract;
@@ -57,20 +59,22 @@ export class AbstractActionButtonsComponent implements OnInit {
   }
 
   saveAndSend() {
-    if (this.prefixUrl.includes("case") === true) {
-      this.case.type = 'C';
-      this.abstractService.newCaseAbstract(this.case).subscribe(value => {
-        this.abstractService.sendCaseAbstract(value.id).subscribe(value1 => {
-          this.router.navigate([this.prefixUrl + value.id]);
+    if(this.insertable) {
+      if (this.prefixUrl.includes("case") === true) {
+        this.case.type = 'C';
+        this.abstractService.newCaseAbstract(this.case).subscribe(value => {
+          this.abstractService.sendCaseAbstract(value.id).subscribe(value1 => {
+            this.router.navigate([this.prefixUrl + value.id]);
+          });
         });
-      });
-    } else if (this.prefixUrl.includes("research") === true) {
-      this.research.type = 'R';
-      this.abstractService.newResearchAbstract(this.research).subscribe(value => {
-        this.abstractService.sendResearchAbstract(value.id).subscribe(value1 => {
-          this.router.navigate([this.prefixUrl + value.id]);
+      } else if (this.prefixUrl.includes("research") === true) {
+        this.research.type = 'R';
+        this.abstractService.newResearchAbstract(this.research).subscribe(value => {
+          this.abstractService.sendResearchAbstract(value.id).subscribe(value1 => {
+            this.router.navigate([this.prefixUrl + value.id]);
+          });
         });
-      });
+      }
     }
   }
 
