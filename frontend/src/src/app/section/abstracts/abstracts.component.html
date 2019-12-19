@@ -1,4 +1,11 @@
 <div class="container">
+  <div class="row" *ngIf="checkErrorIsNotUndefined()">
+    <p class="col-sm-2 col-form-label"></p>
+    <p class="col-sm-8">
+      <app-error-display [_displayError]="checkErrorIsNotUndefined()" [_error]="error">
+      </app-error-display>
+    </p>
+  </div>
   <button class="btn btn-primary button-new" (click)="openDialog()">Add Abstract</button>
   <app-abstracts-table [_abstractList]="abstractList"></app-abstracts-table>
 </div>

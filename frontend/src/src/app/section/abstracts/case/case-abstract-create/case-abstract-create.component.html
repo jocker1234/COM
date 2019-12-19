@@ -15,6 +15,10 @@
         <div class="col-7 row-author row" *ngFor="let author of authors.controls; index as idx">
           <input class="form-control author-input" [formControlName]="idx">
           <button class="btn btn-secondary" type="button" (click)="deleteAuthorField(idx)">-</button>
+          <span class="error-messages"
+                *ngIf="!(authors.at(idx).untouched || authors.at(idx).valid)">
+          Authors field is required
+        </span>
         </div>
         <button type="btn button-plus" (click)="addAuthorField()">+</button>
       </div>
@@ -45,6 +49,10 @@
             <option value="">Select category...</option>
             <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
           </select>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('categoryId').untouched || abstractForm.get('categoryId').valid)">
+          Category field is required
+        </span>
         </div>
       </div>
       <div class="row">
@@ -53,9 +61,12 @@
           <textarea type="text" class="form-control"
                     formControlName="background" autosize></textarea>
           <span class="error-messages"
-                *ngIf="!(abstractForm.get('background').untouched || abstractForm.get('background').valid)">
+                *ngIf="!this.abstractForm.get('background').untouched && this.abstractForm.get('background').value === ''">
             Background field is required
           </span>
+          <span class="error-messages"
+                *ngIf="handleException('background') === 1">
+            Too long. Maximum length fields background, case report and conclusions are 2300 characters.</span>
         </div>
       </div>
       <div class="row">
@@ -64,8 +75,12 @@
           <textarea type="text" class="form-control"
                     formControlName="caseReport" autosize></textarea>
           <span class="error-messages"
-                *ngIf="!(abstractForm.get('caseReport').untouched || abstractForm.get('caseReport').valid)">
-            Case report field is reuired
+                *ngIf="!this.abstractForm.get('caseReport').untouched && this.abstractForm.get('caseReport').value === ''">
+            Case report field is required
+          </span>
+          <span class="error-messages"
+                *ngIf="handleException('caseReport') === 1">
+            Too long. Maximum length fields background, case report and conclusions are 2300 characters.
           </span>
         </div>
       </div>
@@ -75,15 +90,19 @@
           <textarea type="text" class="form-control"
                     formControlName="conclusions" autosize></textarea>
           <span class="error-messages"
-                *ngIf="!(abstractForm.get('conclusions').untouched || abstractForm.get('conclusions').valid)">
+                *ngIf="!this.abstractForm.get('conclusions').untouched && this.abstractForm.get('conclusions').value === ''">
             Conclusions field is required
+          </span>
+          <span class="error-messages"
+                *ngIf="handleException('conclusions') === 1">
+            Too long. Maximum length fields background, case report and conclusions are 2300 characters.
           </span>
         </div>
       </div>
     </div>
   </form>
   <div class="float-right">
-    <app-abstract-action-buttons prefixUrl="abstracts/case/" type="create"
+    <app-abstract-action-buttons prefixUrl="abstracts/case/" type="create" [insertable]="insertable()" (click)="validateAllFormFields(abstractForm)"
                                  [case]="abstractForm.value"></app-abstract-action-buttons>
   </div>
 </div>

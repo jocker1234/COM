@@ -15,6 +15,10 @@
         <div class="col-7 row row-author" *ngFor="let author of authors.controls; index as idx">
           <input class="form-control author-input" [formControlName]="idx">
           <button class="btn btn-secondary" type="button" (click)="deleteAuthorField(idx)">-</button>
+          <span class="error-messages"
+                *ngIf="!(authors.at(idx).untouched || authors.at(idx).valid)">
+          Authors field is required
+        </span>
         </div>
         <button type="btn button-plus" (click)="addAuthorField()">+</button>
       </div>
@@ -45,6 +49,10 @@
             <option value="">Select category...</option>
             <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
           </select>
+          <span class="error-messages"
+                *ngIf="!(abstractForm.get('categoryId').untouched || abstractForm.get('categoryId').valid)">
+          Category field is required
+        </span>
         </div>
       </div>
       <div class="row">
@@ -53,7 +61,13 @@
         <textarea type="text" class="form-control"
                   formControlName="introduction" autosize></textarea>
           <span class="error-messages"
-                *ngIf="!(abstractForm.get('introduction').untouched || abstractForm.get('introduction').valid)"></span>
+                *ngIf="!this.abstractForm.get('introduction').untouched && this.abstractForm.get('introduction').value === ''">
+            Introduction field is required
+          </span>
+          <span class="error-messages"
+                *ngIf="handleException('introduction') === 1">
+            Too long. Maximum length fields introduction, aim of the study,  material and methods, results and conclusions are 2300 characters.
+          </span>
         </div>
       </div>
       <div class="row">
@@ -62,7 +76,13 @@
         <textarea type="text" class="form-control"
                   formControlName="aimOfTheStudy" autosize></textarea>
           <span class="error-messages"
-                *ngIf="!(abstractForm.get('aimOfTheStudy').untouched || abstractForm.get('aimOfTheStudy').valid)"></span>
+                *ngIf="!this.abstractForm.get('aimOfTheStudy').untouched && this.abstractForm.get('aimOfTheStudy').value === ''">
+            Aim Of The Study field is required
+          </span>
+          <span class="error-messages"
+                *ngIf="handleException('aimOfTheStudy') === 1">
+            Too long. Maximum length fields introduction, aim of the study,  material and methods, results and conclusions are 2300 characters.
+          </span>
         </div>
       </div>
       <div class="row">
@@ -71,7 +91,13 @@
         <textarea type="text" class="form-control"
                   formControlName="materialAndMethods" autosize></textarea>
           <span class="error-messages"
-                *ngIf="!(abstractForm.get('materialAndMethods').untouched || abstractForm.get('materialAndMethods').valid)"></span>
+                *ngIf="!this.abstractForm.get('materialAndMethods').untouched && this.abstractForm.get('materialAndMethods').value === ''">
+            Material And Methods field is required
+          </span>
+          <span class="error-messages"
+                *ngIf="handleException('materialAndMethods') === 1">
+            Too long. Maximum length fields introduction, aim of the study,  material and methods, results and conclusions are 2300 characters.
+          </span>
         </div>
       </div>
       <div class="row">
@@ -80,7 +106,13 @@
         <textarea type="text" class="form-control"
                   formControlName="results" autosize></textarea>
           <span class="error-messages"
-                *ngIf="!(abstractForm.get('results').untouched || abstractForm.get('results').valid)"></span>
+                *ngIf="!this.abstractForm.get('results').untouched && this.abstractForm.get('results').value === ''">
+            Results field is required
+          </span>
+          <span class="error-messages"
+                *ngIf="handleException('results') === 1">
+            Too long. Maximum length fields introduction, aim of the study,  material and methods, results and conclusions are 2300 characters.
+          </span>
         </div>
       </div>
       <div class="row">
@@ -89,13 +121,19 @@
         <textarea type="text" class="form-control"
                   formControlName="conclusions" autosize></textarea>
           <span class="error-messages"
-                *ngIf="!(abstractForm.get('conclusions').untouched || abstractForm.get('conclusions').valid)"></span>
+                *ngIf="!this.abstractForm.get('conclusions').untouched && this.abstractForm.get('conclusions').value === ''">
+            Conclusions field is required
+          </span>
+          <span class="error-messages"
+                *ngIf="handleException('conclusions') === 1">
+            Too long. Maximum length fields introduction, aim of the study,  material and methods, results and conclusions are 2300 characters.
+          </span>
         </div>
       </div>
     </div>
   </form>
   <div class="float-right">
-    <app-abstract-action-buttons prefixUrl="abstracts/research/" type="create"
+    <app-abstract-action-buttons prefixUrl="abstracts/research/" type="create" [insertable]="insertable()" (click)="validateAllFormFields(abstractForm)"
                                  [research]="abstractForm.value"></app-abstract-action-buttons>
   </div>
 </div>

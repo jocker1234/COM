@@ -4,7 +4,7 @@ import {AbstractsService} from "../../../../service/abstracts.service";
 import {Category} from "../../../category";
 import {CategoryService} from "../../../../service/category.service";
 import {Router} from "@angular/router";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-research-abstract-create',
@@ -18,7 +18,7 @@ export class ResearchAbstractCreateComponent implements OnInit {
   abstractForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
     authors: new FormArray([
-      new FormControl('')
+      new FormControl('', [Validators.required])
     ]),
     tutors: new FormControl('', [Validators.required]),
     affiliation: new FormControl('', [Validators.required]),
@@ -31,7 +31,44 @@ export class ResearchAbstractCreateComponent implements OnInit {
   });
 
   constructor(protected abstractService: AbstractsService, protected categoryService: CategoryService,
-              protected router: Router) { }
+              protected router: Router) {
+    this.abstractForm.setValidators(this.lengthValidator());
+  }
+
+  private lengthValidator(){
+    return (group: FormGroup): ValidationErrors => {
+      const introduction = group.controls['introduction'];
+      const aimOfTheStudy = group.controls['aimOfTheStudy'];
+      const materialAndMethods = group.controls['materialAndMethods'];
+      const results = group.controls['results'];
+      const conclusions = group.controls['conclusions'];
+      let lengthFields = introduction.value.length + aimOfTheStudy.value.length + materialAndMethods.value.length
+        + results.value.length + conclusions.value.length;
+      if(lengthFields > 2300){
+        introduction.setErrors({notEquivalent: true});
+        aimOfTheStudy.setErrors({notEquivalent: true});
+        materialAndMethods.setErrors({notEquivalent: true});
+        results.setErrors({notEquivalent: true});
+        conclusions.setErrors({notEquivalent: true});
+      } else {
+        introduction.setErrors(null);
+        aimOfTheStudy.setErrors(null);
+        materialAndMethods.setErrors(null);
+        results.setErrors(null);
+        conclusions.setErrors(null);
+      }
+      return;
+    };
+  }
+
+  private handleException(field: string) {
+    if(!(this.abstractForm.get(field).untouched || this.abstractForm.get(field).valid)){
+      if(this.abstractForm.get(field).errors != null && this.abstractForm.get(field).errors.notEquivalent != null) {
+        return 1;
+      }
+      return 0;
+    }
+  }
 
   ngOnInit(): void {
     this.categoryService.getCategory().subscribe(data => this.categories = data);
@@ -47,6 +84,25 @@ export class ResearchAbstractCreateComponent implements OnInit {
 
   deleteAuthorField(index: number) {
     this.authors.removeAt(index);
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({onlySelf: true});
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+  }
+
+  insertable() {
+    if(this.abstractForm.valid) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
