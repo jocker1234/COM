@@ -61,7 +61,7 @@ export class ResearchAbstractCreateComponent implements OnInit {
     };
   }
 
-  private handleException(field: string) {
+  handleException(field: string) {
     if(!(this.abstractForm.get(field).untouched || this.abstractForm.get(field).valid)){
       if(this.abstractForm.get(field).errors != null && this.abstractForm.get(field).errors.notEquivalent != null) {
         return 1;
