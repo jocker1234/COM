@@ -35,15 +35,15 @@ export class AbstractsComponent implements OnInit {
   }
 
   openDialog(): void {
-    let count;
     this.abstractService.countAbstracts().subscribe(value => {
-      count = value
+      if(value <= 2) {
+        const dialogRef = this.dialog.open(ChooseNewAbstractContentComponent);
+      } else {
+        this._error = new ErrorHandler("You have submitted the maximum amount of work. You can have maximum 2 abstracts sent or approved ");
+      }
+    }, error1 => {
+      this._error = new ErrorHandler(error1.error.message);
     });
-    if(count <= 2) {
-      const dialogRef = this.dialog.open(ChooseNewAbstractContentComponent);
-    } else {
-      this._error = new ErrorHandler("You have submitted the maximum amount of work");
-    }
   }
 
   get error(): ErrorHandler {
