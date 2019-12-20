@@ -11,11 +11,11 @@ public interface AbstractsDao extends JpaRepository<Abstracts, Long> {
     @Query(value = "SELECT SUM(a.count) " +
             "FROM (SELECT COUNT(*) " +
                     "FROM case_abstracts " +
-                    "WHERE user_id = ?1 AND status IN ('A', 'F') " +
+                    "WHERE user_id = ?1 AND status IN ('A', 'S') " +
             "UNION All " +
                 "SELECT COUNT(*) " +
                     "FROM research_abstracts " +
-                    "WHERE user_id = ?1 AND status IN ('A', 'F')" +
+                    "WHERE user_id = ?1 AND status IN ('A', 'S')" +
             ") AS a", nativeQuery = true)
     Long countAllAbstracts(Long userId);
 
