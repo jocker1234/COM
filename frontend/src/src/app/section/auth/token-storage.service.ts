@@ -19,7 +19,9 @@ export class TokenStorageService {
   signOut() {
     if (window.localStorage.length !== 0) {
       window.localStorage.clear();
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login').then(() => {
+        window.location.reload();
+      });
     }
   }
 
