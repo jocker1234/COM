@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
         window.location.reload();
       });
     } else if (this.checkRole(this.roles,'ROLE_PASSIVE_PARTICIPANT')) {
-      this.router.navigate(['/user/' + this.tokenStorage.getUserId()]).then(() => {
+      this.router.navigateByUrl('/user/' + this.tokenStorage.getUserId()).then(() => {
         window.location.reload();
       });
     }
