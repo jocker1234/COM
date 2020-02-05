@@ -1,6 +1,5 @@
 package com.com.backend.model;
 
-import com.com.backend.model.enums.Gender;
 import com.com.backend.model.enums.Title;
 import com.com.backend.model.enums.YearOfStudy;
 import lombok.*;

@@ -1,14 +1,11 @@
 package com.com.backend.service;
 
+import com.com.backend.dto.request.AbstractsDtoRequest;
 import com.com.backend.dto.response.AbstractsDtoResponse;
 import com.com.backend.exception.AccessException;
-import com.com.backend.exception.NotFoundException;
-import com.com.backend.model.Abstracts;
-import com.com.backend.dto.request.AbstractsDtoRequest;
-import com.com.backend.exception.AbstractNotFoundException;
 import com.com.backend.exception.AppException;
+import com.com.backend.model.Abstracts;
 
-import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Map;
 

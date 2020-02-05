@@ -11,7 +11,6 @@ import com.com.backend.exception.AppException;
 import com.com.backend.exception.NotFoundException;
 import com.com.backend.model.Users;
 
-import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Map;
 

@@ -2,7 +2,6 @@ package com.com.backend.dto.request;
 
 import com.com.backend.dto.AbstractDto;
 import com.com.backend.dto.AuthoritiesDto;
-import com.com.backend.dto.response.AbstractsDtoResponse;
 import lombok.*;
 import org.springframework.lang.NonNull;
 

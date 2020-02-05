@@ -30,15 +30,13 @@ public class AppException extends Exception {
     public AppException(EntityType entityType, ExceptionType exceptionType) {
         super();
         this.error = exceptionType.name();
-        String message = getMessageTemplate(entityType, exceptionType);
-        this.message = message;
+        this.message = getMessageTemplate(entityType, exceptionType);
     }
 
     public AppException(EntityType entityType, ExceptionType exceptionType, String... msgParams) {
         super();
         this.error = exceptionType.name();
-        String message = getMessageTemplate(entityType, exceptionType);
-        this.message = message;
+        this.message = getMessageTemplate(entityType, exceptionType);
         this.parameters = msgParams;
     }
 

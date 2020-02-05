@@ -6,7 +6,6 @@ import com.com.backend.dto.request.ResearchAbstractsDtoRequest;
 import com.com.backend.dto.response.ResearchAbstractsDtoResponse;
 import com.com.backend.exception.AccessException;
 import com.com.backend.model.Abstracts;
-import com.com.backend.model.CaseAbstracts;
 import com.com.backend.model.ResearchAbstracts;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
