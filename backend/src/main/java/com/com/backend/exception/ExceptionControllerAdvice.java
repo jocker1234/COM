@@ -1,6 +1,5 @@
 package com.com.backend.exception;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -16,8 +15,11 @@ import java.util.Optional;
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
+
+    public ExceptionControllerAdvice(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @ExceptionHandler(AppException.class)
     public ResponseEntity<ExceptionResponse> exceptionHandler(HttpServletRequest request, AppException ex) {
@@ -68,8 +70,8 @@ public class ExceptionControllerAdvice {
     }
 
     private String getMessage(AppException ex) {
-        Optional<String> templateContent = Optional.ofNullable(messageSource.getMessage(ex.getMessage(), ex.getParameters(), LocaleContextHolder.getLocale()));
-        if (templateContent.isPresent() && ex.parameters != null) {
+        Optional<String> templateContent = Optional.of(messageSource.getMessage(ex.getMessage(), ex.getParameters(), LocaleContextHolder.getLocale()));
+        if (ex.parameters != null) {
             return MessageFormat.format(templateContent.get(), ex.getParameters());
         }
         return templateContent.get();

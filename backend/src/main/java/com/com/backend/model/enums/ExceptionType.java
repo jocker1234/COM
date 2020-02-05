@@ -23,7 +23,7 @@ public enum ExceptionType {
     WRONG_VALUE("wrong.value"),
     NO_ACCESS("no.access"),
 
-    ABSTRACT_AMMOUNT("abstract.amount");
+    ABSTRACT_AMOUNT("abstract.amount");
 
     private String message;
 

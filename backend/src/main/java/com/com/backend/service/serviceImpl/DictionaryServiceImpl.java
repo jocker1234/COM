@@ -6,8 +6,6 @@ import com.com.backend.dto.response.DictionaryDtoResponse;
 import com.com.backend.exception.AccessException;
 import com.com.backend.mapper.DictionaryMapper;
 import com.com.backend.model.Dictionary;
-import com.com.backend.model.enums.ExceptionType;
-import com.com.backend.model.enums.Role;
 import com.com.backend.service.AuthoritiesService;
 import com.com.backend.service.DictionaryService;
 import com.com.backend.service.UsersService;

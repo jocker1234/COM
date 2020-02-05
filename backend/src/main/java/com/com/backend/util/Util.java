@@ -16,7 +16,7 @@ public class Util {
     public static String replace(String message, Object[] params) {
         if (params != null && message != null) {
             for (int i = 0; i < params.length; i++) {
-                message = message.replaceAll("\\{" + i + "\\}", ((params.length > i && params[i] != null) ? Matcher.quoteReplacement(params[i].toString()) : "null"));
+                message = message.replaceAll("\\{" + i + "\\}", params[i] != null ? Matcher.quoteReplacement(params[i].toString()) : "null");
             }
         }
         return message;
@@ -35,7 +35,7 @@ public class Util {
     }
 
     public static boolean isNull(Object value) {
-        return !(value != null);
+        return value == null;
     }
 
     public static String setDate() {

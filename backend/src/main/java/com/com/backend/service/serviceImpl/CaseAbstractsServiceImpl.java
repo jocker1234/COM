@@ -12,7 +12,6 @@ import com.com.backend.mapper.AbstractsMapper;
 import com.com.backend.mapper.CaseAbstractsMapper;
 import com.com.backend.model.Abstracts;
 import com.com.backend.model.CaseAbstracts;
-import com.com.backend.model.Users;
 import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.model.enums.Fields;
 import com.com.backend.model.enums.Status;

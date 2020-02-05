@@ -20,7 +20,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -96,7 +95,7 @@ public abstract class AbstractsAbstractServiceImpl<TREQ extends AbstractsDtoRequ
         String email = usersService.getEmailFromToken(token);
         long countAllAbstractUser = abstractsService.countAllAbstractUser(email);
         if (countAllAbstractUser >= 2) {
-            throw new AppException(ExceptionType.ABSTRACT_AMMOUNT);
+            throw new AppException(ExceptionType.ABSTRACT_AMOUNT);
         }
         validAbstracts(t);
         validFields(t);

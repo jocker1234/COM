@@ -7,8 +7,6 @@ import com.com.backend.model.enums.ExceptionType;
 import com.com.backend.service.AbstractsAbstractService;
 import com.com.backend.service.AbstractsService;
 import com.com.backend.service.UsersService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -47,7 +45,7 @@ public class AbstractServiceImpl implements AbstractsService {
         long id = usersService.getUserIdByEmail(email);
         long count = abstractsDao.countAllAbstracts(id);
         if(count >= 2)
-            throw new AppException(ExceptionType.ABSTRACT_AMMOUNT);
+            throw new AppException(ExceptionType.ABSTRACT_AMOUNT);
         return count;
     }
 

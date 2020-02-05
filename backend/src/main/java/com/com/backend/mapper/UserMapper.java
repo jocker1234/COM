@@ -64,7 +64,8 @@ public interface UserMapper {
             @Mapping(target = "needVisa", source = "usersDto.needVisa"),
             @Mapping(target = "passportNumber", source = "usersDto.passportNumber"),
             @Mapping(target = "authoritiesSet", source = "usersDto.authoritiesSet"),
-            @Mapping(target = "abstracts", ignore = true)
+            @Mapping(target = "abstracts", ignore = true),
+            @Mapping(target = "resetToken", ignore = true)
     })
     @Named("to")
     Users usersDtoToUsers(UserCreateRequest usersDto);
@@ -87,7 +88,8 @@ public interface UserMapper {
             @Mapping(target = "phoneNumber", source = "usersDto.phoneNumber"),
             @Mapping(target = "needVisa", source = "usersDto.needVisa"),
             @Mapping(target = "authoritiesSet", ignore = true),
-            @Mapping(target = "abstracts", ignore = true)
+            @Mapping(target = "abstracts", ignore = true),
+            @Mapping(target = "resetToken", ignore = true)
     })
     @Named("to")
     Users usersRequestToUsers(UserRequest usersDto);
@@ -152,7 +154,9 @@ public interface UserMapper {
             @Mapping(target = "phoneNumber", source = "usersDto.phoneNumber"),
             @Mapping(target = "needVisa", source = "usersDto.needVisa"),
             @Mapping(target = "passportNumber", source = "usersDto.passportNumber"),
-            @Mapping(target = "authoritiesSet", source = "usersDto.authoritiesSet")
+            @Mapping(target = "authoritiesSet", source = "usersDto.authoritiesSet"),
+            @Mapping(target = "abstracts", ignore = true),
+            @Mapping(target = "resetToken", ignore = true)
     })
     @Named("to")
     Users usersDtoToUsers(UserAdminDtoRequest usersDto);

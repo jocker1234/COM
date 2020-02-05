@@ -5,7 +5,6 @@ import com.com.backend.dto.response.DictionaryDtoResponse;
 import com.com.backend.model.Dictionary;
 import org.mapstruct.*;
 
-import java.util.Base64;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -14,7 +13,10 @@ public interface DictionaryMapper {
     @Mappings({
             @Mapping(target = "id", source = "directoryDtoRequest.id"),
             @Mapping(target = "key", source = "directoryDtoRequest.key"),
-            @Mapping(target = "value", source = "directoryDtoRequest.value")
+            @Mapping(target = "value", source = "directoryDtoRequest.value"),
+            @Mapping(target = "addDate", ignore = true),
+            @Mapping(target = "editDate", ignore = true),
+            @Mapping(target = "image", ignore = true)
     })
     @Named("to")
     Dictionary dtoReqToModel(DictionaryDtoRequest directoryDtoRequest);
