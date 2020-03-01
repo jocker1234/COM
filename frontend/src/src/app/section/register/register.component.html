@@ -42,6 +42,14 @@
         </div>
       </div>
       <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Confirm Password *</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" name="confirm_password" formControlName="confirm_password" required/>
+          <app-field-error-display [displayError]="isFieldValid('confirm_password')" errorMsg="Passwords do not match">
+          </app-field-error-display>
+        </div>
+      </div>
+      <div class="form-group row">
         <label class="col-sm-3 col-form-label">First name *</label>
         <div class="col-sm-7">
           <input type="text" class="form-control" name="firstName" formControlName="firstName" required/>

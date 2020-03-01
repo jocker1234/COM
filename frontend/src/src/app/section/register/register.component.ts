@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {SignUpInfo} from '../auth/signup-info';
 import {AuthService} from '../../service/auth.service';
 import {Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {CustomValidators} from "../../custom-validators";
 import {ErrorHandler} from "../error-handler";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-register',
@@ -42,6 +43,10 @@ export class RegisterComponent implements OnInit {
       // 6. Has a minimum length of 8 characters
       Validators.minLength(8)
     ])),
+    confirm_password: new FormControl(null, [
+      Validators.required,
+      RegisterComponent.matchValues('password')
+    ]),
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
     //gender: new FormControl(null, [Validators.required]),
@@ -58,6 +63,15 @@ export class RegisterComponent implements OnInit {
     passportNumber: new FormControl(null,
       CustomValidators.patternValidator(/^[_A-Za-z]{2}[0-9]{7}$/, {hasCapitalCase: true}))
   });
+
+  public static matchValues(matchTo: string ): (AbstractControl) => ValidationErrors | null {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return !!control.parent &&
+      !!control.parent.value &&
+      control.value === control.parent.controls[matchTo].value
+        ? null : { isMatching: false };
+    };
+  }
 
   constructor(private authService: AuthService,
               private router: Router) {
@@ -76,7 +90,7 @@ export class RegisterComponent implements OnInit {
 
   checkBox() {
     this.isChecked = !this.isChecked;
-    if (this.isChecked == true) {
+    if (this.isChecked === true) {
       this.regulationsValid = true;
     }
   }
@@ -98,6 +112,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.isChecked && this.registration.valid) {
+      if (this.registration.get('title').value === 'PhD Student') {
+        this.registration.get('title').setValue('PhD_Student');
+      }
+      const date = new Date();
+      this.registration.get('dateOfBirth')
+        .setValue(formatDate(date, this.registration.get('dateOfBirth').value, 'en-US'));
       this.authService.signUp(this.registration.value).subscribe(
         data => {
           this.isSignedUp = true;
@@ -105,7 +125,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/login']);
         }, error1 => {
           this.error = new ErrorHandler(error1.error.message);
-          scroll(0,0)
+          scroll(0, 0);
         }
       );
     } else {
