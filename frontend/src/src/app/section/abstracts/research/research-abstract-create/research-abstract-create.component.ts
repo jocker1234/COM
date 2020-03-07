@@ -13,7 +13,7 @@ import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from '@
 export class ResearchAbstractCreateComponent implements OnInit {
 
   categories: Category[];
-  private lengthFields = 0;
+  private _lengthFields = 0;
 
   abstractForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -42,9 +42,9 @@ export class ResearchAbstractCreateComponent implements OnInit {
       const materialAndMethods = group.controls.materialAndMethods;
       const results = group.controls.results;
       const conclusions = group.controls.conclusions;
-      this.lengthFields = introduction.value.length + aimOfTheStudy.value.length + materialAndMethods.value.length
+      this._lengthFields = introduction.value.length + aimOfTheStudy.value.length + materialAndMethods.value.length
         + results.value.length + conclusions.value.length;
-      if (this.lengthFields > 2300) {
+      if (this._lengthFields > 2300) {
         introduction.setErrors({notEquivalent: true});
         aimOfTheStudy.setErrors({notEquivalent: true});
         materialAndMethods.setErrors({notEquivalent: true});
@@ -59,6 +59,10 @@ export class ResearchAbstractCreateComponent implements OnInit {
       }
       return;
     };
+  }
+
+  get lengthFields(): number {
+    return this._lengthFields;
   }
 
   handleException(field: string) {
