@@ -1,10 +1,9 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ResearchAbstract} from "../../research-abstract";
-import {AbstractsService} from "../../../../service/abstracts.service";
-import {Category} from "../../../category";
-import {CategoryService} from "../../../../service/category.service";
-import {Router} from "@angular/router";
-import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {AbstractsService} from '../../../../service/abstracts.service';
+import {Category} from '../../../category';
+import {CategoryService} from '../../../../service/category.service';
+import {Router} from '@angular/router';
+import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-research-abstract-create',
@@ -14,6 +13,7 @@ import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from "@
 export class ResearchAbstractCreateComponent implements OnInit {
 
   categories: Category[];
+  private lengthFields = 0;
 
   abstractForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -35,16 +35,16 @@ export class ResearchAbstractCreateComponent implements OnInit {
     this.abstractForm.setValidators(this.lengthValidator());
   }
 
-  private lengthValidator(){
+  private lengthValidator() {
     return (group: FormGroup): ValidationErrors => {
-      const introduction = group.controls['introduction'];
-      const aimOfTheStudy = group.controls['aimOfTheStudy'];
-      const materialAndMethods = group.controls['materialAndMethods'];
-      const results = group.controls['results'];
-      const conclusions = group.controls['conclusions'];
-      let lengthFields = introduction.value.length + aimOfTheStudy.value.length + materialAndMethods.value.length
+      const introduction = group.controls.introduction;
+      const aimOfTheStudy = group.controls.aimOfTheStudy;
+      const materialAndMethods = group.controls.materialAndMethods;
+      const results = group.controls.results;
+      const conclusions = group.controls.conclusions;
+      this.lengthFields = introduction.value.length + aimOfTheStudy.value.length + materialAndMethods.value.length
         + results.value.length + conclusions.value.length;
-      if(lengthFields > 2300){
+      if (this.lengthFields > 2300) {
         introduction.setErrors({notEquivalent: true});
         aimOfTheStudy.setErrors({notEquivalent: true});
         materialAndMethods.setErrors({notEquivalent: true});
@@ -62,8 +62,8 @@ export class ResearchAbstractCreateComponent implements OnInit {
   }
 
   handleException(field: string) {
-    if(!(this.abstractForm.get(field).untouched || this.abstractForm.get(field).valid)){
-      if(this.abstractForm.get(field).errors != null && this.abstractForm.get(field).errors.notEquivalent != null) {
+    if (!(this.abstractForm.get(field).untouched || this.abstractForm.get(field).valid)) {
+      if (this.abstractForm.get(field).errors != null && this.abstractForm.get(field).errors.notEquivalent != null) {
         return 1;
       }
       return 0;
@@ -98,7 +98,7 @@ export class ResearchAbstractCreateComponent implements OnInit {
   }
 
   insertable() {
-    if(this.abstractForm.valid) {
+    if (this.abstractForm.valid) {
       return true;
     } else {
       return false;

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Category} from "../../../category";
-import {CategoryService} from "../../../../service/category.service";
-import {AbstractsService} from "../../../../service/abstracts.service";
-import {Router} from "@angular/router";
-import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {Category} from '../../../category';
+import {CategoryService} from '../../../../service/category.service';
+import {AbstractsService} from '../../../../service/abstracts.service';
+import {Router} from '@angular/router';
+import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-case-abstract-create',
@@ -13,6 +13,7 @@ import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from "@
 export class CaseAbstractCreateComponent implements OnInit {
 
   categories: Category[];
+  private _lengthFields = 0;
 
   abstractForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -31,13 +32,17 @@ export class CaseAbstractCreateComponent implements OnInit {
     this.abstractForm.setValidators(this.lengthValidator());
   }
 
-  private lengthValidator(){
+  get lengthFields(): number {
+    return this._lengthFields;
+  }
+
+  private lengthValidator() {
     return (group: FormGroup): ValidationErrors => {
-      const background = group.controls['background'];
-      const caseReport = group.controls['caseReport'];
-      const conclusions = group.controls['conclusions'];
-      let lengthFields = background.value.length + caseReport.value.length + conclusions.value.length;
-      if(lengthFields > 2300){
+      const background = group.controls.background;
+      const caseReport = group.controls.caseReport;
+      const conclusions = group.controls.conclusions;
+      this._lengthFields = background.value.length + caseReport.value.length + conclusions.value.length;
+      if (this._lengthFields > 2300) {
         background.setErrors({notEquivalent: true});
         caseReport.setErrors({notEquivalent: true});
         conclusions.setErrors({notEquivalent: true});
@@ -51,8 +56,8 @@ export class CaseAbstractCreateComponent implements OnInit {
   }
 
   handleException(field: string) {
-    if(!(this.abstractForm.get(field).untouched || this.abstractForm.get(field).valid)){
-      if(this.abstractForm.get(field).errors != null && this.abstractForm.get(field).errors.notEquivalent != null) {
+    if (!(this.abstractForm.get(field).untouched || this.abstractForm.get(field).valid)) {
+      if (this.abstractForm.get(field).errors != null && this.abstractForm.get(field).errors.notEquivalent != null) {
         console.log(1);
         return 1;
       } else {
@@ -90,7 +95,7 @@ export class CaseAbstractCreateComponent implements OnInit {
   }
 
   insertable() {
-    if(this.abstractForm.valid) {
+    if (this.abstractForm.valid) {
       return true;
     } else {
       return false;
